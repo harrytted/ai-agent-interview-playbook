@@ -65,6 +65,18 @@ class StudyTests(unittest.TestCase):
         self.assertNotIn("### Q091", out)
         self.assertFalse(self.progress.exists())
 
+    def test_original_bank_show_expands_full_answers_across_all_modules(self):
+        for qid in ("Q001", "Q017", "Q033", "Q049", "Q056"):
+            with self.subTest(qid=qid):
+                code, out, err = self.cli("show", qid)
+                self.assertEqual((code, err), (0, ""))
+                for label in ("详细答案", "常见追问", "实战案例", "微练习", "学习与参考"):
+                    self.assertIn(label, out)
+                self.assertNotIn("<details", out)
+                self.assertNotIn("<summary", out)
+                self.assertNotRegex(out, r"(?m)^### Q\d{3}")
+        self.assertFalse(self.progress.exists())
+
     def test_duplicate_ids_fail_instead_of_overwriting_an_answer(self):
         folder = self.work / "docs" / "foundations"
         folder.mkdir(parents=True)

@@ -4,7 +4,7 @@
 
 政策助手读了几十份制度，为什么比较地区差异时反而漏掉一条关键限制？如果把原文、搜索页面、失败记录和草稿全装进下一次输入，容量可能超限，过时判断也会与当前证据混在一起。行李越重，未必越容易找到登机证。
 
-上下文工程要持续选择下一次推理该看什么。先修是基础课的 token 预算与 RAG；学完本章，应能建立可回查的上下文组织方式，并区分信息筛选、文本压缩、KV 复用与答案缓存。[上下文的持续组织](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents)
+上下文工程要持续选择下一次推理该看什么。建议先读基础课的[提示与上下文](../learning/03-context-and-prompts.md)及[RAG](../learning/06-rag-and-retrieval.md)，了解 token 预算与证据选择；学完本章，应能建立可回查的上下文组织方式，并区分信息筛选、文本压缩、KV 复用与答案缓存。[上下文的持续组织](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents)
 
 ## 用任务依赖选择信息
 

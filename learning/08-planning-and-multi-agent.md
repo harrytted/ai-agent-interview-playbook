@@ -4,7 +4,7 @@
 
 用户让内部政策助手比较海岚与云洲的差旅规则，列出例外审批材料，再准备申请草稿。两路检索看起来可以同时开始，可出差日期还没确认；即使各自查完，也可能拿回不同版本的制度。增加角色以前，先得弄清每一步需要等谁、交回什么。
 
-本章学习几种规划方式，画出能并发的依赖图，并为多 Agent 的合并、失败和预算设计规则。任务验收先写清：两地有效规则均有出处，材料清单完整，草稿没有提交。前置是理解 Agent 循环、工具与会话状态。
+本章学习几种规划方式，画出能并发的依赖图，并为多 Agent 的合并、失败和预算设计规则。任务验收先写清：两地有效规则均有出处，材料清单完整，草稿没有提交。建议先读 [工具循环](04-agent-loop.md)、[工具合同](05-tools-and-mcp.md)和[状态与记忆](07-memory-and-state.md)，再来安排多步任务。
 
 ## 几种模式，改变的是怎样组织工作
 
@@ -62,3 +62,18 @@ Reducer 规定每个字段怎样合并更新，LangGraph 的状态字段可以�
 3. **两条分支都成功，为什么仍可能无法合并？** 日期、版本、实体或权限口径可能不一致；执行成功不代表语义一致。
 
 进一步练习见 [规划与编排题](../docs/foundations/02-planning-and-orchestration.md)。
+
+<!-- question-links:start -->
+## 配套面试练习
+
+先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。
+
+<details><summary>展开本章相关面试题</summary>
+
+- [Q010 ReAct 与先规划后执行有何不同？](../docs/foundations/02-planning-and-orchestration.md#q010-react-与先规划后执行有何不同)
+- [Q013 多个分支何时可以并发？](../docs/foundations/02-planning-and-orchestration.md#q013-多个分支何时可以并发)
+- [Q015 什么时候值得使用多个 Agent？](../docs/foundations/02-planning-and-orchestration.md#q015-什么时候值得使用多个-agent)
+- [Q016 多 Agent 如何交接，冲突如何处理？](../docs/foundations/02-planning-and-orchestration.md#q016-多-agent-如何交接冲突如何处理)
+
+</details>
+<!-- question-links:end -->

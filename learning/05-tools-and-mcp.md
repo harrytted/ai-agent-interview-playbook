@@ -4,7 +4,7 @@
 
 林悦请内部政策助手查差旅住宿上限，助手给出一份字段齐全的调用参数，却夹带了另一名员工的身份。JSON 能解析，工具也确实存在，这次调用依然应被拦住。要找出拦在哪里，需要把模型建议、协议连接和业务权限逐层展开。
 
-本章从查政策走到申请例外审批，学习画出工具调用边界、解释 MCP 的三个角色，并判断执行前还缺哪些校验。前置是已理解模型一次输出和外部执行循环的区别。
+本章从查政策走到申请例外审批，学习画出工具调用边界、解释 MCP 的三个角色，并判断执行前还缺哪些校验。建议先读 [第 04 章：工具循环](04-agent-loop.md)，看清模型提出动作与程序实际执行之间的区别。
 
 ## 从一句话到一次受约束的动作
 
@@ -65,3 +65,19 @@ MCP 与 A2A 也不宜画成两个互斥阵营。MCP 围绕应用与能力提供�
 3. **MCP Server 能否在内部调用另一个 Agent？** 可以由实现封装；协议角色不限制内部实现。若需要 Agent 间任务合同，还可组合 A2A，不能据此说两个协议完全相同。
 
 进一步口述练习见 [工具与记忆题](../docs/foundations/04-tools-memory-protocols.md)。
+
+<!-- question-links:start -->
+## 配套面试练习
+
+先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。
+
+<details><summary>展开本章相关面试题</summary>
+
+- [Q025 Function Calling 的真正执行者是谁？](../docs/foundations/04-tools-memory-protocols.md#q025-function-calling-的真正执行者是谁)
+- [Q026 怎样设计易用且可控的工具接口？](../docs/foundations/04-tools-memory-protocols.md#q026-怎样设计易用且可控的工具接口)
+- [Q027 Schema 合法为什么仍然不够？](../docs/foundations/04-tools-memory-protocols.md#q027-schema-合法为什么仍然不够)
+- [Q028 MCP 的 Host、Client、Server 分别负责什么？](../docs/foundations/04-tools-memory-protocols.md#q028-mcp-的-hostclientserver-分别负责什么)
+- [Q029 MCP 是否自动解决鉴权和 Prompt Injection？](../docs/foundations/04-tools-memory-protocols.md#q029-mcp-是否自动解决鉴权和-prompt-injection)
+
+</details>
+<!-- question-links:end -->

@@ -4,7 +4,7 @@
 
 助手找到了住宿政策，还给了很高的相似度分数，林悦却发现引用来自旧版制度。也可能版本没错，片段却漏掉了“仅适用于管理人员”。“搜到了一段相关文字”离“足以回答这次问题”还有几步，本章就沿着这些步骤排查。
 
-读完应能分开描述入库与查询链路，手算一个混合检索结果，并定位为什么有检索仍会答错。前置是理解工具调用及向量的基本概念。政策会更新、员工权限不同，外部证据需要按本次问题重新选择。
+读完应能分开描述入库与查询链路，手算一个混合检索结果，并定位为什么有检索仍会答错。建议先读 [工具调用](05-tools-and-mcp.md)和[模型原理中的 Embedding 说明](02-llm-primer.md)，了解调用边界与向量检索的输入输出。政策会更新、员工权限不同，外部证据需要按本次问题重新选择。
 
 RAG 在生成前检索外部证据，让回答有机会依据这些材料。原始研究把参数化模型与外部检索记忆结合；今天工程中所说的 RAG 是更广的实践集合，不要求照搬论文架构，也不保证消除幻觉。[RAG 原始论文](https://arxiv.org/abs/2005.11401)
 
@@ -74,3 +74,25 @@ D = 1/63        ≈ 0.01587302
 3. **加了重排器，Recall 一定更高吗？** 不一定。它在候选范围内排序，无法找回未召回项；截取最终 top-k 还可能改变该截断位置的召回表现。
 
 进一步练习见 [RAG 题](../docs/foundations/03-rag-and-search.md)。
+
+<!-- question-links:start -->
+## 配套面试练习
+
+先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。
+
+<details><summary>展开本章相关面试题</summary>
+
+- [Q006 Prompt、RAG 与微调如何选？](../docs/foundations/01-agent-and-llm.md#q006-promptrag-与微调如何选)
+- [Q017 一个 RAG 系统的完整数据流是什么？](../docs/foundations/03-rag-and-search.md#q017-一个-rag-系统的完整数据流是什么)
+- [Q018 Chunk 大小和重叠该怎样选择？](../docs/foundations/03-rag-and-search.md#q018-chunk-大小和重叠该怎样选择)
+- [Q019 为什么向量检索和关键词检索可以互补？](../docs/foundations/03-rag-and-search.md#q019-为什么向量检索和关键词检索可以互补)
+- [Q020 召回和 Rerank 为什么分两阶段？](../docs/foundations/03-rag-and-search.md#q020-召回和-rerank-为什么分两阶段)
+- [Q021 向量索引如何兼顾延迟与检索质量？](../docs/foundations/03-rag-and-search.md#q021-向量索引如何兼顾延迟与检索质量)
+- [Q022 ACL 应放在哪里？文档更新和删除如何传播？](../docs/foundations/03-rag-and-search.md#q022-acl-应放在哪里文档更新和删除如何传播)
+- [Q023 RAG 如何评测，Recall@k、MRR 和答案质量有何区别？](../docs/foundations/03-rag-and-search.md#q023-rag-如何评测recallkmrr-和答案质量有何区别)
+- [Q024 RAG 回答错误应该按什么顺序排查？](../docs/foundations/03-rag-and-search.md#q024-rag-回答错误应该按什么顺序排查)
+- [Q049 设计一个企业知识库客服 Agent，你会怎样开始？](../docs/engineering/07-system-design-and-projects.md#q049-设计一个企业知识库客服-agent你会怎样开始)
+- [Q050 设计一个可以引用来源的研究助手，怎么保证报告可信？](../docs/engineering/07-system-design-and-projects.md#q050-设计一个可以引用来源的研究助手怎么保证报告可信)
+
+</details>
+<!-- question-links:end -->

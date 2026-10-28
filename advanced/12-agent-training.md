@@ -2,7 +2,7 @@
 
 助手上次引用了旧政策，读完一段反思后改对了。有人说它已经“自我训练”，另一个人提议马上上 RL。先别急着申请显卡：这次究竟改了输入、文件、工具，还是模型参数？
 
-本章先定位失败，再选择运行时改进、提示与技能优化或参数训练，并分清 SFT、偏好优化和 Agent RL。前置是[评测闭环](09-evaluation-and-feedback.md)与[性能与预算](10-performance-and-serving.md)。
+本章先定位失败，再选择运行时改进、提示与技能优化或参数训练，并分清 SFT、偏好优化和 Agent RL。建议先读[评测闭环](09-evaluation-and-feedback.md)与[性能与预算](10-performance-and-serving.md)。
 
 ## 先确认你在优化哪一层
 

@@ -2,7 +2,7 @@
 
 同一句“培训住宿能报销吗”，加上长篇制度后，助手等了更久才开始回答；它又能逐字续写，却仍可能引用错政策。这些现象需要分别看输入如何编码、模型怎样利用前文，以及输出如何一步步产生。
 
-本章拆开政策助手的一次模型调用，从 token 走到注意力、缓存和生成，再分清哪些改动会更新模型参数。读完应能解释这几层各自处理什么，遇到慢或答错时先查哪一层。先修为第 01 章和基本概率、向量加权平均。
+本章拆开政策助手的一次模型调用，从 token 走到注意力、缓存和生成，再分清哪些改动会更新模型参数。读完应能解释这几层各自处理什么，遇到慢或答错时先查哪一层。建议先读 [第 01 章：系统地图](01-system-map.md)，分清模型和执行器的职责。概率与向量加权平均会在本章算例中用到，可以边算边补。
 
 ## 文本先变成 token
 
@@ -79,3 +79,20 @@ KV Cache 保存计算中间表示，员工偏好档案保存业务数据，两�
 </details>
 
 关联复习：[Q002–Q006](../docs/foundations/01-agent-and-llm.md)。[课程目录](README.md) · 上一章：[01 系统地图](01-system-map.md) · 下一章：[03 上下文与提示](03-context-and-prompts.md)
+
+<!-- question-links:start -->
+## 配套面试练习
+
+先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。
+
+<details><summary>展开本章相关面试题</summary>
+
+- [Q002 自回归语言模型到底在预测什么？](../docs/foundations/01-agent-and-llm.md#q002-自回归语言模型到底在预测什么)
+- [Q003 Transformer 的 Attention 在做什么？](../docs/foundations/01-agent-and-llm.md#q003-transformer-的-attention-在做什么)
+- [Q004 Prefill、Decode 与 KV Cache 为什么影响延迟？](../docs/foundations/01-agent-and-llm.md#q004-prefilldecode-与-kv-cache-为什么影响延迟)
+- [Q005 预训练、SFT、偏好优化、LoRA 分别是什么？](../docs/foundations/01-agent-and-llm.md#q005-预训练sft偏好优化lora-分别是什么)
+- [Q006 Prompt、RAG 与微调如何选？](../docs/foundations/01-agent-and-llm.md#q006-promptrag-与微调如何选)
+- [Q007 为什么模型会给出流畅但错误的回答？](../docs/foundations/01-agent-and-llm.md#q007-为什么模型会给出流畅但错误的回答)
+
+</details>
+<!-- question-links:end -->

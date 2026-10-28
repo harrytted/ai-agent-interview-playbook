@@ -2,7 +2,7 @@
 
 运行日志出现一条 `decision`，随后又出现 `stop`，中间却没有工具结果：这次搜索到底做成了吗？如果只看最后的“处理完成”，很容易把提出动作、实际执行和得到答案混在一起。政策助手需要把每一步留下来，才能回答这个问题。
 
-本章结合仓库 [lab.py](../examples/agent_lab/lab.py) 跟踪一次工具循环，练习从事件和计数还原执行经过。读完应能区分策略做了什么决定、运行时允许了什么，以及环境实际改变了什么。先修为前 3 章、Python 函数和异常。
+本章结合仓库 [lab.py](../examples/agent_lab/lab.py) 跟踪一次工具循环，练习从事件和计数还原执行经过。读完应能区分策略做了什么决定、运行时允许了什么，以及环境实际改变了什么。建议先读 [系统地图](01-system-map.md)、[模型原理](02-llm-primer.md)和[提示与上下文](03-context-and-prompts.md)，并熟悉 Python 的函数与异常。
 
 ## 先定义循环的不变量
 
@@ -89,3 +89,17 @@ python3 examples/agent_lab/lab.py --scenario loop
 </details>
 
 关联复习：[Q009–Q016](../docs/foundations/02-planning-and-orchestration.md)、[Q055](../docs/engineering/07-system-design-and-projects.md)。[课程目录](README.md) · 上一章：[03 上下文](03-context-and-prompts.md) · 下一章：[05 工具与 MCP](05-tools-and-mcp.md)
+
+<!-- question-links:start -->
+## 配套面试练习
+
+先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。
+
+<details><summary>展开本章相关面试题</summary>
+
+- [Q009 最小 Agent Loop 应包含哪些环节？](../docs/foundations/02-planning-and-orchestration.md#q009-最小-agent-loop-应包含哪些环节)
+- [Q012 如何防止循环、反复重规划与无效重试？](../docs/foundations/02-planning-and-orchestration.md#q012-如何防止循环反复重规划与无效重试)
+- [Q051 设计一个能创建、分派工单的 Agent，状态如何流转？](../docs/engineering/07-system-design-and-projects.md#q051-设计一个能创建分派工单的-agent状态如何流转)
+
+</details>
+<!-- question-links:end -->

@@ -2,7 +2,7 @@
 
 员工问内部政策助手：“我下周去外地参加培训，住宿能报销吗？”屏幕很快出现“可以，工单也已创建”，可员工没说具体日期，工单系统里也找不到记录。要排查这次失败，光盯着聊天框还不够：需要查清谁作了判断，谁真正调用了系统，以及哪一步留下了证据。
 
-本章沿着这个政策助手画一张系统地图，学会区分生成建议、执行动作、保存数据与确认完成。先修是 Python 函数、字典、异常，以及 JSON 和 HTTP 的基本含义。后面会逐步加入制度检索、条件澄清和咨询工单；先把各自的责任放对位置。
+本章沿着这个政策助手画一张系统地图，学会区分生成建议、执行动作、保存数据与确认完成。阅读前会用 Python 的函数、字典和异常，知道 JSON 与 HTTP 的大意即可；不熟悉时可以先看本章后面的补充说明。后面会逐步加入制度检索、条件澄清和咨询工单；先把各自的责任放对位置。
 
 ## 从五个实体拆开应用
 
@@ -42,7 +42,7 @@
 
 所以，不必先凑齐规划器、长期记忆和多个角色，再给系统命名。政策问答可能只需要固定流程；复杂、信息逐渐揭示的任务才可能需要动态选择。多一步选择就多一个需要验证的失败位置，应从任务需求解释它的价值。框架是否出现，不能决定你的程序是否可靠。
 
-## 先修能力怎样接上来
+## Python、JSON 和 HTTP 不熟，怎样补上来
 
 Python 函数把工具能力封装为清楚的输入输出；字典保存结构化字段；异常表达未能正常返回；JSON 是跨边界传送数据的一种格式；HTTP 是常见的远程请求方式。JSON 文本与 Python 对象有区别：`true` 属于 JSON，Python 布尔值写作 `True`。解析成功只说明能读出结构，不证明订单属于当前用户。[Python JSON 官方说明](https://docs.python.org/3/library/json.html)
 
@@ -80,3 +80,18 @@ print(type(arguments).__name__, arguments["top_k"])
 </details>
 
 关联复习：[Q001–Q008](../docs/foundations/01-agent-and-llm.md)。[课程目录](README.md) · 下一章：[02 大模型最小原理](02-llm-primer.md)
+
+<!-- question-links:start -->
+## 配套面试练习
+
+先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。
+
+<details><summary>展开本章相关面试题</summary>
+
+- [Q001 什么是 Agent，和普通 LLM 调用有何区别？](../docs/foundations/01-agent-and-llm.md#q001-什么是-agent和普通-llm-调用有何区别)
+- [Q049 设计一个企业知识库客服 Agent，你会怎样开始？](../docs/engineering/07-system-design-and-projects.md#q049-设计一个企业知识库客服-agent你会怎样开始)
+- [Q052 面试官问“为什么选这个框架”，怎样回答？](../docs/engineering/07-system-design-and-projects.md#q052-面试官问为什么选这个框架怎样回答)
+- [Q053 怎样向面试官讲清一个真实个人项目？](../docs/engineering/07-system-design-and-projects.md#q053-怎样向面试官讲清一个真实个人项目)
+
+</details>
+<!-- question-links:end -->

@@ -4,7 +4,7 @@
 
 林悦昨天说要去海岚出差，今天只发来一句“按上次的方式继续”。助手如果把上次的城市、语言偏好和旧政策金额一起原样搬过来，可能延续了任务，也可能把过期条件带进了新请求。“记住上次”究竟要取回哪些内容，需要逐项判断。
 
-本章学习区分四种容易混淆的“记住”，为记忆设计来源、适用范围和失效规则，并解释为什么恢复状态仍可能重复提交。前置是理解上下文窗口、工具执行和检索链路。读完应能为一条记录说明：存在哪里，何时读入，这次为何还可信。
+本章学习区分四种容易混淆的“记住”，为记忆设计来源、适用范围和失效规则，并解释为什么恢复状态仍可能重复提交。建议先读 [提示与上下文](03-context-and-prompts.md)、[工具调用](05-tools-and-mcp.md)和[RAG](06-rag-and-retrieval.md)，了解信息怎样被读取和使用。读完应能为一条记录说明：存在哪里，何时读入，这次为何还可信。
 
 ## 四种东西，不是同一个抽屉
 
@@ -64,3 +64,18 @@ TTL 是本例的保存或再确认期限，到了期限可以触发重新检索�
 3. **有 checkpoint 是否无需幂等？** 仍需要。外部成功但本地状态未保存的故障窗口可能导致重复动作。
 
 进一步练习见 [工具与记忆题](../docs/foundations/04-tools-memory-protocols.md)。
+
+<!-- question-links:start -->
+## 配套面试练习
+
+先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。
+
+<details><summary>展开本章相关面试题</summary>
+
+- [Q011 为什么用状态图组织 Agent？](../docs/foundations/02-planning-and-orchestration.md#q011-为什么用状态图组织-agent)
+- [Q030 Context、短期记忆和长期记忆如何区分？](../docs/foundations/04-tools-memory-protocols.md#q030-context短期记忆和长期记忆如何区分)
+- [Q032 长期记忆怎样避免污染与跨用户泄漏？](../docs/foundations/04-tools-memory-protocols.md#q032-长期记忆怎样避免污染与跨用户泄漏)
+- [Q051 设计一个能创建、分派工单的 Agent，状态如何流转？](../docs/engineering/07-system-design-and-projects.md#q051-设计一个能创建分派工单的-agent状态如何流转)
+
+</details>
+<!-- question-links:end -->

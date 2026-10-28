@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from os.path import relpath
 from pathlib import Path
 import re
 import sys
@@ -27,6 +28,36 @@ ADVANCED_CHAPTERS = (
     "11-security-and-governance",
     "12-agent-training",
 )
+BASE_LESSONS = {
+    "Q001": "learning/01-system-map.md",
+    **{f"Q{i:03}": "learning/02-llm-primer.md" for i in range(2, 8)},
+    "Q008": "learning/09-evaluation.md",
+    "Q009": "learning/04-agent-loop.md",
+    "Q010": "learning/08-planning-and-multi-agent.md",
+    "Q011": "learning/07-memory-and-state.md",
+    "Q012": "learning/04-agent-loop.md",
+    "Q013": "learning/08-planning-and-multi-agent.md",
+    "Q014": "learning/10-reliability-and-security.md",
+    "Q015": "learning/08-planning-and-multi-agent.md",
+    "Q016": "learning/08-planning-and-multi-agent.md",
+    **{f"Q{i:03}": "learning/06-rag-and-retrieval.md" for i in range(17, 25)},
+    **{f"Q{i:03}": "learning/05-tools-and-mcp.md" for i in range(25, 30)},
+    "Q030": "learning/07-memory-and-state.md",
+    "Q031": "learning/03-context-and-prompts.md",
+    "Q032": "learning/07-memory-and-state.md",
+    **{f"Q{i:03}": "learning/09-evaluation.md" for i in range(33, 41)},
+    **{f"Q{i:03}": "learning/10-reliability-and-security.md" for i in range(41, 49)},
+    "Q049": "learning/01-system-map.md",
+    "Q050": "learning/06-rag-and-retrieval.md",
+    "Q051": "learning/04-agent-loop.md",
+    "Q052": "learning/01-system-map.md",
+    "Q053": "docs/engineering/08-project-lab.md",
+    "Q054": "learning/09-evaluation.md",
+    "Q055": "docs/engineering/08-project-lab.md",
+    "Q056": "learning/09-evaluation.md",
+}
+LINKS_START = "<!-- question-links:start -->"
+LINKS_END = "<!-- question-links:end -->"
 
 
 def slug(text: str) -> str:
@@ -54,6 +85,50 @@ def anchors(content: str) -> set[str]:
     return result
 
 
+def local_url(source: Path, target: Path) -> str:
+    return Path(relpath(target, source.parent)).as_posix()
+
+
+def lesson_sections() -> dict[Path, str]:
+    """Build lesson navigation from primary mappings and explicit related-lesson links."""
+    grouped = {}
+    for q in questions():
+        if q.id not in BASE_LESSONS:
+            continue
+        targets = {ROOT / BASE_LESSONS[q.id]}
+        for match in re.finditer(r"\[[^\]]*\]\(([^)\s]+)\)", q.body):
+            parsed = urlsplit(match[1])
+            if parsed.scheme or parsed.netloc:
+                continue
+            target = (ROOT / q.path.parent / unquote(parsed.path)).resolve()
+            if (target.parent == ROOT / "learning" and re.match(r"\d{2}-", target.name)) or target == ROOT / "docs/engineering/08-project-lab.md":
+                targets.add(target)
+        for target in targets:
+            grouped.setdefault(target, []).append(q)
+    result = {}
+    for lesson, bank in grouped.items():
+        lines = [LINKS_START, "## 配套面试练习", "", "先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。", "",
+                 "<details><summary>展开本章相关面试题</summary>", ""]
+        for q in bank:
+            target = local_url(lesson, ROOT / q.path)
+            lines.append(f"- [{q.id} {q.title}]({target}#{slug(q.id + ' ' + q.title)})")
+        lines.extend(["", "</details>", LINKS_END])
+        result[lesson] = "\n".join(lines)
+    return result
+
+
+def write_navigation() -> None:
+    (ROOT / "docs/question-index.md").write_text(question_index(), encoding="utf-8")
+    for path, section in lesson_sections().items():
+        content = path.read_text(encoding="utf-8")
+        pattern = re.escape(LINKS_START) + r".*?" + re.escape(LINKS_END)
+        if LINKS_START in content:
+            content = re.sub(pattern, lambda _: section, content, flags=re.S)
+        else:
+            content = content.rstrip() + "\n\n" + section + "\n"
+        path.write_text(content, encoding="utf-8")
+
+
 def question_index() -> str:
     bank = questions()
     lines = [f"# {len(bank)} 题索引", "", "先找到问题，再回到机制。短答用于口述，详细答案用于理解，追问与案例用于检查能否迁移。", "",
@@ -67,7 +142,9 @@ def question_index() -> str:
             if folder == "advanced":
                 course = f"[{q.path.stem[:2]} 章](../advanced/{q.path.name})"
             else:
-                course = "[基础课程](../learning/README.md)" if folder == "foundations" else "[工程学习路线](00-roadmap.md)"
+                lesson = ROOT / BASE_LESSONS[q.id]
+                label = "项目实验" if lesson.name == "08-project-lab.md" else f"基础 {lesson.name[:2]} 章"
+                course = f"[{label}]({local_url(ROOT / 'docs/question-index.md', lesson)})"
             lines.append(f"| {q.id} | [{q.title}]({path}#{slug(q.id + ' ' + q.title)}) | {course} |")
         lines.append("")
     lines.extend(["", "[学习路线](00-roadmap.md) · [复习工具](../practice/README.md) · [仓库首页](../README.md)", ""])
@@ -86,10 +163,13 @@ def check() -> list[str]:
                 failures.append(f"{q.id} 缺少 {label}")
         if "追问" not in q.body:
             failures.append(f"{q.id} 缺少追问")
-        if q.path.parent.name == "advanced":
-            for label in ("详细答案", "常见追问", "实战案例"):
-                if label not in q.body:
-                    failures.append(f"{q.id} 缺少 {label}")
+        for label in ("详细答案", "常见追问", "实战案例"):
+            if label not in q.body:
+                failures.append(f"{q.id} 缺少 {label}")
+        if q.id in BASE_LESSONS:
+            target = local_url(ROOT / q.path, ROOT / BASE_LESSONS[q.id])
+            if target not in q.body:
+                failures.append(f"{q.id} 缺少主要学习章链接：{target}")
     # Each advanced lesson owns three stable questions and links back to its question chapter.
     for number, stem in enumerate(ADVANCED_CHAPTERS):
         lesson = ROOT / "advanced" / f"{stem}.md"
@@ -105,6 +185,9 @@ def check() -> list[str]:
     index = ROOT / "docs/question-index.md"
     if not index.exists() or index.read_text(encoding="utf-8") != question_index():
         failures.append("题目索引需更新：python3 scripts/check_repo.py --write-index")
+    for path, section in lesson_sections().items():
+        if not path.exists() or section not in path.read_text(encoding="utf-8"):
+            failures.append(f"{path.relative_to(ROOT)} 面试题导航需更新：python3 scripts/check_repo.py --write-index")
     markdown = sorted(p for p in ROOT.rglob("*.md") if not any(x in p.parts for x in (".git", ".local", ".venv")))
     for path in markdown:
         content = path.read_text(encoding="utf-8")
@@ -137,10 +220,10 @@ def check() -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--write-index", action="store_true")
+    parser.add_argument("--write-index", action="store_true", help="更新题目总索引与学习章题目导航")
     args = parser.parse_args()
     if args.write_index:
-        (ROOT / "docs/question-index.md").write_text(question_index(), encoding="utf-8")
+        write_navigation()
     failures = check()
     for item in failures:
         print(f"ERROR: {item}", file=sys.stderr)

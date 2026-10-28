@@ -91,3 +91,17 @@
 ## 参考资料
 
 [评测参考资料](05-evaluation-and-observability.md#参考资料) · [可靠性参考资料](06-reliability-and-security.md#参考资料)
+
+<!-- question-links:start -->
+## 配套面试练习
+
+先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。
+
+<details><summary>展开本章相关面试题</summary>
+
+- [Q053 怎样向面试官讲清一个真实个人项目？](07-system-design-and-projects.md#q053-怎样向面试官讲清一个真实个人项目)
+- [Q055 Agent 项目怎样做测试，哪些该 mock？](07-system-design-and-projects.md#q055-agent-项目怎样做测试哪些该-mock)
+- [Q056 线上突然回答变差，你会如何排查？](07-system-design-and-projects.md#q056-线上突然回答变差你会如何排查)
+
+</details>
+<!-- question-links:end -->
