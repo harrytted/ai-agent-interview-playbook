@@ -1,6 +1,6 @@
 # Agent 与大模型基础
 
-目标：能解释一次模型调用如何变成可完成任务的系统，并判断哪些问题需要模型、检索或确定性代码。以下为原创练习题，不代表任何公司的真实题库。回答是复述骨架，请用自己的项目证据补充。
+目标：能解释一次模型调用如何变成可完成任务的系统，并判断哪些问题需要模型、检索或确定性代码。回答是复述骨架，请用自己的项目证据补充。
 
 ### Q001 什么是 Agent，和普通 LLM 调用有何区别？
 
@@ -98,17 +98,15 @@
 
 **微练习：** 设计二十条示例任务，覆盖正常、缺参、冲突、工具失败与越权。验收：先写评分规则，再看模型输出；所有数字注明是本地实验。
 
-## 核验记录与进一步阅读
+## 参考资料
 
-核验日期：2026-10-28。上文的工程排查方法和练习是本仓库的设计建议，不是原作者的实验结论。
-
-| 核心主张 | 一手来源 | 状态与边界 |
+| 核心主张 | 一手来源 | 阅读要点 |
 |---|---|---|
-| Agent 与预定义工作流可按控制路径区分 | [Anthropic](https://www.anthropic.com/research/building-effective-agents) | 已核验；术语约定并不统一，文章发表于 2024 年 |
-| 自回归生成依赖已有 token | [Hugging Face](https://huggingface.co/docs/transformers/llm_tutorial) | 已核验；此处不涵盖所有生成架构 |
-| 标准缩放点积注意力机制 | [Attention Is All You Need](https://arxiv.org/abs/1706.03762) | 已核验；现代模型可能采用变体 |
-| SFT 与偏好优化使用不同训练信号 | [TRL SFT](https://huggingface.co/docs/trl/sft_trainer)、[TRL DPO](https://huggingface.co/docs/trl/dpo_trainer) | 已核验；这里只讨论概念，不固定训练库接口 |
-| KV Cache 用存储换取重复计算减少 | [Hugging Face 缓存说明](https://huggingface.co/docs/transformers/cache_explanation) | 已核验；具体性能依赖实现 |
-| LoRA 训练低秩增量，RAG 使用外部检索材料 | [LoRA](https://arxiv.org/abs/2106.09685)、[RAG](https://arxiv.org/abs/2005.11401) | 已核验；不转述论文的性能数字为普遍保证 |
+| Agent 与预定义工作流可按控制路径区分 | [Anthropic](https://www.anthropic.com/research/building-effective-agents) | 术语约定并不统一，文章发表于 2024 年 |
+| 自回归生成依赖已有 token | [Hugging Face](https://huggingface.co/docs/transformers/llm_tutorial) | 此处不涵盖所有生成架构 |
+| 标准缩放点积注意力机制 | [Attention Is All You Need](https://arxiv.org/abs/1706.03762) | 现代模型可能采用变体 |
+| SFT 与偏好优化使用不同训练信号 | [TRL SFT](https://huggingface.co/docs/trl/sft_trainer)、[TRL DPO](https://huggingface.co/docs/trl/dpo_trainer) | 这里只讨论概念，不固定训练库接口 |
+| KV Cache 用存储换取重复计算减少 | [Hugging Face 缓存说明](https://huggingface.co/docs/transformers/cache_explanation) | 具体性能依赖实现 |
+| LoRA 训练低秩增量，RAG 使用外部检索材料 | [LoRA](https://arxiv.org/abs/2106.09685)、[RAG](https://arxiv.org/abs/2005.11401) | 结合训练与检索设置阅读论文结果 |
 
 复习入口：[仓库首页](../../README.md) · 下一篇：[规划与编排](02-planning-and-orchestration.md)

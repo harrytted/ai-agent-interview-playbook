@@ -26,7 +26,7 @@
 | 状态与协作 | [07 记忆](learning/07-memory-and-state.md) · [08 规划与多 Agent](learning/08-planning-and-multi-agent.md) | 管理状态与版本，解释协作和恢复的边界 |
 | 质量与交付 | [09 评测](learning/09-evaluation.md) · [10 可靠性与安全](learning/10-reliability-and-security.md) | 定义指标与终态，处理失败和越权 |
 
-[完整课程与节奏](learning/README.md) · [术语回查](learning/glossary.md) · [知识核验记录](learning/verification.md) · [GitHub 学习资源深度调研](research/learning-resources.md)
+[完整课程与节奏](learning/README.md) · [术语回查](learning/glossary.md) · [课程参考资料](learning/verification.md) · [GitHub 学习资源深度调研](research/learning-resources.md)
 
 ## 知识地图
 
@@ -67,11 +67,11 @@ python3 examples/agent_lab/lab.py --scenario all
 python3 examples/foundations/math_lab.py --section all
 ```
 
-复习记录保存在 `.local/study-progress.json`，默认不进入 Git。使用简单的日期间隔规则，详见 [复习说明](practice/README.md)；没有使用算法预测你的掌握程度。
+复习记录保存在 `.local/study-progress.json`，默认不进入 Git。日期间隔规则详见 [复习说明](practice/README.md)。
 
 ## 用项目支撑面试回答
 
-[7 天项目实验](docs/engineering/08-project-lab.md)提供从教学循环到真实模型接入的验收步骤。当前代码的决策器是固定脚本，检索是关键词匹配；它能验证执行器边界，**不能衡量真实 LLM 能力、语义检索质量或生产性能**。接入模型、持久化、多租户和部署属于后续练习。
+[7 天项目实验](docs/engineering/08-project-lab.md)提供从工具循环到真实模型接入的验收步骤。当前代码使用脚本决策器和关键词检索，实验重点是执行器边界。接入模型、持久化、多租户和部署见后续练习。
 
 准备面试时使用 [模拟面试](practice/mock-interviews.md)、[项目表达模板](practice/project-story-template.md) 和 [错题复盘模板](practice/review-template.md)。所有业务数据、项目职责和指标请用自己的真实材料填写。
 
@@ -79,8 +79,8 @@ python3 examples/foundations/math_lab.py --section all
 
 - [项目调研及热度口径](research/github-survey.md)：面试题库、教程和框架分别比较；统计有来源和采集说明。
 - [基础学习资源调研](research/learning-resources.md)：实读课程章节，标注先修、示例环境、归档与版本限制。
-- [课程核验台账](learning/verification.md)：事实依据、教学简化、独立复核及未验证项。
-- [关键事实核验台账](docs/claim-ledger.md)：区分事实、工程建议和教学简化。
+- [课程参考资料](learning/verification.md)：按课程主题整理原论文和官方文档。
+- [面试知识参考资料](docs/claim-ledger.md)：按基础概念和工程主题整理一手资料。
 - [贡献指南](CONTRIBUTING.md)：补充问题、修正事实、增加可复现实验。
 - [变更记录](CHANGELOG.md)：跟踪内容与工具更新。
 

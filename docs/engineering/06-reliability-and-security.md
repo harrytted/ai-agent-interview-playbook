@@ -1,6 +1,6 @@
 # 06 · 可靠性与安全
 
-学习目标：说明一次动作为什么获准执行、失败后能否重做、恢复时如何避免重复副作用。这里的状态机和参数是教学设计，需要按实际业务验证。
+学习目标：说明一次动作为什么获准执行、失败后能否重做、恢复时如何避免重复副作用。
 
 ### Q041 工具失败后应该怎样重试？
 
@@ -98,17 +98,15 @@
 
 **微练习：** 一个主任务预算为 20 次工具调用，派出 3 个子任务。给出共享预算的分配与扣减规则，并处理两个子任务同时申请最后一个名额的竞争。
 
-## 核验记录
+## 参考资料
 
-核验日期：2026-10-28。本文提出的状态字段、练习和参数选择属于教学方案，不等同于任何 SDK 的完整实现。
-
-| 关键事实 | 一手来源 | 状态与限定 |
+| 关键事实 | 一手来源 | 阅读要点 |
 |---|---|---|
-| 重试会增加依赖负载，需超时、退避和抖动 | [AWS 重试与退避](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/) | 已核验；策略依错误与服务合同选择 |
-| 响应丢失可能造成结果不确定，客户端意图 ID 可支持幂等 | [AWS 幂等 API](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) | 已核验；不是所有第三方 API 都支持 |
-| Interrupt 可暂停并在状态持久化后恢复 | [LangGraph Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) | 已核验；审批授权由应用负责 |
-| Checkpointer 保存线程范围的图状态 | [LangGraph Persistence](https://docs.langchain.com/oss/python/langgraph/persistence) | 已核验；不自动覆盖外部事务 |
-| 工具边界需权限与参数校验 | [OWASP 注入防御](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html)、[授权指南](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) | 已核验；防御不能保证零风险 |
-| asyncio 取消需要正确传播并清理资源 | [Python 官方文档](https://docs.python.org/3/library/asyncio-task.html#task-cancellation) | 已核验；远端取消取决于接口能力 |
+| 重试会增加依赖负载，需超时、退避和抖动 | [AWS 重试与退避](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/) | 策略依错误与服务合同选择 |
+| 响应丢失可能造成结果不确定，客户端意图 ID 可支持幂等 | [AWS 幂等 API](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) | 先确认外部 API 的幂等合同 |
+| Interrupt 可暂停并在状态持久化后恢复 | [LangGraph Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) | 审批授权由应用负责 |
+| Checkpointer 保存线程范围的图状态 | [LangGraph Persistence](https://docs.langchain.com/oss/python/langgraph/persistence) | 不自动覆盖外部事务 |
+| 工具边界需权限与参数校验 | [OWASP 注入防御](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html)、[授权指南](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) | 结合最小权限、参数校验与动作审批 |
+| asyncio 取消需要正确传播并清理资源 | [Python 官方文档](https://docs.python.org/3/library/asyncio-task.html#task-cancellation) | 远端取消取决于接口能力 |
 
 复习时用一句话区分：“状态恢复告诉我执行到了哪里，幂等控制同一意图产生几次副作用。”下一篇：[系统设计与项目表达](07-system-design-and-projects.md)。

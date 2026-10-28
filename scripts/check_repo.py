@@ -41,7 +41,7 @@ def anchors(content: str) -> set[str]:
 
 
 def question_index() -> str:
-    lines = ["# 56 题索引", "", "由 `python3 scripts/check_repo.py --write-index` 生成。题号保持稳定，按模块阅读全文可看到来源核验记录。", "",
+    lines = ["# 56 题索引", "", "按模块查看问题、回答与参考资料。", "",
              "| 题号 | 问题 | 模块 |", "| --- | --- | --- |"]
     for q in questions():
         path = q.path.relative_to("docs").as_posix()

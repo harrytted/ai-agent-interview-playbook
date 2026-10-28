@@ -98,15 +98,13 @@
 
 **微练习：** 给出“文档缺失、检索遗漏、生成误读”三次故障。验收：设计最小对照实验，让每次只改变一个环节。
 
-## 核验记录与进一步阅读
+## 参考资料
 
-核验日期：2026-10-28。分块、权限生命周期、评测和排障步骤是本仓库的工程练习设计，最佳参数与实际收益需要自行实验。
-
-| 核心主张 | 一手来源 | 状态与边界 |
+| 核心主张 | 一手来源 | 阅读要点 |
 |---|---|---|
-| 原始 RAG 将参数化生成与非参数化检索结合 | [RAG 论文](https://arxiv.org/abs/2005.11401) | 已核验；现代应用 RAG 不限于论文训练方式 |
-| 两阶段检索先召回候选，再对候选重排 | [Sentence Transformers](https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html) | 已核验；重排无法补回候选外证据 |
-| RRF 按各路名次融合 | [Elastic 官方说明](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion) | 已核验；不承诺一定优于其他融合方式 |
-| 可比较精确搜索与近似索引；过滤影响需检查 | [pgvector README](https://github.com/pgvector/pgvector) | 已核验；特定数据库实现不代表所有产品 |
+| 原始 RAG 将参数化生成与非参数化检索结合 | [RAG 论文](https://arxiv.org/abs/2005.11401) | 现代应用 RAG 不限于论文训练方式 |
+| 两阶段检索先召回候选，再对候选重排 | [Sentence Transformers](https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html) | 重排无法补回候选外证据 |
+| RRF 按各路名次融合 | [Elastic 官方说明](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion) | 在目标查询上比较融合效果 |
+| 可比较精确搜索与近似索引；过滤影响需检查 | [pgvector README](https://github.com/pgvector/pgvector) | 特定数据库实现不代表所有产品 |
 
 复习入口：[仓库首页](../../README.md) · 上一篇：[编排](02-planning-and-orchestration.md) · 下一篇：[工具、记忆与协议](04-tools-memory-protocols.md)

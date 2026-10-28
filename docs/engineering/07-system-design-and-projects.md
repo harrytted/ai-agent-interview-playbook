@@ -1,6 +1,6 @@
 # 07 · 系统设计与项目表达
 
-学习目标：从业务约束推导设计，并用真实证据讲清自己的贡献。下列场景、架构与数字是原创教学假设，不是公司的实际案例或个人履历。
+学习目标：从业务约束推导设计，并用真实证据讲清自己的贡献。
 
 面试时先用 1–2 分钟确认用户、动作范围、成功标准、数据规模、时延与风险，再画主路径，最后深入一个失败路径。下面的“回答”是起点，深入设计通常需要更长时间。
 
@@ -100,14 +100,12 @@
 
 **微练习：** 场景：“今天起退款政策回答错误，但搜索服务没有报错。”列出 5 个可区分的假设和各自一个检查证据，最后指定一个低风险回滚方案。
 
-## 设计依据与核验边界
+## 参考资料
 
-核验日期：2026-10-28。Q049–Q056 是综合工程原则设计的教学问题，不是收集到的真实公司面经；图示状态、容量与目标值需要由自己的实验验证。
-
-| 设计依据 | 一手来源 | 已核验的范围 |
+| 设计依据 | 一手来源 | 阅读要点 |
 |---|---|---|
 | 根据任务选择简单工作流或动态 Agent | [Anthropic Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) | 架构模式与权衡；没有通用最佳框架 |
-| 以任务和可检查结果构建评测 | [Anthropic Agent Evals](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | 评测方法；不提供本文算例的实测数据 |
+| 以任务和可检查结果构建评测 | [Anthropic Agent Evals](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | 任务定义、评分方法与结果检查 |
 | 持久化状态和暂停恢复是独立机制 | [LangGraph Persistence](https://docs.langchain.com/oss/python/langgraph/persistence)、[Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) | 框架能力；业务权限与副作用另行处理 |
 | 对每次资源访问执行授权 | [OWASP Authorization](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) | 权限边界；具体 ACL 模型按业务定义 |
 

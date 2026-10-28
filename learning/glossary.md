@@ -40,4 +40,4 @@
 | Idempotency | 相同意图的重复请求不增加相应副作用的合同 | 依赖服务端范围、期限和一致性语义 | [10](10-reliability-and-security.md) |
 | Prompt Injection | 不可信内容试图改变系统指令或行动的攻击 | 仅靠提示不形成完整执行边界 | [10](10-reliability-and-security.md) |
 
-[课程目录](README.md) · [核验台账](verification.md)
+[课程目录](README.md) · [参考资料](verification.md)

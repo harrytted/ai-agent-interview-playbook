@@ -1,6 +1,6 @@
 # 05 · 评测与可观测性
 
-学习目标：把“感觉回答不错”转换为可复现的验收结论，并能从一条失败轨迹定位问题。优先级是本仓库的学习建议，不代表招聘频次。以下数字均为教学算例。
+学习目标：把“感觉回答不错”转换为可复现的验收结论，并能从一条失败轨迹定位问题。优先级用于安排学习顺序。以下数字均为教学算例。
 
 ### Q033 怎样判断一个 Agent 真正完成了任务？
 
@@ -98,15 +98,13 @@
 
 **微练习：** 为一个新检索器写发布门槛：1 个主要质量指标、2 个保护指标和 1 个回滚条件。阈值由你设定并标为实验目标，不写成行业标准。
 
-## 核验记录
+## 参考资料
 
-核验日期：2026-10-28。问题、算例、指标组合与练习是本仓库的教学设计；其阈值不代表通用生产标准。
-
-| 关键事实 | 一手来源 | 状态与限定 |
+| 关键事实 | 一手来源 | 阅读要点 |
 |---|---|---|
-| Agent 可结合轨迹、环境结果及多种评分器评测 | [Anthropic Agent Evals](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | 已核验；任务口径由应用定义 |
-| Judge 存在位置、冗长等偏差 | [MT-Bench 原始研究](https://arxiv.org/abs/2306.05685) | 已核验；论文结果不保证迁移到其他任务 |
-| Trace 由关联的 span 组织执行链路 | [OpenTelemetry Traces](https://opentelemetry.io/docs/concepts/signals/traces/) | 已核验；本文字段列表是设计建议 |
-| GenAI 语义约定旧页面已迁移 | [OpenTelemetry GenAI 规范仓库](https://github.com/open-telemetry/semantic-conventions-genai) | 已核验；使用时查当前版本 |
+| Agent 可结合轨迹、环境结果及多种评分器评测 | [Anthropic Agent Evals](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | 任务口径由应用定义 |
+| Judge 存在位置、冗长等偏差 | [MT-Bench 原始研究](https://arxiv.org/abs/2306.05685) | 在目标任务上校准 Judge 与人工的一致性 |
+| Trace 由关联的 span 组织执行链路 | [OpenTelemetry Traces](https://opentelemetry.io/docs/concepts/signals/traces/) | 结合任务链路选择 span 与属性 |
+| GenAI 语义约定旧页面已迁移 | [OpenTelemetry GenAI 规范仓库](https://github.com/open-telemetry/semantic-conventions-genai) | 使用时查当前版本 |
 
 复习时先遮住回答，口述“成功终态→分母→证据→失败归因”，再做算例。下一篇：[可靠性与安全](06-reliability-and-security.md)。

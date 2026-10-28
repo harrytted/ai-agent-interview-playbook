@@ -98,15 +98,15 @@
 
 **微练习：** A 说“不吃花生”，B 说“喜欢花生”。验收：设计两个用户查询，证明 B 的偏好不会覆盖 A，并测试 A 更新或删除偏好后的结果。
 
-## 核验记录与进一步阅读
+## 参考资料
 
-核验日期：2026-10-28。协议会演进；上文角色概念参考当前架构页，工具与授权细节固定引用 2025-11-25 规范，实际实现请按服务协商版本核对。校验、业务授权、隐私生命周期及练习是本仓库的工程建议。
+角色概念参考架构页；工具与授权细节引用 2025-11-25 规范，实践时按服务协商版本核对。
 
-| 核心主张 | 一手来源 | 状态与边界 |
+| 核心主张 | 一手来源 | 阅读要点 |
 |---|---|---|
-| MCP 有 Host、Client、Server 角色，并聚焦能力交换 | [MCP 架构](https://modelcontextprotocol.io/docs/learn/architecture) | 已核验；不是完整 Agent 编排标准 |
-| 工具可被发现、调用，并声明输入结构 | [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) | 已核验；协议描述不等于执行授权 |
-| 授权包含令牌、资源与范围等约束 | [MCP Authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) | 已核验；本地与远程传输需分别考虑 |
-| 短期记忆面向会话，长期记忆跨会话保存与读取 | [短期记忆](https://docs.langchain.com/oss/python/langchain/short-term-memory)、[长期记忆](https://docs.langchain.com/oss/python/langchain/long-term-memory) | 已核验；是框架术语参考，存储与治理由应用决定 |
+| MCP 有 Host、Client、Server 角色，并聚焦能力交换 | [MCP 架构](https://modelcontextprotocol.io/docs/learn/architecture) | 不是完整 Agent 编排标准 |
+| 工具可被发现、调用，并声明输入结构 | [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) | 协议描述不等于执行授权 |
+| 授权包含令牌、资源与范围等约束 | [MCP Authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) | 本地与远程传输需分别考虑 |
+| 短期记忆面向会话，长期记忆跨会话保存与读取 | [短期记忆](https://docs.langchain.com/oss/python/langchain/short-term-memory)、[长期记忆](https://docs.langchain.com/oss/python/langchain/long-term-memory) | 是框架术语参考，存储与治理由应用决定 |
 
 复习入口：[仓库首页](../../README.md) · 上一篇：[RAG](03-rag-and-search.md)

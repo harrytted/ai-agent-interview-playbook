@@ -1,6 +1,6 @@
 # 规划、状态与多 Agent 编排
 
-目标：画出可停止、可恢复、可解释失败位置的执行流程。这里的状态机与练习是教学设计，不是某框架的固定接口。
+目标：画出可停止、可恢复、可解释失败位置的执行流程。
 
 ### Q009 最小 Agent Loop 应包含哪些环节？
 
@@ -98,15 +98,13 @@
 
 **微练习：** 两个 Agent 对政策生效时间给出冲突答案。验收：用包含版本、来源、日期和置信边界的结构交接，说明如何裁决。
 
-## 核验记录与进一步阅读
+## 参考资料
 
-核验日期：2026-10-28。Q009、Q012、Q015、Q016 以通用工程设计与本仓库练习为主，不声称存在唯一架构。
-
-| 核心主张 | 一手来源 | 状态与边界 |
+| 核心主张 | 一手来源 | 阅读要点 |
 |---|---|---|
-| ReAct 交替组织推理与动作 | [ReAct](https://arxiv.org/abs/2210.03629) | 已核验；不把原论文任务成绩推广到任意业务 |
-| 图使用状态、节点、边与更新归并 | [LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) | 已核验；此处不固定 SDK 版本 |
-| Checkpointer 与跨线程 store 有不同作用 | [LangGraph Persistence](https://docs.langchain.com/oss/python/langgraph/persistence) | 已核验；外部副作用仍需业务幂等设计 |
-| 编排可包含路由、并行和动态分解 | [Anthropic 模式讨论](https://www.anthropic.com/research/building-effective-agents) | 已核验；属于设计参考，不是优劣排名 |
+| ReAct 交替组织推理与动作 | [ReAct](https://arxiv.org/abs/2210.03629) | 实验结论对应论文中的任务与设置 |
+| 图使用状态、节点、边与更新归并 | [LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) | 此处不固定 SDK 版本 |
+| Checkpointer 与跨线程 store 有不同作用 | [LangGraph Persistence](https://docs.langchain.com/oss/python/langgraph/persistence) | 外部副作用仍需业务幂等设计 |
+| 编排可包含路由、并行和动态分解 | [Anthropic 模式讨论](https://www.anthropic.com/research/building-effective-agents) | 结合路由、并行和动态分解的适用条件阅读 |
 
 复习入口：[仓库首页](../../README.md) · 上一篇：[基础](01-agent-and-llm.md) · 下一篇：[RAG](03-rag-and-search.md)
