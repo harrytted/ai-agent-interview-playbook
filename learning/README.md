@@ -62,6 +62,8 @@ python3 examples/agent_lab/lab.py --scenario all
 
 各章正文附有官方文档、协议和原论文，集中索引见 [课程参考资料](verification.md)。外部课程的章节选择、依赖环境和阅读顺序见 [学习资源深度调研](../research/learning-resources.md)。
 
+学完后进入 [12 章进阶课程](../advanced/README.md)，继续学习长任务 Harness、持久执行、上下文工程、Agentic RAG、多 Agent、计算机操作、性能与训练，并通过 [项目工作坊](../advanced/project-workshop.md)串成一套系统。
+
 后续接入真实模型，可沿用 [7 天项目实验](../docs/engineering/08-project-lab.md)；需要数学、训练或推理系统更深知识时，再按 [调研报告](../research/learning-resources.md) 选修对应原课程。
 
 [返回仓库首页](../README.md) · [面试准备路线](../docs/00-roadmap.md)

@@ -1,0 +1,904 @@
+{
+  "schema_version": 1,
+  "collected_date": "2026-10-28",
+  "timezone": "Asia/Shanghai",
+  "scope": "Agent 进阶课程新增机制的 GitHub、第一方博客与官方学习路径",
+  "methods": {
+    "content": "实际打开 README、关键文档或源码以及博客正文；页面引用和读取章节保留在各记录。",
+    "statistics": "GitHub 页面显示的近似 Star / Fork 数，不是 GitHub API 精确数，也不是 Trending 排名。",
+    "versions": "GitHub 源码读取 main，commit SHA 未固定为 null；可变文档以读取入口和观察到的版本范围记录。",
+    "execution": "本文件中外部项目、SDK 示例和训练任务均未在本地运行。"
+  },
+  "sources": [
+    {
+      "id": "gh-deepagents",
+      "type": "github_repository",
+      "repo": "langchain-ai/deepagents",
+      "url": "https://github.com/langchain-ai/deepagents",
+      "read_pages": [
+        {
+          "url": "https://github.com/langchain-ai/deepagents",
+          "section": "README、页面规模与许可标签",
+          "method": "browser_ax_text"
+        },
+        {
+          "url": "https://docs.langchain.com/oss/python/deepagents/backends",
+          "section": "StateBackend、CompositeBackend、LocalShellBackend 与存储作用域",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "存储路由、线程状态与执行隔离分开设计。"
+      ],
+      "boundaries": [
+        "LocalShellBackend 不是安全沙箱；跨线程存储和线程内状态有不同生命周期。"
+      ],
+      "chapters": [
+        1,
+        3,
+        4,
+        8,
+        11
+      ],
+      "version": "main",
+      "default_branch": "main",
+      "commit_sha": null,
+      "executed": false,
+      "license_observation": {
+        "label": "MIT",
+        "evidence_url": "https://github.com/langchain-ai/deepagents",
+        "method": "GitHub page license label"
+      },
+      "popularity": {
+        "stars_display": "30.7k",
+        "forks_display": "4.3k",
+        "method": "repository HTML page display",
+        "exact_api_count": null,
+        "may_be_cached": true
+      }
+    },
+    {
+      "id": "gh-deerflow",
+      "type": "github_repository",
+      "repo": "bytedance/deer-flow",
+      "url": "https://github.com/bytedance/deer-flow",
+      "read_pages": [
+        {
+          "url": "https://raw.githubusercontent.com/bytedance/deer-flow/main/README.md",
+          "section": "2.0 定位、版本历史与环境组件",
+          "method": "web_open"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/bytedance/deer-flow/main/backend/README.md",
+          "section": "网关、LangGraph 运行时、lead agent 与中间件架构",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "按请求路径拆分运行时、中间件、执行环境和应用服务。"
+      ],
+      "boundaries": [
+        "2.0 是重写；1.x 位于历史分支，不能混用其架构说明。"
+      ],
+      "chapters": [
+        1,
+        2,
+        3,
+        7,
+        8,
+        11
+      ],
+      "version": "2.0 / main",
+      "default_branch": "main",
+      "commit_sha": null,
+      "executed": false,
+      "license_observation": {
+        "label": "MIT",
+        "evidence_url": "https://github.com/bytedance/deer-flow",
+        "method": "GitHub page license label"
+      },
+      "popularity": {
+        "stars_display": "84.5k",
+        "forks_display": "11.8k",
+        "method": "repository HTML page display",
+        "exact_api_count": null,
+        "may_be_cached": true
+      }
+    },
+    {
+      "id": "gh-claude-sdk",
+      "type": "github_repository",
+      "repo": "anthropics/claude-agent-sdk-python",
+      "url": "https://github.com/anthropics/claude-agent-sdk-python",
+      "read_pages": [
+        {
+          "url": "https://github.com/anthropics/claude-agent-sdk-python",
+          "section": "README 中 query、Client 与工具权限说明",
+          "method": "web_open"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/src/claude_agent_sdk/query.py",
+          "section": "单次查询语义、子进程与自定义 transport",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "区分单次查询与交互会话；权限判断由执行运行时落实。"
+      ],
+      "boundaries": [
+        "allowed_tools 表示自动审批规则，不能据此认定其他工具不可见。"
+      ],
+      "chapters": [
+        2,
+        8,
+        11
+      ],
+      "version": "main",
+      "default_branch": "main",
+      "commit_sha": null,
+      "executed": false,
+      "license_observation": {
+        "label": "MIT",
+        "evidence_url": "https://github.com/anthropics/claude-agent-sdk-python",
+        "method": "GitHub page license label"
+      },
+      "popularity": {
+        "stars_display": "8.4k",
+        "forks_display": "1.4k",
+        "method": "repository HTML page display",
+        "exact_api_count": null,
+        "may_be_cached": true
+      }
+    },
+    {
+      "id": "gh-openai-sdk",
+      "type": "github_repository",
+      "repo": "openai/openai-agents-python",
+      "url": "https://github.com/openai/openai-agents-python",
+      "read_pages": [
+        {
+          "url": "https://github.com/openai/openai-agents-python",
+          "section": "README 构建块与编排模式",
+          "method": "web_open"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/openai/openai-agents-python/main/src/agents/handoffs/__init__.py",
+          "section": "HandoffInputData 历史、交接前后条目与输入过滤",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "把交接的所有权与上下文传递写进协作契约。"
+      ],
+      "boundaries": [
+        "handoff 与将 Agent 当作工具的答复责任不同。"
+      ],
+      "chapters": [
+        2,
+        5,
+        7,
+        9,
+        11
+      ],
+      "version": "main",
+      "default_branch": "main",
+      "commit_sha": null,
+      "executed": false,
+      "license_observation": {
+        "label": "MIT",
+        "evidence_url": "https://github.com/openai/openai-agents-python",
+        "method": "GitHub page license label"
+      },
+      "popularity": {
+        "stars_display": "30.3k",
+        "forks_display": "4.9k",
+        "method": "repository HTML page display",
+        "exact_api_count": null,
+        "may_be_cached": true
+      }
+    },
+    {
+      "id": "gh-ms-framework",
+      "type": "github_repository",
+      "repo": "microsoft/agent-framework",
+      "url": "https://github.com/microsoft/agent-framework",
+      "read_pages": [
+        {
+          "url": "https://github.com/microsoft/agent-framework",
+          "section": "README 工作流、checkpoint 与可观测性",
+          "method": "web_open"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/agent-framework/main/python/samples/03-workflows/README.md",
+          "section": "函数式及图式工作流样例目录",
+          "method": "web_open"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/agent-framework/main/python/samples/03-workflows/functional/steps_and_checkpointing.py",
+          "section": "普通函数与 step 在恢复时的执行区别",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "通过已完成步骤结果恢复，分析重放成本和副作用边界。"
+      ],
+      "boundaries": [
+        "此样例使用 InMemoryCheckpointStorage，不具备跨进程持久化。"
+      ],
+      "chapters": [
+        2,
+        7,
+        9
+      ],
+      "version": "main",
+      "default_branch": "main",
+      "commit_sha": null,
+      "executed": false,
+      "license_observation": {
+        "label": "MIT",
+        "evidence_url": "https://github.com/microsoft/agent-framework",
+        "method": "GitHub page license label"
+      },
+      "popularity": {
+        "stars_display": "14.3k",
+        "forks_display": "2.5k",
+        "method": "repository HTML page display",
+        "exact_api_count": null,
+        "may_be_cached": true
+      }
+    },
+    {
+      "id": "gh-graphiti",
+      "type": "github_repository",
+      "repo": "getzep/graphiti",
+      "url": "https://github.com/getzep/graphiti",
+      "read_pages": [
+        {
+          "url": "https://raw.githubusercontent.com/getzep/graphiti/main/README.md",
+          "section": "增量摄入、时序图与混合检索",
+          "method": "web_open"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/getzep/graphiti/main/graphiti_core/edges.py",
+          "section": "EntityEdge 的有效时间、失效时间与 episode 引用",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "给记忆增加来源与事实有效期，区分图记录和事实变化。"
+      ],
+      "boundaries": [
+        "开源库仍需要图数据库、模型与嵌入等依赖；不等同托管 Zep 服务。"
+      ],
+      "chapters": [
+        4,
+        6
+      ],
+      "version": "main",
+      "default_branch": "main",
+      "commit_sha": null,
+      "executed": false,
+      "license_observation": {
+        "label": "Apache-2.0",
+        "evidence_url": "https://github.com/getzep/graphiti",
+        "method": "GitHub page license label"
+      },
+      "popularity": {
+        "stars_display": "32.3k",
+        "forks_display": "3.3k",
+        "method": "repository HTML page display",
+        "exact_api_count": null,
+        "may_be_cached": true
+      }
+    },
+    {
+      "id": "gh-graphrag",
+      "type": "github_repository",
+      "repo": "microsoft/graphrag",
+      "url": "https://github.com/microsoft/graphrag",
+      "read_pages": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/graphrag/main/README.md",
+          "section": "维护状态、索引成本与项目范围",
+          "method": "web_open"
+        },
+        {
+          "url": "https://microsoft.github.io/graphrag/query/global_search/",
+          "section": "社区报告的 map-reduce 全局搜索",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "将全局主题汇总与局部证据检索分开选择与评测。"
+      ],
+      "boundaries": [
+        "README 已明确 maintenance mode；离线索引开销需纳入比较。"
+      ],
+      "chapters": [
+        6,
+        9
+      ],
+      "version": "main / maintenance mode",
+      "default_branch": "main",
+      "commit_sha": null,
+      "executed": false,
+      "license_observation": {
+        "label": "MIT",
+        "evidence_url": "https://github.com/microsoft/graphrag",
+        "method": "GitHub page license label"
+      },
+      "popularity": {
+        "stars_display": "36.5k",
+        "forks_display": "3.9k",
+        "method": "repository HTML page display",
+        "exact_api_count": null,
+        "may_be_cached": true
+      }
+    },
+    {
+      "id": "gh-agent-lightning",
+      "type": "github_repository",
+      "repo": "microsoft/agent-lightning",
+      "url": "https://github.com/microsoft/agent-lightning",
+      "read_pages": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/agent-lightning/main/README.md",
+          "section": "v1.0 重构、legacy 分支与当前论文入口",
+          "method": "web_open"
+        },
+        {
+          "url": "https://microsoft.github.io/agent-lightning/stable/05-basics/",
+          "section": "Trainer、API Gateway、Rollout Controller 与 rollout 生命周期",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "把参数训练、模型调用代理和环境执行拆成独立职责。"
+      ],
+      "boundaries": [
+        "v1.0 与 v0.x 架构分开；当前论文为 2608.17528，旧论文为 2508.03680。"
+      ],
+      "chapters": [
+        9,
+        10,
+        12
+      ],
+      "version": "v1.0 architecture / main",
+      "default_branch": "main",
+      "commit_sha": null,
+      "executed": false,
+      "license_observation": {
+        "label": "MIT",
+        "evidence_url": "https://github.com/microsoft/agent-lightning",
+        "method": "GitHub page license label"
+      },
+      "popularity": {
+        "stars_display": "18.8k",
+        "forks_display": "1.7k",
+        "method": "repository HTML page display",
+        "exact_api_count": null,
+        "may_be_cached": true
+      }
+    },
+    {
+      "id": "blog-anthropic-long-running",
+      "type": "first_party_blog",
+      "author": "Anthropic",
+      "url": "https://www.anthropic.com/research/effective-harnesses-for-long-running-agents",
+      "requested_url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+      "read_pages": [
+        {
+          "url": "https://www.anthropic.com/research/effective-harnesses-for-long-running-agents",
+          "section": "initializer、进度文件、功能清单、增量编码与验证",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "将跨上下文窗口任务交接落实为工作空间产物。"
+      ],
+      "chapters": [
+        1,
+        2,
+        8
+      ],
+      "version": {
+        "publication_date": "2025-11-26"
+      },
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "blog-anthropic-context",
+      "type": "first_party_blog",
+      "author": "Anthropic",
+      "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+      "requested_url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "read_pages": [
+        {
+          "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+          "section": "高信号上下文、工具设计与按需读取",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "从所有输入的信息生命周期设计上下文。"
+      ],
+      "chapters": [
+        3,
+        4,
+        5
+      ],
+      "version": {
+        "publication_date": "2025-09-29"
+      },
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "blog-anthropic-tools",
+      "type": "first_party_blog",
+      "author": "Anthropic",
+      "url": "https://www.anthropic.com/research/advanced-tool-use",
+      "requested_url": "https://www.anthropic.com/engineering/advanced-tool-use",
+      "read_pages": [
+        {
+          "url": "https://www.anthropic.com/research/advanced-tool-use",
+          "section": "工具搜索、程序化工具调用与工具示例",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "按需发现与执行侧聚合需和直接暴露工具做预算比较。"
+      ],
+      "chapters": [
+        5,
+        10,
+        11
+      ],
+      "version": {
+        "publication_date": "2025-11-24"
+      },
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "blog-langchain-deep",
+      "type": "first_party_blog",
+      "author": "LangChain",
+      "url": "https://www.langchain.com/blog/deep-agents",
+      "requested_url": "https://blog.langchain.com/deep-agents/",
+      "read_pages": [
+        {
+          "url": "https://www.langchain.com/blog/deep-agents",
+          "section": "详细指令、规划、文件与子 Agent",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "通过逐项消融比较 harness 组件收益。"
+      ],
+      "chapters": [
+        1,
+        3,
+        7
+      ],
+      "version": {
+        "publication_date": "2025-07-30"
+      },
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "blog-langchain-harness",
+      "type": "first_party_blog",
+      "author": "LangChain",
+      "url": "https://www.langchain.com/blog/the-anatomy-of-an-agent-harness",
+      "requested_url": "https://blog.langchain.com/the-anatomy-of-an-agent-harness/",
+      "read_pages": [
+        {
+          "url": "https://www.langchain.com/blog/the-anatomy-of-an-agent-harness",
+          "section": "文件工作空间、执行环境、hooks 与持久状态",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "以责任划分理解 harness，外部状态改写和参数学习分开。"
+      ],
+      "chapters": [
+        1,
+        2,
+        8,
+        11
+      ],
+      "version": {
+        "publication_date": "2026-03-10"
+      },
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "blog-weng-agents",
+      "type": "first_party_blog",
+      "author": "Lilian Weng",
+      "url": "https://lilianweng.github.io/posts/2023-06-23-agent/",
+      "requested_url": null,
+      "read_pages": [
+        {
+          "url": "https://lilianweng.github.io/posts/2023-06-23-agent/",
+          "section": "规划、记忆、工具分类及 Challenges 章节",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "以经典论文分类连接有限上下文、长程规划与当前实现。"
+      ],
+      "chapters": [
+        3,
+        4,
+        7,
+        12
+      ],
+      "version": {
+        "publication_date": "2023-06-23"
+      },
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "blog-hamel-judge",
+      "type": "first_party_blog",
+      "author": "Hamel Husain",
+      "url": "https://hamel.dev/blog/posts/llm-judge/",
+      "requested_url": null,
+      "read_pages": [
+        {
+          "url": "https://hamel.dev/blog/posts/llm-judge/",
+          "section": "领域专家、数据覆盖、pass/fail 与评审器校准、错误分析",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "先建立业务验收标准和样本，再训练或提示评审器。"
+      ],
+      "chapters": [
+        9
+      ],
+      "version": {
+        "publication_date": "2024-10-29"
+      },
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "blog-chip-agents",
+      "type": "first_party_blog",
+      "author": "Chip Huyen",
+      "url": "https://huyenchip.com/2025/01/07/agents.html",
+      "requested_url": null,
+      "read_pages": [
+        {
+          "url": "https://huyenchip.com/2025/01/07/agents.html",
+          "section": "计划生成、参数推断、函数调用与规划粒度",
+          "method": "web_open"
+        }
+      ],
+      "adopted_points": [
+        "将动作选择、参数正确性与执行失败分开诊断。"
+      ],
+      "chapters": [
+        5,
+        7,
+        9
+      ],
+      "version": {
+        "publication_date": "2025-01-07"
+      },
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-openai-sdk",
+      "type": "official_documentation",
+      "owner": "OpenAI",
+      "url": "https://developers.openai.com/api/docs/guides/agents/sdk",
+      "read_pages": [
+        {
+          "url": "https://developers.openai.com/api/docs/guides/agents/sdk",
+          "section": "SDK 运行能力与自持应用责任",
+          "method": "web_open",
+          "read_by": "research and root"
+        }
+      ],
+      "adopted_points": [
+        "区分 SDK 循环与部署、存储和审批。"
+      ],
+      "chapters": [
+        1,
+        2,
+        7
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-openai-orchestration",
+      "type": "official_documentation",
+      "owner": "OpenAI",
+      "url": "https://developers.openai.com/api/docs/guides/agents/orchestration",
+      "read_pages": [
+        {
+          "url": "https://developers.openai.com/api/docs/guides/agents/orchestration",
+          "section": "Choose the orchestration pattern / Agents as tools",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "交接转移控制权，主管式调用保留答复所有权。"
+      ],
+      "chapters": [
+        7
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-openai-evals",
+      "type": "official_documentation",
+      "owner": "OpenAI",
+      "url": "https://developers.openai.com/api/docs/guides/agent-evals",
+      "read_pages": [
+        {
+          "url": "https://developers.openai.com/api/docs/guides/agent-evals",
+          "section": "Agent evals 正文：trace、dataset 与 eval runs",
+          "method": "web_open",
+          "read_by": "root"
+        }
+      ],
+      "adopted_points": [
+        "从轨迹诊断衔接到可复用评测集。"
+      ],
+      "chapters": [
+        9
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-langgraph-persistence",
+      "type": "official_documentation",
+      "owner": "LangChain",
+      "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "read_pages": [
+        {
+          "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "section": "Checkpointer vs store / MemorySaver does not persist between restarts",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "线程快照、跨线程存储与内存生命周期分别解释。"
+      ],
+      "chapters": [
+        2,
+        4
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-deepagents-subagents",
+      "type": "official_documentation",
+      "owner": "LangChain",
+      "url": "https://docs.langchain.com/oss/python/deepagents/subagents",
+      "read_pages": [
+        {
+          "url": "https://docs.langchain.com/oss/python/deepagents/subagents",
+          "section": "Why use subagents / Per-subagent context",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "对委派定义输入输出、上下文边界与开销。"
+      ],
+      "chapters": [
+        7
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-langchain-retrieval",
+      "type": "official_documentation",
+      "owner": "LangChain",
+      "url": "https://docs.langchain.com/oss/python/deepagents/retrieval",
+      "read_pages": [
+        {
+          "url": "https://docs.langchain.com/oss/python/deepagents/retrieval",
+          "section": "Building a knowledge base / From retrieval to RAG",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "已有知识系统可以作为工具，无需一律重建向量库。"
+      ],
+      "chapters": [
+        6
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-claude-permissions",
+      "type": "official_documentation",
+      "owner": "Anthropic",
+      "url": "https://code.claude.com/docs/en/agent-sdk/permissions",
+      "read_pages": [
+        {
+          "url": "https://code.claude.com/docs/en/agent-sdk/permissions",
+          "section": "How permissions are evaluated",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "区分 hooks、deny、ask、模式、allow 与执行时回调。"
+      ],
+      "chapters": [
+        8,
+        11
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-claude-skills",
+      "type": "official_documentation",
+      "owner": "Anthropic",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
+      "read_pages": [
+        {
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview",
+          "section": "Agent Skills / Why use Skills",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "将可复用任务流程组织为按需装载的文件资源。"
+      ],
+      "chapters": [
+        4
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-mcp-architecture",
+      "type": "official_documentation",
+      "owner": "MCP",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture",
+      "read_pages": [
+        {
+          "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture",
+          "section": "Scope / Participants",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "协议负责上下文交换，host/client/server 责任分开。"
+      ],
+      "chapters": [
+        5
+      ],
+      "version": "2026-07-28",
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-mcp-authorization",
+      "type": "official_documentation",
+      "owner": "MCP",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization",
+      "read_pages": [
+        {
+          "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization",
+          "section": "Purpose and Scope / Protocol Requirements / Roles",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "HTTP transport 授权和应用业务权限分别设计。"
+      ],
+      "chapters": [
+        11
+      ],
+      "version": "2026-07-28",
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-hf-observability",
+      "type": "official_documentation",
+      "owner": "Hugging Face",
+      "url": "https://huggingface.co/learn/agents-course/en/bonus-unit2/introduction",
+      "read_pages": [
+        {
+          "url": "https://huggingface.co/learn/agents-course/en/bonus-unit2/introduction",
+          "section": "What You Will Learn",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "将工具轨迹、token、延迟与离线任务评测连起来。"
+      ],
+      "chapters": [
+        9,
+        10
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-hf-inference",
+      "type": "official_documentation",
+      "owner": "Hugging Face",
+      "url": "https://huggingface.co/docs/transformers/main/en/llm_optims",
+      "read_pages": [
+        {
+          "url": "https://huggingface.co/docs/transformers/main/en/llm_optims",
+          "section": "Optimizing inference / Static kv-cache and torch.compile",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "区分推理缓存机制与端到端 Agent 延迟。"
+      ],
+      "chapters": [
+        10
+      ],
+      "version": "main documentation",
+      "commit_sha": null,
+      "executed": false
+    },
+    {
+      "id": "official-hf-grpo",
+      "type": "official_documentation",
+      "owner": "Hugging Face",
+      "url": "https://huggingface.co/docs/trl/grpo_trainer",
+      "read_pages": [
+        {
+          "url": "https://huggingface.co/docs/trl/grpo_trainer",
+          "section": "Agent Training / Tools / Environments",
+          "method": "web_open",
+          "read_by": "research"
+        }
+      ],
+      "adopted_points": [
+        "从 rollout、可重置状态与奖励进入参数训练。"
+      ],
+      "chapters": [
+        12
+      ],
+      "version": null,
+      "commit_sha": null,
+      "executed": false
+    }
+  ]
+}

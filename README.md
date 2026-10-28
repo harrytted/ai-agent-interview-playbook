@@ -1,19 +1,21 @@
-# AI Agent 基础学习与面试准备手册
+# AI Agent 系统学习与面试手册
 
 把 Agent 的机制讲清楚，把工程取舍讲具体，把自己的项目做扎实。
 
-面向 **AI Agent / 大模型应用工程师**，以 Python 实践为主。这里是一份可自学、可复习、可贡献的中文学习仓库：**10 章基础课程、56 道原创问答**，配有数值算例、执行器实验、学习路线和模拟面试。
+面向 **AI Agent / 大模型应用工程师**，以 Python 实践为主。这里是一份可自学、可复习、可贡献的中文学习仓库：**10 章基础、12 章进阶、56 道原创问答**，配有数值算例、执行器与恢复实验、项目工作坊、学习路线和模拟面试。
 
 ## 从这里开始
 
 | 你的状态 | 建议入口 | 本次产出 |
 | --- | --- | --- |
 | 想从原理开始学 | [基础课程](learning/README.md) | 理解从 LLM 到 Agent 系统的完整链路 |
+| 已经掌握基础 | [进阶课程](advanced/README.md) | 系统学习长任务、Agentic RAG、协作、质量优化与训练 |
 | 开始准备面试 | [学习路线](docs/00-roadmap.md) | 确定 30 天安排与验收标准 |
 | 已经做过 LLM 应用 | [56 题索引](docs/question-index.md) | 找出解释不清的机制与失败路径 |
 | 面试前一周 | [7 天冲刺](docs/00-roadmap.md#7-天冲刺) | 两轮模拟面试和一个可验证的项目演示 |
 | 想动手补工程能力 | [离线实验](examples/agent_lab/README.md) | 运行工具循环，观察重试、审批、幂等和步数上限 |
 | 想挑外部学习资料 | [GitHub 项目调研](research/github-survey.md) | 按用途组合资料，避免只收藏不练习 |
+| 想跟进进阶方向 | [进阶项目与技术博客](research/advanced-landscape.md) | 判断新能力的用途、工程取舍及对应学习章节 |
 
 ## 基础课程
 
@@ -27,6 +29,18 @@
 | 质量与交付 | [09 评测](learning/09-evaluation.md) · [10 可靠性与安全](learning/10-reliability-and-security.md) | 定义指标与终态，处理失败和越权 |
 
 [完整课程与节奏](learning/README.md) · [术语回查](learning/glossary.md) · [课程参考资料](learning/verification.md) · [GitHub 学习资源深度调研](research/learning-resources.md)
+
+## 进阶课程
+
+进阶课程将 GitHub 项目、作者技术博客、官方文档、协议和论文整理成可连续学习的知识。沿同一个政策研究助手案例，从运行机制走到设计练习，再用轨迹、故障和评测判断改进。
+
+| 学习阶段 | 课程 | 核心产出 |
+| --- | --- | --- |
+| 运行基础 | [01 Harness](advanced/01-harness-and-deep-agents.md) · [02 持久执行](advanced/02-durable-execution.md) · [03 上下文工程](advanced/03-context-engineering.md) · [04 记忆与技能](advanced/04-memory-and-skills.md) | 长任务交接、恢复状态图、上下文与记忆合同 |
+| 能力组织 | [05 工具路由/MCP](advanced/05-tool-routing-and-mcp.md) · [06 Agentic RAG](advanced/06-agentic-rag.md) · [07 多 Agent](advanced/07-multi-agent-systems.md) · [08 编码与计算机操作](advanced/08-coding-and-computer-use.md) | 工具选择、证据策略、协作图和操作环境 |
+| 质量优化 | [09 评测反馈](advanced/09-evaluation-and-feedback.md) · [10 性能与推理](advanced/10-performance-and-serving.md) · [11 安全治理](advanced/11-security-and-governance.md) · [12 Agent 训练](advanced/12-agent-training.md) | 回归集合、共享预算、授权边界与训练决策 |
+
+[完整进阶路线](advanced/README.md) · [贯穿项目工作坊](advanced/project-workshop.md) · [官方知识体系](advanced/official-learning-map.md) · [机制实验](examples/advanced/README.md)
 
 ## 知识地图
 
@@ -65,6 +79,9 @@ python3 examples/agent_lab/lab.py --scenario all
 
 # 复算 Attention、余弦、RRF 与检索指标
 python3 examples/foundations/math_lab.py --section all
+
+# 验证多次尝试指标、共享预算、关键路径与崩溃恢复
+python3 examples/advanced/runtime_lab.py --scenario all
 ```
 
 复习记录保存在 `.local/study-progress.json`，默认不进入 Git。日期间隔规则详见 [复习说明](practice/README.md)。
@@ -79,6 +96,8 @@ python3 examples/foundations/math_lab.py --section all
 
 - [项目调研及热度口径](research/github-survey.md)：面试题库、教程和框架分别比较；统计有来源和采集说明。
 - [基础学习资源调研](research/learning-resources.md)：实读课程章节，标注先修、示例环境、归档与版本限制。
+- [进阶项目与技术博客](research/advanced-landscape.md)：从 Harness、协议、记忆、检索与训练梳理能力变化。
+- [官方知识体系与选读地图](advanced/official-learning-map.md)：将官方教程、协议与论文接到 12 章进阶课程。
 - [课程参考资料](learning/verification.md)：按课程主题整理原论文和官方文档。
 - [面试知识参考资料](docs/claim-ledger.md)：按基础概念和工程主题整理一手资料。
 - [贡献指南](CONTRIBUTING.md)：补充问题、修正事实、增加可复现实验。
