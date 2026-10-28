@@ -39,11 +39,11 @@ Agent 能把答案说得很像已经办成了。学这份手册，要再往前�
 
 进阶课程将 GitHub 项目、作者技术博客、官方文档、协议和论文整理成可连续学习的知识。沿同一个政策研究助手案例，从运行机制走到设计练习，再用轨迹、故障和评测判断改进。
 
-| 学习阶段 | 课程 | 核心产出 |
+| 学&#8288;习&#8288;阶&#8288;段 | 课程 | 核心产出 |
 | --- | --- | --- |
-| 运行基础 | [01 Harness](advanced/01-harness-and-deep-agents.md) · [02 持久执行](advanced/02-durable-execution.md) · [03 上下文工程](advanced/03-context-engineering.md) · [04 记忆与技能](advanced/04-memory-and-skills.md) | 长任务交接、恢复状态图、上下文与记忆合同 |
-| 能力组织 | [05 工具路由/MCP](advanced/05-tool-routing-and-mcp.md) · [06 Agentic RAG](advanced/06-agentic-rag.md) · [07 多 Agent](advanced/07-multi-agent-systems.md) · [08 编码与计算机操作](advanced/08-coding-and-computer-use.md) | 工具选择、证据策略、协作图和操作环境 |
-| 质量优化 | [09 评测反馈](advanced/09-evaluation-and-feedback.md) · [10 性能与推理](advanced/10-performance-and-serving.md) · [11 安全治理](advanced/11-security-and-governance.md) · [12 Agent 训练](advanced/12-agent-training.md) | 回归集合、共享预算、授权边界与训练决策 |
+| 运&#8288;行&#8288;基&#8288;础 | [01 Harness](advanced/01-harness-and-deep-agents.md) · [02 持久执行](advanced/02-durable-execution.md) · [03 上下文工程](advanced/03-context-engineering.md) · [04 记忆与技能](advanced/04-memory-and-skills.md) | 长任务交接、恢复状态图、上下文与记忆合同 |
+| 能&#8288;力&#8288;组&#8288;织 | [05 工具路由/MCP](advanced/05-tool-routing-and-mcp.md) · [06 Agentic RAG](advanced/06-agentic-rag.md) · [07 多 Agent](advanced/07-multi-agent-systems.md) · [08 编码与计算机操作](advanced/08-coding-and-computer-use.md) | 工具选择、证据策略、协作图和操作环境 |
+| 质&#8288;量&#8288;优&#8288;化 | [09 评测反馈](advanced/09-evaluation-and-feedback.md) · [10 性能与推理](advanced/10-performance-and-serving.md) · [11 安全治理](advanced/11-security-and-governance.md) · [12 Agent 训练](advanced/12-agent-training.md) | 回归集合、共享预算、授权边界与训练决策 |
 
 [完整进阶路线](advanced/README.md) · [贯穿项目工作坊](advanced/project-workshop.md) · [官方知识体系](advanced/official-learning-map.md) · [机制实验](examples/advanced/README.md)
 
