@@ -127,22 +127,10 @@ python3 examples/advanced/runtime_lab.py --scenario all
 
 内容格式、引用要求和提交前检查见 [贡献指南](CONTRIBUTING.md)。
 
-## 资料和维护
+## 参考资料与延伸阅读
 
-- [项目调研及热度口径](research/github-survey.md)：面试题库、教程和框架分别比较；统计有来源和采集说明。
-- [基础学习资源调研](research/learning-resources.md)：实读课程章节，说明建议的阅读基础、示例环境、归档与版本限制。
-- [进阶项目与技术博客](research/advanced-landscape.md)：从 Harness、协议、记忆、检索与训练梳理能力变化。
-- [官方知识体系与选读地图](advanced/official-learning-map.md)：将官方教程、协议与论文接到 12 章进阶课程。
-- [课程参考资料](learning/verification.md)：按课程主题整理原论文和官方文档。
-- [面试知识参考资料](docs/claim-ledger.md)：按基础概念和工程主题整理一手资料。
-- [贡献指南](CONTRIBUTING.md)：补充问题、修正事实、增加可复现实验。
-- [变更记录](CHANGELOG.md)：跟踪内容与工具更新。
-
-提交前运行：
-
-```bash
-python3 scripts/check_repo.py
-python3 -m unittest discover -s tests -v
-```
+想查原论文、官方文档，或继续挑选外部项目与教程，可以打开 [资料索引](research/README.md)，按当前问题选读。
 
 本文档与代码为本仓库原创整理，采用 [MIT License](LICENSE)。引用的资料、外部项目和商标归各自权利人所有；其内容适用原项目许可。这里只链接外部资料，不搬运其题库、插图或模板。
+
+[变更记录](CHANGELOG.md)
