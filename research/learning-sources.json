@@ -1,0 +1,558 @@
+{
+  "schema_version": 1,
+  "verified_date": "2026-10-28",
+  "timezone": "Asia/Shanghai",
+  "purpose": "Systematic Agent foundations curriculum research, not a popularity or interview-frequency ranking.",
+  "methods": [
+    "Opened course directory/README for each resource.",
+    "Read at least two substantive chapter excerpts or code/notebook source files per resource.",
+    "Used primary official documents and original paper abstracts to check high-impact boundaries.",
+    "Kept source code, prose and illustrations external; only brief original analysis and links are saved."
+  ],
+  "version_limit": "Read branch URLs in this session; full source HEAD SHAs were not obtained. All commit_sha fields are null and no source is represented as immutably pinned.",
+  "execution_limit": "No external course was installed, no notebook or example was executed, no model API was called. Reading source does not establish reproducibility.",
+  "resources": [
+    {
+      "id": "LR01",
+      "repo": "datawhalechina/hello-agents",
+      "url": "https://github.com/datawhalechina/hello-agents",
+      "default_branch_observed": "main",
+      "commit_sha": null,
+      "commit_status": "not_obtained; branch URLs are mutable and are not immutable source pins",
+      "verified_date": "2026-10-28",
+      "timezone": "Asia/Shanghai",
+      "directory_read": true,
+      "directory_url": "https://github.com/datawhalechina/hello-agents",
+      "read_sections": [
+        {
+          "path": "docs/chapter3/第三章%20大语言模型基础.md",
+          "url": "https://github.com/datawhalechina/hello-agents/blob/main/docs/chapter3/第三章%20大语言模型基础.md",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "language modeling",
+            "Transformer introduction",
+            "tokenizer impact",
+            "local model setup"
+          ],
+          "executed": false
+        },
+        {
+          "path": "docs/chapter4/第四章%20智能体经典范式构建.md",
+          "url": "https://github.com/datawhalechina/hello-agents/blob/main/docs/chapter4/第四章%20智能体经典范式构建.md",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "Python/API setup",
+            "tool executor",
+            "bounded ReAct loop",
+            "plan/execute and Reflection section structure"
+          ],
+          "executed": false
+        }
+      ],
+      "license_observation": {
+        "identifier": "CC-BY-NC-SA-4.0",
+        "evidence_url": "https://github.com/datawhalechina/hello-agents/blob/main/README.md#-开源协议",
+        "basis": "Actual README opening-license statement read; see README.md#-开源协议. LICENSE.txt not independently parsed in this learning survey.",
+        "verified_date": "2026-10-28",
+        "third_party_subcomponents_not_relicensed": true
+      },
+      "prerequisites": [
+        "基础 Python",
+        "基本 LLM/API 概念"
+      ],
+      "adopt": [
+        "先拆组件，再组合循环"
+      ],
+      "boundaries": [
+        "手设词向量例子不是真实模型测量",
+        "正则解析与打印轨迹不等于生产校验"
+      ],
+      "runtime_requirements_and_cost_boundary": [
+        "第4章建议Python3.10+；模型服务与SerpAPI凭据",
+        "本地模型需权重与计算资源；无免费额度或当前价格保证"
+      ],
+      "executed": false,
+      "installed": false,
+      "model_api_called": false,
+      "full_repository_audit": false,
+      "archived_observation": null
+    },
+    {
+      "id": "LR02",
+      "repo": "huggingface/agents-course",
+      "url": "https://github.com/huggingface/agents-course",
+      "default_branch_observed": "main",
+      "commit_sha": null,
+      "commit_status": "not_obtained; branch URLs are mutable and are not immutable source pins",
+      "verified_date": "2026-10-28",
+      "timezone": "Asia/Shanghai",
+      "directory_read": true,
+      "directory_url": "https://github.com/huggingface/agents-course",
+      "read_sections": [
+        {
+          "path": "units/en/unit1/tools.mdx",
+          "url": "https://github.com/huggingface/agents-course/blob/main/units/en/unit1/tools.mdx",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "tool descriptions",
+            "typed arguments",
+            "application-side execution",
+            "fictional Tool wrapper"
+          ],
+          "executed": false
+        },
+        {
+          "path": "units/en/unit1/tutorial.mdx",
+          "url": "https://github.com/huggingface/agents-course/blob/main/units/en/unit1/tutorial.mdx",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "smolagents CodeAgent",
+            "Space setup",
+            "HF_TOKEN secret",
+            "remote tool loading"
+          ],
+          "executed": false
+        }
+      ],
+      "license_observation": {
+        "identifier": "Apache-2.0",
+        "evidence_url": "https://github.com/huggingface/agents-course/blob/main/LICENSE",
+        "basis": "Repository license label observed in live GitHub course root page.",
+        "verified_date": "2026-10-28",
+        "third_party_subcomponents_not_relicensed": true
+      },
+      "prerequisites": [
+        "基础 Python",
+        "基础 LLM 概念"
+      ],
+      "adopt": [
+        "用工具合同解释模型与执行器的交接"
+      ],
+      "boundaries": [
+        "文本输入输出是入门简化",
+        "代码执行与trust_remote_code需另审权限"
+      ],
+      "runtime_requirements_and_cost_boundary": [
+        "首个Agent教程需有推理权限的HF_TOKEN及Space配置",
+        "免费课程不表示模型推理和托管额度永久免费"
+      ],
+      "executed": false,
+      "installed": false,
+      "model_api_called": false,
+      "full_repository_audit": false,
+      "archived_observation": null
+    },
+    {
+      "id": "LR03",
+      "repo": "microsoft/ai-agents-for-beginners",
+      "url": "https://github.com/microsoft/ai-agents-for-beginners",
+      "default_branch_observed": "main",
+      "commit_sha": null,
+      "commit_status": "not_obtained; branch URLs are mutable and are not immutable source pins",
+      "verified_date": "2026-10-28",
+      "timezone": "Asia/Shanghai",
+      "directory_read": true,
+      "directory_url": "https://github.com/microsoft/ai-agents-for-beginners",
+      "read_sections": [
+        {
+          "path": "01-intro-to-ai-agents/README.md",
+          "url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/01-intro-to-ai-agents/README.md",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "agent/environment/sensors/actuators",
+            "classical agent types",
+            "optional memory examples"
+          ],
+          "executed": false
+        },
+        {
+          "path": "04-tool-use/README.md",
+          "url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/04-tool-use/README.md",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "tool schema",
+            "message flow",
+            "execution and function-call-result association"
+          ],
+          "executed": false
+        },
+        {
+          "path": "00-course-setup/README.md",
+          "url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/00-course-setup/README.md",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "Python3.12+",
+            "Azure subscription and Foundry deployment",
+            "Azure CLI credentials"
+          ],
+          "executed": false
+        }
+      ],
+      "license_observation": {
+        "identifier": "MIT",
+        "evidence_url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/LICENSE",
+        "basis": "GitHub repository root MIT label observed; this survey did not reparse the full license text.",
+        "verified_date": "2026-10-28",
+        "third_party_subcomponents_not_relicensed": true
+      },
+      "prerequisites": [
+        "基础 Python",
+        "LLM使用经验"
+      ],
+      "adopt": [
+        "学习目标与设计模式逐课对应"
+      ],
+      "boundaries": [
+        "经典Agent与LLM Agent范围区分",
+        "供应商生态示例不应当作框架通用要求"
+      ],
+      "runtime_requirements_and_cost_boundary": [
+        "当前主要路径Python3.12+、Azure订阅与Foundry模型部署",
+        "多数notebook用Azure CLI认证；具体费用和额外资源未实测"
+      ],
+      "executed": false,
+      "installed": false,
+      "model_api_called": false,
+      "full_repository_audit": false,
+      "archived_observation": null
+    },
+    {
+      "id": "LR04",
+      "repo": "anthropics/courses",
+      "url": "https://github.com/anthropics/courses",
+      "default_branch_observed": "master",
+      "commit_sha": null,
+      "commit_status": "not_obtained; branch URLs are mutable and are not immutable source pins",
+      "verified_date": "2026-10-28",
+      "timezone": "Asia/Shanghai",
+      "directory_read": true,
+      "directory_url": "https://github.com/anthropics/courses",
+      "read_sections": [
+        {
+          "path": "tool_use/01_tool_use_overview.ipynb",
+          "url": "https://github.com/anthropics/courses/blob/master/tool_use/01_tool_use_overview.ipynb",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "client tool round trip",
+            "historical no-server-tools statement"
+          ],
+          "executed": false
+        },
+        {
+          "path": "tool_use/04_complete_workflow.ipynb",
+          "url": "https://github.com/anthropics/courses/blob/master/tool_use/04_complete_workflow.ipynb",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "tool_use_id/tool_result association",
+            "Wikipedia tool",
+            "historical model IDs",
+            "single-round example and loop extension"
+          ],
+          "executed": false
+        }
+      ],
+      "license_observation": {
+        "identifier": "CC-BY-NC-4.0",
+        "evidence_url": "https://github.com/anthropics/courses/blob/master/LICENSE",
+        "basis": "Actual LICENSE file read; starts Attribution-NonCommercial 4.0 International.",
+        "verified_date": "2026-10-28",
+        "third_party_subcomponents_not_relicensed": true
+      },
+      "prerequisites": [
+        "Python",
+        "JSON",
+        "API消息基础"
+      ],
+      "adopt": [
+        "按请求ID关联工具调用与结果"
+      ],
+      "boundaries": [
+        "仓库页面显示2026-09-15归档",
+        "历史无服务端工具表述与旧模型ID不作当前建议"
+      ],
+      "runtime_requirements_and_cost_boundary": [
+        "Notebook使用Anthropic SDK、dotenv与Wikipedia服务",
+        "需对照当前官方文档迁移，调用可能计费；本轮未调用"
+      ],
+      "executed": false,
+      "installed": false,
+      "model_api_called": false,
+      "full_repository_audit": false,
+      "archived_observation": {
+        "archived": true,
+        "date_on_page": "2026-09-15",
+        "evidence_url": "https://github.com/anthropics/courses/tree/master/tool_use"
+      }
+    },
+    {
+      "id": "LR05",
+      "repo": "langchain-ai/agents-from-scratch",
+      "url": "https://github.com/langchain-ai/agents-from-scratch",
+      "default_branch_observed": "main",
+      "commit_sha": null,
+      "commit_status": "not_obtained; branch URLs are mutable and are not immutable source pins",
+      "verified_date": "2026-10-28",
+      "timezone": "Asia/Shanghai",
+      "directory_read": true,
+      "directory_url": "https://github.com/langchain-ai/agents-from-scratch",
+      "read_sections": [
+        {
+          "path": "src/email_assistant/email_assistant.py",
+          "url": "https://github.com/langchain-ai/agents-from-scratch/blob/main/src/email_assistant/email_assistant.py",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "triage router",
+            "llm_call/tool_node loop",
+            "conditional edges",
+            "Done termination"
+          ],
+          "executed": false
+        },
+        {
+          "path": "src/email_assistant/email_assistant_hitl.py",
+          "url": "https://github.com/langchain-ai/agents-from-scratch/blob/main/src/email_assistant/email_assistant_hitl.py",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "interrupt handling",
+            "accept/edit/ignore/response branches",
+            "selective tool execution gating"
+          ],
+          "executed": false
+        }
+      ],
+      "license_observation": {
+        "identifier": "MIT",
+        "evidence_url": "https://github.com/langchain-ai/agents-from-scratch/blob/main/LICENSE",
+        "basis": "MIT label observed in live GitHub root page.",
+        "verified_date": "2026-10-28",
+        "third_party_subcomponents_not_relicensed": true
+      },
+      "prerequisites": [
+        "Python",
+        "状态与条件分支",
+        "LLM/API基础"
+      ],
+      "adopt": [
+        "对照基础版与HITL版定位新增控制"
+      ],
+      "boundaries": [
+        "默认邮件与日历工具是mock",
+        "真实Gmail与授权在其他实现中，未运行或审计"
+      ],
+      "runtime_requirements_and_cost_boundary": [
+        "README要求Python3.11+、项目安装、模型及LangSmith配置",
+        "mock工具不代表模型离线；服务额度与费用未核验"
+      ],
+      "executed": false,
+      "installed": false,
+      "model_api_called": false,
+      "full_repository_audit": false,
+      "archived_observation": null
+    },
+    {
+      "id": "LR06",
+      "repo": "bojieli/ai-agent-book",
+      "url": "https://github.com/bojieli/ai-agent-book",
+      "default_branch_observed": "main",
+      "commit_sha": null,
+      "commit_status": "not_obtained; branch URLs are mutable and are not immutable source pins",
+      "verified_date": "2026-10-28",
+      "timezone": "Asia/Shanghai",
+      "directory_read": true,
+      "directory_url": "https://github.com/bojieli/ai-agent-book",
+      "read_sections": [
+        {
+          "path": "book/chapter1.md",
+          "url": "https://github.com/bojieli/ai-agent-book/blob/main/book/chapter1.md",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "engineering component formula",
+            "Model/Harness/environment boundary",
+            "context adaptation versus persistent and parameter updates"
+          ],
+          "executed": false
+        },
+        {
+          "path": "book/chapter7.md",
+          "url": "https://github.com/bojieli/ai-agent-book/blob/main/book/chapter7.md",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "task/environment/verifier",
+            "terminal-state and trajectory checks",
+            "pass@k versus repeated reliability",
+            "evaluation conditions"
+          ],
+          "executed": false
+        }
+      ],
+      "license_observation": {
+        "identifier": "Apache-2.0",
+        "evidence_url": "https://github.com/bojieli/ai-agent-book/blob/main/LICENSE",
+        "basis": "Live README and repository license label observed; README says subprojects may carry separate license statements.",
+        "verified_date": "2026-10-28",
+        "third_party_subcomponents_not_relicensed": true
+      },
+      "prerequisites": [
+        "能修改Python",
+        "Git/JSON/REST",
+        "模型使用经验"
+      ],
+      "adopt": [
+        "按可观测终态与轨迹检查理解"
+      ],
+      "boundaries": [
+        "工程公式不是一般Agent形式化定义",
+        "案例性能不可脱离模型、任务、验证器与运行条件外推"
+      ],
+      "runtime_requirements_and_cost_boundary": [
+        "当前README为2.0版，Python3.11–3.13与按章依赖",
+        "部分实验需模型凭据、浏览器或训练硬件；未安装未复现"
+      ],
+      "executed": false,
+      "installed": false,
+      "model_api_called": false,
+      "full_repository_audit": false,
+      "archived_observation": null
+    },
+    {
+      "id": "LR07",
+      "repo": "karpathy/nn-zero-to-hero",
+      "url": "https://github.com/karpathy/nn-zero-to-hero",
+      "default_branch_observed": "master",
+      "commit_sha": null,
+      "commit_status": "not_obtained; branch URLs are mutable and are not immutable source pins",
+      "verified_date": "2026-10-28",
+      "timezone": "Asia/Shanghai",
+      "directory_read": true,
+      "directory_url": "https://github.com/karpathy/nn-zero-to-hero",
+      "read_sections": [
+        {
+          "path": "lectures/micrograd/micrograd_lecture_first_half_roughly.ipynb",
+          "url": "https://github.com/karpathy/nn-zero-to-hero/blob/master/lectures/micrograd/micrograd_lecture_first_half_roughly.ipynb",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "numerical derivative",
+            "Value computation graph",
+            "backward accumulation",
+            "parameter perturbation"
+          ],
+          "executed": false
+        },
+        {
+          "path": "lectures/makemore/makemore_part1_bigrams.ipynb",
+          "url": "https://github.com/karpathy/nn-zero-to-hero/blob/master/lectures/makemore/makemore_part1_bigrams.ipynb",
+          "inspection": "substantive excerpts or notebook source cells read; not a full line-by-line audit",
+          "topics_checked": [
+            "names.txt dataset input",
+            "character transition counts",
+            "sampling",
+            "negative log likelihood",
+            "one-hot representation"
+          ],
+          "executed": false
+        }
+      ],
+      "license_observation": {
+        "identifier": "MIT",
+        "evidence_url": "https://github.com/karpathy/nn-zero-to-hero/blob/master/LICENSE",
+        "basis": "Repository MIT label observed through GitHub root page.",
+        "verified_date": "2026-10-28",
+        "third_party_subcomponents_not_relicensed": true
+      },
+      "prerequisites": [
+        "Python",
+        "基础微积分/导数"
+      ],
+      "adopt": [
+        "小数据亲算梯度与概率"
+      ],
+      "boundaries": [
+        "可选前置课，不是Agent教程",
+        "字符bigram模型不能代表当前聊天模型表现"
+      ],
+      "runtime_requirements_and_cost_boundary": [
+        "抽读单元使用NumPy/Matplotlib、PyTorch或Graphviz；需准备names.txt",
+        "选读练习不需要模型API，但依赖安装、数据和计算未运行验证"
+      ],
+      "executed": false,
+      "installed": false,
+      "model_api_called": false,
+      "full_repository_audit": false,
+      "archived_observation": null
+    }
+  ],
+  "primary_verification_sources": [
+    {
+      "id": "PV01",
+      "title": "Building effective agents",
+      "url": "https://www.anthropic.com/research/building-effective-agents",
+      "kind": "official engineering article",
+      "scope_read": "workflow/agent distinction; simplicity and cost/latency tradeoff; page warns tooling landscape changed since 2024",
+      "verified_date": "2026-10-28",
+      "executed": false
+    },
+    {
+      "id": "PV02",
+      "title": "Tool use with Claude",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
+      "kind": "current official documentation",
+      "scope_read": "client tools versus server tools and actual execution location",
+      "verified_date": "2026-10-28",
+      "executed": false
+    },
+    {
+      "id": "PV03",
+      "title": "MCP Security Best Practices",
+      "url": "https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices",
+      "kind": "official documentation",
+      "scope_read": "authorization, per-client consent and implementation attack surfaces; redirected from older specification URL",
+      "verified_date": "2026-10-28",
+      "executed": false
+    },
+    {
+      "id": "PV04",
+      "title": "Reflexion",
+      "url": "https://arxiv.org/abs/2303.11366v4",
+      "kind": "original research paper",
+      "scope_read": "abstract and version history: verbal feedback and episodic memory rather than weight updates",
+      "verified_date": "2026-10-28",
+      "executed": false
+    },
+    {
+      "id": "PV05",
+      "title": "Lost in the Middle",
+      "url": "https://arxiv.org/abs/2307.03172v3",
+      "kind": "original research paper",
+      "scope_read": "abstract and version history: position effects under the evaluated models/tasks; not a universal current-model performance claim",
+      "verified_date": "2026-10-28",
+      "executed": false
+    },
+    {
+      "id": "PV06",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "url": "https://arxiv.org/abs/2005.11401v4",
+      "kind": "original research paper",
+      "scope_read": "abstract and version history: parametric/nonparametric combination and empirical tasks; not full mathematical-method audit",
+      "verified_date": "2026-10-28",
+      "executed": false
+    },
+    {
+      "id": "PV07",
+      "title": "Tokenization algorithms",
+      "url": "https://huggingface.co/docs/transformers/main/en/tokenizer_summary",
+      "kind": "official documentation",
+      "scope_read": "subword tokenization and vocabulary-dependent splitting; main documentation is mutable",
+      "verified_date": "2026-10-28",
+      "executed": false
+    },
+    {
+      "id": "PV08",
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "url": "https://arxiv.org/abs/2306.05685v4",
+      "kind": "original research paper",
+      "scope_read": "abstract and version history: position, verbosity and self-enhancement biases; no original experiment rerun",
+      "verified_date": "2026-10-28",
+      "executed": false
+    }
+  ]
+}

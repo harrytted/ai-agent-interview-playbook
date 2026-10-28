@@ -1,8 +1,8 @@
-# AI Agent 面试准备手册
+# AI Agent 基础学习与面试准备手册
 
 把 Agent 的机制讲清楚，把工程取舍讲具体，把自己的项目做扎实。
 
-面向 **AI Agent / 大模型应用工程师**，以 Python 实践为主。这里是一份可自学、可复习、可贡献的中文学习仓库：56 道原创问答、30 天路线、工程场景、模拟面试，以及不需要 API Key 的离线教学实验。
+面向 **AI Agent / 大模型应用工程师**，以 Python 实践为主。这里是一份可自学、可复习、可贡献的中文学习仓库：**10 章基础课程、56 道原创问答**，配有数值算例、执行器实验、学习路线和模拟面试。
 
 > 内容核验日期：2026-10-28。题目优先级是本仓库的学习建议，不代表企业面试频率。示例、演练和项目目标均不代表作者的真实工作经历。
 
@@ -10,11 +10,25 @@
 
 | 你的状态 | 建议入口 | 本次产出 |
 | --- | --- | --- |
-| 刚开始准备 | [学习路线](docs/00-roadmap.md) | 确定 30 天安排与验收标准 |
+| 想从原理开始学 | [基础课程](learning/README.md) | 理解从 LLM 到 Agent 系统的完整链路 |
+| 开始准备面试 | [学习路线](docs/00-roadmap.md) | 确定 30 天安排与验收标准 |
 | 已经做过 LLM 应用 | [56 题索引](docs/question-index.md) | 找出解释不清的机制与失败路径 |
 | 面试前一周 | [7 天冲刺](docs/00-roadmap.md#7-天冲刺) | 两轮模拟面试和一个可验证的项目演示 |
 | 想动手补工程能力 | [离线实验](examples/agent_lab/README.md) | 运行工具循环，观察重试、审批、幂等和步数上限 |
 | 想挑外部学习资料 | [GitHub 项目调研](research/github-survey.md) | 按用途组合资料，避免只收藏不练习 |
+
+## 基础课程
+
+先沿连续教程理解机制，再用题目闭卷检验。每章有具体案例、逐步算例、验收练习、自检答案及来源。贯穿案例为虚构的内部政策助手。
+
+| 学习阶段 | 课程 | 核心产出 |
+| --- | --- | --- |
+| 模型和输入 | [01 系统地图](learning/01-system-map.md) · [02 LLM 原理](learning/02-llm-primer.md) · [03 上下文](learning/03-context-and-prompts.md) | 画清职责，复算注意力，组织有效证据 |
+| 行动与知识 | [04 工具循环](learning/04-agent-loop.md) · [05 工具/MCP](learning/05-tools-and-mcp.md) · [06 RAG](learning/06-rag-and-retrieval.md) | 读执行轨迹，定义工具合同，检查检索链路 |
+| 状态与协作 | [07 记忆](learning/07-memory-and-state.md) · [08 规划与多 Agent](learning/08-planning-and-multi-agent.md) | 管理状态与版本，解释协作和恢复的边界 |
+| 质量与交付 | [09 评测](learning/09-evaluation.md) · [10 可靠性与安全](learning/10-reliability-and-security.md) | 定义指标与终态，处理失败和越权 |
+
+[完整课程与节奏](learning/README.md) · [术语回查](learning/glossary.md) · [知识核验记录](learning/verification.md) · [GitHub 学习资源深度调研](research/learning-resources.md)
 
 ## 知识地图
 
@@ -30,7 +44,7 @@
 
 ## 每天怎么学
 
-每天 45–60 分钟：闭卷回答 3–5 题，读对应解析，做一个微练习，最后记下解释失败的原因。优先练“为什么、怎么失败、怎么验证”，再补框架名词。
+基础学习可先读一章、预测并运行算例、完成动手验收，再口述关联题。面试复习可每天闭卷回答 3–5 题，读对应解析，做一个微练习，最后记下解释失败的原因。优先练“为什么、怎么失败、怎么验证”，再补框架名词。
 
 只阅读文档无需安装。运行工具需要 **Python 3.10+**，仅使用标准库，无需联网、安装依赖或配置密钥。在仓库根目录运行：
 
@@ -50,6 +64,9 @@ python3 scripts/study.py stats
 
 # 运行离线教学实验
 python3 examples/agent_lab/lab.py --scenario all
+
+# 复算 Attention、余弦、RRF 与检索指标
+python3 examples/foundations/math_lab.py --section all
 ```
 
 复习记录保存在 `.local/study-progress.json`，默认不进入 Git。使用简单的日期间隔规则，详见 [复习说明](practice/README.md)；没有使用算法预测你的掌握程度。
@@ -63,6 +80,8 @@ python3 examples/agent_lab/lab.py --scenario all
 ## 资料和维护
 
 - [项目调研及热度口径](research/github-survey.md)：面试题库、教程和框架分别比较；统计有来源和采集说明。
+- [基础学习资源调研](research/learning-resources.md)：实读课程章节，标注先修、示例环境、归档与版本限制。
+- [课程核验台账](learning/verification.md)：事实依据、教学简化、独立复核及未验证项。
 - [关键事实核验台账](docs/claim-ledger.md)：区分事实、工程建议和教学简化。
 - [贡献指南](CONTRIBUTING.md)：补充问题、修正事实、增加可复现实验。
 - [变更记录](CHANGELOG.md)：跟踪内容与工具更新。
