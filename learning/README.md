@@ -62,6 +62,8 @@ python3 examples/agent_lab/lab.py --scenario all
 
 ## 参考资料与进阶学习
 
+遇到陌生术语，可随手查 [AI 编程字典](https://agent.harrylab.cn/dictionary/)；想换一种图解或工程案例继续理解，可访问作者的 [Agent 技术博客](https://agent.harrylab.cn/articles/)。按当前问题选读，再回课程做练习，知识会更容易接上。
+
 各章正文附有官方文档、协议和原论文，集中索引见 [课程参考资料](verification.md)。外部课程的章节选择、依赖环境和阅读顺序见 [学习资源深度调研](../research/learning-resources.md)。
 
 学完后进入 [12 章进阶课程](../advanced/README.md)，继续学习长任务 Harness、持久执行、上下文工程、Agentic RAG、多 Agent、计算机操作、性能与训练，并通过 [项目工作坊](../advanced/project-workshop.md)串成一套系统。

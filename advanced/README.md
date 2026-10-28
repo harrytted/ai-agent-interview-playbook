@@ -91,4 +91,6 @@ python3 examples/advanced/runtime_lab.py --scenario replay
 
 [GitHub 与技术博客调研](../research/advanced-landscape.md)解释所选项目带来了哪些能力、怎样与基础课程衔接；[官方知识体系与选读地图](official-learning-map.md)把文档、协议和论文放到对应学习阶段。外部项目的版本、接口和维护方式不同，运行示例时使用相应项目的环境与版本说明。
 
+延伸阅读可以访问作者的 [Agent 技术博客](https://agent.harrylab.cn/articles/)，选读工程实践和原理图解；遇到 Harness、Context、MCP 等术语时，可打开 [AI 编程字典](https://agent.harrylab.cn/dictionary/)查看解释与概念关系，再回到本章案例和面试题检验理解。
+
 [返回首页](../README.md) · [基础课程](../learning/README.md) · [92 题总索引](../docs/question-index.md) · [进阶面试题](../docs/advanced/README.md)
