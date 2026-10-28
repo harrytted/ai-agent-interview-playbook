@@ -1,11 +1,15 @@
 # 练习与复习
 
-先口述问题，再看答案，用自己的项目举证。题目按文档自动读取，学习记录留在本地。
+先口述问题，再看答案，用自己的项目举证。看答案时处处眼熟，合上后却只剩“这个我见过”，是很常见的错觉；抽题就是让这个错觉早点露面。
+
+工具会读取全部 92 题，包括与学习章节互链的 [36 道进阶题](../docs/advanced/README.md)。学习记录留在本地。
 
 ```bash
 python3 scripts/study.py list
 python3 scripts/study.py draw --count 3 --topic rag
 python3 scripts/study.py draw --count 5 --seed 42
+python3 scripts/study.py draw --topic docs/advanced/ --count 3
+python3 scripts/study.py show Q060
 python3 scripts/study.py show Q019
 python3 scripts/study.py review Q019 --score 1
 python3 scripts/study.py due
@@ -13,6 +17,8 @@ python3 scripts/study.py stats
 ```
 
 `--topic` 匹配题目、文件路径或答案正文。`draw` 用于无提示抽题，未标记前不会改变进度。`show` 展示答案。`due` 分开显示到期和未学习题目。
+
+GitHub 中的进阶题先显示短答，详细解析、追问和案例放在折叠区；命令行 `show` 会完整展开，方便连续阅读。按 `docs/advanced/02-` 筛选，可以只练持久执行这一章。
 
 ## 自评分与日期规则
 

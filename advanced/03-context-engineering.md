@@ -2,9 +2,9 @@
 
 [上一章：持久执行](02-durable-execution.md) · [进阶目录](README.md) · [下一章：记忆与技能](04-memory-and-skills.md)
 
-先修是基础课的 token 预算与 RAG。学完本章，应能为长任务建立可回查的上下文组织方式，并区分信息筛选、文本压缩、KV 复用与答案缓存。
+政策助手读了几十份制度，为什么比较地区差异时反而漏掉一条关键限制？如果把原文、搜索页面、失败记录和草稿全装进下一次输入，容量可能超限，过时判断也会与当前证据混在一起。行李越重，未必越容易找到登机证。
 
-政策研究助手已读完几十份制度，还要比较地区差异。把原文、搜索页面、失败记录和草稿全部追加到历史里，既可能超过容量，也会让过时判断与当前证据混在一起。上下文工程要持续决定下一次推理应该看什么，而不是只在任务开始时写一段提示。[上下文的持续组织](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents)
+上下文工程要持续选择下一次推理该看什么。先修是基础课的 token 预算与 RAG；学完本章，应能建立可回查的上下文组织方式，并区分信息筛选、文本压缩、KV 复用与答案缓存。[上下文的持续组织](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents)
 
 ## 用任务依赖选择信息
 
@@ -18,7 +18,9 @@
 
 工具返回的大 HTML 或 JSON 可以先在执行层解析，提取需要的字段，保留总条数、筛选条件、截断标记与原始产物位置。若只展示前几行而不说明截断，模型可能把“不在预览中”误当成“不存在”。空结果、权限拒绝和解析失败也应保留不同状态。
 
-长结果外置与历史摘要是两种操作。外置保存内容、在上下文里留下定位方式；摘要则对内容重新编码，可能遗漏条件或改变确定程度。Deep Agents 的上下文机制分别提供 offloading 与 summarization，二者都依赖后续能重新取得必要信息。[Deep Agents 上下文机制](https://docs.langchain.com/oss/python/deepagents/context-engineering)
+外置和摘要都能减轻上下文，但做的是不同的事。外置像托运行李：原内容留着，随身保留定位方式；摘要像把合同改写成便条：更短，却可能漏掉条件，或把“可能”写成“确定”。
+
+Deep Agents 分别提供 offloading 与 summarization。两条路径都要保住重新取得必要信息的能力；选择哪条，要看后续需要精确原文还是只需连续任务状态。[Deep Agents 上下文机制](https://docs.langchain.com/oss/python/deepagents/context-engineering)
 
 例如，原文“仅对已批准的外部培训适用”不能压成“培训适用”。摘要应保留批准状态、培训类别与证据指针。需要作出有副作用的决定时，再从原文核对关键条件，不能让几轮摘要之后的结论成为唯一依据。
 
@@ -39,7 +41,9 @@
 
 对于常见因果注意力模型，已有位置的 KV 可以被后续生成复用。vLLM 的自动前缀缓存进一步在共享前缀的请求间复用相应 KV，主要减少重复的 prefill 计算；新 token 仍要生成。答案缓存则可能直接跳过模型调用，二者不是同一件事。[vLLM 自动前缀缓存](https://docs.vllm.ai/en/stable/features/automatic_prefix_caching/)
 
-若两个请求前 6000 token 完全相同，后面各有 2000 token 的不同问题，缓存命中可能复用前缀，而动态后缀和新生成输出仍需处理。不能把复用位置比例直接当作总延迟下降比例；排队、内存、输出长度与调度仍影响实际耗时。
+用一个具体账目区分复用范围：两个请求的前 6000 token 完全相同，后面各有 2000 token 的不同问题。命中前缀缓存后，前缀计算可能复用，动态后缀与新生成输出仍要处理；它复用的是计算过的“稿纸”，不是把旧答案直接交卷。
+
+复用位置比例不能直接换算成总延迟下降比例。排队、内存、输出长度与调度也在计时，测量时要把这些工作分别看清。
 
 稳定前缀应放确实稳定的系统说明、工具定义或共享资料，动态任务信息随后加入。随意调整工具顺序、在最前面插入时间戳，都可能缩短可复用前缀；但不能为了命中率保留过时规则或不适用的材料。正确性优先决定输入内容，再优化其稳定表示。
 
@@ -82,3 +86,5 @@
 - [vLLM：自动前缀缓存](https://docs.vllm.ai/en/stable/features/automatic_prefix_caching/)、[缓存设计与隔离](https://docs.vllm.ai/en/stable/design/prefix_caching/)
 
 [上一章](02-durable-execution.md) · [进阶目录](README.md) · [下一章：记忆与技能](04-memory-and-skills.md)
+
+[配套进阶面试题](../docs/advanced/03-context-engineering.md)

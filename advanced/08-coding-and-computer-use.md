@@ -2,7 +2,9 @@
 
 [上一章：多 Agent 系统](07-multi-agent-systems.md) · [进阶目录](README.md) · [下一章：评测与反馈](09-evaluation-and-feedback.md)
 
-Coding Agent 改代码，Browser Agent 操作网页，Computer Use 操作桌面。它们共享一个核心难题：模型提出动作时看到的世界，可能已经与实际环境不同。可靠运行依赖一套 harness，负责组织输入、执行工具、收集观察、保存状态、控制预算并验证终态，而不是只靠一句“完成后自行检查”。
+你让助手修正政策生效日期，再去后台更新草稿。补丁顺利生成，网页也点了“保存”，可测试运行的是旧文件，页面重排后编辑的还是另一份草稿。工具都返回成功，用户目标却没有完成。
+
+Coding Agent 改代码，Browser Agent 操作网页，Computer Use 操作桌面；共同难点是动作依据的世界可能已经变化。Harness 要组织输入、执行工具、收集观察、保存状态、控制预算并验证终态。接下来要学的是怎样让每一步都有新鲜证据。
 
 ## Coding Agent 的闭环围绕仓库证据展开
 
@@ -10,7 +12,9 @@ Coding Agent 改代码，Browser Agent 操作网页，Computer Use 操作桌面�
 
 一个紧凑闭环是“定位证据→复现问题→提出最小补丁→运行相关测试→分析输出→决定继续或结束”。SWE-agent 1.0 的架构将 Agent 与环境分离：运行环境管理 shell，历史处理器压缩交互记录，动作解析后再交给环境执行，说明这些能力属于系统运行时。[SWE-agent 架构](https://swe-agent.com/latest/background/architecture/)
 
-模型生成的 diff 只是候选补丁。应用前检查路径范围、基线版本与补丁是否匹配；应用后读取实际差异，防止误删其他修改。测试输出也是待解释的观察：命令退出码、运行数量、失败内容和环境错误共同决定结论，不能仅因日志出现“passed”就宣布需求完成。
+模型给出 diff，意味着有了一个候选修法。应用前先检查路径范围、基线版本与补丁是否匹配；应用后重新读取实际差异，确认没有误删别人的修改。菜单上写着一道菜，不代表它已经端上桌。
+
+测试结果也要逐项解释：命令退出码、实际运行数量、失败内容和环境错误分别说明什么？日志出现“passed”时，还应确认跑的是相关测试。补丁生成、测试通过和用户目标验收是三个不同的结论。
 
 ## 一次修复怎样留下可重现证据
 
@@ -22,7 +26,9 @@ Coding Agent 改代码，Browser Agent 操作网页，Computer Use 操作桌面�
 
 ## 文件系统抽象不等于执行沙箱
 
-Agent 看到的 `/workspace` 可能是状态中的虚拟文件、真实本地目录或远程沙箱。Deep Agents 的 backend 决定文件工具映射到哪里，执行隔离是另一项能力；本地 shell 与受隔离环境的权限边界不同。[Deep Agents Backends](https://docs.langchain.com/oss/python/deepagents/backends)
+同样叫 `/workspace`，背后可能是状态中的虚拟文件、真实本地目录，也可能是远程沙箱。先问文件工具最终读写在哪里，再问命令能接触哪些资源；两个问题不能用一个路径名回答。
+
+Deep Agents 的 backend 负责文件映射，执行隔离则决定程序的活动范围。给目录换个整齐的门牌，并不会自动装上门锁；本地 shell 和受隔离执行环境有不同的权限边界。[Deep Agents Backends](https://docs.langchain.com/oss/python/deepagents/backends)
 
 为修复任务挂载必要仓库与临时目录，限制可写路径、出站域名和运行资源。路径检查要考虑规范化、符号链接以及检查后文件变化；只验证字符串以 `/workspace` 开头，不能证明最终写入仍在该目录。依赖安装脚本和仓库测试会执行代码，它们应受同样的环境权限约束。
 
@@ -40,7 +46,9 @@ Agent 看到的 `/workspace` 可能是状态中的虚拟文件、真实本地目
 
 截图坐标依赖窗口位置、缩放、滚动和视口。若刚发生滚动，不能沿用旧图里的按钮坐标；应重新截图，识别目标与遮挡，再行动。表格中每行都有“编辑”时，先确认行标题或对象标识；仅看按钮样式无法区分对象。Canvas 或远程桌面缺少可靠文本结构时，视觉可以补足定位，但不能省略对象核对。
 
-一次“保存”点击返回成功，只说明输入动作完成。还要确认页面显示新日期、目标对象仍正确、保存状态或版本已变化；若支持独立读取，可核对持久结果。出现响应超时后，应先重新读取当前状态，避免重复点击造成重复提交。截图、页面文本、工具返回和外部对象状态各有覆盖范围，组合起来才能支持任务结论。
+“保存”点击成功，只能说明输入动作已经发出。接着核对目标对象、新日期、保存状态或版本；如果有独立读取接口，再检查持久结果。按钮点击是过程证据，对象变化才接近业务结果。
+
+保存后超时尤其需要停一下：先读当前状态，再决定是否重试。连点两次可能把一次不确定变成两次真实提交。截图、页面文本、工具返回和后端对象各覆盖一部分事实，应把它们连起来解释。
 
 ## 多模态证据与人工介入
 
@@ -73,3 +81,5 @@ Agent 看到的 `/workspace` 可能是状态中的虚拟文件、真实本地目
 - [Deep Agents Backends](https://docs.langchain.com/oss/python/deepagents/backends)：虚拟文件、本地文件与执行环境的区别。
 - [Claude Browser use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool)、[Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool)：观察、动作、错误与环境配置。
 - [Playwright Locators](https://playwright.dev/docs/locators)：基于页面语义的重新定位。
+
+[对应面试题：Q078、Q079、Q080](../docs/advanced/08-coding-and-computer-use.md)

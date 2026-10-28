@@ -12,7 +12,21 @@ from urllib.parse import unquote, urlsplit
 
 from study import ROOT, questions
 
-EXPECTED_QUESTIONS = 56
+EXPECTED_QUESTIONS = 92
+ADVANCED_CHAPTERS = (
+    "01-harness-and-deep-agents",
+    "02-durable-execution",
+    "03-context-engineering",
+    "04-memory-and-skills",
+    "05-tool-routing-and-mcp",
+    "06-agentic-rag",
+    "07-multi-agent-systems",
+    "08-coding-and-computer-use",
+    "09-evaluation-and-feedback",
+    "10-performance-and-serving",
+    "11-security-and-governance",
+    "12-agent-training",
+)
 
 
 def slug(text: str) -> str:
@@ -41,11 +55,21 @@ def anchors(content: str) -> set[str]:
 
 
 def question_index() -> str:
-    lines = ["# 56 题索引", "", "按模块查看问题、回答与参考资料。", "",
-             "| 题号 | 问题 | 模块 |", "| --- | --- | --- |"]
-    for q in questions():
-        path = q.path.relative_to("docs").as_posix()
-        lines.append(f"| {q.id} | [{q.title}]({path}#{slug(q.id + ' ' + q.title)}) | {q.path.parent.name} |")
+    bank = questions()
+    lines = [f"# {len(bank)} 题索引", "", "先找到问题，再回到机制。短答用于口述，详细答案用于理解，追问与案例用于检查能否迁移。", "",
+             "[基础课程](../learning/README.md) · [进阶课程](../advanced/README.md) · [36 道进阶题与章节对照](advanced/README.md)", ""]
+    for folder, title in (("foundations", "基础原理：Q001–Q032"),
+                          ("engineering", "工程与项目：Q033–Q056"),
+                          ("advanced", "进阶系统：Q057–Q092")):
+        lines.extend([f"## {title}", "", "| 题号 | 问题 | 学习入口 |", "| --- | --- | --- |"])
+        for q in (item for item in bank if item.path.parent.name == folder):
+            path = q.path.relative_to("docs").as_posix()
+            if folder == "advanced":
+                course = f"[{q.path.stem[:2]} 章](../advanced/{q.path.name})"
+            else:
+                course = "[基础课程](../learning/README.md)" if folder == "foundations" else "[工程学习路线](00-roadmap.md)"
+            lines.append(f"| {q.id} | [{q.title}]({path}#{slug(q.id + ' ' + q.title)}) | {course} |")
+        lines.append("")
     lines.extend(["", "[学习路线](00-roadmap.md) · [复习工具](../practice/README.md) · [仓库首页](../README.md)", ""])
     return "\n".join(lines)
 
@@ -62,6 +86,22 @@ def check() -> list[str]:
                 failures.append(f"{q.id} 缺少 {label}")
         if "追问" not in q.body:
             failures.append(f"{q.id} 缺少追问")
+        if q.path.parent.name == "advanced":
+            for label in ("详细答案", "常见追问", "实战案例"):
+                if label not in q.body:
+                    failures.append(f"{q.id} 缺少 {label}")
+    # Each advanced lesson owns three stable questions and links back to its question chapter.
+    for number, stem in enumerate(ADVANCED_CHAPTERS):
+        lesson = ROOT / "advanced" / f"{stem}.md"
+        interview = ROOT / "docs/advanced" / f"{stem}.md"
+        expected_ids = [f"Q{i:03}" for i in range(57 + number * 3, 60 + number * 3)]
+        actual_ids = [q.id for q in bank if q.path == interview.relative_to(ROOT)]
+        if actual_ids != expected_ids:
+            failures.append(f"{interview.relative_to(ROOT)} 应包含 {'、'.join(expected_ids)}")
+        if lesson.exists() and f"../docs/advanced/{stem}.md" not in lesson.read_text(encoding="utf-8"):
+            failures.append(f"{lesson.relative_to(ROOT)} 缺少对应面试章回链")
+        if interview.exists() and f"../../advanced/{stem}.md" not in interview.read_text(encoding="utf-8"):
+            failures.append(f"{interview.relative_to(ROOT)} 缺少对应学习章回链")
     index = ROOT / "docs/question-index.md"
     if not index.exists() or index.read_text(encoding="utf-8") != question_index():
         failures.append("题目索引需更新：python3 scripts/check_repo.py --write-index")

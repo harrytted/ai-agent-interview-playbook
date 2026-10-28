@@ -37,11 +37,33 @@ class StudyTests(unittest.TestCase):
     def question_ids(self, text):
         return re.findall(r"^\s*(Q\d{3}) ", text, re.MULTILINE)
 
-    def test_complete_bank_has_exactly_56_unique_questions(self):
+    def test_complete_bank_keeps_original_ids_and_adds_36_advanced_questions(self):
         bank = study.questions()
-        self.assertEqual([q.id for q in bank], [f"Q{i:03d}" for i in range(1, 57)])
+        self.assertEqual([q.id for q in bank], [f"Q{i:03d}" for i in range(1, 93)])
         self.assertTrue(all(q.title and q.body for q in bank))
         self.assertTrue(all((ROOT / q.path).is_file() for q in bank))
+
+    def test_advanced_bank_can_be_selected_and_drawn_without_changing_progress(self):
+        code, out, err = self.cli("list", "--topic", "docs/advanced/")
+        self.assertEqual((code, err), (0, ""))
+        self.assertEqual(self.question_ids(out), [f"Q{i:03d}" for i in range(57, 93)])
+        code, out, err = self.cli("draw", "--topic", "docs/advanced/", "--count", "3", "--seed", "7")
+        self.assertEqual((code, err), (0, ""))
+        ids = self.question_ids(out)
+        self.assertEqual(len(set(ids)), 3)
+        self.assertTrue(all(57 <= int(qid[1:]) <= 92 for qid in ids))
+        self.assertFalse(self.progress.exists())
+
+    def test_advanced_show_expands_details_and_keeps_followups_and_case(self):
+        code, out, err = self.cli("show", "q092")
+        self.assertEqual((code, err), (0, ""))
+        for label in ("详细答案", "常见追问", "实战案例", "微练习"):
+            self.assertIn(label, out)
+        self.assertNotIn("<details", out)
+        self.assertNotIn("</details>", out)
+        self.assertNotIn("<summary", out)
+        self.assertNotIn("### Q091", out)
+        self.assertFalse(self.progress.exists())
 
     def test_duplicate_ids_fail_instead_of_overwriting_an_answer(self):
         folder = self.work / "docs" / "foundations"
@@ -168,12 +190,12 @@ class StudyTests(unittest.TestCase):
         due_section, unseen_section = out.split("未学习", 1)
         self.assertEqual(self.question_ids(due_section), ["Q001", "Q003"])
         unseen = self.question_ids(unseen_section)
-        self.assertEqual(len(unseen), 53)
+        self.assertEqual(len(unseen), 89)
         self.assertNotIn("Q002", unseen)
         self.assertNotIn("Q999", out)
         code, stats, err = self.cli("stats")
         self.assertEqual((code, err), (0, ""))
-        self.assertIn("题目 56；已自评 3；未学习 53；到期 2", stats)
+        self.assertIn("题目 92；已自评 3；未学习 89；到期 2", stats)
         self.assertEqual(self.progress.read_bytes(), before)
 
 

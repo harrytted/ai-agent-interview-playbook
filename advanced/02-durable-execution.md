@@ -2,13 +2,15 @@
 
 [上一章：Harness](01-harness-and-deep-agents.md) · [进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
 
-先修是检查点、幂等和工具错误处理。学完本章，应能找出跨系统写入的故障窗口，为等待审批、重放、升级和取消设计明确语义。
+政策助手刚把研究报告的发布工单创建好，程序却在显示“成功”前退出了。几小时后点击继续，应该再创建一次，还是先找回那张工单？如果连原来的批准也找不到，恢复就会同时遇到进度和副作用两个难题。
 
-政策助手准备发布一份研究报告，流程包含生成草稿、等待负责人批准、创建工单并登记发布状态。进程可能在任意两步之间退出；几小时后恢复时，系统既要避免丢掉批准，也要避免重复创建对象。
+我们沿“生成草稿→等待负责人批准→创建工单→登记发布状态”拆开故障窗口。先修是检查点、幂等和工具错误处理；学完本章，应能为等待审批、重放、升级和取消设计明确语义。
 
 ## 恢复的是已记录的计算，不是原来的调用栈
 
-Checkpoint 保存某个边界上的应用状态，恢复执行可能重新进入节点。LangGraph 明确说明节点恢复时可以从函数开头重执行；Functional API 则从入口重放，并恢复已持久保存的 task 结果。因而“恢复到审批处”不能理解为原进程的 Python 栈一直停在那里。[节点重执行](https://docs.langchain.com/oss/python/langgraph/graph-api#re-execution-and-idempotency)、[Functional API 的确定性](https://docs.langchain.com/oss/python/langgraph/functional-api#determinism)
+Checkpoint 更像账本上的一页：它记住某个边界的应用状态，恢复时按记录继续安排工作，而不是把原进程冻住。LangGraph 的节点可以从函数开头重执行；Functional API 从入口重放，并恢复已经持久保存的 task 结果。
+
+因此，“回到审批处”说的是恢复流程中的位置，不是原来的 Python 调用栈一直等在那里。知道哪些结果会被取回、哪些代码会再跑一遍，才能判断重复风险。[节点重执行](https://docs.langchain.com/oss/python/langgraph/graph-api#re-execution-and-idempotency)、[Functional API 的确定性](https://docs.langchain.com/oss/python/langgraph/functional-api#determinism)
 
 读取当前时间、生成随机标识、调用模型及访问远端，都会产生可能变化的结果。把这些操作放到有稳定身份的任务边界，并保存结果，才能让同一次恢复沿着已记录的决策继续。每次恢复都重新生成业务操作 ID，会把一次原始意图变成多个看似独立的写请求。
 
@@ -30,7 +32,9 @@ Checkpoint 保存某个边界上的应用状态，恢复执行可能重新进入
 
 本地去重表也不能天然覆盖远端事务。服务端记录幂等键与变更对象的过程，需要符合其一致性合同；同 ID 不同参数应拒绝或进入明确冲突分支。[幂等请求的意图与参数](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
 
-当本地状态更新还要发送“创建工单”事件，可以使用 outbox：在同一数据库事务里写入业务状态和待投递消息，提交后由分发器送往下游。它解决的是本地双写一致性；分发器可能重复投递，消费方仍需按事件 ID 去重。它没有把外部工单服务自动纳入本地事务。[Transactional outbox](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html)
+本地既要记下“准备创建工单”，又要把消息交出去，可以先把消息放进 outbox 这个“待寄箱”：业务状态和待投递消息在同一数据库事务内写入，提交后由分发器送往下游。
+
+这解决本地双写一致性，却没有把外部工单服务变成本地事务的一部分。快递员没拿到回执可能再送一次，分发器也可能重复投递，因此消费方仍要按事件 ID 去重。[Transactional outbox](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html)
 
 | 故障点 | 能确认什么 | 恢复动作 |
 |---|---|---|
@@ -49,7 +53,7 @@ Checkpoint 保存某个边界上的应用状态，恢复执行可能重新进入
 
 ## 取消、租约与 Fencing
 
-取消应先持久保存停止意图，再阻止新调度。远端已发出的请求可能仍完成，结果应进入对账；释放本地等待不等于撤销远端写入。长任务由租约控制执行权时，还要处理工作进程暂停后再次苏醒的情况。
+取消应先持久保存停止意图，再阻止新的业务动作调度；终态查询、对账与必要清理按允许范围继续。远端已发出的请求可能仍完成，结果应进入对账；释放本地等待不等于撤销远端写入。长任务由租约控制执行权时，还要处理工作进程暂停后再次苏醒的情况。
 
 假设工作进程 A 持有令牌 41，暂停到租约过期；B 获得新令牌 42，并向受保护存储提交成功。随后 A 恢复，携带 41 写入。存储若记录已见最大令牌并拒绝更小值，就能阻止 A 覆盖 B 的结果。Fencing 的关键是受保护资源参与校验，不能只在协调者的内存里比较。[Fencing token 的原始讨论](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)
 
@@ -83,3 +87,5 @@ Fencing 控制陈旧执行者，幂等控制同一意图重复请求，二者处
 - [Martin Kleppmann：How to do distributed locking](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)
 
 [上一章](01-harness-and-deep-agents.md) · [进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
+
+[配套进阶面试题](../docs/advanced/02-durable-execution.md)

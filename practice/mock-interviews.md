@@ -32,3 +32,18 @@
 围绕自己的一个真实项目回答：你交付了什么 → 当时最难的约束是什么 → 比较过什么方案 → 用什么数据验证 → 哪个失败案例还没有解决。没有生产数据时，明确说是个人实验及其数据量。
 
 结束后使用 [复盘模板](review-template.md)，只选两个薄弱点作为下一次练习目标。
+
+## D 轮：进阶系统深挖，60 分钟
+
+这轮从一个正在运行的政策研究助手开始。面试官逐步增加约束，候选人要沿状态和证据推理。框架名可以少说几个，发生了什么要讲清楚；不能让系统每遇到一次故障就招一位新 Agent 来开会。
+
+| 时间 | 场景与追问 | 对应题目 |
+| --- | --- | --- |
+| 0–10 分钟 | 三地研究跨会话继续，怎样交接？文件有了，沙箱和持久化也有了吗？ | [Q057–Q059](../docs/advanced/01-harness-and-deep-agents.md) |
+| 10–20 分钟 | 工单创建成功但响应丢失，随后用户取消；恢复后该怎么办？ | [Q060–Q062](../docs/advanced/02-durable-execution.md) |
+| 20–30 分钟 | 文档越来越多，窗口装不下，工具也选不准；先改哪一层？ | [Q063–Q065](../docs/advanced/03-context-engineering.md)、[Q069–Q071](../docs/advanced/05-tool-routing-and-mcp.md) |
+| 30–40 分钟 | 引入研究 Worker 后更慢、更贵，怎样做对照实验和分支取消？ | [Q075–Q077](../docs/advanced/07-multi-agent-systems.md)、[Q084–Q086](../docs/advanced/10-performance-and-serving.md) |
+| 40–50 分钟 | 评测分数提高，但关键错误仍被放行；怎样检查 Judge 和数据切分？ | [Q081–Q083](../docs/advanced/09-evaluation-and-feedback.md) |
+| 50–60 分钟 | 技能更新、参数训练和奖励优化各解决什么？哪项失败应先修数据或权限？ | [Q087–Q089](../docs/advanced/11-security-and-governance.md)、[Q090–Q092](../docs/advanced/12-agent-training.md) |
+
+结束时挑一个回答，换掉其成立条件再讲一次。评分看机制是否准确、状态是否完整、取舍是否有依据，以及案例结果怎样核对。

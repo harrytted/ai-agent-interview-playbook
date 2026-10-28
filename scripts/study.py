@@ -15,6 +15,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 HEADING = re.compile(r"^### (Q\d{3}) (.+)$", re.MULTILINE)
+BANK_FOLDERS = ("foundations", "engineering", "advanced")
 
 
 @dataclass(frozen=True)
@@ -27,19 +28,25 @@ class Question:
 
 def questions(root: Path = ROOT) -> list[Question]:
     found = []
-    for folder in ("foundations", "engineering"):
+    for folder in BANK_FOLDERS:
         for path in sorted((root / "docs" / folder).glob("*.md")):
             content = path.read_text(encoding="utf-8")
             matches = list(HEADING.finditer(content))
             for i, match in enumerate(matches):
                 end = matches[i + 1].start() if i + 1 < len(matches) else len(content)
-                # Keep chapter-level verification tables outside the answer display.
+                # Chapter navigation and reference sections are outside individual answers.
                 body = content[match.end():end].split("\n## ", 1)[0].strip()
                 found.append(Question(match[1], match[2], path.relative_to(root), body))
     ids = [q.id for q in found]
     if len(ids) != len(set(ids)):
         raise ValueError("题号重复，请先修正文档。")
     return sorted(found, key=lambda q: q.id)
+
+
+def readable_answer(body: str) -> str:
+    """Expand GitHub's answer folds for a terminal while retaining all answer text."""
+    body = re.sub(r"<summary>(.*?)</summary>", r"\1\n", body, flags=re.S)
+    return re.sub(r"</?details\b[^>]*>", "", body).strip()
 
 
 def today() -> date:
@@ -133,7 +140,7 @@ def main(argv: list[str] | None = None) -> int:
                 parser.error(f"未知题号：{qid}")
             question = by_id[qid]
             if args.command == "show":
-                print(f"{question.id} {question.title}\n来源：{question.path}\n\n{question.body}")
+                print(f"{question.id} {question.title}\n来源：{question.path}\n\n{readable_answer(question.body)}")
                 return 0
         progress = read_progress(args.progress)
         day = today()
