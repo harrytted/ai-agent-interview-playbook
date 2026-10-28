@@ -1,0 +1,521 @@
+/* Local reading layer for Material for MkDocs. No remote fonts or assets. */
+:root {
+  --reading-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --reading-font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", "Noto Sans Mono CJK SC", monospace;
+  --reading-measure: 900px;
+  --md-text-font: var(--reading-font-sans);
+  --md-code-font: var(--reading-font-mono);
+  --md-text-font-family: var(--reading-font-sans);
+  --md-code-font-family: var(--reading-font-mono);
+}
+
+:root,
+[data-md-color-scheme="default"] {
+  --reading-bg: #f8fafc;
+  --reading-surface: #ffffff;
+  --reading-ink: #24384c;
+  --reading-muted: #526576;
+  --reading-line: #d8e3eb;
+  --reading-soft: #edf4f6;
+  --reading-hover: #e3eff1;
+  --reading-link: #126e75;
+  --reading-link-hover: #094f59;
+  --reading-link-line: #9abec3;
+  --reading-focus: #087d89;
+  --reading-code: #f0f4f8;
+  --md-default-fg-color: var(--reading-ink);
+  --md-default-fg-color--light: var(--reading-muted);
+  --md-default-fg-color--lighter: #788b9b;
+  --md-default-bg-color: var(--reading-bg);
+  --md-typeset-color: var(--reading-ink);
+  --md-typeset-a-color: var(--reading-link);
+  --md-accent-fg-color: var(--reading-link);
+  --md-accent-fg-color--transparent: #126e7514;
+  --md-code-bg-color: var(--reading-code);
+  --md-code-fg-color: var(--reading-ink);
+  --md-footer-bg-color: var(--reading-surface);
+  --md-footer-bg-color--dark: var(--reading-bg);
+  --md-footer-fg-color: var(--reading-ink);
+  --md-footer-fg-color--light: var(--reading-muted);
+  --md-footer-fg-color--lighter: var(--reading-muted);
+}
+
+[data-md-color-scheme="slate"] {
+  --reading-bg: #111d2b;
+  --reading-surface: #172536;
+  --reading-ink: #dce7ef;
+  --reading-muted: #a5b7c8;
+  --reading-line: #34485c;
+  --reading-soft: #1d3041;
+  --reading-hover: #243d4c;
+  --reading-link: #78d6cf;
+  --reading-link-hover: #a4eee6;
+  --reading-link-line: #4d8e90;
+  --reading-focus: #78d6cf;
+  --reading-code: #152332;
+  --md-default-fg-color: var(--reading-ink);
+  --md-default-fg-color--light: var(--reading-muted);
+  --md-default-fg-color--lighter: #8199ae;
+  --md-default-bg-color: var(--reading-bg);
+  --md-typeset-color: var(--reading-ink);
+  --md-typeset-a-color: var(--reading-link);
+  --md-accent-fg-color: var(--reading-link);
+  --md-accent-fg-color--transparent: #78d6cf18;
+  --md-code-bg-color: var(--reading-code);
+  --md-code-fg-color: var(--reading-ink);
+}
+
+body,
+input,
+button,
+select,
+textarea {
+  font-family: var(--reading-font-sans);
+}
+
+.md-grid {
+  max-width: 1480px;
+}
+
+.md-content,
+.md-content__inner,
+.md-typeset details,
+.md-typeset .highlight {
+  min-width: 0;
+}
+
+.md-content__inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(var(--reading-measure) + 48px);
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
+
+/* Match Material's directional sidebar gutter specificity before centering. */
+[dir] .md-sidebar:not([hidden]) ~ .md-content > .md-content__inner {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.md-typeset {
+  font-size: 17px;
+  line-height: 1.8;
+  font-weight: 400;
+  overflow-wrap: break-word;
+}
+
+.md-typeset p {
+  margin: 0 0 1.15em;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  color: var(--reading-ink);
+  font-family: var(--reading-font-sans);
+  font-style: normal;
+  font-weight: 650;
+  scroll-margin-top: 5rem;
+  overflow-wrap: break-word;
+}
+
+.md-typeset h1 {
+  margin: 0 0 1em;
+  font-size: 1.95em;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h2 {
+  margin: 2.3em 0 1em;
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid var(--reading-line);
+  font-size: 1.43em;
+  line-height: 1.5;
+}
+
+.md-typeset h3 {
+  margin: 2em 0 0.9em;
+  font-size: 1.17em;
+  line-height: 1.6;
+}
+
+/* Question numbers already carry sequence; a quiet rule marks each new task. */
+.md-typeset h3[id^="q"] {
+  margin-top: 2.6em;
+  padding-top: 1.25em;
+  border-top: 1px solid var(--reading-line);
+}
+
+.md-typeset h4 {
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+.md-typeset strong {
+  font-weight: 650;
+}
+
+.md-typeset em {
+  font-style: normal;
+}
+
+.md-typeset a:not(.md-button):not(.headerlink) {
+  color: var(--reading-link);
+  text-decoration: underline;
+  text-decoration-color: var(--reading-link-line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+
+.md-typeset a:not(.md-button):hover {
+  color: var(--reading-link-hover);
+  text-decoration-color: currentColor;
+}
+
+.md-typeset ul,
+.md-typeset ol {
+  margin-top: 0.65em;
+  margin-bottom: 1.2em;
+}
+
+.md-typeset li {
+  margin-bottom: 0.5em;
+}
+
+.md-typeset li > p {
+  margin-bottom: 0.55em;
+}
+
+.md-typeset blockquote {
+  margin-inline: 0;
+  padding-inline-start: 1em;
+  border-inline-start: 3px solid var(--reading-line);
+  color: var(--reading-muted);
+}
+
+.md-typeset hr {
+  margin: 2em 0;
+  border-color: var(--reading-line);
+}
+
+.md-typeset img,
+.md-typeset video,
+.md-typeset svg {
+  max-width: 100%;
+}
+
+/* Keep long tables inside their own horizontal viewport. */
+.md-typeset__scrollwrap {
+  max-width: 100%;
+  margin: 1.35em 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.md-typeset__table {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.md-typeset details .md-typeset__scrollwrap {
+  margin: 1.2em 0;
+}
+
+.md-typeset details .md-typeset__table {
+  padding: 0;
+}
+
+.md-typeset table:not([class]) {
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--reading-line);
+  border-radius: 5px;
+  background: var(--reading-surface);
+  box-shadow: none;
+  font-size: 0.88em;
+  line-height: 1.7;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  padding: 0.75em 0.9em;
+  border-color: var(--reading-line);
+  vertical-align: top;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--reading-soft);
+  color: var(--reading-ink);
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.md-typeset table:not([class]) td {
+  min-width: 8em;
+}
+
+.md-typeset > table:not([class]),
+.md-typeset details > table:not([class]) {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Inline code may wrap; executable blocks preserve whitespace and scroll. */
+.md-typeset code,
+.md-typeset pre,
+.md-typeset kbd {
+  font-family: var(--reading-font-mono);
+  font-style: normal;
+}
+
+.md-typeset :not(pre) > code {
+  padding: 0.12em 0.32em;
+  border: 1px solid var(--reading-line);
+  border-radius: 4px;
+  font-size: 0.85em;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.md-typeset pre {
+  max-width: 100%;
+}
+
+.md-typeset > pre {
+  margin: 1.2em 0;
+}
+
+.md-typeset pre > code {
+  display: block;
+  overflow-x: auto;
+  font-size: 0.86em;
+  line-height: 1.65;
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.md-typeset .highlight {
+  max-width: 100%;
+  margin: 1.2em 0;
+  border: 1px solid var(--reading-line);
+  border-radius: 5px;
+}
+
+/* Native details keeps the browser/Material keyboard and open-state behavior. */
+.md-typeset details {
+  margin: 1.3em 0 1.6em;
+  padding: 0 1em 0.15em;
+  border: 1px solid var(--reading-line);
+  border-inline-start: 3px solid var(--reading-link);
+  border-radius: 5px;
+  background: var(--reading-surface);
+  color: var(--reading-ink);
+  box-shadow: none;
+  font-size: 1em;
+  line-height: inherit;
+}
+
+.md-typeset details:not([open]) {
+  padding-bottom: 0;
+  box-shadow: none;
+}
+
+.md-typeset details:focus-within {
+  box-shadow: none;
+}
+
+[dir] .md-typeset details > summary {
+  box-sizing: border-box;
+  min-height: 48px;
+  margin: 0 -1em;
+  padding: 0.8em 2.4em 0.8em 1em;
+  border-radius: 4px;
+  background: var(--reading-soft);
+  color: var(--reading-ink);
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.md-typeset details > summary::before {
+  display: none;
+}
+
+[dir] .md-typeset details > summary::after {
+  top: 1em;
+  inset-inline-end: 0.8em;
+  color: var(--reading-link);
+}
+
+.md-typeset details > summary:hover {
+  background: var(--reading-hover);
+}
+
+.md-typeset details[open] > summary {
+  margin-bottom: 1.05em;
+  border-bottom: 1px solid var(--reading-line);
+  border-radius: 4px 4px 0 0;
+}
+
+.md-typeset details[open] > :last-child {
+  margin-bottom: 1em;
+}
+
+/* Header and navigation retain Material's built-in drawer and search controls. */
+.md-header {
+  border-bottom: 1px solid var(--reading-line);
+  background: var(--reading-surface);
+  color: var(--reading-ink);
+  box-shadow: none;
+}
+
+.md-header__title {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.md-tabs {
+  border-bottom: 1px solid var(--reading-line);
+  background: var(--reading-surface);
+  color: var(--reading-muted);
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  color: var(--reading-link);
+}
+
+.md-search__form {
+  border-radius: 5px;
+  background: var(--reading-soft);
+  color: var(--reading-ink);
+}
+
+/* Material's idle desktop icon assumes a colored header; ours is a light surface. */
+.md-search__form .md-search__input ~ .md-search__icon {
+  color: var(--reading-muted);
+}
+
+.md-search__input::placeholder {
+  color: var(--reading-muted);
+}
+
+.md-sidebar .md-nav {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.md-sidebar .md-nav__link {
+  padding: 0.35em 0.5em;
+  border-radius: 4px;
+  color: var(--reading-muted);
+}
+
+.md-sidebar .md-nav__link:hover {
+  background: var(--reading-soft);
+  color: var(--reading-link);
+}
+
+.md-sidebar .md-nav__link--active,
+.md-sidebar .md-nav__link[aria-current="page"] {
+  background: var(--reading-hover);
+  color: var(--reading-link);
+  font-weight: 650;
+}
+
+.md-sidebar--secondary .md-nav__title {
+  color: var(--reading-ink);
+  font-weight: 650;
+}
+
+.md-typeset :is(a, button, summary, input, select, textarea, [tabindex]):focus-visible,
+.md-header :is(a, button, input, label[tabindex]):focus-visible,
+.md-tabs a:focus-visible,
+.md-sidebar :is(a, button, label[tabindex]):focus-visible,
+.md-search :is(a, button, input):focus-visible {
+  outline: 3px solid var(--reading-focus);
+  outline-offset: 3px;
+}
+
+.md-typeset details > summary:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid var(--reading-focus);
+  outline-offset: 3px;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-nav--primary .md-nav__title {
+    background: transparent;
+    color: var(--reading-ink);
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 76.234375em) {
+  .md-sidebar--primary .md-nav {
+    font-size: 15px;
+  }
+
+  .md-sidebar--primary .md-nav__link {
+    min-height: 44px;
+  }
+}
+
+@media screen and (max-width: 44.9375em) {
+  .md-content__inner {
+    padding: 0 20px 40px;
+  }
+
+  .md-typeset {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .md-typeset table:not([class]) {
+    min-width: 600px;
+  }
+
+  .md-typeset h1 {
+    font-size: 1.65em;
+  }
+
+  .md-typeset h2 {
+    font-size: 1.3em;
+  }
+
+  .md-typeset h3 {
+    font-size: 1.12em;
+  }
+
+  .md-typeset details {
+    padding-inline: 0.85em;
+  }
+
+  [dir] .md-typeset details > summary {
+    margin-inline: -0.85em;
+    padding-inline-start: 0.85em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

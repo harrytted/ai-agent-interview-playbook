@@ -14,6 +14,7 @@ from urllib.parse import unquote, urlsplit
 from study import ROOT, questions
 
 EXPECTED_QUESTIONS = 92
+EXCLUDED_DIRS = frozenset({".git", ".local", ".venv", ".venv-docs", ".site-src", "site", "node_modules"})
 ADVANCED_CHAPTERS = (
     "01-harness-and-deep-agents",
     "02-durable-execution",
@@ -188,7 +189,7 @@ def check() -> list[str]:
     for path, section in lesson_sections().items():
         if not path.exists() or section not in path.read_text(encoding="utf-8"):
             failures.append(f"{path.relative_to(ROOT)} 面试题导航需更新：python3 scripts/check_repo.py --write-index")
-    markdown = sorted(p for p in ROOT.rglob("*.md") if not any(x in p.parts for x in (".git", ".local", ".venv")))
+    markdown = sorted(p for p in ROOT.rglob("*.md") if not EXCLUDED_DIRS.intersection(p.relative_to(ROOT).parts))
     for path in markdown:
         content = path.read_text(encoding="utf-8")
         # Remove fenced examples so instructional placeholder paths are not links.
@@ -210,7 +211,7 @@ def check() -> list[str]:
                 if unquote(parsed.fragment) not in anchors(dest.read_text(encoding="utf-8")):
                     failures.append(f"{path.relative_to(ROOT)} 锚点不存在：{target}")
     for path in ROOT.rglob("*.json"):
-        if ".local" not in path.parts and ".git" not in path.parts:
+        if not EXCLUDED_DIRS.intersection(path.relative_to(ROOT).parts):
             try:
                 json.loads(path.read_text(encoding="utf-8"))
             except (ValueError, OSError) as error:

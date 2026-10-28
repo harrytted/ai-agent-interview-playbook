@@ -1,0 +1,143 @@
+site_name: Agent 学习手册
+site_description: 从基础原理到工程进阶，配合 92 道详解面试题与 Python 实验，系统学习 AI Agent。
+site_url: https://harrytted.github.io/ai-agent-interview-playbook/
+repo_url: https://github.com/harrytted/ai-agent-interview-playbook
+repo_name: GitHub 仓库
+edit_uri: ""
+docs_dir: .site-src
+site_dir: site
+use_directory_urls: true
+
+theme:
+  name: material
+  language: zh
+  font: false
+  favicon: assets/favicon.svg
+  icon:
+    logo: material/book-open-page-variant-outline
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search:
+      lang: zh
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+
+extra_css:
+  - assets/stylesheets/reading.css
+extra_javascript:
+  - assets/javascripts/reading.js
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/harrytted/ai-agent-interview-playbook
+      name: GitHub 源码与反馈
+
+nav:
+  - 开始阅读: index.md
+  - 基础课程:
+      - learning/index.md
+      - 01 · Agent 系统地图: learning/01-system-map.md
+      - 02 · LLM 基础原理: learning/02-llm-primer.md
+      - 03 · 提示与上下文: learning/03-context-and-prompts.md
+      - 04 · Agent 工具循环: learning/04-agent-loop.md
+      - 05 · 工具与 MCP: learning/05-tools-and-mcp.md
+      - 06 · RAG 与检索: learning/06-rag-and-retrieval.md
+      - 07 · 记忆与状态: learning/07-memory-and-state.md
+      - 08 · 规划与多 Agent: learning/08-planning-and-multi-agent.md
+      - 09 · 评测: learning/09-evaluation.md
+      - 10 · 可靠性与安全: learning/10-reliability-and-security.md
+      - 术语回查: learning/glossary.md
+  - 进阶课程:
+      - advanced/index.md
+      - 01 · Harness 与深度 Agent: advanced/01-harness-and-deep-agents.md
+      - 02 · 持久执行: advanced/02-durable-execution.md
+      - 03 · 上下文工程: advanced/03-context-engineering.md
+      - 04 · 记忆与技能: advanced/04-memory-and-skills.md
+      - 05 · 工具路由与 MCP: advanced/05-tool-routing-and-mcp.md
+      - 06 · Agentic RAG: advanced/06-agentic-rag.md
+      - 07 · 多 Agent 系统: advanced/07-multi-agent-systems.md
+      - 08 · 编码与计算机操作: advanced/08-coding-and-computer-use.md
+      - 09 · 评测与反馈: advanced/09-evaluation-and-feedback.md
+      - 10 · 性能与推理: advanced/10-performance-and-serving.md
+      - 11 · 安全与治理: advanced/11-security-and-governance.md
+      - 12 · Agent 训练: advanced/12-agent-training.md
+      - 贯穿项目工作坊: advanced/project-workshop.md
+      - 官方知识体系: advanced/official-learning-map.md
+  - 面试题库:
+      - 92 题索引: docs/question-index.md
+      - 学习路线与冲刺: docs/00-roadmap.md
+      - 基础与工程:
+          - Agent 与 LLM: docs/foundations/01-agent-and-llm.md
+          - 规划与编排: docs/foundations/02-planning-and-orchestration.md
+          - RAG 与检索: docs/foundations/03-rag-and-search.md
+          - 工具、记忆与协议: docs/foundations/04-tools-memory-protocols.md
+          - 评测与可观测性: docs/engineering/05-evaluation-and-observability.md
+          - 可靠性与安全: docs/engineering/06-reliability-and-security.md
+          - 系统设计与项目表达: docs/engineering/07-system-design-and-projects.md
+      - 进阶面试:
+          - docs/advanced/index.md
+          - 01 · Harness: docs/advanced/01-harness-and-deep-agents.md
+          - 02 · 持久执行: docs/advanced/02-durable-execution.md
+          - 03 · 上下文工程: docs/advanced/03-context-engineering.md
+          - 04 · 记忆与技能: docs/advanced/04-memory-and-skills.md
+          - 05 · 工具路由与 MCP: docs/advanced/05-tool-routing-and-mcp.md
+          - 06 · Agentic RAG: docs/advanced/06-agentic-rag.md
+          - 07 · 多 Agent: docs/advanced/07-multi-agent-systems.md
+          - 08 · 编码与计算机操作: docs/advanced/08-coding-and-computer-use.md
+          - 09 · 评测与反馈: docs/advanced/09-evaluation-and-feedback.md
+          - 10 · 性能与推理: docs/advanced/10-performance-and-serving.md
+          - 11 · 安全与治理: docs/advanced/11-security-and-governance.md
+          - 12 · Agent 训练: docs/advanced/12-agent-training.md
+  - 动手练习:
+      - practice/index.md
+      - 7 天项目实验: docs/engineering/08-project-lab.md
+      - Agent 工具循环实验: examples/agent_lab/index.md
+      - 基础数值实验: examples/foundations/index.md
+      - 进阶运行机制实验: examples/advanced/index.md
+      - 模拟面试: practice/mock-interviews.md
+      - 项目表达模板: practice/project-story-template.md
+      - 错题复盘模板: practice/review-template.md
+  - 资料与参与:
+      - research/index.md
+      - GitHub 项目调研: research/github-survey.md
+      - 基础学习资源: research/learning-resources.md
+      - 进阶项目与技术博客: research/advanced-landscape.md
+      - 课程参考资料: learning/verification.md
+      - 面试知识参考资料: docs/claim-ledger.md
+      - 参与完善: CONTRIBUTING.md
+      - 变更记录: CHANGELOG.md

@@ -10,6 +10,8 @@ Agent 能把答案说得很像已经办成了。学这份手册，要再往前�
 
 ## 配套在线阅读
 
+**[打开在线学习手册 →](https://harrytted.github.io/ai-agent-interview-playbook/)**：按课程目录连续阅读，搜索知识点和题号，在学习章节与面试题之间跳转。电脑、手机都可以直接打开，无需下载仓库。
+
 读到陌生词，可以先查字典；学完一章，还可以到博客看图解和工程文章。两个网站都由本仓库作者维护：
 
 - [AI 编程字典：查术语、看关系图](https://agent.harrylab.cn/dictionary/)：查询中英术语，沿概念关系理解 Token、Context、Harness、MCP 等知识怎样连接。
