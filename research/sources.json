@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "survey_date": "2026-10-28",
+  "timezone": "Asia/Shanghai",
+  "observation_window_utc": {
+    "start": null,
+    "recorded_clock_reading": "2026-10-28T05:57:11Z",
+    "note": "Collected during a single research session on the survey date; exact per-request wall-clock times were not exported. This reading is a collection-time anchor, not a source update time or atomic live snapshot."
+  },
+  "selection_method": "Topic relevance plus observed GitHub attention; includes courses, frameworks and one explicitly low-star structural reference. Not GitHub Trending and not exhaustive.",
+  "collection_status": {
+    "direct_rest_api": "unavailable_unauthenticated_rate_limit",
+    "direct_error_summary": "GitHub REST API returned HTTP 403 with API rate limit exceeded; initial sandbox DNS failure and Python trust-store failure also observed.",
+    "fallback": "Opened GitHub pages with web tool; two cached API JSON snapshots available. Page counts are rounded display values, not live counts.",
+    "unknown_policy": "Unknown values remain null. Default branch SHA not obtained for any project. Exact fields from API are observed cached payload fields, not verified current values."
+  },
+  "repositories": [
+    {
+      "full_name": "bcefghj/ai-agent-interview-guide",
+      "html_url": "https://github.com/bcefghj/ai-agent-interview-guide",
+      "category": "interview",
+      "default_branch": "main",
+      "default_branch_evidence": "GitHub repository page branch selector",
+      "commit_sha": null,
+      "commit_sha_status": "unconfirmed",
+      "stargazers_count": null,
+      "forks_count": null,
+      "pushed_at": null,
+      "archived": null,
+      "exact_metadata_status": "unconfirmed",
+      "api_url": "https://api.github.com/repos/bcefghj/ai-agent-interview-guide",
+      "branch_api_url": "https://api.github.com/repos/bcefghj/ai-agent-interview-guide/commits/main",
+      "page_snapshot": {
+        "stars_display": "3.5k",
+        "forks_display": "334",
+        "approximate": true,
+        "source_url": "https://github.com/bcefghj/ai-agent-interview-guide",
+        "crawler_freshness_label": "today",
+        "crawler_exact_timestamp": null
+      },
+      "license": {
+        "observed_identifier": "MIT",
+        "source_url": "https://github.com/bcefghj/ai-agent-interview-guide/blob/main/LICENSE",
+        "status": "observed"
+      },
+      "readme_url": "https://github.com/bcefghj/ai-agent-interview-guide/blob/main/README.md",
+      "notes": "LICENSE is MIT; README separately discourages commercial use; ambiguity not resolved."
+    },
+    {
+      "full_name": "Lau-Jonathan/LLM-Agent-Interview-Guide",
+      "html_url": "https://github.com/Lau-Jonathan/LLM-Agent-Interview-Guide",
+      "category": "interview",
+      "default_branch": "main",
+      "default_branch_evidence": "GitHub repository page branch selector",
+      "commit_sha": null,
+      "commit_sha_status": "unconfirmed",
+      "stargazers_count": null,
+      "forks_count": null,
+      "pushed_at": null,
+      "archived": null,
+      "exact_metadata_status": "unconfirmed",
+      "api_url": "https://api.github.com/repos/Lau-Jonathan/LLM-Agent-Interview-Guide",
+      "branch_api_url": "https://api.github.com/repos/Lau-Jonathan/LLM-Agent-Interview-Guide/commits/main",
+      "page_snapshot": {
+        "stars_display": "1.0k",
+        "forks_display": "72",
+        "approximate": true,
+        "source_url": "https://github.com/Lau-Jonathan/LLM-Agent-Interview-Guide",
+        "crawler_freshness_label": "yesterday",
+        "crawler_exact_timestamp": null
+      },
+      "license": {
+        "observed_identifier": "Apache-2.0",
+        "source_url": "https://github.com/Lau-Jonathan/LLM-Agent-Interview-Guide/blob/main/LICENSE",
+        "status": "observed"
+      },
+      "readme_url": "https://github.com/Lau-Jonathan/LLM-Agent-Interview-Guide/blob/main/README.md",
+      "notes": "LICENSE text read; popularity snapshot fetched by web tool one day earlier."
+    },
+    {
+      "full_name": "wdndev/llm_interview_note",
+      "html_url": "https://github.com/wdndev/llm_interview_note",
+      "category": "interview-notes",
+      "default_branch": "main",
+      "default_branch_evidence": "GitHub repository page branch selector",
+      "commit_sha": null,
+      "commit_sha_status": "unconfirmed",
+      "stargazers_count": null,
+      "forks_count": null,
+      "pushed_at": null,
+      "archived": null,
+      "exact_metadata_status": "unconfirmed",
+      "api_url": "https://api.github.com/repos/wdndev/llm_interview_note",
+      "branch_api_url": "https://api.github.com/repos/wdndev/llm_interview_note/commits/main",
+      "page_snapshot": {
+        "stars_display": "15.3k",
+        "forks_display": "1.5k",
+        "approximate": true,
+        "source_url": "https://github.com/wdndev/llm_interview_note",
+        "crawler_freshness_label": "today",
+        "crawler_exact_timestamp": null
+      },
+      "license": {
+        "observed_identifier": null,
+        "source_url": null,
+        "status": "unconfirmed"
+      },
+      "readme_url": "https://github.com/wdndev/llm_interview_note/blob/main/README.md",
+      "notes": "License not confirmed; do not interpret missing UI label as unrestricted use."
+    },
+    {
+      "full_name": "datawhalechina/hello-agents",
+      "html_url": "https://github.com/datawhalechina/hello-agents",
+      "category": "course",
+      "default_branch": "main",
+      "default_branch_evidence": "GitHub repository page branch selector",
+      "commit_sha": null,
+      "commit_sha_status": "unconfirmed",
+      "stargazers_count": 84918,
+      "forks_count": 10548,
+      "pushed_at": "2026-10-13T22:28:54Z",
+      "archived": false,
+      "exact_metadata_status": "web_tool_api_snapshot_not_live",
+      "api_url": "https://api.github.com/repos/datawhalechina/hello-agents",
+      "branch_api_url": "https://api.github.com/repos/datawhalechina/hello-agents/commits/main",
+      "page_snapshot": {
+        "stars_display": "85.0k",
+        "forks_display": "10.6k",
+        "approximate": true,
+        "source_url": "https://github.com/datawhalechina/hello-agents",
+        "crawler_freshness_label": "today",
+        "crawler_exact_timestamp": null
+      },
+      "license": {
+        "observed_identifier": "CC-BY-NC-SA-4.0",
+        "source_url": "https://github.com/datawhalechina/hello-agents#-开源协议",
+        "status": "observed"
+      },
+      "readme_url": "https://github.com/datawhalechina/hello-agents/blob/main/README.md",
+      "notes": "README states CC BY-NC-SA 4.0; API license.spdx_id is NOASSERTION, not a determination of no license."
+    },
+    {
+      "full_name": "microsoft/ai-agents-for-beginners",
+      "html_url": "https://github.com/microsoft/ai-agents-for-beginners",
+      "category": "course",
+      "default_branch": "main",
+      "default_branch_evidence": "GitHub repository page branch selector",
+      "commit_sha": null,
+      "commit_sha_status": "unconfirmed",
+      "stargazers_count": null,
+      "forks_count": null,
+      "pushed_at": null,
+      "archived": null,
+      "exact_metadata_status": "unconfirmed",
+      "api_url": "https://api.github.com/repos/microsoft/ai-agents-for-beginners",
+      "branch_api_url": "https://api.github.com/repos/microsoft/ai-agents-for-beginners/commits/main",
+      "page_snapshot": {
+        "stars_display": "78.0k",
+        "forks_display": "25.6k",
+        "approximate": true,
+        "source_url": "https://github.com/microsoft/ai-agents-for-beginners",
+        "crawler_freshness_label": "today",
+        "crawler_exact_timestamp": null
+      },
+      "license": {
+        "observed_identifier": "MIT",
+        "source_url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/LICENSE",
+        "status": "observed"
+      },
+      "readme_url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/README.md",
+      "notes": "License observed in repository UI; examples and services not executed in this survey."
+    },
+    {
+      "full_name": "langchain-ai/langgraph",
+      "html_url": "https://github.com/langchain-ai/langgraph",
+      "category": "framework",
+      "default_branch": "main",
+      "default_branch_evidence": "GitHub repository page branch selector",
+      "commit_sha": null,
+      "commit_sha_status": "unconfirmed",
+      "stargazers_count": 44014,
+      "forks_count": 7564,
+      "pushed_at": "2026-10-28T01:22:08Z",
+      "archived": false,
+      "exact_metadata_status": "web_tool_api_snapshot_not_live",
+      "api_url": "https://api.github.com/repos/langchain-ai/langgraph",
+      "branch_api_url": "https://api.github.com/repos/langchain-ai/langgraph/commits/main",
+      "page_snapshot": {
+        "stars_display": "44.0k",
+        "forks_display": "7.6k",
+        "approximate": true,
+        "source_url": "https://github.com/langchain-ai/langgraph",
+        "crawler_freshness_label": "today",
+        "crawler_exact_timestamp": null
+      },
+      "license": {
+        "observed_identifier": "MIT",
+        "source_url": "https://github.com/langchain-ai/langgraph/blob/main/LICENSE",
+        "status": "observed"
+      },
+      "readme_url": "https://github.com/langchain-ai/langgraph/blob/main/README.md",
+      "notes": "API JSON snapshot available through web tool; no live CLI metadata due to unauthenticated rate limit."
+    },
+    {
+      "full_name": "hiyouga/LlamaFactory",
+      "html_url": "https://github.com/hiyouga/LlamaFactory",
+      "category": "training-tool",
+      "default_branch": "main",
+      "default_branch_evidence": "GitHub repository page branch selector",
+      "commit_sha": null,
+      "commit_sha_status": "unconfirmed",
+      "stargazers_count": null,
+      "forks_count": null,
+      "pushed_at": null,
+      "archived": null,
+      "exact_metadata_status": "unconfirmed",
+      "api_url": "https://api.github.com/repos/hiyouga/LlamaFactory",
+      "branch_api_url": "https://api.github.com/repos/hiyouga/LlamaFactory/commits/main",
+      "page_snapshot": {
+        "stars_display": "75.7k",
+        "forks_display": "9.3k",
+        "approximate": true,
+        "source_url": "https://github.com/hiyouga/LlamaFactory",
+        "crawler_freshness_label": "today",
+        "crawler_exact_timestamp": null
+      },
+      "license": {
+        "observed_identifier": "Apache-2.0",
+        "source_url": "https://github.com/hiyouga/LlamaFactory/blob/main/LICENSE",
+        "status": "observed"
+      },
+      "readme_url": "https://github.com/hiyouga/LlamaFactory/blob/main/README.md",
+      "notes": "License label observed in repository UI; supplementary resource, not an agent interview curriculum."
+    },
+    {
+      "full_name": "arpitkath/agentic-ai-interview-roadmap",
+      "html_url": "https://github.com/arpitkath/agentic-ai-interview-roadmap",
+      "category": "interview-low-popularity",
+      "default_branch": "main",
+      "default_branch_evidence": "GitHub repository page branch selector",
+      "commit_sha": null,
+      "commit_sha_status": "unconfirmed",
+      "stargazers_count": null,
+      "forks_count": null,
+      "pushed_at": null,
+      "archived": null,
+      "exact_metadata_status": "unconfirmed",
+      "api_url": "https://api.github.com/repos/arpitkath/agentic-ai-interview-roadmap",
+      "branch_api_url": "https://api.github.com/repos/arpitkath/agentic-ai-interview-roadmap/commits/main",
+      "page_snapshot": {
+        "stars_display": "4",
+        "forks_display": "0",
+        "approximate": false,
+        "source_url": "https://github.com/arpitkath/agentic-ai-interview-roadmap",
+        "crawler_freshness_label": "today",
+        "crawler_exact_timestamp": null
+      },
+      "license": {
+        "observed_identifier": "MIT",
+        "source_url": "https://github.com/arpitkath/agentic-ai-interview-roadmap/blob/main/LICENSE",
+        "status": "observed"
+      },
+      "readme_url": "https://github.com/arpitkath/agentic-ai-interview-roadmap/blob/main/README.md",
+      "notes": "Low-star structural reference; must not be represented as a popular project."
+    },
+    {
+      "full_name": "Zchary1106/agent-interview-hub",
+      "html_url": "https://github.com/Zchary1106/agent-interview-hub",
+      "category": "interview",
+      "default_branch": "main",
+      "default_branch_evidence": "GitHub repository page branch selector",
+      "commit_sha": null,
+      "commit_sha_status": "unconfirmed",
+      "stargazers_count": null,
+      "forks_count": null,
+      "pushed_at": null,
+      "archived": null,
+      "exact_metadata_status": "unconfirmed",
+      "api_url": "https://api.github.com/repos/Zchary1106/agent-interview-hub",
+      "branch_api_url": "https://api.github.com/repos/Zchary1106/agent-interview-hub/commits/main",
+      "page_snapshot": {
+        "stars_display": "841",
+        "forks_display": "84",
+        "approximate": false,
+        "source_url": "https://github.com/Zchary1106/agent-interview-hub",
+        "crawler_freshness_label": "today",
+        "crawler_exact_timestamp": null
+      },
+      "license": {
+        "observed_identifier": "MIT",
+        "source_url": "https://github.com/Zchary1106/agent-interview-hub#license",
+        "status": "observed_page_label"
+      },
+      "readme_url": "https://github.com/Zchary1106/agent-interview-hub/blob/main/README.md",
+      "notes": "Additional page snapshot opened 2026-10-28. Company interview claims not independently verified; used only for scope and structure."
+    }
+  ]
+}

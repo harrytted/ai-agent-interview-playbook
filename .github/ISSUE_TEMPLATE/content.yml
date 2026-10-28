@@ -1,0 +1,21 @@
+name: 内容修正或新问题
+description: 用来源或可复现实验改进学习手册
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题与位置
+      description: 写明题号、原说法及具体问题。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 一手来源或复现步骤
+      description: 给出链接、版本、日期或可执行命令；请勿上传敏感信息。
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 建议修改
