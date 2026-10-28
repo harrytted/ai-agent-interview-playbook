@@ -117,6 +117,16 @@ python3 examples/advanced/runtime_lab.py --scenario all
 
 准备面试时使用 [模拟面试](practice/mock-interviews.md)、[项目表达模板](practice/project-story-template.md) 和 [错题复盘模板](practice/review-template.md)。所有业务数据、项目职责和指标请用自己的真实材料填写。
 
+## 参与完善
+
+读到不准确的解释、遇到跑不通的示例，欢迎反馈；有值得分享的面试经验或实战做法，也欢迎一起补充。
+
+- **纠错与补充**：通过 [Issue](https://github.com/harrytted/ai-agent-interview-playbook/issues/new) 注明题号或章节位置，写下修改建议，尽量附上参考来源。
+- **分享经验与案例**：欢迎通过 [Pull Request](https://github.com/harrytted/ai-agent-interview-playbook/compare) 补充面试追问、答题思路或实战案例，让下一位读者少绕一点弯。
+- **反馈代码问题**：提交 [Issue](https://github.com/harrytted/ai-agent-interview-playbook/issues/new) 时，请说明运行环境、复现步骤，以及预期结果和实际表现，方便定位与修复。
+
+内容格式、引用要求和提交前检查见 [贡献指南](CONTRIBUTING.md)。
+
 ## 资料和维护
 
 - [项目调研及热度口径](research/github-survey.md)：面试题库、教程和框架分别比较；统计有来源和采集说明。
@@ -135,4 +145,4 @@ python3 scripts/check_repo.py
 python3 -m unittest discover -s tests -v
 ```
 
-本文档与代码为本仓库原创整理，采用 [MIT License](LICENSE)。引用的资料、外部项目和商标归各自权利人所有；其内容适用原项目许可。这里只链接外部资料，不搬运其题库、插图或模板。欢迎 Fork 后加入你自己的笔记与实验，并通过 Issue / PR 分享能核验的改进。
+本文档与代码为本仓库原创整理，采用 [MIT License](LICENSE)。引用的资料、外部项目和商标归各自权利人所有；其内容适用原项目许可。这里只链接外部资料，不搬运其题库、插图或模板。
