@@ -1,8 +1,23 @@
 # 02 · 大模型最小原理：从 token 到一次生成
 
+本章主线：**从文字生成到模型适配**。先理解自回归预测与注意力，再看生成阶段、缓存、训练与知识更新的区别。
+
+## 按这个顺序逐题阅读
+
+- [Q002 自回归语言模型到底在预测什么？](../questions/Q002.md)
+- [Q003 Transformer 的 Attention 在做什么？](../questions/Q003.md)
+- [Q004 Prefill、Decode 与 KV Cache 为什么影响延迟？](../questions/Q004.md)
+- [Q005 预训练、SFT、偏好优化、LoRA 分别是什么？](../questions/Q005.md)
+- [Q006 Prompt、RAG 与微调如何选？](../questions/Q006.md)
+- [Q007 为什么模型会给出流畅但错误的回答？](../questions/Q007.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 同一句“培训住宿能报销吗”，加上长篇制度后，助手等了更久才开始回答；它又能逐字续写，却仍可能引用错政策。这些现象需要分别看输入如何编码、模型怎样利用前文，以及输出如何一步步产生。
 
-本章拆开政策助手的一次模型调用，从 token 走到注意力、缓存和生成，再分清哪些改动会更新模型参数。读完应能解释这几层各自处理什么，遇到慢或答错时先查哪一层。建议先读 [第 01 章：系统地图](01-system-map.md)，分清模型和执行器的职责。概率与向量加权平均会在本章算例中用到，可以边算边补。
+本章拆开政策助手的一次模型调用，从 token 走到注意力、缓存和生成，再分清哪些改动会更新模型参数。读完应能解释这几层各自处理什么，遇到慢或答错时先查哪一层。建议先读 [第 01 章：组成与协作](01-system-map.md)，分清模型和执行器的职责。概率与向量加权平均会在本章算例中用到，可以边算边补。
 
 **阅读分层：** 必读“文本先变成token”“逐步选择”“Prefill/Decode”三节，能说明输入、输出和延迟来源即可；Attention数值推导及训练方法为数学与模型方向选读，可以稍后回查。选读不改变理解工具循环所需的前提。
 
@@ -90,7 +105,7 @@ KV Cache 保存计算中间表示，员工偏好档案保存业务数据，两�
 
 </details>
 
-关联复习：[Q002–Q006](../docs/foundations/01-agent-and-llm.md)。[课程目录](README.md) · 上一章：[01 系统地图](01-system-map.md) · 下一章：[03 上下文与提示](03-context-and-prompts.md)
+关联复习：[Q002–Q006](../docs/foundations/01-agent-and-llm.md)。[课程目录](README.md) · 上一章：[01 组成与协作](01-system-map.md) · 下一章：[03 上下文与提示](03-context-and-prompts.md)
 
 <!-- question-links:start -->
 ## 配套面试练习
@@ -99,12 +114,14 @@ KV Cache 保存计算中间表示，员工偏好档案保存业务数据，两�
 
 <details><summary>展开本章相关面试题</summary>
 
-- [Q002 自回归语言模型到底在预测什么？](../docs/foundations/01-agent-and-llm.md#q002-自回归语言模型到底在预测什么)
-- [Q003 Transformer 的 Attention 在做什么？](../docs/foundations/01-agent-and-llm.md#q003-transformer-的-attention-在做什么)
-- [Q004 Prefill、Decode 与 KV Cache 为什么影响延迟？](../docs/foundations/01-agent-and-llm.md#q004-prefilldecode-与-kv-cache-为什么影响延迟)
-- [Q005 预训练、SFT、偏好优化、LoRA 分别是什么？](../docs/foundations/01-agent-and-llm.md#q005-预训练sft偏好优化lora-分别是什么)
-- [Q006 Prompt、RAG 与微调如何选？](../docs/foundations/01-agent-and-llm.md#q006-promptrag-与微调如何选)
-- [Q007 为什么模型会给出流畅但错误的回答？](../docs/foundations/01-agent-and-llm.md#q007-为什么模型会给出流畅但错误的回答)
+- [Q002 自回归语言模型到底在预测什么？](../questions/Q002.md#q002-自回归语言模型到底在预测什么)
+- [Q003 Transformer 的 Attention 在做什么？](../questions/Q003.md#q003-transformer-的-attention-在做什么)
+- [Q004 Prefill、Decode 与 KV Cache 为什么影响延迟？](../questions/Q004.md#q004-prefilldecode-与-kv-cache-为什么影响延迟)
+- [Q005 预训练、SFT、偏好优化、LoRA 分别是什么？](../questions/Q005.md#q005-预训练sft偏好优化lora-分别是什么)
+- [Q006 Prompt、RAG 与微调如何选？](../questions/Q006.md#q006-promptrag-与微调如何选)
+- [Q007 为什么模型会给出流畅但错误的回答？](../questions/Q007.md#q007-为什么模型会给出流畅但错误的回答)
 
 </details>
 <!-- question-links:end -->
+
+</details>

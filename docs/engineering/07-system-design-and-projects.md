@@ -16,6 +16,10 @@
 
 **详细答案：**
 
+![运行时组织上下文模型执行器和状态，工具连接外部制度资料与服务](../../website/assets/diagrams/concepts/C6-runtime-boundary.svg)
+
+先区分应用边界与外部环境，再把身份范围、证据检索和读写限制放到相应路径，图本身不替代完整系统设计。
+
 先把用户的一次任务写成合同：谁在提问、能看哪些资料、只生成答案还是可以修改对象，信息不全时怎样结束。再问数据规模、更新频率、时延目标和错误代价。假设有100万片段、每天1万次任务、希望p95小于5秒，这些是设计输入，尚未经过容量验证；它们不能靠画上一个向量库就自动兑现。
 
 读取路径从可信身份开始。入库保留文档ID、版本、生效区间与访问范围，查询时先限定可见材料，再召回、重排、组装上下文，最后核对引用是否支持结论。没有覆盖适用日期或员工类别时，先澄清或交给人工。混合检索可以照顾政策编号与语义改写，但是否值得增加一条检索链路，应由任务集上的覆盖、排序和费用决定。
@@ -44,7 +48,7 @@
 
 画出身份服务、索引、重排、生成、订单工具、人工入口 6 个组件，沿“用户权限刚被撤回”的路径标出需要重新校验与失效的位置。
 
-**学习与参考：** [学习章：系统地图](../../learning/01-system-map.md) · [RAG链路](../../learning/06-rag-and-retrieval.md) · [可靠性与安全](../../learning/10-reliability-and-security.md) · [架构取舍](https://www.anthropic.com/research/building-effective-agents) · [逐次授权](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+**学习与参考：** [学习章：组成与协作](../../learning/01-system-map.md) · [RAG链路](../../learning/06-rag-and-retrieval.md) · [可靠性与安全](../../learning/10-reliability-and-security.md) · [架构取舍](https://www.anthropic.com/research/building-effective-agents) · [逐次授权](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
 
 ### Q050 设计一个可以引用来源的研究助手，怎么保证报告可信？
 
@@ -170,7 +174,7 @@
 
 为“本地只读资料助手”和“跨天审批的退款流程”各写一份两行选型记录：最关键需求、最小实现、尚未解决的风险。
 
-**学习与参考：** [学习章：系统地图](../../learning/01-system-map.md) · [运行时与Harness](../../advanced/01-harness-and-deep-agents.md) · [从简单机制开始](https://www.anthropic.com/research/building-effective-agents) · [持久化机制](https://docs.langchain.com/oss/python/langgraph/persistence)
+**学习与参考：** [学习章：组成与协作](../../learning/01-system-map.md) · [运行时与Harness](../../advanced/01-harness-and-deep-agents.md) · [从简单机制开始](https://www.anthropic.com/research/building-effective-agents) · [持久化机制](https://docs.langchain.com/oss/python/langgraph/persistence)
 
 ### Q053 怎样向面试官讲清一个真实个人项目？
 

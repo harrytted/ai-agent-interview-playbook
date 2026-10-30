@@ -1,5 +1,17 @@
 # 04 · 记忆与技能：管理事实变化和可复用过程
 
+本章主线：**记忆与技能：管理事实变化和可复用过程**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
+
+## 按这个顺序逐题阅读
+
+- [Q066 长期事实为什么需要实体解析与两条时间轴？](../questions/Q066.md)
+- [Q067 反思经验怎样写入记忆而不制造新错误？](../questions/Q067.md)
+- [Q068 Skills 怎样渐进加载并安全升级？](../questions/Q068.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 [上一章：上下文工程](03-context-engineering.md) · [进阶目录](README.md) · [下一章：工具路由与 MCP](05-tool-routing-and-mcp.md)
 
 助手昨天记住了住宿金额，今天却拿旧制度指导新申请；你更新了比较流程，它又把一次成功经验套到所有任务上。问题可能不在“记得不够多”，而在它把事实与做事方法装进了同一个抽屉。
@@ -104,3 +116,5 @@ Skill 可以把适用条件、操作步骤、示例、脚本和模板组成可�
 [上一章](03-context-engineering.md) · [进阶目录](README.md) · [下一章：工具路由与 MCP](05-tool-routing-and-mcp.md)
 
 [配套进阶面试题](../docs/advanced/04-memory-and-skills.md)
+
+</details>

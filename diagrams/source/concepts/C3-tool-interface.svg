@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="C3" width="520" height="655" viewBox="0 0 520 655" role="img" aria-labelledby="C3-title C3-desc">
+<title id="C3-title">工具：说明接口，再执行动作</title><desc id="C3-desc">工具说明让模型知道能力名称、用途和所需参数。模型只提出动作请求，执行器实际调用资料源或服务，再把结果交回模型。</desc>
+<defs>
+<marker id="C3-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="C3-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#346DB7"/></marker>
+<marker id="C3-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="C3-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#546C80"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#20344B}.title{font-size:26px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:20px}.small{font-size:18px;fill:#546C80}.micro{font-size:16px;fill:#546C80}</style>
+<rect width="520" height="655" rx="18" fill="#F6F9FC"/>
+<text x="24" y="43" class="title" text-anchor="start">工具：说明接口，再执行动作</text>
+<text x="24" y="76" class="small" text-anchor="start">模型知道“怎么申请”，程序负责真正办理</text>
+<rect x="24" y="100" width="472" height="141" rx="12" fill="#FFF9F2" stroke="#E7C7A7" stroke-width="1.5"/>
+<text x="43" y="134" class="label" text-anchor="start" style="fill:#B56B26">工具说明</text>
+<text x="43" y="168" class="body" text-anchor="start">名称：查询制度</text>
+<text x="43" y="198" class="body" text-anchor="start">用途：取得适用规则</text>
+<text x="43" y="228" class="body" text-anchor="start">参数：城市、出行日期</text>
+<path d="M101 241 V295" fill="none" stroke="#B56B26" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C3-orange)"/>
+<text x="319" y="273" class="small" text-anchor="middle" style="fill:#B56B26">说明书本身不会执行</text>
+<rect x="24" y="295" width="154" height="111" rx="12" fill="#EAF1FD" stroke="#346DB7" stroke-width="1.5"/>
+<text x="101" y="337" class="label" text-anchor="middle" style="fill:#346DB7">模型</text>
+<text x="101" y="373" class="small" text-anchor="middle">决定查什么</text>
+<rect x="260" y="295" width="236" height="111" rx="12" fill="white" stroke="#087F86" stroke-width="1.5"/>
+<text x="378" y="337" class="label" text-anchor="middle" style="fill:#087F86">执行器</text>
+<text x="378" y="373" class="small" text-anchor="middle">检查后调用工具</text>
+<path d="M178 328 H260" fill="none" stroke="#B56B26" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C3-orange)"/>
+<text x="219" y="315" class="small" text-anchor="middle" style="fill:#B56B26">请求</text>
+<path d="M260 376 H178" fill="none" stroke="#087F86" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C3-arrow)"/>
+<text x="219" y="403" class="small" text-anchor="middle" style="fill:#087F86">资料</text>
+<path d="M341 406 V489" fill="none" stroke="#B56B26" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C3-orange)"/>
+<text x="332" y="452" class="small" text-anchor="end" style="fill:#B56B26">调用</text>
+<path d="M421 489 V406" fill="none" stroke="#087F86" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C3-arrow)"/>
+<text x="432" y="452" class="small" text-anchor="start" style="fill:#087F86">返回</text>
+<rect x="260" y="489" width="236" height="99" rx="12" fill="#E9F5F4" stroke="#087F86" stroke-width="1.5"/>
+<text x="378" y="529" class="label" text-anchor="middle" style="fill:#087F86">资料源 / 服务</text>
+<text x="378" y="562" class="small" text-anchor="middle">返回本次读取的结果</text>
+<text x="24" y="526" class="body" text-anchor="start">“查到了什么”</text>
+<text x="24" y="556" class="small" text-anchor="start">来自实际调用，</text>
+<text x="24" y="584" class="small" text-anchor="start">不能靠模型编造。</text>
+<text x="260" y="632" class="small" text-anchor="middle">工具描述帮助选择；执行结果提供新观察</text>
+</svg>

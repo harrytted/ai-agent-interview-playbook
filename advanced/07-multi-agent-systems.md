@@ -1,5 +1,17 @@
 # 07 · 多 Agent 系统：控制权、证据与协作成本
 
+本章主线：**多 Agent 系统：控制权、证据与协作成本**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
+
+## 按这个顺序逐题阅读
+
+- [Q075 什么时候采用 Manager，什么时候采用 handoff？](../questions/Q075.md)
+- [Q076 动态任务图怎样处理共享状态、冲突与迟到结果？](../questions/Q076.md)
+- [Q077 多 Agent 怎样在失败、取消和高成本时收敛？](../questions/Q077.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 [上一章：Agentic RAG](06-agentic-rag.md) · [进阶目录](README.md) · [下一章：Coding 与 Computer Use](08-coding-and-computer-use.md)
 
 你把三地政策比较交给三个 Agent：一个查条文，一个算申请比例，一个写报告。它们各自说“完成了”，合起来却用了不同年份，报告还把申请量增加解释成政策放宽。多招几位同事，会议纪要也会跟着变长，结论却未必更清楚。
@@ -105,3 +117,5 @@ T05两地比较的共同输入固定为日期11月12日、staff类别、同一�
 - [Anthropic 多 Agent 研究系统](https://www.anthropic.com/research/multi-agent-research-system)：独立探索、汇总与协调经验。
 
 [对应面试题：Q075、Q076、Q077](../docs/advanced/07-multi-agent-systems.md)
+
+</details>

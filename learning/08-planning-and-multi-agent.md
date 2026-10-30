@@ -1,5 +1,18 @@
 # 08 · 规划与多 Agent：把依赖、证据和责任写清楚
 
+本章主线：**从步骤安排到多方协作**。先看同一任务的推进方式，再讨论依赖、并发以及何时值得引入多个Agent。
+
+## 按这个顺序逐题阅读
+
+- [Q010 ReAct 与先规划后执行有何不同？](../questions/Q010.md)
+- [Q013 多个分支何时可以并发？](../questions/Q013.md)
+- [Q015 什么时候值得使用多个 Agent？](../questions/Q015.md)
+- [Q016 多 Agent 如何交接，冲突如何处理？](../questions/Q016.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 [上一章：记忆与状态](07-memory-and-state.md) · [学习目录](README.md) · [下一章：评测](09-evaluation.md)
 
 用户让内部政策助手比较海岚与云洲的差旅规则，列出例外审批材料，再准备申请草稿。两路检索看起来可以同时开始，可出差日期还没确认；即使各自查完，也可能拿回不同版本的制度。增加角色以前，先得弄清每一步需要等谁、交回什么。
@@ -95,10 +108,12 @@ Reducer 规定每个字段怎样合并更新，LangGraph 的状态字段可以�
 
 <details><summary>展开本章相关面试题</summary>
 
-- [Q010 ReAct 与先规划后执行有何不同？](../docs/foundations/02-planning-and-orchestration.md#q010-react-与先规划后执行有何不同)
-- [Q013 多个分支何时可以并发？](../docs/foundations/02-planning-and-orchestration.md#q013-多个分支何时可以并发)
-- [Q015 什么时候值得使用多个 Agent？](../docs/foundations/02-planning-and-orchestration.md#q015-什么时候值得使用多个-agent)
-- [Q016 多 Agent 如何交接，冲突如何处理？](../docs/foundations/02-planning-and-orchestration.md#q016-多-agent-如何交接冲突如何处理)
+- [Q010 ReAct 与先规划后执行有何不同？](../questions/Q010.md#q010-react-与先规划后执行有何不同)
+- [Q013 多个分支何时可以并发？](../questions/Q013.md#q013-多个分支何时可以并发)
+- [Q015 什么时候值得使用多个 Agent？](../questions/Q015.md#q015-什么时候值得使用多个-agent)
+- [Q016 多 Agent 如何交接，冲突如何处理？](../questions/Q016.md#q016-多-agent-如何交接冲突如何处理)
 
 </details>
 <!-- question-links:end -->
+
+</details>

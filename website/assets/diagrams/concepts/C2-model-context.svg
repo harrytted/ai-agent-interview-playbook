@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="C2" width="520" height="690" viewBox="0 0 520 690" role="img" aria-labelledby="C2-title C2-desc">
+<title id="C2-title">模型看到的是本轮输入</title><desc id="C2-desc">指令、用户问题、工具说明与选入的资料组成当前上下文。模型处理本轮输入，输出回答或者动作请求。存在数据库里的内容不会自动成为本轮输入。</desc>
+<defs>
+<marker id="C2-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="C2-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#346DB7"/></marker>
+<marker id="C2-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="C2-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#546C80"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#20344B}.title{font-size:26px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:20px}.small{font-size:18px;fill:#546C80}.micro{font-size:16px;fill:#546C80}</style>
+<rect width="520" height="690" rx="18" fill="#F6F9FC"/>
+<text x="24" y="43" class="title" text-anchor="start">模型看到的是本轮输入</text>
+<text x="24" y="76" class="small" text-anchor="start">外部信息要先被选入，模型才用得上</text>
+<path d="M360 135 H403" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M360 202 H403" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M360 269 H403" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M360 336 H403" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M403 135 V360 H260 V395" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C2-blue)"/>
+<rect x="24" y="111" width="336" height="48" rx="6" fill="#FFFFFF" stroke="#C8D7E4" stroke-width="1.5"/>
+<text x="39" y="143" class="body" text-anchor="start">用户问题：650 元超限吗？</text>
+<rect x="24" y="178" width="336" height="48" rx="6" fill="#FFFFFF" stroke="#C8D7E4" stroke-width="1.5"/>
+<text x="39" y="210" class="body" text-anchor="start">行为指令：回答要说明依据</text>
+<rect x="24" y="245" width="336" height="48" rx="6" fill="#FFFFFF" stroke="#C8D7E4" stroke-width="1.5"/>
+<text x="39" y="277" class="body" text-anchor="start">工具说明：可以查哪些制度</text>
+<rect x="24" y="312" width="336" height="48" rx="6" fill="#E8F5F3" stroke="#C8D7E4" stroke-width="1.5"/>
+<text x="39" y="344" class="body" text-anchor="start">已选资料：本次适用的规则</text>
+<rect x="170" y="395" width="180" height="83" rx="12" fill="#EAF1FD" stroke="#346DB7" stroke-width="1.5"/>
+<path d="M190 386 V395" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M190 478 V487" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M220 386 V395" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M220 478 V487" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M250 386 V395" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M250 478 V487" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M280 386 V395" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M280 478 V487" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M310 386 V395" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M310 478 V487" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M330 386 V395" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M330 478 V487" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="260" y="446" class="label" text-anchor="middle" style="fill:#346DB7">模型调用</text>
+<path d="M260 487 V519 H137 V550" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C2-blue)"/>
+<path d="M260 519 H383 V550" fill="none" stroke="#B56B26" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C2-orange)"/>
+<rect x="24" y="550" width="226" height="83" rx="12" fill="white" stroke="#346DB7" stroke-width="1.5"/>
+<text x="137" y="585" class="label" text-anchor="middle" style="fill:#346DB7">直接回答</text>
+<text x="137" y="613" class="small" text-anchor="middle">已有信息足够</text>
+<rect x="270" y="550" width="226" height="83" rx="12" fill="white" stroke="#B56B26" stroke-width="1.5"/>
+<text x="383" y="585" class="label" text-anchor="middle" style="fill:#B56B26">动作请求</text>
+<text x="383" y="613" class="small" text-anchor="middle">还需要取得资料</text>
+<text x="260" y="669" class="small" text-anchor="middle">模型参数中的知识，与本次提供的资料不同</text>
+</svg>

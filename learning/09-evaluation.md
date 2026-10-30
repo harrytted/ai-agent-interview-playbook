@@ -1,5 +1,23 @@
 # 09 · 评测：怎样知道系统真的学会做事
 
+本章主线：**从任务目标到质量判断**。先建立完成与评分的口径，再讨论数据集、裁判、观察、性能和线上变化。
+
+## 按这个顺序逐题阅读
+
+- [Q033 怎样判断一个 Agent 真正完成了任务？](../questions/Q033.md)
+- [Q034 成功率的分母怎么定义，拒答算成功还是失败？](../questions/Q034.md)
+- [Q035 怎样构建评测集，避免越调越像“背答案”？](../questions/Q035.md)
+- [Q036 LLM-as-a-Judge 有哪些偏差，怎么用才可信？](../questions/Q036.md)
+- [Q037 一条有用的 Agent trace 应记录什么？](../questions/Q037.md)
+- [Q038 怎样解释 p95 延迟，如何定位慢任务？](../questions/Q038.md)
+- [Q039 怎样算 Agent 的成本，优化时看哪些指标？](../questions/Q039.md)
+- [Q040 离线分数提升，为什么线上还可能变差？](../questions/Q040.md)
+- [Q008 如何为 Agent 选择模型而不只看排行榜？](../questions/Q008.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 演示里，政策助手引用了一份文件，还回复“工单已创建”。点开引用却是旧制度，后台也没有工单。如果评测只看回答是否流畅，这次运行甚至可能拿到高分；检查办法需要能看到这些具体失败。
 
 本章从可接受终态出发，学习定义任务成功条件，把检索错误、决策错误与执行错误分开，再手算指标。读完应能解释一个分数的分母、适用范围，以及它还没检查什么。建议先读 [RAG](06-rag-and-retrieval.md)和[规划与协作](08-planning-and-multi-agent.md)，熟悉被评测的执行过程。
@@ -119,19 +137,21 @@ python3 examples/foundations/math_lab.py --section metrics
 
 <details><summary>展开本章相关面试题</summary>
 
-- [Q008 如何为 Agent 选择模型而不只看排行榜？](../docs/foundations/01-agent-and-llm.md#q008-如何为-agent-选择模型而不只看排行榜)
-- [Q033 怎样判断一个 Agent 真正完成了任务？](../docs/engineering/05-evaluation-and-observability.md#q033-怎样判断一个-agent-真正完成了任务)
-- [Q034 成功率的分母怎么定义，拒答算成功还是失败？](../docs/engineering/05-evaluation-and-observability.md#q034-成功率的分母怎么定义拒答算成功还是失败)
-- [Q035 怎样构建评测集，避免越调越像“背答案”？](../docs/engineering/05-evaluation-and-observability.md#q035-怎样构建评测集避免越调越像背答案)
-- [Q036 LLM-as-a-Judge 有哪些偏差，怎么用才可信？](../docs/engineering/05-evaluation-and-observability.md#q036-llm-as-a-judge-有哪些偏差怎么用才可信)
-- [Q037 一条有用的 Agent trace 应记录什么？](../docs/engineering/05-evaluation-and-observability.md#q037-一条有用的-agent-trace-应记录什么)
-- [Q038 怎样解释 p95 延迟，如何定位慢任务？](../docs/engineering/05-evaluation-and-observability.md#q038-怎样解释-p95-延迟如何定位慢任务)
-- [Q039 怎样算 Agent 的成本，优化时看哪些指标？](../docs/engineering/05-evaluation-and-observability.md#q039-怎样算-agent-的成本优化时看哪些指标)
-- [Q040 离线分数提升，为什么线上还可能变差？](../docs/engineering/05-evaluation-and-observability.md#q040-离线分数提升为什么线上还可能变差)
-- [Q050 设计一个可以引用来源的研究助手，怎么保证报告可信？](../docs/engineering/07-system-design-and-projects.md#q050-设计一个可以引用来源的研究助手怎么保证报告可信)
-- [Q054 怎样解释指标提升，避免编造与夸大？](../docs/engineering/07-system-design-and-projects.md#q054-怎样解释指标提升避免编造与夸大)
-- [Q055 Agent 项目怎样做测试，哪些该 mock？](../docs/engineering/07-system-design-and-projects.md#q055-agent-项目怎样做测试哪些该-mock)
-- [Q056 线上突然回答变差，你会如何排查？](../docs/engineering/07-system-design-and-projects.md#q056-线上突然回答变差你会如何排查)
+- [Q008 如何为 Agent 选择模型而不只看排行榜？](../questions/Q008.md#q008-如何为-agent-选择模型而不只看排行榜)
+- [Q033 怎样判断一个 Agent 真正完成了任务？](../questions/Q033.md#q033-怎样判断一个-agent-真正完成了任务)
+- [Q034 成功率的分母怎么定义，拒答算成功还是失败？](../questions/Q034.md#q034-成功率的分母怎么定义拒答算成功还是失败)
+- [Q035 怎样构建评测集，避免越调越像“背答案”？](../questions/Q035.md#q035-怎样构建评测集避免越调越像背答案)
+- [Q036 LLM-as-a-Judge 有哪些偏差，怎么用才可信？](../questions/Q036.md#q036-llm-as-a-judge-有哪些偏差怎么用才可信)
+- [Q037 一条有用的 Agent trace 应记录什么？](../questions/Q037.md#q037-一条有用的-agent-trace-应记录什么)
+- [Q038 怎样解释 p95 延迟，如何定位慢任务？](../questions/Q038.md#q038-怎样解释-p95-延迟如何定位慢任务)
+- [Q039 怎样算 Agent 的成本，优化时看哪些指标？](../questions/Q039.md#q039-怎样算-agent-的成本优化时看哪些指标)
+- [Q040 离线分数提升，为什么线上还可能变差？](../questions/Q040.md#q040-离线分数提升为什么线上还可能变差)
+- [Q050 设计一个可以引用来源的研究助手，怎么保证报告可信？](../questions/Q050.md#q050-设计一个可以引用来源的研究助手怎么保证报告可信)
+- [Q054 怎样解释指标提升，避免编造与夸大？](../questions/Q054.md#q054-怎样解释指标提升避免编造与夸大)
+- [Q055 Agent 项目怎样做测试，哪些该 mock？](../questions/Q055.md#q055-agent-项目怎样做测试哪些该-mock)
+- [Q056 线上突然回答变差，你会如何排查？](../questions/Q056.md#q056-线上突然回答变差你会如何排查)
 
 </details>
 <!-- question-links:end -->
+
+</details>

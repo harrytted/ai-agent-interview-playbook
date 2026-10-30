@@ -3,11 +3,12 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from scripts.check_diagrams import FILES, check_diagrams, validate_svg
+from scripts.check_diagrams import CONCEPT_FILES, FILES, check_diagrams, validate_svg
 
 
 def sample(number):
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" id="G{number}"
+    label = f"G{number}" if isinstance(number, int) else number
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" id="{label}"
 viewBox="0 0 440 600" role="img" aria-labelledby="title desc">
 <title id="title">组件与反馈</title><desc id="desc">工具观察成为后续输入。</desc>
 <defs><marker id="arrow"><path d="M0 0 L5 3 L0 6"/></marker></defs>
@@ -23,7 +24,8 @@ class DiagramTests(unittest.TestCase):
 
     def write(self, number, content=None, pair=True):
         for dirname in ("diagrams/source", "website/assets/diagrams") if pair else ("diagrams/source",):
-            target = self.root / dirname / FILES[number]
+            filename = FILES[number] if isinstance(number, int) else CONCEPT_FILES[number]
+            target = self.root / dirname / filename
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(content if content is not None else sample(number))
 
@@ -89,6 +91,20 @@ class DiagramTests(unittest.TestCase):
 
     def test_complete_real_repository_contract(self):
         result = check_diagrams(Path(__file__).resolve().parents[1], "all")
+        self.assertEqual(result.errors, [])
+        self.assertEqual(result.diagrams, 8 + len(CONCEPT_FILES))
+
+    def test_concept_group_is_checked_recursively_and_requires_complete_pairs(self):
+        self.write(1)
+        self.write(3)
+        self.assertEqual(check_diagrams(self.root, "pilot").errors, [])
+        self.write("C1", pair=False)
+        errors = "\n".join(check_diagrams(self.root, "pilot").errors)
+        self.assertIn("missing source/published pair: concepts/C1-capability-map.svg", errors)
+        self.assertIn("missing required diagram: concepts/C2-model-context.svg", errors)
+        for label in CONCEPT_FILES:
+            self.write(label)
+        result = check_diagrams(self.root, "pilot")
         self.assertEqual(result.errors, [])
         self.assertEqual(result.diagrams, 8)
 

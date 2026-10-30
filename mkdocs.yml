@@ -71,8 +71,8 @@ nav:
   - 开始阅读: index.md
   - 基础课程:
       - learning/index.md
-      - 00 · 走完一次任务: learning/00-first-agent.md
-      - 01 · Agent 系统地图: learning/01-system-map.md
+      - 知识主线与阅读顺序: learning/knowledge-map.md
+      - 01 · 组成与协作: learning/01-system-map.md
       - 02 · LLM 基础原理: learning/02-llm-primer.md
       - 03 · 提示与上下文: learning/03-context-and-prompts.md
       - 04 · Agent 工具循环: learning/04-agent-loop.md
@@ -100,33 +100,149 @@ nav:
       - 贯穿项目工作坊: advanced/project-workshop.md
       - 官方知识体系: advanced/official-learning-map.md
   - 面试题库:
-      - 92 题索引: docs/question-index.md
+      - questions/index.md
+      - 题目与课程对照: docs/question-index.md
       - 学习路线与冲刺: docs/00-roadmap.md
-      - 基础与工程:
-          - Agent 与 LLM: docs/foundations/01-agent-and-llm.md
-          - 规划与编排: docs/foundations/02-planning-and-orchestration.md
-          - RAG 与检索: docs/foundations/03-rag-and-search.md
-          - 工具、记忆与协议: docs/foundations/04-tools-memory-protocols.md
-          - 评测与可观测性: docs/engineering/05-evaluation-and-observability.md
-          - 可靠性与安全: docs/engineering/06-reliability-and-security.md
-          - 系统设计与项目表达: docs/engineering/07-system-design-and-projects.md
-      - 进阶面试:
-          - docs/advanced/index.md
-          - 01 · Harness: docs/advanced/01-harness-and-deep-agents.md
-          - 02 · 持久执行: docs/advanced/02-durable-execution.md
-          - 03 · 上下文工程: docs/advanced/03-context-engineering.md
-          - 04 · 记忆与技能: docs/advanced/04-memory-and-skills.md
-          - 05 · 工具路由与 MCP: docs/advanced/05-tool-routing-and-mcp.md
-          - 06 · Agentic RAG: docs/advanced/06-agentic-rag.md
-          - 07 · 多 Agent: docs/advanced/07-multi-agent-systems.md
-          - 08 · 编码与计算机操作: docs/advanced/08-coding-and-computer-use.md
-          - 09 · 评测与反馈: docs/advanced/09-evaluation-and-feedback.md
-          - 10 · 性能与推理: docs/advanced/10-performance-and-serving.md
-          - 11 · 安全与治理: docs/advanced/11-security-and-governance.md
-          - 12 · Agent 训练: docs/advanced/12-agent-training.md
+      - 基础原理:
+          - Agent 与 LLM:
+              - "Q001 · 什么是 Agent，和普通 LLM 调用有何区别？": questions/Q001.md
+              - "Q002 · 自回归语言模型到底在预测什么？": questions/Q002.md
+              - "Q003 · Transformer 的 Attention 在做什么？": questions/Q003.md
+              - "Q004 · Prefill、Decode 与 KV Cache 为什么影响延迟？": questions/Q004.md
+              - "Q005 · 预训练、SFT、偏好优化、LoRA 分别是什么？": questions/Q005.md
+              - "Q006 · Prompt、RAG 与微调如何选？": questions/Q006.md
+              - "Q007 · 为什么模型会给出流畅但错误的回答？": questions/Q007.md
+              - "Q008 · 如何为 Agent 选择模型而不只看排行榜？": questions/Q008.md
+          - 规划与编排:
+              - "Q009 · 最小 Agent Loop 应包含哪些环节？": questions/Q009.md
+              - "Q010 · ReAct 与先规划后执行有何不同？": questions/Q010.md
+              - "Q011 · 为什么用状态图组织 Agent？": questions/Q011.md
+              - "Q012 · 如何防止循环、反复重规划与无效重试？": questions/Q012.md
+              - "Q013 · 多个分支何时可以并发？": questions/Q013.md
+              - "Q014 · Checkpoint 能保证恢复后不重复扣款吗？": questions/Q014.md
+              - "Q015 · 什么时候值得使用多个 Agent？": questions/Q015.md
+              - "Q016 · 多 Agent 如何交接，冲突如何处理？": questions/Q016.md
+          - RAG 与检索:
+              - "Q017 · 一个 RAG 系统的完整数据流是什么？": questions/Q017.md
+              - "Q018 · Chunk 大小和重叠该怎样选择？": questions/Q018.md
+              - "Q019 · 为什么向量检索和关键词检索可以互补？": questions/Q019.md
+              - "Q020 · 召回和 Rerank 为什么分两阶段？": questions/Q020.md
+              - "Q021 · 向量索引如何兼顾延迟与检索质量？": questions/Q021.md
+              - "Q022 · ACL 应放在哪里？文档更新和删除如何传播？": questions/Q022.md
+              - "Q023 · RAG 如何评测，Recall@k、MRR 和答案质量有何区别？": questions/Q023.md
+              - "Q024 · RAG 回答错误应该按什么顺序排查？": questions/Q024.md
+          - 工具、记忆与协议:
+              - "Q025 · Function Calling 的真正执行者是谁？": questions/Q025.md
+              - "Q026 · 怎样设计易用且可控的工具接口？": questions/Q026.md
+              - "Q027 · Schema 合法为什么仍然不够？": questions/Q027.md
+              - "Q028 · MCP 的 Host、Client、Server 分别负责什么？": questions/Q028.md
+              - "Q029 · MCP 是否自动解决鉴权和 Prompt Injection？": questions/Q029.md
+              - "Q030 · Context、短期记忆和长期记忆如何区分？": questions/Q030.md
+              - "Q031 · 上下文太长时如何压缩而不丢任务？": questions/Q031.md
+              - "Q032 · 长期记忆怎样避免污染与跨用户泄漏？": questions/Q032.md
+      - 工程应用:
+          - 评测与可观测性:
+              - "Q033 · 怎样判断一个 Agent 真正完成了任务？": questions/Q033.md
+              - "Q034 · 成功率的分母怎么定义，拒答算成功还是失败？": questions/Q034.md
+              - "Q035 · 怎样构建评测集，避免越调越像“背答案”？": questions/Q035.md
+              - "Q036 · LLM-as-a-Judge 有哪些偏差，怎么用才可信？": questions/Q036.md
+              - "Q037 · 一条有用的 Agent trace 应记录什么？": questions/Q037.md
+              - "Q038 · 怎样解释 p95 延迟，如何定位慢任务？": questions/Q038.md
+              - "Q039 · 怎样算 Agent 的成本，优化时看哪些指标？": questions/Q039.md
+              - "Q040 · 离线分数提升，为什么线上还可能变差？": questions/Q040.md
+          - 可靠性与安全:
+              - "Q041 · 工具失败后应该怎样重试？": questions/Q041.md
+              - "Q042 · 什么是幂等，为什么“工具超时”不等于“工具没执行”？": questions/Q042.md
+              - "Q043 · 人工审批应该放在哪里，审批后还能改参数吗？": questions/Q043.md
+              - "Q044 · 怎么应对网页或文档中的 Prompt Injection？": questions/Q044.md
+              - "Q045 · 工具沙箱、参数校验和 ACL 分别解决什么？": questions/Q045.md
+              - "Q046 · Checkpoint 能保证崩溃恢复后不重复执行工具吗？": questions/Q046.md
+              - "Q047 · 用户点了停止，怎样取消流式 Agent？": questions/Q047.md
+              - "Q048 · 如何防止 Agent 死循环与故障扩散？": questions/Q048.md
+          - 系统设计与项目:
+              - "Q049 · 设计一个企业知识库客服 Agent，你会怎样开始？": questions/Q049.md
+              - "Q050 · 设计一个可以引用来源的研究助手，怎么保证报告可信？": questions/Q050.md
+              - "Q051 · 设计一个能创建、分派工单的 Agent，状态如何流转？": questions/Q051.md
+              - "Q052 · 面试官问“为什么选这个框架”，怎样回答？": questions/Q052.md
+              - "Q053 · 怎样向面试官讲清一个真实个人项目？": questions/Q053.md
+              - "Q054 · 怎样解释指标提升，避免编造与夸大？": questions/Q054.md
+              - "Q055 · Agent 项目怎样做测试，哪些该 mock？": questions/Q055.md
+              - "Q056 · 线上突然回答变差，你会如何排查？": questions/Q056.md
+      - 进阶系统:
+          - Harness:
+              - "Q057 · Harness 与模型、Agent 框架分别承担什么职责？": questions/Q057.md
+              - "Q058 · 怎样区分文件 Backend、执行 Sandbox 与持久化状态？": questions/Q058.md
+              - "Q059 · 长任务跨会话交接应该保存什么？": questions/Q059.md
+          - 持久执行:
+              - "Q060 · 持久执行为什么仍需要外部幂等？": questions/Q060.md
+              - "Q061 · 怎样让审批与 Outbox 在恢复后仍保持正确含义？": questions/Q061.md
+              - "Q062 · 租约、Fencing 与取消分别保护什么？": questions/Q062.md
+          - 上下文工程:
+              - "Q063 · 上下文选择、外置与摘要应该怎样配合？": questions/Q063.md
+              - "Q064 · 怎样区分 KV、前缀、检索与最终答案缓存？": questions/Q064.md
+              - "Q065 · 长任务怎样分配上下文预算并传播证据失效？": questions/Q065.md
+          - 记忆与技能:
+              - "Q066 · 长期事实为什么需要实体解析与两条时间轴？": questions/Q066.md
+              - "Q067 · 反思经验怎样写入记忆而不制造新错误？": questions/Q067.md
+              - "Q068 · Skills 怎样渐进加载并安全升级？": questions/Q068.md
+          - 工具路由与 MCP:
+              - "Q069 · 大工具目录怎样做到发现、加载与执行一致？": questions/Q069.md
+              - "Q070 · 程序化工具调用怎样节省上下文并保持调用边界？": questions/Q070.md
+              - "Q071 · MCP 授权、业务 ACL 与 A2A 任务合同怎样区分？": questions/Q071.md
+          - Agentic RAG:
+              - "Q072 · Agentic RAG 怎样围绕证据依赖选择检索路径？": questions/Q072.md
+              - "Q073 · GraphRAG 的局部与全局查询怎样选择和维护？": questions/Q073.md
+              - "Q074 · 研究助手怎样反向核验证据并决定停止？": questions/Q074.md
+          - 多 Agent:
+              - "Q075 · 什么时候采用 Manager，什么时候采用 handoff？": questions/Q075.md
+              - "Q076 · 动态任务图怎样处理共享状态、冲突与迟到结果？": questions/Q076.md
+              - "Q077 · 多 Agent 怎样在失败、取消和高成本时收敛？": questions/Q077.md
+          - 编码与操作:
+              - "Q078 · Coding Agent 怎样形成可复现、可验收的修复闭环？": questions/Q078.md
+              - "Q079 · 文件系统 Backend、路径白名单和沙箱分别保护什么？": questions/Q079.md
+              - "Q080 · Browser / Computer Use 怎样保持观察新鲜并确认任务完成？": questions/Q080.md
+          - 评测与反馈:
+              - "Q081 · pass@k 提升是否意味着 Agent 更可靠？怎样正确计算？": questions/Q081.md
+              - "Q082 · 怎样校准 LLM-as-a-Judge，避免总体高分掩盖关键错误？": questions/Q082.md
+              - "Q083 · 怎样证明一次 Agent 改进来自策略，而不是任务、预算或数据泄漏？": questions/Q083.md
+          - 性能与服务:
+              - "Q084 · 怎样定位 Agent 的延迟瓶颈，为什么加 Worker 未必更快？": questions/Q084.md
+              - "Q085 · KV / 前缀缓存与检索、工具、答案缓存有什么区别？": questions/Q085.md
+              - "Q086 · 多分支 Agent 怎样控制共享预算，并设计模型升级与降级？": questions/Q086.md
+          - 安全与治理:
+              - "Q087 · 认证、资源授权、动作批准与执行隔离为什么不能合并？": questions/Q087.md
+              - "Q088 · 提示注入怎样穿过检索、记忆与 MCP，应该在哪里阻断？": questions/Q088.md
+              - "Q089 · 人工审批怎样与参数、恢复、撤销和审计绑定？": questions/Q089.md
+          - 优化与训练:
+              - "Q090 · Agent 出错时，怎样选择改运行时、SFT、DPO 或 Agent RL？": questions/Q090.md
+              - "Q091 · GRPO 的组内相对奖励怎样计算，为什么标准化不等于完整训练？": questions/Q091.md
+              - "Q092 · Harnessed Agent RL 怎样组织训练数据，如何理解 Agent Lightning 的版本？": questions/Q092.md
+      - 按模块合订:
+          - 基础与工程总索引: docs/question-index.md
+          - 进阶合订目录: docs/advanced/index.md
+          - "Agent 与 LLM": docs/foundations/01-agent-and-llm.md
+          - "规划与编排": docs/foundations/02-planning-and-orchestration.md
+          - "RAG 与检索": docs/foundations/03-rag-and-search.md
+          - "工具、记忆与协议": docs/foundations/04-tools-memory-protocols.md
+          - "评测与可观测性": docs/engineering/05-evaluation-and-observability.md
+          - "可靠性与安全": docs/engineering/06-reliability-and-security.md
+          - "系统设计与项目": docs/engineering/07-system-design-and-projects.md
+          - "进阶 · Harness": docs/advanced/01-harness-and-deep-agents.md
+          - "进阶 · 持久执行": docs/advanced/02-durable-execution.md
+          - "进阶 · 上下文工程": docs/advanced/03-context-engineering.md
+          - "进阶 · 记忆与技能": docs/advanced/04-memory-and-skills.md
+          - "进阶 · 工具路由与 MCP": docs/advanced/05-tool-routing-and-mcp.md
+          - "进阶 · Agentic RAG": docs/advanced/06-agentic-rag.md
+          - "进阶 · 多 Agent": docs/advanced/07-multi-agent-systems.md
+          - "进阶 · 编码与操作": docs/advanced/08-coding-and-computer-use.md
+          - "进阶 · 评测与反馈": docs/advanced/09-evaluation-and-feedback.md
+          - "进阶 · 性能与服务": docs/advanced/10-performance-and-serving.md
+          - "进阶 · 安全与治理": docs/advanced/11-security-and-governance.md
+          - "进阶 · 优化与训练": docs/advanced/12-agent-training.md
   - 动手练习:
       - practice/index.md
       - 7 天项目实验: docs/engineering/08-project-lab.md
+      - 先走完一次任务: learning/00-first-agent.md
       - 政策助手完整实验: examples/policy_agent/index.md
       - Agent 工具循环实验: examples/agent_lab/index.md
       - 基础数值实验: examples/foundations/index.md

@@ -44,8 +44,9 @@ class NavigationTests(unittest.TestCase):
                 self.assertEqual(content.count(check_repo.LINKS_START), 1)
                 href = re.search(r"\[Q001[^\]]+\]\(([^)]+)\)", content)[1]
                 location, anchor = href.split("#")
-                self.assertEqual((path.parent / location).resolve(), root / question.path)
-                self.assertIn(anchor, check_repo.anchors((root / question.path).read_text()))
+                article = root / "questions/Q001.md"
+                self.assertEqual((path.parent / location).resolve(), article)
+                self.assertIn(anchor, check_repo.anchors(article.read_text()))
 
 
 if __name__ == "__main__":

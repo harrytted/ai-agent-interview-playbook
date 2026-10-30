@@ -48,6 +48,10 @@ class SiteHTML(HTMLParser):
         self._answer: AnswerBlock | None = None
         self._details_depth = 0
         self._code_depth = 0
+        self.h1_titles: list[str] = []
+        self.section_titles: list[str] = []
+        self._article_heading: list[str] | None = None
+        self._article_heading_tag = ""
 
     def handle_starttag(self, tag: str, attrs):
         values = dict(attrs)
@@ -61,6 +65,9 @@ class SiteHTML(HTMLParser):
 
         if tag in {"h1", "h2", "h3"}:
             self._question = None
+        if tag in {"h1", "h2"}:
+            self._article_heading = []
+            self._article_heading_tag = tag
         if tag == "h3":
             self._heading = []
             self._heading_id = values.get("id", "")
@@ -83,6 +90,8 @@ class SiteHTML(HTMLParser):
         self.handle_endtag(tag)
 
     def handle_data(self, data: str):
+        if self._article_heading is not None:
+            self._article_heading.append(data)
         if self._heading is not None:
             self._heading.append(data)
         if self._answer is not None:
@@ -91,6 +100,11 @@ class SiteHTML(HTMLParser):
                 self._answer.prose.append(data)
 
     def handle_endtag(self, tag: str):
+        if tag == self._article_heading_tag and self._article_heading is not None:
+            text = " ".join("".join(self._article_heading).split()).rstrip(" ¶")
+            (self.h1_titles if tag == "h1" else self.section_titles).append(text)
+            self._article_heading = None
+            self._article_heading_tag = ""
         if tag == "h3" and self._heading is not None:
             text = " ".join("".join(self._heading).split())
             title = re.match(r"Q(\d{3})(?:\s|$)", text)
@@ -121,6 +135,7 @@ class CheckResult:
     pages: int = 0
     references: int = 0
     questions: int = 0
+    articles: int = 0
 
 
 def resolve_reference(root: Path, page: Path, value: str) -> tuple[Path, str] | None:
@@ -253,6 +268,34 @@ def check_site(site_dir: Path) -> CheckResult:
     for number, locations in inventory.items():
         if len(locations) > 1:
             result.errors.append(f"Duplicate Q{number:03} h3 IDs: " + "; ".join(locations))
+    # Old grouped URLs retain their 92 anchors. The primary reading surface is
+    # separately checked when standalone articles are present.
+    if (root / "questions").is_dir():
+        articles: dict[int, list[Path]] = defaultdict(list)
+        for page, parser in pages.items():
+            relative = page.relative_to(root)
+            if len(relative.parts) < 2 or relative.parts[0] != "questions":
+                continue
+            match = re.fullmatch(r"Q(\d{3})", Path(relative.parts[1]).stem)
+            if not match:
+                continue
+            number = int(match[1])
+            articles[number].append(page)
+            if len(parser.h1_titles) != 1 or not parser.h1_titles[0].startswith(f"Q{number:03} "):
+                result.errors.append(f"{relative}: standalone question H1 disagrees with its filename")
+            required_sections = {"简要回答", "详细解析", "常见追问", "实战案例", "常见误区", "动手想一想", "学习参考"}
+            if not required_sections.issubset(parser.section_titles):
+                result.errors.append(f"{relative}: standalone article sections are missing or not rendered")
+        result.articles = sum(map(len, articles.values()))
+        missing_articles = EXPECTED_QUESTIONS - articles.keys()
+        unexpected_articles = articles.keys() - EXPECTED_QUESTIONS
+        if missing_articles:
+            result.errors.append("Missing standalone articles: " + ", ".join(f"Q{n:03}" for n in sorted(missing_articles)))
+        if unexpected_articles:
+            result.errors.append("Unexpected standalone articles: " + ", ".join(f"Q{n:03}" for n in sorted(unexpected_articles)))
+        for number, locations in articles.items():
+            if len(locations) != 1:
+                result.errors.append(f"Duplicate standalone Q{number:03}")
     return result
 
 
@@ -269,6 +312,7 @@ def main(argv: list[str] | None = None) -> int:
     print(
         f"Site check passed: {result.pages} HTML pages, {result.references} local references, "
         f"{result.questions} rendered questions (Q001–Q092)."
+        + (f" {result.articles} standalone articles." if result.articles else "")
     )
     return 0
 

@@ -23,6 +23,14 @@ FILES = {
     7: "G7-planning-compare.svg",
     8: "G8-write-recovery.svg",
 }
+CONCEPT_FILES = {
+    "C1": "concepts/C1-capability-map.svg",
+    "C2": "concepts/C2-model-context.svg",
+    "C3": "concepts/C3-tool-interface.svg",
+    "C4": "concepts/C4-memory-context.svg",
+    "C5": "concepts/C5-planning-feedback.svg",
+    "C6": "concepts/C6-runtime-boundary.svg",
+}
 
 
 @dataclass
@@ -31,7 +39,7 @@ class Result:
     diagrams: int = 0
 
 
-def validate_svg(data: bytes, number: int) -> list[str]:
+def validate_svg(data: bytes, number: int | str) -> list[str]:
     """Validate local SVG only, with accessible text and no executable/external parts."""
     errors: list[str] = []
     try:
@@ -46,8 +54,9 @@ def validate_svg(data: bytes, number: int) -> list[str]:
         return [f"invalid XML: {exc}"]
     if svg.tag != f"{{{SVG_NS}}}svg":
         errors.append("root must be an SVG element with the SVG namespace")
-    if svg.get("id") != f"G{number}":
-        errors.append(f"root id must match diagram number G{number}")
+    label = f"G{number}" if isinstance(number, int) else number
+    if svg.get("id") != label:
+        errors.append(f"root id must match diagram number {label}")
     try:
         bounds = [float(item) for item in re.split(r"[\s,]+", svg.get("viewBox", "").strip())]
         if len(bounds) != 4 or not all(math.isfinite(v) for v in bounds) or min(bounds[2:]) <= 0:
@@ -104,10 +113,12 @@ def check_diagrams(root: Path = ROOT, suite: str = "all") -> Result:
     published = root / "website/assets/diagrams"
     result = Result()
     required = {FILES[n] for n in ({1, 3} if suite == "pilot" else FILES)}
-    names = {p.name for directory in (source, published) for p in directory.glob("*.svg")}
+    names = {p.relative_to(directory).as_posix() for directory in (source, published) for p in directory.rglob("*.svg")}
+    if names.intersection(CONCEPT_FILES.values()):
+        required.update(CONCEPT_FILES.values())
     for name in sorted(required - names):
         result.errors.append(f"missing required diagram: {name}")
-    numbers = {name: n for n, name in FILES.items()}
+    numbers = {name: n for n, name in FILES.items()} | {name: n for n, name in CONCEPT_FILES.items()}
     for name in sorted(names):
         if name not in numbers:
             result.errors.append(f"unexpected diagram filename/number: {name}")

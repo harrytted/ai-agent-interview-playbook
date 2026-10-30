@@ -1,5 +1,17 @@
 # 12 · Agent 优化与训练：从失败证据到参数更新
 
+本章主线：**Agent 优化与训练：从失败证据到参数更新**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
+
+## 按这个顺序逐题阅读
+
+- [Q090 Agent 出错时，怎样选择改运行时、SFT、DPO 或 Agent RL？](../questions/Q090.md)
+- [Q091 GRPO 的组内相对奖励怎样计算，为什么标准化不等于完整训练？](../questions/Q091.md)
+- [Q092 Harnessed Agent RL 怎样组织训练数据，如何理解 Agent Lightning 的版本？](../questions/Q092.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 助手上次引用了旧政策，读完一段反思后改对了。有人说它已经“自我训练”，另一个人提议马上上 RL。先别急着申请显卡：这次究竟改了输入、文件、工具，还是模型参数？
 
 本章先定位失败，再选择运行时改进、提示与技能优化或参数训练，并分清 SFT、偏好优化和 Agent RL。建议先读[评测闭环](09-evaluation-and-feedback.md)与[性能与预算](10-performance-and-serving.md)。
@@ -115,3 +127,5 @@ python3 examples/advanced/runtime_lab.py --scenario evaluation
 [上一章](11-security-and-governance.md) · [课程目录](README.md)
 
 [对应面试题：Q090、Q091、Q092](../docs/advanced/12-agent-training.md)
+
+</details>

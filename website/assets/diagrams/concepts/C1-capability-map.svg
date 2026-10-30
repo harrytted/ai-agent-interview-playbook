@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="C1" width="520" height="570" viewBox="0 0 520 570" role="img" aria-labelledby="C1-title C1-desc">
+<title id="C1-title">四类能力，怎样协作？</title><desc id="C1-desc">模型根据本轮输入作出判断，规划组织步骤，记忆提供可用信息，工具取得观察或执行动作。这些是能力视角，不表示四台独立服务。</desc>
+<defs>
+<marker id="C1-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="C1-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#346DB7"/></marker>
+<marker id="C1-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="C1-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#546C80"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#20344B}.title{font-size:26px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:20px}.small{font-size:18px;fill:#546C80}.micro{font-size:16px;fill:#546C80}</style>
+<rect width="520" height="570" rx="18" fill="#F6F9FC"/>
+<text x="24" y="43" class="title" text-anchor="start">四类能力，怎样协作？</text>
+<text x="24" y="76" class="small" text-anchor="start">从“理解、行动、保留、组织”认识 Agent</text>
+<path d="M260 197 V235" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C1-blue)"/>
+<path d="M136 291 H170" fill="none" stroke="#087F86" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C1-arrow)" marker-start="url(#C1-arrow)"/>
+<path d="M350 291 H384" fill="none" stroke="#B56B26" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C1-orange)" marker-start="url(#C1-orange)"/>
+<path d="M260 420 V347" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C1-blue)"/>
+<rect x="170" y="113" width="180" height="84" rx="12" fill="#ECF7F6" stroke="#087F86" stroke-width="1.5"/>
+<text x="260" y="148" class="label" text-anchor="middle" style="fill:#087F86">规划</text>
+<text x="260" y="178" class="small" text-anchor="middle">安排步骤与依赖</text>
+<rect x="170" y="235" width="180" height="112" rx="12" fill="#EAF1FD" stroke="#346DB7" stroke-width="1.5"/>
+<text x="260" y="279" class="label" text-anchor="middle" style="fill:#346DB7">模型</text>
+<text x="260" y="313" class="body" text-anchor="middle">判断下一步</text>
+<rect x="24" y="235" width="112" height="112" rx="12" fill="white" stroke="#087F86" stroke-width="1.5"/>
+<text x="80" y="279" class="label" text-anchor="middle" style="fill:#087F86">记忆</text>
+<text x="80" y="312" class="small" text-anchor="middle">保留信息</text>
+<rect x="384" y="235" width="112" height="112" rx="12" fill="white" stroke="#B56B26" stroke-width="1.5"/>
+<text x="440" y="279" class="label" text-anchor="middle" style="fill:#B56B26">工具</text>
+<text x="440" y="312" class="small" text-anchor="middle">读取 / 操作</text>
+<rect x="73" y="420" width="374" height="67" rx="12" fill="white" stroke="#C8D7E4" stroke-width="1.5"/>
+<text x="260" y="461" class="body" text-anchor="middle">目标：判断住宿金额是否超限</text>
+<text x="260" y="510" class="small" text-anchor="middle">取用的信息、步骤与观察，共同影响判断</text>
+<text x="260" y="536" class="small" text-anchor="middle">能力可以合并在同一模型与程序中</text>
+<text x="260" y="560" class="micro" text-anchor="middle">图中连线表示协作，不表示独立部署</text>
+</svg>

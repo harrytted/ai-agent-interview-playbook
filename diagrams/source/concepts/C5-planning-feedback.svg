@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="C5" width="520" height="690" viewBox="0 0 520 690" role="img" aria-labelledby="C5-title C5-desc">
+<title id="C5-title">规划：步骤、依赖与反馈</title><desc id="C5-desc">比较海岚与云洲住宿标准，需要分别取得两地资料，再汇合比较。用户改变出行日期时，程序或模型更新相关查询步骤，而不只是改写最终结论。</desc>
+<defs>
+<marker id="C5-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="C5-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#346DB7"/></marker>
+<marker id="C5-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="C5-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#546C80"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#20344B}.title{font-size:26px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:20px}.small{font-size:18px;fill:#546C80}.micro{font-size:16px;fill:#546C80}</style>
+<rect width="520" height="690" rx="18" fill="#F6F9FC"/>
+<text x="24" y="43" class="title" text-anchor="start">规划：步骤、依赖与反馈</text>
+<text x="24" y="76" class="small" text-anchor="start">同一目标，可以拆开做，但有先后依赖</text>
+<rect x="24" y="101" width="472" height="69" rx="12" fill="#EAF1FD" stroke="#346DB7" stroke-width="1.5"/>
+<text x="260" y="144" class="label" text-anchor="middle" style="fill:#346DB7">目标：比较两地住宿标准</text>
+<path d="M260 170 V204 H136 V239" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C5-blue)"/>
+<path d="M260 204 H384 V239" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C5-blue)"/>
+<rect x="24" y="239" width="224" height="91" rx="12" fill="white" stroke="#087F86" stroke-width="1.5"/>
+<text x="136" y="277" class="label" text-anchor="middle" style="fill:#087F86">查海岚制度</text>
+<text x="136" y="310" class="small" text-anchor="middle">匹配当前出行日期</text>
+<rect x="272" y="239" width="224" height="91" rx="12" fill="white" stroke="#087F86" stroke-width="1.5"/>
+<text x="384" y="277" class="label" text-anchor="middle" style="fill:#087F86">查云洲制度</text>
+<text x="384" y="310" class="small" text-anchor="middle">匹配当前出行日期</text>
+<path d="M136 330 V365 H260 V395" fill="none" stroke="#087F86" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C5-arrow)"/>
+<path d="M384 330 V365 H260" fill="none" stroke="#087F86" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="112" y="395" width="296" height="81" rx="12" fill="#E9F5F4" stroke="#087F86" stroke-width="1.5"/>
+<text x="260" y="430" class="label" text-anchor="middle" style="fill:#087F86">比较并组织回答</text>
+<text x="260" y="460" class="small" text-anchor="middle">依赖两份资料都已取得</text>
+<rect x="24" y="537" width="224" height="78" rx="12" fill="#FFF9F2" stroke="#E7C7A7" stroke-width="1.5"/>
+<text x="136" y="570" class="label" text-anchor="middle" style="fill:#B56B26">用户更正日期</text>
+<text x="136" y="599" class="small" text-anchor="middle">原查询条件发生变化</text>
+<path d="M248 576 H283" fill="none" stroke="#B56B26" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C5-orange)"/>
+<rect x="283" y="537" width="213" height="78" rx="12" fill="#FFF9F2" stroke="#E7C7A7" stroke-width="1.5"/>
+<text x="389" y="570" class="label" text-anchor="middle" style="fill:#B56B26">更新相关步骤</text>
+<text x="389" y="599" class="small" text-anchor="middle">重新核对适用制度</text>
+<path d="M496 575 H509 V204 H384" fill="none" stroke="#B56B26" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C5-orange)" stroke-dasharray="6 5"/>
+<text x="260" y="658" class="small" text-anchor="middle">反馈会改变待做的事，计划才能继续有效</text>
+</svg>

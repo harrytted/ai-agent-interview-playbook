@@ -1,5 +1,17 @@
 # 01 · Harness 与 Deep Agents：组织跨会话的工作
 
+本章主线：**Harness 与 Deep Agents：组织跨会话的工作**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
+
+## 按这个顺序逐题阅读
+
+- [Q057 Harness 与模型、Agent 框架分别承担什么职责？](../questions/Q057.md)
+- [Q058 怎样区分文件 Backend、执行 Sandbox 与持久化状态？](../questions/Q058.md)
+- [Q059 长任务跨会话交接应该保存什么？](../questions/Q059.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 [进阶目录](README.md) · [下一章：持久执行](02-durable-execution.md)
 
 你让政策助手比较三个地区的差旅制度，整理冲突与例外流程，明天下午交付带出处的报告。它查到一半退出，第二天换一个会话继续。你最想知道的不是它还能写多少字，而是：昨天查过什么，证据还有效吗，今天从哪里接着做？
@@ -111,3 +123,5 @@ Deep Agents 将计划、文件系统上下文、子任务委派和记忆等能�
 [进阶目录](README.md) · [下一章：持久执行](02-durable-execution.md)
 
 [配套进阶面试题](../docs/advanced/01-harness-and-deep-agents.md)
+
+</details>

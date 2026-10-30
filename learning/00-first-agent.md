@@ -118,7 +118,7 @@ python3 -m examples.policy_agent eval --suite pilot --mode offline --output .loc
 
 **完成标准：** 不看正文，画出一次工具往返，标明模型/策略、运行时、工具与状态；说清两个变式分别改变了哪个观察或未知项；引用一条记录解释为什么当前任务结束。只背出组件名还没有完成这次练习。
 
-[继续：01 系统地图](01-system-map.md) · [课程目录](README.md) · [按题查漏](../docs/question-index.md)
+[继续：01 组成与协作](01-system-map.md) · [课程目录](README.md) · [按题查漏](../docs/question-index.md)
 
 <!-- question-links:start -->
 ## 配套面试练习
@@ -127,10 +127,10 @@ python3 -m examples.policy_agent eval --suite pilot --mode offline --output .loc
 
 <details><summary>展开本章相关面试题</summary>
 
-- [Q001 什么是 Agent，和普通 LLM 调用有何区别？](../docs/foundations/01-agent-and-llm.md#q001-什么是-agent和普通-llm-调用有何区别)
-- [Q009 最小 Agent Loop 应包含哪些环节？](../docs/foundations/02-planning-and-orchestration.md#q009-最小-agent-loop-应包含哪些环节)
-- [Q025 Function Calling 的真正执行者是谁？](../docs/foundations/04-tools-memory-protocols.md#q025-function-calling-的真正执行者是谁)
-- [Q027 Schema 合法为什么仍然不够？](../docs/foundations/04-tools-memory-protocols.md#q027-schema-合法为什么仍然不够)
+- [Q001 什么是 Agent，和普通 LLM 调用有何区别？](../questions/Q001.md#q001-什么是-agent和普通-llm-调用有何区别)
+- [Q009 最小 Agent Loop 应包含哪些环节？](../questions/Q009.md#q009-最小-agent-loop-应包含哪些环节)
+- [Q025 Function Calling 的真正执行者是谁？](../questions/Q025.md#q025-function-calling-的真正执行者是谁)
+- [Q027 Schema 合法为什么仍然不够？](../questions/Q027.md#q027-schema-合法为什么仍然不够)
 
 </details>
 <!-- question-links:end -->

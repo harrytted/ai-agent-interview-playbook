@@ -1,5 +1,17 @@
 # 09 · 从执行轨迹到评测与反馈闭环
 
+本章主线：**从执行轨迹到评测与反馈闭环**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
+
+## 按这个顺序逐题阅读
+
+- [Q081 pass@k 提升是否意味着 Agent 更可靠？怎样正确计算？](../questions/Q081.md)
+- [Q082 怎样校准 LLM-as-a-Judge，避免总体高分掩盖关键错误？](../questions/Q082.md)
+- [Q083 怎样证明一次 Agent 改进来自策略，而不是任务、预算或数据泄漏？](../questions/Q083.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 新版本助手多查了两次资料，演示时答得更完整，账单也更长。到底是检索策略改善了，还是只给它多试了几次？如果评分器又偏爱长答案，分数上涨可能只是尺子跟着变长。
 
 本章把这几件事拆开：先找真正值得修的错误，再比较多次尝试，最后检验评分器。建议先读[基础评测](../learning/09-evaluation.md)与[多 Agent 协作](07-multi-agent-systems.md)。
@@ -113,3 +125,5 @@ python3 examples/advanced/runtime_lab.py --scenario evaluation
 [上一章](08-coding-and-computer-use.md) · [下一章](10-performance-and-serving.md) · [课程目录](README.md)
 
 [对应面试题：Q081、Q082、Q083](../docs/advanced/09-evaluation-and-feedback.md)
+
+</details>

@@ -12,6 +12,7 @@ import unicodedata
 from urllib.parse import unquote, urlsplit
 
 from study import ROOT, questions
+from question_articles import article_path, check_articles, write_articles
 
 EXPECTED_QUESTIONS = 92
 EXCLUDED_DIRS = frozenset({".git", ".local", ".venv", ".venv-docs", ".site-src", "site", "node_modules"})
@@ -111,7 +112,7 @@ def lesson_sections() -> dict[Path, str]:
         lines = [LINKS_START, "## 配套面试练习", "", "先合上正文讲一分钟，再用追问和案例检查理解。每题都可以跳回对应学习内容。", "",
                  "<details><summary>展开本章相关面试题</summary>", ""]
         for q in bank:
-            target = local_url(lesson, ROOT / q.path)
+            target = local_url(lesson, ROOT / article_path(q.id))
             lines.append(f"- [{q.id} {q.title}]({target}#{slug(q.id + ' ' + q.title)})")
         lines.extend(["", "</details>", LINKS_END])
         result[lesson] = "\n".join(lines)
@@ -119,6 +120,7 @@ def lesson_sections() -> dict[Path, str]:
 
 
 def write_navigation() -> None:
+    write_articles(questions(), ROOT)
     (ROOT / "docs/question-index.md").write_text(question_index(), encoding="utf-8")
     for path, section in lesson_sections().items():
         content = path.read_text(encoding="utf-8")
@@ -139,7 +141,7 @@ def question_index() -> str:
                           ("advanced", "进阶系统：Q057–Q092")):
         lines.extend([f"## {title}", "", "| 题号 | 问题 | 学习入口 |", "| --- | --- | --- |"])
         for q in (item for item in bank if item.path.parent.name == folder):
-            path = q.path.relative_to("docs").as_posix()
+            path = local_url(ROOT / "docs/question-index.md", ROOT / article_path(q.id))
             if folder == "advanced":
                 course = f"[{q.path.stem[:2]} 章](../advanced/{q.path.name})"
             else:
@@ -155,6 +157,7 @@ def question_index() -> str:
 def check() -> list[str]:
     failures = []
     bank = questions()
+    failures.extend(check_articles(bank, ROOT))
     expected = [f"Q{i:03}" for i in range(1, EXPECTED_QUESTIONS + 1)]
     if [q.id for q in bank] != expected:
         failures.append(f"题号应为 Q001–Q{EXPECTED_QUESTIONS:03} 且连续唯一。")
@@ -221,7 +224,7 @@ def check() -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--write-index", action="store_true", help="更新题目总索引与学习章题目导航")
+    parser.add_argument("--write-index", action="store_true", help="更新独立文章、题目总索引与学习章题目导航")
     args = parser.parse_args()
     if args.write_index:
         write_navigation()

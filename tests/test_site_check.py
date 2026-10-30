@@ -82,6 +82,19 @@ class SiteCheckTests(unittest.TestCase):
             self.assertIn(filename, errors)
         self.assertEqual(errors.count("missing file"), 4)
 
+    def test_standalone_articles_are_complete_and_keep_the_grouped_anchors(self):
+        sections = "".join(f"<h2>{name}</h2><p>解释</p>" for name in
+                           ("简要回答", "详细解析", "常见追问", "实战案例", "常见误区", "动手想一想", "学习参考"))
+        for number in range(1, 93):
+            self.write(f"questions/Q{number:03}/index.html", f'<h1 id="q{number:03}-题目">Q{number:03} 题目</h1>' + sections)
+        result = check_site.check_site(self.site)
+        self.assertEqual(result.errors, [])
+        self.assertEqual((result.questions, result.articles), (92, 92))
+        self.write("questions/Q001/index.html", '<h1>Q002 wrong</h1><p>## 简要回答</p>')
+        errors = self.errors()
+        self.assertIn("H1 disagrees", errors)
+        self.assertIn("sections are missing or not rendered", errors)
+
     def test_directory_requires_index_and_relative_links_use_page_directory(self):
         self.write("learning/index.html", '<a href="../docs/questions/#q092-题目">last</a>')
         self.write("index.html", '<a href="learning/">valid</a><a href="empty/">invalid</a>')

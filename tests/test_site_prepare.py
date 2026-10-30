@@ -95,6 +95,18 @@ class SitePrepareTests(unittest.TestCase):
         self.assertIn("blob/main/examples/policy_agent/traces/normal.jsonl", lab)
         self.assertEqual((self.output / "assets/diagrams/G1-system-flow.svg").read_text(), svg)
 
+    def test_question_articles_publish_and_grouped_versions_stay_out_of_search(self):
+        self.write("README.md", "[Read](questions/Q001.md)\n")
+        self.write("questions/Q001.md", "# Q001 Topic\n\n## 简要回答\nText\n")
+        self.write("docs/foundations/group.md", "### Q001 Topic\nLegacy answer\n")
+        self.prepare()
+        self.assertIn("(questions/Q001.md)", (self.output / "index.md").read_text())
+        self.assertTrue((self.output / "questions/Q001.md").is_file())
+        grouped = (self.output / "docs/foundations/group.md").read_text()
+        self.assertTrue(grouped.startswith("---\nsearch:\n  exclude: true\n---"))
+        self.assertIn("### Q001 Topic", grouped)
+        self.assertNotIn("exclude: true", (self.output / "questions/Q001.md").read_text())
+
     def test_chinese_encoded_paths_angle_targets_and_titles(self):
         self.write("README.md", '[课](learning/%E4%B8%AD%E6%96%87%20%E7%AC%94%E8%AE%B0.md?x=1#章节)\n[课](<learning/中文 笔记.md#章节> "说明")\n')
         self.write("learning/中文 笔记.md", "# 章节\n")
@@ -220,7 +232,7 @@ class SitePrepareTests(unittest.TestCase):
         self.assertIn("### Q031 上下文太长时如何压缩而不丢任务？ {#q031-上下文太长时如何压缩而不丢任务}", generated)
         index_source = PurePosixPath("docs/question-index.md")
         index = site.transform_markdown((ROOT / index_source).read_text(encoding="utf-8"), index_source, mapping, ROOT)
-        self.assertIn("(foundations/04-tools-memory-protocols.md#q031-上下文太长时如何压缩而不丢任务)", index)
+        self.assertIn("(../questions/Q031.md#q031-上下文太长时如何压缩而不丢任务)", index)
         for question in bank:
             relative = PurePosixPath(question.path.as_posix())
             page = site.transform_markdown((ROOT / relative).read_text(encoding="utf-8"), relative, mapping, ROOT)

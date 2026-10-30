@@ -1,5 +1,23 @@
 # 10 · 可靠性与安全：让行动边界可执行
 
+本章主线：**从失败观察到恢复与安全**。分清重试、幂等、批准和授权，再看取消、注入、恢复与故障收敛。
+
+## 按这个顺序逐题阅读
+
+- [Q041 工具失败后应该怎样重试？](../questions/Q041.md)
+- [Q042 什么是幂等，为什么“工具超时”不等于“工具没执行”？](../questions/Q042.md)
+- [Q043 人工审批应该放在哪里，审批后还能改参数吗？](../questions/Q043.md)
+- [Q044 怎么应对网页或文档中的 Prompt Injection？](../questions/Q044.md)
+- [Q045 工具沙箱、参数校验和 ACL 分别解决什么？](../questions/Q045.md)
+- [Q046 Checkpoint 能保证崩溃恢复后不重复执行工具吗？](../questions/Q046.md)
+- [Q047 用户点了停止，怎样取消流式 Agent？](../questions/Q047.md)
+- [Q048 如何防止 Agent 死循环与故障扩散？](../questions/Q048.md)
+- [Q014 Checkpoint 能保证恢复后不重复扣款吗？](../questions/Q014.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 创建工单的请求转了很久，最后显示超时。员工再点一次，后台却出现两张相同工单；原来第一次已经成功，只是回执没回来。助手要处理的既有“做失败了”，也有“做没做成还不知道”，这两种情况需要不同的下一步。
 
 本章学习为失败分类，给写操作设计可恢复的状态，并让身份、权限和批准在执行边界生效。读完应能解释超时、重试和取消各自说明了什么，画出从结果未知走到确认终态的路径。建议先读 [工具合同](05-tools-and-mcp.md)、[状态与记忆](07-memory-and-state.md)和[评测](09-evaluation.md)，再看失败后该怎样继续或停止。
@@ -131,19 +149,21 @@ python3 -m unittest discover -s tests -p 'test_agent_lab.py' -v
 
 <details><summary>展开本章相关面试题</summary>
 
-- [Q014 Checkpoint 能保证恢复后不重复扣款吗？](../docs/foundations/02-planning-and-orchestration.md#q014-checkpoint-能保证恢复后不重复扣款吗)
-- [Q041 工具失败后应该怎样重试？](../docs/engineering/06-reliability-and-security.md#q041-工具失败后应该怎样重试)
-- [Q042 什么是幂等，为什么“工具超时”不等于“工具没执行”？](../docs/engineering/06-reliability-and-security.md#q042-什么是幂等为什么工具超时不等于工具没执行)
-- [Q043 人工审批应该放在哪里，审批后还能改参数吗？](../docs/engineering/06-reliability-and-security.md#q043-人工审批应该放在哪里审批后还能改参数吗)
-- [Q044 怎么应对网页或文档中的 Prompt Injection？](../docs/engineering/06-reliability-and-security.md#q044-怎么应对网页或文档中的-prompt-injection)
-- [Q045 工具沙箱、参数校验和 ACL 分别解决什么？](../docs/engineering/06-reliability-and-security.md#q045-工具沙箱参数校验和-acl-分别解决什么)
-- [Q046 Checkpoint 能保证崩溃恢复后不重复执行工具吗？](../docs/engineering/06-reliability-and-security.md#q046-checkpoint-能保证崩溃恢复后不重复执行工具吗)
-- [Q047 用户点了停止，怎样取消流式 Agent？](../docs/engineering/06-reliability-and-security.md#q047-用户点了停止怎样取消流式-agent)
-- [Q048 如何防止 Agent 死循环与故障扩散？](../docs/engineering/06-reliability-and-security.md#q048-如何防止-agent-死循环与故障扩散)
-- [Q049 设计一个企业知识库客服 Agent，你会怎样开始？](../docs/engineering/07-system-design-and-projects.md#q049-设计一个企业知识库客服-agent你会怎样开始)
-- [Q051 设计一个能创建、分派工单的 Agent，状态如何流转？](../docs/engineering/07-system-design-and-projects.md#q051-设计一个能创建分派工单的-agent状态如何流转)
-- [Q055 Agent 项目怎样做测试，哪些该 mock？](../docs/engineering/07-system-design-and-projects.md#q055-agent-项目怎样做测试哪些该-mock)
-- [Q056 线上突然回答变差，你会如何排查？](../docs/engineering/07-system-design-and-projects.md#q056-线上突然回答变差你会如何排查)
+- [Q014 Checkpoint 能保证恢复后不重复扣款吗？](../questions/Q014.md#q014-checkpoint-能保证恢复后不重复扣款吗)
+- [Q041 工具失败后应该怎样重试？](../questions/Q041.md#q041-工具失败后应该怎样重试)
+- [Q042 什么是幂等，为什么“工具超时”不等于“工具没执行”？](../questions/Q042.md#q042-什么是幂等为什么工具超时不等于工具没执行)
+- [Q043 人工审批应该放在哪里，审批后还能改参数吗？](../questions/Q043.md#q043-人工审批应该放在哪里审批后还能改参数吗)
+- [Q044 怎么应对网页或文档中的 Prompt Injection？](../questions/Q044.md#q044-怎么应对网页或文档中的-prompt-injection)
+- [Q045 工具沙箱、参数校验和 ACL 分别解决什么？](../questions/Q045.md#q045-工具沙箱参数校验和-acl-分别解决什么)
+- [Q046 Checkpoint 能保证崩溃恢复后不重复执行工具吗？](../questions/Q046.md#q046-checkpoint-能保证崩溃恢复后不重复执行工具吗)
+- [Q047 用户点了停止，怎样取消流式 Agent？](../questions/Q047.md#q047-用户点了停止怎样取消流式-agent)
+- [Q048 如何防止 Agent 死循环与故障扩散？](../questions/Q048.md#q048-如何防止-agent-死循环与故障扩散)
+- [Q049 设计一个企业知识库客服 Agent，你会怎样开始？](../questions/Q049.md#q049-设计一个企业知识库客服-agent你会怎样开始)
+- [Q051 设计一个能创建、分派工单的 Agent，状态如何流转？](../questions/Q051.md#q051-设计一个能创建分派工单的-agent状态如何流转)
+- [Q055 Agent 项目怎样做测试，哪些该 mock？](../questions/Q055.md#q055-agent-项目怎样做测试哪些该-mock)
+- [Q056 线上突然回答变差，你会如何排查？](../questions/Q056.md#q056-线上突然回答变差你会如何排查)
 
 </details>
 <!-- question-links:end -->
+
+</details>

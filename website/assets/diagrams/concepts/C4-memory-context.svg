@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="C4" width="520" height="765" viewBox="0 0 520 765" role="img" aria-labelledby="C4-title C4-desc">
+<title id="C4-title">存着的信息，怎样进入本轮？</title><desc id="C4-desc">任务记录与跨会话记忆保存在窗口外，程序选择读取后组成当前上下文。模型产生新信息后，也需要由程序筛选再保存。存储不等于模型本轮已看到。</desc>
+<defs>
+<marker id="C4-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="C4-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#346DB7"/></marker>
+<marker id="C4-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="C4-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#546C80"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#20344B}.title{font-size:26px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:20px}.small{font-size:18px;fill:#546C80}.micro{font-size:16px;fill:#546C80}</style>
+<rect width="520" height="765" rx="18" fill="#F6F9FC"/>
+<text x="24" y="43" class="title" text-anchor="start">存着的信息，怎样进入本轮？</text>
+<text x="24" y="76" class="small" text-anchor="start">区分：保存在哪里，以及这次实际读到什么</text>
+<rect x="24" y="105" width="224" height="157" rx="12" fill="white" stroke="#087F86" stroke-width="1.5"/>
+<rect x="272" y="105" width="224" height="157" rx="12" fill="white" stroke="#346DB7" stroke-width="1.5"/>
+<text x="136" y="143" class="label" text-anchor="middle" style="fill:#087F86">任务记录</text>
+<text x="136" y="176" class="small" text-anchor="middle">当前工作的信息与进度</text>
+<text x="44" y="211" class="body" text-anchor="start">海岚 · 11 月 12 日</text>
+<text x="44" y="242" class="body" text-anchor="start">已取得住宿制度</text>
+<text x="384" y="143" class="label" text-anchor="middle" style="fill:#346DB7">跨会话记忆</text>
+<text x="384" y="176" class="small" text-anchor="middle">可复用的事实或偏好</text>
+<text x="291" y="211" class="body" text-anchor="start">偏好：用中文解释</text>
+<text x="291" y="242" class="body" text-anchor="start">按需要读取一部分</text>
+<path d="M136 262 V305 H260 V354" fill="none" stroke="#087F86" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C4-arrow)"/>
+<path d="M384 262 V305 H260" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="190" y="316" width="140" height="31" rx="0" fill="#F6F9FC" stroke="#F6F9FC" stroke-width="1.5"/>
+<text x="260" y="339" class="body" text-anchor="middle" style="fill:#087F86">选择、读取</text>
+<rect x="79" y="354" width="362" height="184" rx="15" fill="#FFFDF5" stroke="#DDC989" stroke-width="1.5"/>
+<text x="260" y="392" class="label" text-anchor="middle">当前上下文</text>
+<circle cx="105" cy="423" r="4" fill="#B99742" stroke="none" stroke-width="1.5"/>
+<text x="120" y="430" class="body" text-anchor="start">本轮问题与适用条件</text>
+<circle cx="105" cy="461" r="4" fill="#B99742" stroke="none" stroke-width="1.5"/>
+<text x="120" y="468" class="body" text-anchor="start">选入的制度、状态与历史</text>
+<circle cx="105" cy="500" r="4" fill="#B99742" stroke="none" stroke-width="1.5"/>
+<text x="120" y="507" class="body" text-anchor="start">只包含这次实际送入的内容</text>
+<path d="M205 538 V601" fill="none" stroke="#346DB7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C4-blue)"/>
+<rect x="24" y="601" width="264" height="88" rx="12" fill="#EAF1FD" stroke="#346DB7" stroke-width="1.5"/>
+<text x="156" y="640" class="label" text-anchor="middle" style="fill:#346DB7">模型</text>
+<text x="156" y="672" class="small" text-anchor="middle">使用本轮输入产生结果</text>
+<path d="M288 645 H354" fill="none" stroke="#B56B26" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C4-orange)"/>
+<text x="321" y="630" class="micro" text-anchor="middle" style="fill:#B56B26">新信息</text>
+<rect x="354" y="601" width="142" height="88" rx="12" fill="#FFF9F2" stroke="#E7C7A7" stroke-width="1.5"/>
+<text x="425" y="637" class="body" text-anchor="middle" style="fill:#B56B26">程序筛选</text>
+<text x="425" y="672" class="small" text-anchor="middle">再决定保存</text>
+<path d="M496 645 H509 V185 H496" fill="none" stroke="#B56B26" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#C4-orange)" stroke-dasharray="6 5"/>
+<text x="260" y="734" class="label" text-anchor="middle" style="fill:#087F86">数据库里有 ≠ 本轮上下文里有</text>
+</svg>

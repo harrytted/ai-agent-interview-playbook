@@ -16,7 +16,7 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_URL = "https://github.com/harrytted/ai-agent-interview-playbook"
 ROOT_PAGES = ("README.md", "CONTRIBUTING.md", "CHANGELOG.md")
-PAGE_FOLDERS = ("learning", "advanced", "docs", "practice", "research")
+PAGE_FOLDERS = ("questions", "learning", "advanced", "docs", "practice", "research")
 ASSET_EXTENSIONS = {".css", ".js", ".svg", ".png", ".ico", ".woff2"}
 PRIVATE_NAMES = {".git", ".local", "env", "venv", ".venv", "__pycache__",
                  "node_modules", "credentials", "credential", "secrets"}
@@ -224,6 +224,14 @@ def prepare_site(root: Path = ROOT, output: Path | None = None, source_ref: str 
     # Transform everything before replacing any previous generated output.
     pages = {target: transform_markdown((root / source).read_text(encoding="utf-8"), source, links, root, source_ref)
              for source, target in mapping.items()}
+    # Keep grouped URLs available, while search points readers to one article
+    # per question instead of listing the same long answer twice.
+    if any(source.parts[0] == "questions" for source in mapping):
+        for source, target in mapping.items():
+            if (len(source.parts) == 3 and source.parts[0] == "docs"
+                    and source.parts[1] in {"foundations", "engineering", "advanced"}
+                    and source.name != "README.md"):
+                pages[target] = "---\nsearch:\n  exclude: true\n---\n\n" + pages[target]
     asset_contents = {target: (root / source).read_bytes() for source, target in assets.items()}
     if destination.exists():
         shutil.rmtree(destination)

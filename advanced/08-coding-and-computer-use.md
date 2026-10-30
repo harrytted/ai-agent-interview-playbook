@@ -1,5 +1,17 @@
 # 08 · Coding 与 Computer Use：让执行环境提供真实反馈
 
+本章主线：**Coding 与 Computer Use：让执行环境提供真实反馈**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
+
+## 按这个顺序逐题阅读
+
+- [Q078 Coding Agent 怎样形成可复现、可验收的修复闭环？](../questions/Q078.md)
+- [Q079 文件系统 Backend、路径白名单和沙箱分别保护什么？](../questions/Q079.md)
+- [Q080 Browser / Computer Use 怎样保持观察新鲜并确认任务完成？](../questions/Q080.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 [上一章：多 Agent 系统](07-multi-agent-systems.md) · [进阶目录](README.md) · [下一章：评测与反馈](09-evaluation-and-feedback.md)
 
 你让助手修正政策生效日期，再去后台更新草稿。补丁顺利生成，网页也点了“保存”，可测试运行的是旧文件，页面重排后编辑的还是另一份草稿。工具都返回成功，用户目标却没有完成。
@@ -127,3 +139,5 @@ Deep Agents 的 backend 负责文件映射，执行隔离则决定程序的活�
 - [Playwright Locators](https://playwright.dev/docs/locators)：基于页面语义的重新定位。
 
 [对应面试题：Q078、Q079、Q080](../docs/advanced/08-coding-and-computer-use.md)
+
+</details>

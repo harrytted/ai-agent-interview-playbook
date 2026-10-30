@@ -1,5 +1,17 @@
 # 07 · 记忆与状态：保存什么，何时再相信它
 
+本章主线：**从当前上下文到可复用记忆**。先解释信息何时对模型可见，再看任务状态、历史更新与记忆治理。
+
+## 按这个顺序逐题阅读
+
+- [Q030 Context、短期记忆和长期记忆如何区分？](../questions/Q030.md)
+- [Q011 为什么用状态图组织 Agent？](../questions/Q011.md)
+- [Q032 长期记忆怎样避免污染与跨用户泄漏？](../questions/Q032.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 [上一章：RAG 与检索](06-rag-and-retrieval.md) · [学习目录](README.md) · [下一章：规划与多 Agent](08-planning-and-multi-agent.md)
 
 林悦昨天说要去海岚出差，今天只发来一句“按上次的方式继续”。助手如果把上次的城市、语言偏好和旧政策金额一起原样搬过来，可能延续了任务，也可能把过期条件带进了新请求。“记住上次”究竟要取回哪些内容，需要逐项判断。
@@ -96,10 +108,12 @@ T08的完成变化为：写入可信更正事件→更新city与revision→海�
 
 <details><summary>展开本章相关面试题</summary>
 
-- [Q011 为什么用状态图组织 Agent？](../docs/foundations/02-planning-and-orchestration.md#q011-为什么用状态图组织-agent)
-- [Q030 Context、短期记忆和长期记忆如何区分？](../docs/foundations/04-tools-memory-protocols.md#q030-context短期记忆和长期记忆如何区分)
-- [Q032 长期记忆怎样避免污染与跨用户泄漏？](../docs/foundations/04-tools-memory-protocols.md#q032-长期记忆怎样避免污染与跨用户泄漏)
-- [Q051 设计一个能创建、分派工单的 Agent，状态如何流转？](../docs/engineering/07-system-design-and-projects.md#q051-设计一个能创建分派工单的-agent状态如何流转)
+- [Q011 为什么用状态图组织 Agent？](../questions/Q011.md#q011-为什么用状态图组织-agent)
+- [Q030 Context、短期记忆和长期记忆如何区分？](../questions/Q030.md#q030-context短期记忆和长期记忆如何区分)
+- [Q032 长期记忆怎样避免污染与跨用户泄漏？](../questions/Q032.md#q032-长期记忆怎样避免污染与跨用户泄漏)
+- [Q051 设计一个能创建、分派工单的 Agent，状态如何流转？](../questions/Q051.md#q051-设计一个能创建分派工单的-agent状态如何流转)
 
 </details>
 <!-- question-links:end -->
+
+</details>

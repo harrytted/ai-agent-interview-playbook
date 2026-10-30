@@ -1,5 +1,22 @@
 # 06 · RAG 与检索：从资料入库走到有依据的回答
 
+本章主线：**从外部资料到有依据的回答**。沿入库、召回、重排、使用证据这条线阅读，再区分各阶段的评价与排错。
+
+## 按这个顺序逐题阅读
+
+- [Q017 一个 RAG 系统的完整数据流是什么？](../questions/Q017.md)
+- [Q018 Chunk 大小和重叠该怎样选择？](../questions/Q018.md)
+- [Q019 为什么向量检索和关键词检索可以互补？](../questions/Q019.md)
+- [Q020 召回和 Rerank 为什么分两阶段？](../questions/Q020.md)
+- [Q021 向量索引如何兼顾延迟与检索质量？](../questions/Q021.md)
+- [Q022 ACL 应放在哪里？文档更新和删除如何传播？](../questions/Q022.md)
+- [Q023 RAG 如何评测，Recall@k、MRR 和答案质量有何区别？](../questions/Q023.md)
+- [Q024 RAG 回答错误应该按什么顺序排查？](../questions/Q024.md)
+
+想查这一章与其他主题的关系，回到 [知识主线](knowledge-map.md)。
+
+<details><summary>展开课程补充：机制、算例与实现</summary>
+
 [上一章：工具与 MCP](05-tools-and-mcp.md) · [学习目录](README.md) · [下一章：记忆与状态](07-memory-and-state.md)
 
 助手找到了住宿政策，还给了很高的相似度分数，林悦却发现引用来自旧版制度。也可能版本没错，片段却漏掉了“仅适用于管理人员”。“搜到了一段相关文字”离“足以回答这次问题”还有几步，本章就沿着这些步骤排查。
@@ -106,17 +123,19 @@ D = 1/63        ≈ 0.01587302
 
 <details><summary>展开本章相关面试题</summary>
 
-- [Q006 Prompt、RAG 与微调如何选？](../docs/foundations/01-agent-and-llm.md#q006-promptrag-与微调如何选)
-- [Q017 一个 RAG 系统的完整数据流是什么？](../docs/foundations/03-rag-and-search.md#q017-一个-rag-系统的完整数据流是什么)
-- [Q018 Chunk 大小和重叠该怎样选择？](../docs/foundations/03-rag-and-search.md#q018-chunk-大小和重叠该怎样选择)
-- [Q019 为什么向量检索和关键词检索可以互补？](../docs/foundations/03-rag-and-search.md#q019-为什么向量检索和关键词检索可以互补)
-- [Q020 召回和 Rerank 为什么分两阶段？](../docs/foundations/03-rag-and-search.md#q020-召回和-rerank-为什么分两阶段)
-- [Q021 向量索引如何兼顾延迟与检索质量？](../docs/foundations/03-rag-and-search.md#q021-向量索引如何兼顾延迟与检索质量)
-- [Q022 ACL 应放在哪里？文档更新和删除如何传播？](../docs/foundations/03-rag-and-search.md#q022-acl-应放在哪里文档更新和删除如何传播)
-- [Q023 RAG 如何评测，Recall@k、MRR 和答案质量有何区别？](../docs/foundations/03-rag-and-search.md#q023-rag-如何评测recallkmrr-和答案质量有何区别)
-- [Q024 RAG 回答错误应该按什么顺序排查？](../docs/foundations/03-rag-and-search.md#q024-rag-回答错误应该按什么顺序排查)
-- [Q049 设计一个企业知识库客服 Agent，你会怎样开始？](../docs/engineering/07-system-design-and-projects.md#q049-设计一个企业知识库客服-agent你会怎样开始)
-- [Q050 设计一个可以引用来源的研究助手，怎么保证报告可信？](../docs/engineering/07-system-design-and-projects.md#q050-设计一个可以引用来源的研究助手怎么保证报告可信)
+- [Q006 Prompt、RAG 与微调如何选？](../questions/Q006.md#q006-promptrag-与微调如何选)
+- [Q017 一个 RAG 系统的完整数据流是什么？](../questions/Q017.md#q017-一个-rag-系统的完整数据流是什么)
+- [Q018 Chunk 大小和重叠该怎样选择？](../questions/Q018.md#q018-chunk-大小和重叠该怎样选择)
+- [Q019 为什么向量检索和关键词检索可以互补？](../questions/Q019.md#q019-为什么向量检索和关键词检索可以互补)
+- [Q020 召回和 Rerank 为什么分两阶段？](../questions/Q020.md#q020-召回和-rerank-为什么分两阶段)
+- [Q021 向量索引如何兼顾延迟与检索质量？](../questions/Q021.md#q021-向量索引如何兼顾延迟与检索质量)
+- [Q022 ACL 应放在哪里？文档更新和删除如何传播？](../questions/Q022.md#q022-acl-应放在哪里文档更新和删除如何传播)
+- [Q023 RAG 如何评测，Recall@k、MRR 和答案质量有何区别？](../questions/Q023.md#q023-rag-如何评测recallkmrr-和答案质量有何区别)
+- [Q024 RAG 回答错误应该按什么顺序排查？](../questions/Q024.md#q024-rag-回答错误应该按什么顺序排查)
+- [Q049 设计一个企业知识库客服 Agent，你会怎样开始？](../questions/Q049.md#q049-设计一个企业知识库客服-agent你会怎样开始)
+- [Q050 设计一个可以引用来源的研究助手，怎么保证报告可信？](../questions/Q050.md#q050-设计一个可以引用来源的研究助手怎么保证报告可信)
 
 </details>
 <!-- question-links:end -->
+
+</details>
