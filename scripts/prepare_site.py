@@ -103,7 +103,7 @@ def asset_mapping(root: Path) -> dict[PurePosixPath, PurePosixPath]:
 
 
 def rewrite_url(url: str, source: PurePosixPath, mapping: dict[PurePosixPath, PurePosixPath],
-                root: Path) -> str:
+                root: Path, source_ref: str = "main") -> str:
     parsed = urlsplit(url)
     if parsed.scheme or parsed.netloc or not parsed.path:
         return url
@@ -131,12 +131,13 @@ def rewrite_url(url: str, source: PurePosixPath, mapping: dict[PurePosixPath, Pu
     repository_path = quote(relative.as_posix(), safe="/")
     repository = urlsplit(REPOSITORY_URL)
     return urlunsplit((repository.scheme, repository.netloc,
-                       f"{repository.path}/{kind}/main/{repository_path}",
+                       f"{repository.path}/{kind}/{quote(source_ref, safe='/')}/{repository_path}",
                        parsed.query, parsed.fragment))
 
 
 def transform_markdown(content: str, source: PurePosixPath,
-                       mapping: dict[PurePosixPath, PurePosixPath], root: Path) -> str:
+                       mapping: dict[PurePosixPath, PurePosixPath], root: Path,
+                       source_ref: str = "main") -> str:
     counts: dict[str, int] = defaultdict(int)
     output = []
     fence_character = ""
@@ -145,7 +146,7 @@ def transform_markdown(content: str, source: PurePosixPath,
     def link(match: re.Match) -> str:
         value = match["url"]
         angle = value.startswith("<") and value.endswith(">")
-        rewritten = rewrite_url(value[1:-1] if angle else value, source, mapping, root)
+        rewritten = rewrite_url(value[1:-1] if angle else value, source, mapping, root, source_ref)
         if angle:
             rewritten = "<" + rewritten + ">"
         return match["open"] + rewritten + (match["title"] or "") + ")"
@@ -211,14 +212,17 @@ def output_directory(root: Path, requested: Path | None) -> Path:
     return output
 
 
-def prepare_site(root: Path = ROOT, output: Path | None = None) -> int:
+def prepare_site(root: Path = ROOT, output: Path | None = None, source_ref: str = "main") -> int:
+    if (not isinstance(source_ref, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_./-]*", source_ref)
+            or ".." in source_ref or "//" in source_ref or source_ref.endswith(("/", "."))):
+        raise ValueError("source-ref must be a branch, tag or commit identifier")
     root = Path(root).resolve()
     destination = output_directory(root, output)
     mapping = page_mapping(root)
     assets = asset_mapping(root)
     links = {**mapping, **assets}
     # Transform everything before replacing any previous generated output.
-    pages = {target: transform_markdown((root / source).read_text(encoding="utf-8"), source, links, root)
+    pages = {target: transform_markdown((root / source).read_text(encoding="utf-8"), source, links, root, source_ref)
              for source, target in mapping.items()}
     asset_contents = {target: (root / source).read_bytes() for source, target in assets.items()}
     if destination.exists():
@@ -239,9 +243,10 @@ def prepare_site(root: Path = ROOT, output: Path | None = None) -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, help="Generated source directory (default: .site-src)")
+    parser.add_argument("--source-ref", default="main", help="GitHub source links for branch previews (default: main)")
     args = parser.parse_args(argv)
     try:
-        count = prepare_site(output=args.output)
+        count = prepare_site(output=args.output, source_ref=args.source_ref)
     except (OSError, ValueError) as error:
         parser.exit(1, f"Cannot prepare site: {error}\n")
     print(f"Prepared {count} pages.")

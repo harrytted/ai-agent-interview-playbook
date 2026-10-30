@@ -18,6 +18,8 @@ python -m mkdocs serve
 
 打开命令输出的本地地址。修改原 Markdown 后，重新运行 `python scripts/prepare_site.py`，让预览读取最新内容。
 
+审阅当前改版分支时，使用 `python scripts/prepare_site.py --source-ref codex/agent-handbook-learning`，再运行构建或预览。这样数据、代码与JSONL的GitHub链接也指向审阅分支；默认构建仍链接main。此命令不部署网站，Pages部署仍仅允许main。
+
 提交前执行与 CI 相同的检查：
 
 ```bash

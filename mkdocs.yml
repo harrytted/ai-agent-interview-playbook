@@ -71,6 +71,7 @@ nav:
   - 开始阅读: index.md
   - 基础课程:
       - learning/index.md
+      - 00 · 走完一次任务: learning/00-first-agent.md
       - 01 · Agent 系统地图: learning/01-system-map.md
       - 02 · LLM 基础原理: learning/02-llm-primer.md
       - 03 · 提示与上下文: learning/03-context-and-prompts.md
@@ -126,6 +127,7 @@ nav:
   - 动手练习:
       - practice/index.md
       - 7 天项目实验: docs/engineering/08-project-lab.md
+      - 政策助手完整实验: examples/policy_agent/index.md
       - Agent 工具循环实验: examples/agent_lab/index.md
       - 基础数值实验: examples/foundations/index.md
       - 进阶运行机制实验: examples/advanced/index.md
@@ -138,6 +140,7 @@ nav:
       - 基础学习资源: research/learning-resources.md
       - 进阶项目与技术博客: research/advanced-landscape.md
       - 课程参考资料: learning/verification.md
+      - 本轮改版与验证边界: research/learning-redesign.md
       - 面试知识参考资料: docs/claim-ledger.md
       - 参与完善: CONTRIBUTING.md
       - 变更记录: CHANGELOG.md

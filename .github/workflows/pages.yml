@@ -36,6 +36,11 @@ jobs:
       - name: Run tests
         run: python -m unittest discover -s tests -v
 
+      - name: Check diagrams and offline policy tasks
+        run: |
+          python scripts/check_diagrams.py --suite all
+          python -m examples.policy_agent eval --suite all --mode offline --output .local/policy_agent/ci-report.json
+
       - name: Prepare website sources
         run: python scripts/prepare_site.py
 

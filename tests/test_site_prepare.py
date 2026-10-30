@@ -66,6 +66,35 @@ class SitePrepareTests(unittest.TestCase):
         self.assertIn("(https://example.com/README.md?a=1#x)", generated)
         self.assertIn("(#home)", generated)
 
+    def test_branch_preview_links_code_to_review_branch_without_changing_page_links(self):
+        self.write("README.md", "[Code](examples/policy_agent/core.py)\n[Course](learning/00-first-agent.md)\n")
+        self.write("examples/policy_agent/core.py", "# example\n")
+        self.write("learning/00-first-agent.md", "# Start\n")
+        site.prepare_site(self.root, self.output, source_ref="codex/agent-handbook-learning")
+        home = (self.output / "index.md").read_text()
+        self.assertIn("blob/codex/agent-handbook-learning/examples/policy_agent/core.py", home)
+        self.assertIn("(learning/00-first-agent.md)", home)
+        with self.assertRaises(ValueError):
+            site.prepare_site(self.root, self.output, source_ref="../main?bad=1")
+
+    def test_policy_example_and_nested_diagrams_use_existing_publish_contract(self):
+        self.write("README.md", "[Start](learning/00-first-agent.md)\n")
+        self.write("learning/00-first-agent.md", "![Flow](../website/assets/diagrams/G1-system-flow.svg)\n[Lab](../examples/policy_agent/README.md)\n")
+        self.write("examples/policy_agent/README.md", "[Self](README.md)\n[Data](data/policies.json)\n[Trace](traces/normal.jsonl)\n")
+        svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 600"><title>流程</title></svg>'
+        self.write("website/assets/diagrams/G1-system-flow.svg", svg)
+        self.write("examples/policy_agent/data/policies.json", "[]")
+        self.write("examples/policy_agent/traces/normal.jsonl", "{}\n")
+        self.prepare()
+        intro = (self.output / "learning/00-first-agent.md").read_text()
+        self.assertIn("(../assets/diagrams/G1-system-flow.svg)", intro)
+        self.assertIn("(../examples/policy_agent/index.md)", intro)
+        lab = (self.output / "examples/policy_agent/index.md").read_text()
+        self.assertIn("[Self](index.md)", lab)
+        self.assertIn("blob/main/examples/policy_agent/data/policies.json", lab)
+        self.assertIn("blob/main/examples/policy_agent/traces/normal.jsonl", lab)
+        self.assertEqual((self.output / "assets/diagrams/G1-system-flow.svg").read_text(), svg)
+
     def test_chinese_encoded_paths_angle_targets_and_titles(self):
         self.write("README.md", '[课](learning/%E4%B8%AD%E6%96%87%20%E7%AC%94%E8%AE%B0.md?x=1#章节)\n[课](<learning/中文 笔记.md#章节> "说明")\n')
         self.write("learning/中文 笔记.md", "# 章节\n")
