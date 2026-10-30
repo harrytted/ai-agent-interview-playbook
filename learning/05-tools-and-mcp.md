@@ -2,9 +2,13 @@
 
 [上一章：Agent 循环](04-agent-loop.md) · [学习目录](README.md) · [下一章：RAG 与检索](06-rag-and-retrieval.md)
 
+## 工具调用：从模型请求到程序执行
+
 **工具是应用提供给 Agent 的可调用能力，工具调用是系统请求并使用这项能力的过程。** 对应用侧函数工具，模型提出名称和参数，程序负责检查并实际调用函数；工具返回结果，才形成下一步可用的信息。
 
 常见的**函数调用（Function Calling）** 让模型用结构化形式表达调用请求。参数通常用 **JSON（JavaScript Object Notation）** 这类文本格式表示，字段形状由 **Schema（结构约束）** 说明。可以把它理解成“按表格交申请”：表格容易检查，里面填的对象是否存在、这人是否有权办理，还要另外核对。
+
+## MCP：让不同服务按同一约定接入
 
 工具来自不同服务时，还需要统一连接、发现与交互方式。**模型上下文协议（Model Context Protocol，MCP）** 提供这层通信约定：**宿主应用（Host）** 组织用户与模型交互，内部的**客户端（Client）** 维护具体连接，**服务端（Server）** 提供工具、资源等能力。它们描述职责，既不要求分布在三台机器上，也不替应用安排完整任务。
 
@@ -161,7 +165,7 @@ MCP 解决交互合同，不能替你决定什么时候该检索、检索结果�
 
 ## 连接授权不等于对象授权
 
-本章的工具与授权细节以 **MCP 2025-11-25** 为范围。该版本授权能力是可选的；HTTP 传输授权有对应规范。** 标准输入输出传输（standard input/output，stdio）**则让宿主通过子进程的输入输出通道交换消息，不按同一 HTTP 授权流程工作，通常从运行环境取得凭据。不能把某个部署的“无登录本地连接”推断为所有 MCP 都没有授权。[MCP 传输规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports) · [MCP 授权规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)
+本章的工具与授权细节以 **MCP 2025-11-25** 为范围。该版本授权能力是可选的；HTTP 传输授权有对应规范。**标准输入输出传输（standard input/output，stdio）**则让宿主通过子进程的输入输出通道交换消息，不按同一 HTTP 授权流程工作，通常从运行环境取得凭据。不能把某个部署的“无登录本地连接”推断为所有 MCP 都没有授权。[MCP 传输规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports) · [MCP 授权规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)
 
 **OAuth**是用于委托访问的授权框架；其中的**访问令牌（access token）** 是服务用来核对访问资格的凭据，带有相应资源和范围限制。流程完成、令牌有效后，执行器仍要回答更具体的问题：“小明能否读取这份财务政策，能否为这个对象提交申请？”**连接层的资格不能替代业务对象权限。** 权限应从可信上下文传递，不能采用模型口头声明的身份。
 
