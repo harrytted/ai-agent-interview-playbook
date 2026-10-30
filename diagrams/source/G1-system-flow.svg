@@ -6,7 +6,7 @@
 <rect width="440" height="915" rx="16" fill="#f6f8fb"/>
 <rect x="20" y="22" width="44" height="28" rx="7" fill="#162c40"/><text x="42" y="42" text-anchor="middle" style="fill:white;font-size:16px;font-weight:700">G1</text>
 <text x="20" y="85" class="title">一次任务，谁负责什么？</text>
-<text x="20" y="113" class="small">例：林悦 · 海岚 · 11月12日 · 650元</text>
+<text x="20" y="113" class="small">例：小明 · 海岚 · 11月12日 · 650元</text>
 <rect x="20" y="137" width="400" height="84" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="150" width="4" height="58" rx="2" fill="#087e84"/>
 <text x="37" y="165" class="label" style="fill:#087e84">① 用户目标</text>
 <text x="37" y="192" class="body">判断住宿金额是否超过制度上限</text>
