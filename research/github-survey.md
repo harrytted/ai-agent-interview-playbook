@@ -10,7 +10,7 @@
 
 Star 用于观察社区关注规模；选择学习资料时，还要结合内容结构、技术深度与运行条件。清单也纳入了一个低 Star、结构有参考价值的项目。
 
-**数据口径：**下表为 GitHub 页面快照，可能包含缓存，`k` 已经四舍五入，并非实时计数。详细统计与版本元数据见 [sources.json](sources.json)。
+**数据口径：**下表为2026-10-28调研时读取的 GitHub 页面快照，可能包含缓存，`k` 已经四舍五入，并非实时计数。详细统计与版本元数据见 [sources.json](sources.json)。
 
 ## 项目比较
 
@@ -36,9 +36,9 @@ Star 用于观察社区关注规模；选择学习资料时，还要结合内容
 
 可根据 Python、后端和 LLM 基础调整学习进度。
 
-## 给定仓库的阅读结论
+## 直接面试题库的阅读边界
 
-给定项目把概念问答、项目与表达训练放在一起，适合检查准备范围。个人仓库应展示自己运行过的步骤、失败案例和测量条件，避免把示例包装成工作经历。来源：[项目 README](https://github.com/bcefghj/ai-agent-interview-guide/blob/main/README.md)。
+[ai-agent-interview-guide](https://github.com/bcefghj/ai-agent-interview-guide)把概念问答、项目与表达训练放在一起，适合检查准备范围。个人仓库应展示自己运行过的步骤、失败案例和测量条件，避免把示例包装成工作经历。来源：[项目 README](https://github.com/bcefghj/ai-agent-interview-guide/blob/main/README.md)。
 
 它的 [LICENSE](https://github.com/bcefghj/ai-agent-interview-guide/blob/main/LICENSE) 是 MIT 文本，而 [README 许可段](https://github.com/bcefghj/ai-agent-interview-guide/blob/main/README.md#许可证) 另有限制商业用途的表述，两处表述存在差异，再利用前应确认适用范围。
 

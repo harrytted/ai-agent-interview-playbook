@@ -30,6 +30,8 @@ Coding Agent 改代码，Browser Agent 操作网页，Computer Use 操作桌面�
 
 ```python
 # 故障样本，勿用于实际模块
+from datetime import datetime
+
 wrong = datetime.fromisoformat("2026-10-31T16:00:00+00:00").date()
 # 2026-10-31；业务当地此时已经是11月1日
 ```

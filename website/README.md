@@ -4,6 +4,8 @@
 
 `scripts/prepare_site.py` 将公开内容整理到 `.site-src/`，其中各级 `README.md` 映射为 `index.md`；MkDocs 根据根目录的 `mkdocs.yml` 构建到 `site/`。`.site-src/`、`site/` 都是生成产物，修改内容时编辑原 Markdown，再重新准备与构建。`website/` 保存网站样式和维护说明，本页不进入学习站点。
 
+`website/hooks.py` 在构建 HTML 时读取本地 PNG 的真实尺寸，为图片预留空间；每页首图正常加载，其余图片使用浏览器原生延迟加载。原图像素与 Markdown 内容不受影响，图片按容器宽度等比显示。
+
 ## 本地预览
 
 在仓库根目录使用 Python 3.12 创建独立环境：

@@ -86,7 +86,7 @@ MCP 增加协议参与者与代理关系，需区分下游客户端、MCP 服务
 
 画“外部文档→摘要→共享记忆→Worker→上传”数据流，在三处放同一越权请求。验收每个入口都有来源传递与执行拒绝证据，并解释 token passthrough 为什么不能当作简化登录方案。
 
-**学习章与参考：** [学习章 11](../../advanced/11-security-and-governance.md) · [MCP Security Best Practices](https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices) · [MCP Authorization](https://modelcontextprotocol.io/specification/latest/basic/authorization)
+**学习章与参考：** [学习章 11](../../advanced/11-security-and-governance.md) · [MCP Security Best Practices](https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices) · [MCP Authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)
 
 ### Q089 人工审批怎样与参数、恢复、撤销和审计绑定？
 

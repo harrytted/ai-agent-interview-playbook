@@ -118,6 +118,47 @@ class PolicyAgentTests(unittest.TestCase):
         self.assertEqual(result["status"], "permission_denied")
         self.assertEqual(result["budget"]["tool_calls_started"], 0)
 
+    def test_malformed_call_items_stop_without_crashing_or_executing(self):
+        for index, item in enumerate(("bad", None, [], 7)):
+            with self.subTest(item=item):
+                result = core.run_task("T01", run_id=f"bad-call-{index}", root=self.root,
+                                       policy=lambda _view, value=item: {"tool_calls": [value], "output": None})
+                self.assertEqual(result["status"], "invalid_output")
+                self.assertEqual(result["budget"]["tool_calls_started"], 0)
+
+    def test_malformed_clarification_fields_stop_without_crashing(self):
+        for index, fields in enumerate(([{}], [[]], [None], ["trip_date", "trip_date"])):
+            with self.subTest(fields=fields):
+                result = core.run_task("T01", "missing-date", run_id=f"bad-fields-{index}", root=self.root,
+                                       policy=lambda _view, value=fields: policies.finish("clarification_required", requested_fields=value))
+                self.assertEqual(result["status"], "invalid_output")
+                self.assertEqual(result["budget"]["tool_calls_started"], 0)
+
+    def test_invalid_json_field_shapes_are_rejected_before_tools(self):
+        call = {"call_id": "c1", "name": "search_policy", "arguments": {
+            "query": "lodging", "city": "海岚", "trip_date": "2026-11-12"}}
+        decisions = []
+        for value in ([], {}, None, 17, True):
+            for field in ("call_id", "name", "arguments"):
+                decisions.append({"tool_calls": [{**call, field: value}], "output": None})
+            decisions.append(policies.finish(value))
+            decisions.append(policies.finish("answered", claims=[{"clause_id": value}]))
+        for index, decision in enumerate(decisions):
+            with self.subTest(decision=decision):
+                result = core.run_task("T01", run_id=f"invalid-shape-{index}", root=self.root,
+                                       policy=lambda _view, value=decision: value)
+                self.assertEqual(result["status"], "invalid_output")
+                self.assertEqual(result["budget"]["tool_calls_started"], 0)
+        state = core.load_task("T01")
+        state["mode"] = "offline"
+        with self.assertRaises(ValueError):
+            core.validate_call({**call, "name": []}, state)
+        with self.assertRaises(ValueError):
+            core._validate_decision(policies.finish([]))
+        self.run_task()
+        with self.assertRaises(ValueError):
+            core._validate_claims(policies.finish("answered", claims=[{"clause_id": {}}])["output"], self.stores().load())
+
     def test_stale_version_is_observed_but_not_used_as_current_evidence(self):
         result = self.run_task(variant="stale-first")
         self.assertEqual(result["status"], "answered")
@@ -270,6 +311,16 @@ class PolicyAgentTests(unittest.TestCase):
         result["output"]["claims"][0]["document_id"] = "invented"
         core.write_json(self.root / "demo" / "result.json", result)
         self.assertFalse(grade(self.root / "demo")["passed"])
+
+    def test_retrieved_references_do_not_replace_missing_answer_citations(self):
+        result = self.run_task("T06")
+        self.assertIn("P20-v1#1", result["evidence_refs"])
+        result["output"]["evidence_refs"] = []
+        core.write_json(self.root / "demo" / "result.json", result)
+        report = grade(self.root / "demo")
+        self.assertFalse(report["passed"])
+        self.assertFalse(report["checks"]["required_evidence"])
+        self.assertFalse(report["checks"]["claim_references_in_output"])
 
     def test_completed_result_is_not_returned_after_tenant_or_role_changes(self):
         users = core.read_json(core.USER_FILE)

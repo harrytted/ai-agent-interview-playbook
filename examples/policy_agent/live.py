@@ -151,7 +151,9 @@ class LivePolicy:
             self._save()
             raise LiveError("Active segment deadline exceeded after the HTTP response.")
         blocks = data["content"]
-        if any(not isinstance(block, dict) for block in blocks):
+        if any(not isinstance(block, dict) or not isinstance(block.get("type"), str)
+               or (block["type"] == "text" and not isinstance(block.get("text"), str))
+               for block in blocks):
             self._save()
             raise LiveError("Invalid provider content block.", "invalid_output")
         messages.append({"role": "assistant", "content": blocks})
@@ -162,7 +164,7 @@ class LivePolicy:
             ids = [call["call_id"] for call in calls]
             if (not calls or any(not isinstance(i, str) or not i for i in ids)
                     or len(set(ids)) != len(ids)
-                    or any(c["name"] not in {"search_policy", "get_policy"}
+                    or any(not isinstance(c["name"], str) or c["name"] not in {"search_policy", "get_policy"}
                            or not isinstance(c["arguments"], dict) for c in calls)):
                 raise LiveError("Invalid or disallowed read-only tool batch.", "invalid_output")
             self.saved["pending_ids"] = ids
@@ -179,6 +181,7 @@ class LivePolicy:
             raise LiveError("Final response must be a JSON object.", "invalid_output") from None
         allowed = {"status", "claims", "evidence_refs", "answer", "requested_fields"}
         if (not isinstance(output, dict) or set(output) != allowed
+                or not isinstance(output.get("status"), str)
                 or output.get("status") not in {"answered", "clarification_required", "human_required", "insufficient_evidence"}
                 or any(not isinstance(output.get(k), list) for k in ("claims", "evidence_refs", "requested_fields"))
                 or not isinstance(output.get("answer"), str)):

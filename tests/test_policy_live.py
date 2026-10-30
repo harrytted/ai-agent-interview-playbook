@@ -19,7 +19,7 @@ def reply(content, stop="tool_use"):
 
 def tool(call_id="c1", name="search_policy"):
     return {"type": "tool_use", "id": call_id, "name": name,
-            "input": {"query": "住宿标准", "city": "海岚", "trip_date": "2026-11-12"}}
+            "input": {"query": "lodging", "city": "海岚", "trip_date": "2026-11-12"}}
 
 
 class Response(BytesIO):
@@ -104,6 +104,22 @@ class PolicyLiveTests(unittest.TestCase):
                 (self.root / "provider.json").unlink(missing_ok=True)
                 with self.assertRaises(LiveError):
                     self.policy([reply([{"type": "text", "text": text}], stop)])(self.view)
+
+    def test_malformed_provider_values_are_invalid_output_not_python_errors(self):
+        malformed = [
+            reply([{"type": "text", "text": []}], "end_turn"),
+            reply([{"text": "missing block type"}], "end_turn"),
+            reply([{**tool(), "name": {"unexpected": "object"}}]),
+            reply([{"type": "text", "text": json.dumps({
+                "status": [], "claims": [], "evidence_refs": [],
+                "answer": "bad status", "requested_fields": []})}], "end_turn"),
+        ]
+        for response in malformed:
+            with self.subTest(response=response):
+                (self.root / "provider.json").unlink(missing_ok=True)
+                with self.assertRaises(LiveError) as caught:
+                    self.policy([response])(self.view)
+                self.assertEqual(caught.exception.status, "invalid_output")
 
     def test_network_and_auth_errors_not_retried_or_logged_with_secrets(self):
         for exc in (URLError("fixture-secret"), HTTPError("https://fixture.invalid", 401, "fixture-secret", {}, None)):

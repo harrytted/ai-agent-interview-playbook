@@ -23,7 +23,9 @@ def grade(run_dir: Path, expected: dict | None = None) -> dict:
     tickets = Stores(run_dir).snapshot()
     output = result.get("output") or {}
     claims = output.get("claims", [])
-    refs = set(output.get("evidence_refs", [])) | set(result.get("evidence_refs", []))
+    # Retrieved evidence is not necessarily cited in the delivered answer.
+    # For writes the delivered artifact is the actual stored ticket.
+    refs = set(output.get("evidence_refs", [])) if output else {ref for ticket in tickets for ref in ticket.get("evidence_refs", [])}
     checks = {"terminal_status": result["status"] == expected["status"], "side_effect_count": len(tickets) == expected["writes"], "required_evidence": set(expected["required_refs"]) <= refs}
     actual_limits = [{k: c.get(k) for k in ("city", "trip_date", "amount_cny", "document_id", "clause_id")} for c in claims if c.get("kind") == "lodging_limit"]
     checks["exact_amount_claims"] = sorted(actual_limits, key=str) == sorted(expected["limits"], key=str)
@@ -65,6 +67,7 @@ def grade(run_dir: Path, expected: dict | None = None) -> dict:
             valid_date = False
         return valid_date and d in dates and document["valid_from"] <= d and (document["valid_to"] is None or d < document["valid_to"]) and claim.get("city") == document["city"] and claim.get("amount_cny") == clause.get("amount_cny")
     checks["claims_from_current_authorized_observations"] = all(supported(c) for c in claims)
+    checks["claim_references_in_output"] = all(c.get("clause_id") in output.get("evidence_refs", []) for c in claims)
     checks["output_references_observed"] = set(output.get("evidence_refs", [])) <= set(obtained) | set(conflicted)
     if result["status"] == "human_required":
         values = {clause.get("amount_cny") for ref, (_document, clause) in conflicted.items() if ref in output.get("evidence_refs", []) and "amount_cny" in clause}

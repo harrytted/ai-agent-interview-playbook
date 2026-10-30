@@ -208,6 +208,10 @@ textarea {
   max-width: 100%;
 }
 
+.md-typeset img {
+  height: auto;
+}
+
 /* Keep long tables inside their own horizontal viewport. */
 .md-typeset__scrollwrap {
   max-width: 100%;

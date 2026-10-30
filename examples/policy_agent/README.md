@@ -29,7 +29,7 @@ python3 -m examples.policy_agent eval --suite pilot --mode offline --output .loc
 
 ## 打开已经运行的样本
 
-下列记录来自本仓库离线实现，未调用付费模型。JSONL包含实际事件，context是最后一次决定前实际可见输入；缺日期样本的context会在恢复后更新，等待阶段仍可在trace中找到。
+下列记录来自本仓库离线实现，未调用付费模型。JSONL包含实际事件；context是暂停或结束时依据当前权限重新组装的可见上下文快照，不保存每一轮输入历史。缺日期样本的context会在恢复后更新，等待阶段仍可在trace中找到；写入结束后的快照也会包含新取得的工单结果。
 
 | 样本 | 事件 | 输入与结果 |
 | --- | --- | --- |
@@ -62,7 +62,7 @@ python3 -m examples.policy_agent eval --suite all --mode offline --output .local
 | T11 | 明确创建咨询工单 | 批准具体草稿后创建一份对象 |
 | T12 | 远端提交后进程崩溃 | 原操作ID恢复，仍只有一份对象 |
 
-all共22项：12个主任务、T01的9个读取变式，以及T11批准后修改金额。T12自身包含一次崩溃，不重复算一项。T08更正、冲突、旧索引与故障都由 [控制夹具](data/variants.json)注入，在trace中标明；策略看不到题号、变式名、未来事件或标准答案。
+all共22项：12个主任务、T01的9个读取变式，以及T11批准后修改金额。T12自身包含一次崩溃，不重复算一项。T08更正与主任务故障由 [任务夹具](data/tasks.json)定义，额外故障与参数修改由 [变式夹具](data/variants.json)注入，在trace中标明；策略看不到题号、变式名、未来事件或标准答案。
 
 [政策](data/policies.json)有八份文档，包括两个P17版本。[用户](data/users.json)是可信测试身份源，非生产认证。[任务](data/tasks.json)描述目标与条件。[独立期望](data/expected.json)由评分器在运行后读取，策略不读取。日期使用左闭右开区间，业务日期不取机器当天。
 

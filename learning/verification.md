@@ -23,7 +23,7 @@
 | K17 | Agent 评测要区分任务、尝试、轨迹与环境终态 | [Anthropic agent evals](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | 用后端终态和执行轨迹共同判断任务结果。 |
 | K18 | 二值 gain 的 nDCG 用相应理想排序归一化 | [scikit-learn nDCG](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html) | 声明 gain、截断位置、空相关集合与汇总口径；算例约为 0.530721。 |
 | K19 | Judge 存在任务相关偏差，需人工校准 | [MT-Bench 原研究](https://arxiv.org/abs/2306.05685) | 检查位置、冗长与自我偏好，并用人工样本校准。 |
-| K20 | 超时不等于没有副作用；幂等需服务端合同 | [AWS idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) | 围绕稳定意图 ID、参数、作用域、期限和一致性设计恢复。 |
+| K20 | 超时不等于没有副作用；幂等约束操作效果而非响应字节 | [RFC 9110 §9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2)、[AWS idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) | 先区分幂等定义与创建接口的实现，再围绕稳定意图 ID、参数、作用域、期限和一致性设计恢复。 |
 | K21 | 多层重试可能放大负载；次数上限不同于总耗时上限 | [AWS retry/backoff](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/) | 协调重试层和总期限；每层含首次最多尝试 3 次时，3 层最坏为 27 次。 |
 | K22 | 恢复执行可能重放外部副作用 | [LangGraph re-execution and idempotency](https://docs.langchain.com/oss/python/langgraph/graph-api#re-execution-and-idempotency) | 恢复节点时结合外部事务、幂等合同与查询对账。 |
 | K23 | 访问控制须由可信系统落实；不可信资料不能自行授权 | [OWASP authorization](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)、[injection](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html) | 在可信执行边界落实权限、参数与资源限制。 |

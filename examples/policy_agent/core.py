@@ -129,7 +129,7 @@ def validate_call(action, state):
     if not isinstance(action["call_id"], str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,100}", action["call_id"]):
         raise ValueError("invalid call_id")
     name, args = action["name"], action["arguments"]
-    if name not in TOOLS or not isinstance(args, dict) or set(args) != set(TOOLS[name]["required"]):
+    if not isinstance(name, str) or name not in TOOLS or not isinstance(args, dict) or set(args) != set(TOOLS[name]["required"]):
         raise ValueError("unknown tool or unexpected/missing arguments")
     if state["mode"] == "live" and name not in {"search_policy", "get_policy"}:
         raise ValueError("live only permits read-only policy tools")
@@ -244,13 +244,18 @@ def _validate_decision(decision):
         raise ValueError("decision requires tool_calls/output")
     calls, output = decision["tool_calls"], decision["output"]
     if calls:
+        if any(not isinstance(call, dict) for call in calls):
+            raise ValueError("tool_calls must contain objects")
         if output is not None:
             raise ValueError("tool requests and final output are mutually exclusive")
         return
-    if not isinstance(output, dict) or set(output) != {"status", "claims", "evidence_refs", "answer", "requested_fields"} or output["status"] not in OUTPUT_STATUSES:
+    if not isinstance(output, dict) or set(output) != {"status", "claims", "evidence_refs", "answer", "requested_fields"} or not isinstance(output["status"], str) or output["status"] not in OUTPUT_STATUSES:
         raise ValueError("invalid structured output")
     if not isinstance(output["answer"], str) or not isinstance(output["claims"], list) or not isinstance(output["evidence_refs"], list) or not isinstance(output["requested_fields"], list):
         raise ValueError("invalid output field types")
+    fields = output["requested_fields"]
+    if any(not isinstance(field, str) or not field for field in fields) or len(set(fields)) != len(fields):
+        raise ValueError("requested_fields must contain unique field names")
     if output["status"] != "clarification_required" and output["requested_fields"]:
         raise ValueError("only clarification can request fields")
 
@@ -263,7 +268,7 @@ def _validate_claims(output, state):
     if output["status"] == "answered" and not output["claims"]:
         raise ValueError("answered requires checkable claims")
     for claim in output["claims"]:
-        if not isinstance(claim, dict) or claim.get("clause_id") not in clauses:
+        if not isinstance(claim, dict) or not isinstance(claim.get("clause_id"), str) or claim["clause_id"] not in clauses:
             raise ValueError("claim lacks current evidence")
         document, clause = clauses[claim["clause_id"]]
         if claim.get("document_id") != document["document_id"] or claim["clause_id"] not in output["evidence_refs"]:
