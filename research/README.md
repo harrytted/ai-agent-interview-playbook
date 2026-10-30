@@ -6,7 +6,7 @@
 
 | 你想找什么 | 阅读入口 |
 | --- | --- |
-| 基础课程中模型、工具、检索和可靠性等机制的出处 | [课程参考资料](../learning/verification.md) |
+| 基础原理中模型、工具、检索和可靠性等机制的出处 | [课程参考资料](../learning/verification.md) |
 | 面试题涉及的基础概念与工程主题的一手资料 | [面试知识参考资料](../docs/claim-ledger.md) |
 | 按进阶问题选择官方教程、协议与论文 | [官方知识体系与选读地图](../advanced/official-learning-map.md) |
 
@@ -22,4 +22,4 @@
 
 选定一个主题后，可以带着自己的案例阅读，再回课程做练习。例如研究恢复机制时，重点查哪些步骤会重放、外部写入怎样确认，以及实验能证明什么。
 
-[返回首页](../README.md) · [基础课程](../learning/README.md) · [进阶课程](../advanced/README.md)
+[返回首页](../README.md) · [基础原理](../learning/README.md) · [工程进阶](../advanced/README.md)

@@ -1,6 +1,6 @@
 # 36 道进阶面试题：把机制讲到能落地
 
-面试官问“框架支持什么”，回答功能列表就够了。再追问一句“远端成功后进程挂了呢”，问题就落到了执行过程。这 36 题沿着 [12 章进阶课程](../../advanced/README.md)展开：每章 3 题，分别检查机制、故障与设计取舍。
+面试官问“框架支持什么”，回答功能列表就够了。再追问一句“远端成功后进程挂了呢”，问题就落到了执行过程。这 36 题沿着 [工程进阶（12 章）](../../advanced/README.md)展开：每章 3 题，分别检查机制、故障与设计取舍。
 
 每题先给可口述的短答。展开后可以读详细机制、常见追问的回答、实战案例与练习。先自己想一遍再展开，别让眼睛替大脑打卡。
 
@@ -49,4 +49,4 @@ python3 scripts/study.py show Q060
 python3 scripts/study.py review Q060 --score 2
 ```
 
-[92 题总索引](../question-index.md) · [进阶课程](../../advanced/README.md) · [进阶模拟面试](../../practice/mock-interviews.md#d-轮进阶系统深挖60-分钟) · [项目工作坊](../../advanced/project-workshop.md)
+[92 题总索引](../question-index.md) · [工程进阶](../../advanced/README.md) · [进阶模拟面试](../../practice/mock-interviews.md#d-轮进阶系统深挖60-分钟) · [项目工作坊](../../advanced/project-workshop.md)

@@ -35,4 +35,4 @@
 
 **实验与结论边界**：同一任务集、同一预算、同一验收条件下比较一个机制的增量收益。需要更换模型、硬件或任务分布时重新测量，报告质量、延迟、成本与失败类型，才容易解释为什么选择某种架构。
 
-[返回进阶课程](README.md) · [GitHub 与博客图谱](../research/advanced-landscape.md) · [来源元数据](../research/advanced-sources.json)
+[返回工程进阶](README.md) · [GitHub 与博客图谱](../research/advanced-landscape.md) · [来源元数据](../research/advanced-sources.json)

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "collected_date": "2026-10-28",
   "timezone": "Asia/Shanghai",
-  "scope": "Agent 进阶课程新增机制的 GitHub、第一方博客与官方学习路径",
+  "scope": "Agent 工程进阶新增机制的 GitHub、第一方博客与官方学习路径",
   "methods": {
     "content": "实际打开 README、关键文档或源码以及博客正文；页面引用和读取章节保留在各记录。",
     "statistics": "GitHub 页面显示的近似 Star / Fork 数，不是 GitHub API 精确数，也不是 Trending 排名。",

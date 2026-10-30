@@ -36,4 +36,4 @@ python3 examples/advanced/runtime_lab.py --scenario all
 python3 -m unittest discover -s tests -p 'test_advanced_runtime.py' -v
 ```
 
-[进阶课程](../../advanced/README.md) · [恢复执行](../../advanced/02-durable-execution.md) · [评测闭环](../../advanced/09-evaluation-and-feedback.md) · [性能与预算](../../advanced/10-performance-and-serving.md)
+[工程进阶](../../advanced/README.md) · [恢复执行](../../advanced/02-durable-execution.md) · [评测闭环](../../advanced/09-evaluation-and-feedback.md) · [性能与预算](../../advanced/10-performance-and-serving.md)

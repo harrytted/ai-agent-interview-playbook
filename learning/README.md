@@ -1,8 +1,12 @@
-# Agent 基础课程
+# Agent 基础原理
+
+<div id="agent-基础课程"></div>
+
+**从概念和运行机制讲起，结合图解、案例与实验理解 Agent。**
 
 学习 Agent，可以先抓住几条关系：模型怎样理解输入并作出决定，工具怎样把决定变成外部行动，记忆怎样为下一步提供信息，规划又怎样组织一连串行动。本课程先把这些概念讲清，再逐步深入上下文、检索、评测与工程实现。
 
-从 [01 · Agent 的组成与协作](01-system-map.md)开始，沿十章基础课程连续学习。每章都在本页完整讲解概念、机制、图解与案例，不要求先跳到面试题。你可以只阅读，不需要先准备Python环境；需要看实现或复算时，再补函数、字典、JSON和向量基础。
+从 [01 · Agent 的组成与协作](01-system-map.md)开始，按基础原理的十章顺序连续学习。每章都在本页完整讲解概念、机制、图解与案例，不要求先跳到面试题。你可以只阅读，不需要先准备Python环境；需要看实现或复算时，再补函数、字典、JSON和向量基础。
 
 ## 在知识体系中找到位置
 
@@ -67,7 +71,7 @@ python3 examples/agent_lab/lab.py --scenario all
 
 各章正文附有官方文档、协议和原论文，集中索引见 [课程参考资料](verification.md)。外部课程的章节选择、依赖环境和阅读顺序见 [学习资源深度调研](../research/learning-resources.md)。
 
-学完后进入 [12 章进阶课程](../advanced/README.md)，继续学习长任务 Harness、持久执行、上下文工程、Agentic RAG、多 Agent、计算机操作、性能与训练，并通过 [项目工作坊](../advanced/project-workshop.md)串成一套系统。
+学完后进入 [工程进阶（12 章）](../advanced/README.md)，继续学习长任务 Harness、持久执行、上下文工程、Agentic RAG、多 Agent、计算机操作、性能与训练，并通过 [项目工作坊](../advanced/project-workshop.md)串成一套系统。
 
 后续接入真实模型，可沿用 [7 天项目实验](../docs/engineering/08-project-lab.md)；需要数学、训练或推理系统更深知识时，再按 [调研报告](../research/learning-resources.md) 选修对应原课程。
 

@@ -30,4 +30,4 @@ python3 examples/foundations/math_lab.py --section all
 python3 -m unittest discover -s tests -p 'test_foundations_math.py' -v
 ```
 
-[基础课程](../../learning/README.md) · [评测章](../../learning/09-evaluation.md)
+[基础原理](../../learning/README.md) · [评测章](../../learning/09-evaluation.md)

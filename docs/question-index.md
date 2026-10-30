@@ -2,7 +2,7 @@
 
 先找到问题，再回到机制。短答用于口述，详细答案用于理解，追问与案例用于检查能否迁移。
 
-[基础课程](../learning/README.md) · [进阶课程](../advanced/README.md) · [36 道进阶题与章节对照](advanced/README.md)
+[基础原理](../learning/README.md) · [工程进阶](../advanced/README.md) · [36 道进阶题与章节对照](advanced/README.md)
 
 ## 基础原理：Q001–Q032
 
