@@ -1,0 +1,132 @@
+{
+  "goal": "林悦11月12日去海岚，住宿每晚650元，是否超过金额上限？",
+  "messages": [
+    {
+      "role": "user",
+      "content": "林悦11月12日去海岚，住宿每晚650元，是否超过金额上限？"
+    }
+  ],
+  "known": {
+    "city": "海岚",
+    "trip_date": "2026-11-12",
+    "amount_cny": 650,
+    "topic": "lodging",
+    "employee_category": "staff"
+  },
+  "unknowns": [],
+  "observations": [
+    {
+      "call_id": "call-1",
+      "name": "search_policy",
+      "arguments": {
+        "query": "lodging",
+        "city": "海岚",
+        "trip_date": "2026-11-12"
+      },
+      "result": {
+        "call_id": "call-1",
+        "status": "stale_evidence",
+        "data": {
+          "documents": [
+            {
+              "policy_id": "P17",
+              "document_id": "P17-v1",
+              "version": 1,
+              "tenant_id": "demo-a",
+              "topic": "lodging",
+              "city": "海岚",
+              "employee_category": "staff",
+              "valid_from": "2026-01-01",
+              "valid_to": "2026-11-01",
+              "allowed_roles": [
+                "staff",
+                "manager"
+              ],
+              "clauses": [
+                {
+                  "clause_id": "P17-v1#4",
+                  "text": "本虚构制度下，staff在海岚的住宿金额上限为每晚600元。",
+                  "amount_cny": 600
+                }
+              ]
+            }
+          ],
+          "rejected": []
+        },
+        "evidence_refs": [
+          "P17-v1#4"
+        ],
+        "error": null
+      },
+      "state_revision": 1
+    },
+    {
+      "call_id": "call-2",
+      "name": "get_policy",
+      "arguments": {
+        "policy_id": "P17",
+        "trip_date": "2026-11-12"
+      },
+      "result": {
+        "call_id": "call-2",
+        "status": "ok",
+        "data": {
+          "documents": [
+            {
+              "policy_id": "P17",
+              "document_id": "P17-v2",
+              "version": 2,
+              "tenant_id": "demo-a",
+              "topic": "lodging",
+              "city": "海岚",
+              "employee_category": "staff",
+              "valid_from": "2026-11-01",
+              "valid_to": null,
+              "allowed_roles": [
+                "staff",
+                "manager"
+              ],
+              "clauses": [
+                {
+                  "clause_id": "P17-v2#4",
+                  "text": "本虚构制度下，staff在海岚的住宿金额上限为每晚700元。",
+                  "amount_cny": 700
+                }
+              ]
+            }
+          ],
+          "rejected": []
+        },
+        "evidence_refs": [
+          "P17-v2#4"
+        ],
+        "error": null
+      },
+      "state_revision": 1
+    }
+  ],
+  "evidence": [
+    {
+      "policy_id": "P17",
+      "document_id": "P17-v2",
+      "version": 2,
+      "tenant_id": "demo-a",
+      "topic": "lodging",
+      "city": "海岚",
+      "employee_category": "staff",
+      "valid_from": "2026-11-01",
+      "valid_to": null,
+      "allowed_roles": [
+        "staff",
+        "manager"
+      ],
+      "clauses": [
+        {
+          "clause_id": "P17-v2#4",
+          "text": "本虚构制度下，staff在海岚的住宿金额上限为每晚700元。",
+          "amount_cny": 700
+        }
+      ]
+    }
+  ]
+}

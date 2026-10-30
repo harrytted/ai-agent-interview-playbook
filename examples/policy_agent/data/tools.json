@@ -1,0 +1,110 @@
+{
+  "search_policy": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256,
+        "enum": [
+          "lodging",
+          "consultation",
+          "meal",
+          "office",
+          "finance",
+          "untrusted"
+        ],
+        "description": "本教材固定主题键，不是自然语言或向量搜索。lodging=住宿，consultation=咨询材料，meal=餐补。"
+      },
+      "city": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "trip_date": {
+        "type": "string",
+        "format": "date"
+      }
+    },
+    "required": [
+      "query",
+      "city",
+      "trip_date"
+    ],
+    "additionalProperties": false
+  },
+  "get_policy": {
+    "type": "object",
+    "properties": {
+      "policy_id": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "trip_date": {
+        "type": "string",
+        "format": "date"
+      }
+    },
+    "required": [
+      "policy_id",
+      "trip_date"
+    ],
+    "additionalProperties": false
+  },
+  "create_ticket": {
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "city": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "trip_date": {
+        "type": "string",
+        "format": "date"
+      },
+      "amount_cny": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 1000000
+      },
+      "evidence_refs": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "minItems": 1
+      }
+    },
+    "required": [
+      "title",
+      "city",
+      "trip_date",
+      "amount_cny",
+      "evidence_refs"
+    ],
+    "additionalProperties": false
+  },
+  "lookup_ticket": {
+    "type": "object",
+    "properties": {
+      "operation_id": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      }
+    },
+    "required": [
+      "operation_id"
+    ],
+    "additionalProperties": false
+  }
+}

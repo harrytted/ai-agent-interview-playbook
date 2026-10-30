@@ -1,0 +1,42 @@
+{
+  "task_id": "T01",
+  "run_id": "teaching-stale-first",
+  "variant": "stale-first",
+  "mode": "offline",
+  "status": "answered",
+  "output": {
+    "status": "answered",
+    "claims": [
+      {
+        "kind": "lodging_limit",
+        "city": "海岚",
+        "trip_date": "2026-11-12",
+        "amount_cny": 700,
+        "document_id": "P17-v2",
+        "clause_id": "P17-v2#4"
+      }
+    ],
+    "evidence_refs": [
+      "P17-v2#4"
+    ],
+    "answer": "2026-11-12海岚每晚上限700元；给定金额未超过此金额上限。本例只核对虚构制度的金额条件。",
+    "requested_fields": []
+  },
+  "budget": {
+    "decisions_used": 3,
+    "tool_calls_started": 2,
+    "model_requests_used": 0,
+    "attempts_by_call_id": {
+      "call-1": 1,
+      "call-2": 1
+    }
+  },
+  "evidence_refs": [
+    "P17-v2#4"
+  ],
+  "created_count": 0,
+  "approval_request": null,
+  "operation_id": null,
+  "object_id": null,
+  "detail": null
+}

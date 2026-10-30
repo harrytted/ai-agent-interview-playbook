@@ -1,0 +1,148 @@
+[
+  {
+    "task_id": "T01",
+    "user_id": "U001",
+    "goal": "林悦11月12日去海岚，住宿每晚650元，是否超过金额上限？",
+    "known": {
+      "city": "海岚",
+      "trip_date": "2026-11-12",
+      "amount_cny": 650,
+      "topic": "lodging"
+    }
+  },
+  {
+    "task_id": "T02",
+    "user_id": "U001",
+    "goal": "林悦10月31日去海岚，住宿每晚650元，是否超过金额上限？",
+    "known": {
+      "city": "海岚",
+      "trip_date": "2026-10-31",
+      "amount_cny": 650,
+      "topic": "lodging"
+    }
+  },
+  {
+    "task_id": "T03",
+    "user_id": "U002",
+    "goal": "11月12日海岚经理住宿金额上限是多少？",
+    "known": {
+      "city": "海岚",
+      "trip_date": "2026-11-12",
+      "amount_cny": 650,
+      "topic": "lodging"
+    }
+  },
+  {
+    "task_id": "T04",
+    "user_id": "U001",
+    "goal": "比较10月31日和11月12日海岚的住宿金额上限。",
+    "known": {
+      "city": "海岚",
+      "trip_date": "2026-11-12",
+      "trip_dates": [
+        "2026-10-31",
+        "2026-11-12"
+      ],
+      "topic": "lodging"
+    }
+  },
+  {
+    "task_id": "T05",
+    "user_id": "U001",
+    "goal": "比较11月12日海岚和云洲普通员工住宿上限。",
+    "known": {
+      "city": "海岚",
+      "cities": [
+        "海岚",
+        "云洲"
+      ],
+      "trip_date": "2026-11-12",
+      "topic": "lodging"
+    }
+  },
+  {
+    "task_id": "T06",
+    "user_id": "U001",
+    "goal": "11月12日海岚住宿800元，比较金额标准并列出例外咨询材料。",
+    "known": {
+      "city": "海岚",
+      "trip_date": "2026-11-12",
+      "amount_cny": 800,
+      "topic": "lodging",
+      "need_materials": true
+    }
+  },
+  {
+    "task_id": "T07",
+    "user_id": "U001",
+    "goal": "11月12日海岚住宿上限存在两份冲突资料，请核对。",
+    "known": {
+      "city": "海岚",
+      "trip_date": "2026-11-12",
+      "amount_cny": 650,
+      "topic": "lodging"
+    },
+    "fixture": "conflicting-current"
+  },
+  {
+    "task_id": "T08",
+    "user_id": "U001",
+    "goal": "林悦11月12日去海岚，住宿650元，请核对金额上限。",
+    "known": {
+      "city": "海岚",
+      "trip_date": "2026-11-12",
+      "amount_cny": 650,
+      "topic": "lodging"
+    },
+    "user_update": {
+      "city": "云洲"
+    }
+  },
+  {
+    "task_id": "T09",
+    "user_id": "U001",
+    "goal": "林悦去海岚住宿650元，是否超过金额上限？",
+    "known": {
+      "city": "海岚",
+      "amount_cny": 650,
+      "topic": "lodging"
+    }
+  },
+  {
+    "task_id": "T10",
+    "user_id": "U001",
+    "goal": "11月12日云洲餐补金额是多少？",
+    "known": {
+      "city": "云洲",
+      "trip_date": "2026-11-12",
+      "topic": "meal"
+    }
+  },
+  {
+    "task_id": "T11",
+    "user_id": "U001",
+    "goal": "请就11月12日海岚650元住宿创建咨询工单。",
+    "known": {
+      "city": "海岚",
+      "trip_date": "2026-11-12",
+      "amount_cny": 650,
+      "topic": "lodging",
+      "create_ticket": true,
+      "title": "海岚住宿金额标准咨询"
+    }
+  },
+  {
+    "task_id": "T12",
+    "user_id": "U001",
+    "goal": "请就11月12日海岚650元住宿创建咨询工单；演示远端提交后崩溃恢复。",
+    "known": {
+      "city": "海岚",
+      "trip_date": "2026-11-12",
+      "amount_cny": 650,
+      "topic": "lodging",
+      "create_ticket": true,
+      "title": "海岚住宿金额标准咨询"
+    },
+    "fixture": "crash-after-remote"
+  }
+]

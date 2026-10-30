@@ -1,0 +1,20 @@
+{
+  "U001": {
+    "name": "林悦",
+    "tenant_id": "demo-a",
+    "role": "staff",
+    "employee_category": "staff"
+  },
+  "U002": {
+    "name": "经理测试用户",
+    "tenant_id": "demo-a",
+    "role": "manager",
+    "employee_category": "manager"
+  },
+  "U003": {
+    "name": "另一租户用户",
+    "tenant_id": "demo-b",
+    "role": "staff",
+    "employee_category": "staff"
+  }
+}
