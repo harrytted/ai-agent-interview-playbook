@@ -2,6 +2,12 @@
 
 [上一章：多 Agent 系统](07-multi-agent-systems.md) · [进阶目录](README.md) · [下一章：评测与反馈](09-evaluation-and-feedback.md)
 
+**Coding Agent（编码智能体）** 通过读取代码、提出修改和执行验证来完成开发任务。**Browser Agent（浏览器智能体）** 操作网页，**Computer Use（计算机操作）** 则通过桌面观察与输入动作使用软件。它们把基础课的“工具连接外部环境”扩展到了代码仓库和交互界面。
+
+三者共同需要**观察→行动→验证**的反馈过程：先取得当前状态，再执行动作，随后检查环境实际发生的变化。代码补丁需要应用并测试，界面输入需要确认对象和保存结果；模型输出的动作方案与环境中已经完成的动作应分别记录。
+
+不同环境提供的观察能力不同：网页可能提供结构化元素和页面文本，桌面常依赖截图与坐标。因此，本章既关心怎样发出动作，也关心动作依据是否仍然新鲜。
+
 你让助手修正政策生效日期，再去后台更新草稿。补丁顺利生成，网页也点了“保存”，可测试运行的是旧文件，页面重排后编辑的还是另一份草稿。工具都返回成功，用户目标却没有完成。
 
 Coding Agent 改代码，Browser Agent 操作网页，Computer Use 操作桌面；共同难点是动作依据的世界可能已经变化。Harness 要组织输入、执行工具、收集观察、保存状态、控制预算并验证终态。接下来要学的是怎样让每一步都有新鲜证据。
@@ -82,7 +88,7 @@ Deep Agents 的 backend 负责文件映射，执行隔离则决定程序的活�
 
 ## Browser 与 Computer Use 的观察方式不同
 
-网页任务可以利用 DOM、可访问性树和语义定位器，必要时结合截图。桌面任务更多依赖截图、窗口状态与坐标。当前 Claude 文档也区分 page-aware 的 browser use 与完整桌面的 computer use；两者工具集的执行合同不能互换。[Browser use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool)、[Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool)
+网页任务可以利用 **DOM（Document Object Model，文档对象模型）** 中的元素结构，以及可访问性树提供的角色、名称和状态，按语义定位操作对象，必要时结合截图。桌面任务更多依赖截图、窗口状态与坐标。当前 Claude 文档也区分 page-aware 的 browser use 与完整桌面的 computer use；两者工具集的执行合同不能互换。[Browser use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool)、[Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool)
 
 对“打开政策后台、更新一份草稿的生效日期”，先确认当前系统、对象 ID、草稿状态和目标字段，再执行单个或短批动作，随后重新读取。导航、弹窗、筛选和虚拟列表都可能使旧观察失效。Playwright locator 会在动作时重新定位匹配元素；这改善重渲染适应性，但仍要确保定位语义对应正确对象。[Playwright Locators](https://playwright.dev/docs/locators)
 
@@ -92,7 +98,7 @@ Deep Agents 的 backend 负责文件映射，执行隔离则决定程序的活�
 
 截图坐标依赖窗口位置、缩放、滚动和视口。若刚发生滚动，不能沿用旧图里的按钮坐标；应重新截图，识别目标与遮挡，再行动。表格中每行都有“编辑”时，先确认行标题或对象标识；仅看按钮样式无法区分对象。Canvas 或远程桌面缺少可靠文本结构时，视觉可以补足定位，但不能省略对象核对。
 
-“保存”点击成功，只能说明输入动作已经发出。接着核对目标对象、新日期、保存状态或版本；如果有独立读取接口，再检查持久结果。按钮点击是过程证据，对象变化才接近业务结果。
+**“保存”点击成功，只能说明输入动作已经发出。** 接着核对目标对象、新日期、保存状态或版本；如果有独立读取接口，再检查持久结果。按钮点击是过程证据，对象变化才接近业务结果。
 
 保存后超时尤其需要停一下：先读当前状态，再决定是否重试。连点两次可能把一次不确定变成两次真实提交。截图、页面文本、工具返回和后端对象各覆盖一部分事实，应把它们连起来解释。
 

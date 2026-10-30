@@ -2,6 +2,12 @@
 
 [上一章：记忆与 Skills](04-memory-and-skills.md) · [进阶目录](README.md) · [下一章：Agentic RAG](06-agentic-rag.md)
 
+**工具路由（tool routing）** 是根据任务选择合适操作接口的过程。基础课的工具调用回答“选好函数后怎样提出请求并执行”，本章继续处理选择之前的工作：发现能力、加载完整定义、区分读写用途，再把调用送到执行器。
+
+**MCP（Model Context Protocol，模型上下文协议）** 为应用与工具、资源等能力之间的交互提供统一合同。它帮助不同服务按共同方式连接和描述能力；路由仍需决定当前任务该选哪个工具，业务服务仍需判断调用者能操作什么。**发现工具、理解接口和获准执行应分别检查。**
+
+当接口越来越多时，工具目录就像有了检索功能的工具柜。搜到一把扳手，只解决“在哪里”，下一步还得看它是否适合眼前这颗螺丝。
+
 让助手比较政策，它却挑中了“创建政策申请”，而不是“检索政策”。名字只差几个字，副作用却差一大截。企业研究助手连上政策库、财务系统、项目平台与外部搜索后，上千个相似接口会把选工具变成另一道检索题。
 
 基础循环解决“怎样调用函数”，这里继续解决：先看见哪些能力，加载哪份合同，以谁的权限执行。全部定义放进上下文会增加输入与选择负担；只留几个熟悉接口又可能漏掉目标能力，需要把工具柜整理成可搜索、可核对的目录。
@@ -34,7 +40,7 @@ MCP 2025-11-25 的工具定义使用 JSON Schema；未设置 `$schema` 时默认
 
 ## PTC 将中间处理交给代码，权限仍逐次检查
 
-程序化工具调用让模型编写代码，代码在受控环境中循环、筛选和聚合工具结果，再把必要结果交回模型。Claude 的实现会在代码调用应用工具时暂停，等待应用返回结果后继续执行；中间数据不必逐条进入模型上下文。[Programmatic tool calling](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling)
+**程序化工具调用（PTC，Programmatic Tool Calling）** 让模型编写代码，代码在受控环境中循环、筛选和聚合工具结果，再把必要结果交回模型。Claude 的实现会在代码调用应用工具时暂停，等待应用返回结果后继续执行；中间数据不必逐条进入模型上下文。[Programmatic tool calling](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling)
 
 把四个地区的记录交给代码，可先验证时间范围、计算数量，再输出汇总与来源 ID。模型因此少读中间文本、少做无意义往返，像只收到核对好的报表，而不是每张收据都念一遍。
 
@@ -59,7 +65,7 @@ MCP 的 HTTP 授权保护受限服务访问，stdio 的凭据来源和部署边�
 
 Confused deputy 的关键是代理被诱导用自己的权限替未获同意的调用者行动。MCP 安全说明给出的 OAuth 代理案例涉及共享上游 client ID、动态注册和复用同意状态；应把同意绑定到具体客户端与范围，并正确校验重定向和授权流程状态，而不是只记“用户登录过”。[MCP 安全实践](https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices)
 
-A2A 则为远程 Agent 的发现、消息和任务状态提供合同。研究助手可以把一个子研究任务交给远程 Agent，而对方内部继续用 MCP 访问工具。任务 ID 不代替工具调用 ID；任务被接受不表示数据读取获准，取消任务也不自动撤销已经发生的外部动作。[A2A 核心概念](https://a2a-protocol.org/latest/topics/key-concepts/)
+**A2A（Agent2Agent）协议**则为远程 Agent 的发现、消息和任务状态提供合同。研究助手可以把一个子研究任务交给远程 Agent，而对方内部继续用 MCP 访问工具。任务 ID 不代替工具调用 ID；**任务被接受不表示数据读取获准**，取消任务也不自动撤销已经发生的外部动作。[A2A 核心概念](https://a2a-protocol.org/latest/topics/key-concepts/)
 
 ## 四个工具就能检查路由的四种错误
 

@@ -12,10 +12,10 @@
 | K06 | SFT、偏好优化与 LoRA 分属不同描述维度 | [TRL SFT](https://huggingface.co/docs/trl/sft_trainer)、[DPO](https://huggingface.co/docs/trl/dpo_trainer)、[LoRA 原论文](https://arxiv.org/abs/2106.09685) | 区分训练目标、训练信号与参数适配方式。 |
 | K07 | 上下文需选择；压缩可能丢失重要信息 | [Anthropic context engineering](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents) | 选择证据、管理上下文预算，并在摘要中保留关键条件。 |
 | K08 | 工具参数合同、真正执行和业务权限是不同边界 | [MCP Tools 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)、[当前客户端/服务端工具](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) | 分别检查输入结构、业务权限与执行结果；执行器可在应用侧或平台侧。 |
-| K09 | MCP 的 Host/Client/Server 是逻辑职责 | [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture) | 理解逻辑角色、会话连接与能力协商。 |
+| K09 | MCP 的 Host/Client/Server 是逻辑职责 | [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture)、[传输规范 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports) | 理解逻辑角色、会话连接与能力协商；stdio指标准输入/输出传输。 |
 | K10 | MCP HTTP 授权机制不能替代资源级业务授权 | [MCP authorization 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) | 区分 HTTP 与 stdio 的授权流程，以及连接权限与业务对象权限。 |
 | K11 | MCP 与 A2A 可在同一应用里组合 | [A2A 官方对照](https://a2a-protocol.org/latest/topics/a2a-and-mcp/) | 根据工具连接与 Agent 任务协作的需求组合协议。 |
-| K12 | RAG 使用外部检索材料，工程实践可比原论文更广 | [RAG](https://arxiv.org/abs/2005.11401)、[DPR](https://arxiv.org/abs/2004.04906) | 分别设计资料入库、检索与生成链路。 |
+| K12 | RAG 使用外部检索材料，工程实践可比原论文更广 | [RAG](https://arxiv.org/abs/2005.11401)、[检索与生成的关系](https://docs.langchain.com/oss/python/deepagents/retrieval)、[DPR](https://arxiv.org/abs/2004.04906) | 先理解检索增强生成的用途与过程，再分别设计资料入库、检索与生成链路。 |
 | K13 | 余弦为归一化点积；RRF 可以融合排名 | [cosine 官方定义](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)、[Elastic RRF](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion) | 关注同语义空间、零向量处理与排名融合；算例常数为 60。 |
 | K14 | 重排只处理已召回的候选 | [Sentence Transformers retrieve/rerank](https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html) | 检查候选集合覆盖范围和最终 top-k 的证据完整性。 |
 | K15 | 存储记忆、检索和读入当前上下文是不同步骤 | [LangGraph Persistence](https://docs.langchain.com/oss/python/langgraph/persistence)、[上下文与窗口外笔记](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents) | 区分应用状态、窗口外存储与模型参数。 |
