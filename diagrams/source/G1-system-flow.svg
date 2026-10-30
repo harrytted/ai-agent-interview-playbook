@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="G1" width="440" height="915" viewBox="0 0 440 915" role="img" aria-labelledby="G1-title G1-desc">
+<title id="G1-title">G1 一次任务，谁负责什么？</title>
+<desc id="G1-desc">任务输入由运行时装配给策略或模型；模型提出动作，运行时校验后执行工具，环境返回观察。状态保存事实和进度，选择后的观察成为下一轮输入。长期记忆和独立规划器按需增加。</desc>
+<defs><marker id="G1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087e84"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#162c40}.small{font-size:15px;fill:#526879}.body{font-size:17px}.label{font-size:16px;font-weight:600}.title{font-size:25px;font-weight:700}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px}.line{fill:none;stroke:#087e84;stroke-width:2;marker-end:url(#G1-arrow)}.rule{stroke:#b5c5d0;stroke-width:1}</style>
+<rect width="440" height="915" rx="16" fill="#f6f8fb"/>
+<rect x="20" y="22" width="44" height="28" rx="7" fill="#162c40"/><text x="42" y="42" text-anchor="middle" style="fill:white;font-size:16px;font-weight:700">G1</text>
+<text x="20" y="85" class="title">一次任务，谁负责什么？</text>
+<text x="20" y="113" class="small">例：林悦 · 海岚 · 11月12日 · 650元</text>
+<rect x="20" y="137" width="400" height="84" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="150" width="4" height="58" rx="2" fill="#087e84"/>
+<text x="37" y="165" class="label" style="fill:#087e84">① 用户目标</text>
+<text x="37" y="192" class="body">判断住宿金额是否超过制度上限</text>
+<path class="line" d="M220 221 V248"/>
+<rect x="20" y="251" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="264" width="4" height="83" rx="2" fill="#087e84"/>
+<text x="37" y="279" class="label" style="fill:#087e84">② 运行时 core.py</text>
+<text x="37" y="306" class="body">装配 context，保存 TaskState</text>
+<text x="37" y="331" class="body">检查身份、参数、预算与终止条件</text>
+<path class="line" d="M220 360 V387"/>
+<rect x="20" y="390" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="403" width="4" height="83" rx="2" fill="#2667ac"/>
+<text x="37" y="418" class="label" style="fill:#2667ac">③ 策略 / 可选模型</text>
+<text x="37" y="445" class="body">读取已知条件与实际观察</text>
+<text x="37" y="470" class="body">决定：查资料、请求补充或回答</text>
+<path class="line" d="M220 499 V526"/>
+<rect x="20" y="529" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="542" width="4" height="83" rx="2" fill="#a35d18"/>
+<text x="37" y="557" class="label" style="fill:#a35d18">④ 运行时执行工具</text>
+<text x="37" y="584" class="body">search_policy → 受控政策环境</text>
+<text x="37" y="609" class="body">工具结果不是模型自己编写的</text>
+<path class="line" d="M220 638 V665"/>
+<rect x="20" y="668" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="681" width="4" height="83" rx="2" fill="#087e84"/>
+<text x="37" y="696" class="label" style="fill:#087e84">⑤ 返回观察，更新状态</text>
+<text x="37" y="723" class="body">P17-v2#4：适用上限700元</text>
+<text x="37" y="748" class="body">观察进入下一轮 context，再决定</text>
+<path class="line" d="M420 722 H432 V306 H422"/>
+<rect x="20" y="799" width="400" height="94" rx="8" fill="#e7f1f2"/>
+<text x="33" y="824" class="small">返回箭头回到运行时，再装配下一轮输入。</text>
+<text x="33" y="848" class="small">规划可由模型承担；长期记忆按需选择。</text>
+<text x="33" y="872" class="small">650 ≤ 700仅说明本例金额未超限。</text>
+</svg>

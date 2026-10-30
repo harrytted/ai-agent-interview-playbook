@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="G2" width="440" height="1030" viewBox="0 0 440 1030" role="img" aria-labelledby="G2-title G2-desc">
+<title id="G2-title">G2 文本如何成为一次输出？</title>
+<desc id="G2-desc">输入文本被分词为token ID，结合位置表示后经过多层注意力和前馈计算，输出logits及下一token分布。选出一个token后追加输入再次计算；玩具注意力算例只解释单头加权，不等于整个模型。</desc>
+<defs><marker id="G2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087e84"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#162c40}.small{font-size:15px;fill:#526879}.body{font-size:17px}.label{font-size:16px;font-weight:600}.title{font-size:25px;font-weight:700}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px}.line{fill:none;stroke:#087e84;stroke-width:2;marker-end:url(#G2-arrow)}.rule{stroke:#b5c5d0;stroke-width:1}</style>
+<rect width="440" height="1030" rx="16" fill="#f6f8fb"/>
+<rect x="20" y="22" width="44" height="28" rx="7" fill="#162c40"/><text x="42" y="42" text-anchor="middle" style="fill:white;font-size:16px;font-weight:700">G2</text>
+<text x="20" y="85" class="title">文本如何成为一次输出？</text>
+<text x="20" y="113" class="small">这是推理路径；不展示训练过程。</text>
+<rect x="20" y="137" width="400" height="84" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="150" width="4" height="58" rx="2" fill="#087e84"/>
+<text x="37" y="165" class="label" style="fill:#087e84">① 输入文本</text>
+<text x="37" y="192" class="body">“查海岚11月12日住宿上限”</text>
+<path class="line" d="M220 221 V248"/>
+<rect x="20" y="251" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="264" width="4" height="83" rx="2" fill="#2667ac"/>
+<text x="37" y="279" class="label" style="fill:#2667ac">② 分词与表示</text>
+<text x="37" y="306" class="body">token ID → 向量表示 + 位置信息</text>
+<text x="37" y="331" class="body">token边界由具体分词器决定</text>
+<path class="line" d="M220 360 V387"/>
+<rect x="20" y="390" width="400" height="134" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="403" width="4" height="108" rx="2" fill="#087e84"/>
+<text x="37" y="418" class="label" style="fill:#087e84">③ 多层 Transformer 计算</text>
+<text x="37" y="445" class="body">Attention：按相关性聚合信息</text>
+<text x="37" y="470" class="body">前馈网络、残差与归一化等</text>
+<text x="37" y="495" class="body">正文算例只计算单头的一小步</text>
+<path class="line" d="M220 524 V551"/>
+<rect x="20" y="554" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="567" width="4" height="83" rx="2" fill="#2667ac"/>
+<text x="37" y="582" class="label" style="fill:#2667ac">④ 下一 token 的分布</text>
+<text x="37" y="609" class="body">logits → softmax / 解码规则</text>
+<text x="37" y="634" class="body">不是一次直接生成整段最终答案</text>
+<path class="line" d="M220 663 V690"/>
+<rect x="20" y="693" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="706" width="4" height="83" rx="2" fill="#087e84"/>
+<text x="37" y="721" class="label" style="fill:#087e84">⑤ 选出 token，并追加到序列</text>
+<text x="37" y="748" class="body">下一次计算使用更新后的序列</text>
+<text x="37" y="773" class="body">直到停止条件、预算或长度限制</text>
+<path class="line" d="M420 746 H432 V443 H422"/>
+<rect x="20" y="825" width="400" height="118" rx="8" fill="#e7f1f2"/>
+<text x="33" y="850" class="small">示意分布：A 0.6 / B 0.3 / C 0.1</text>
+<text x="33" y="874" class="small">这不是“事实正确”的概率。</text>
+<text x="33" y="898" class="small">长输入影响prefill；长输出增加生成轮次。</text>
+<text x="33" y="922" class="small">本图不据此给出固定时延或费用。</text>
+</svg>

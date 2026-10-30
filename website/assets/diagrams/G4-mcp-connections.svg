@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="G4" width="440" height="960" viewBox="0 0 440 960" role="img" aria-labelledby="G4-title G4-desc">
+<title id="G4-title">G4 MCP：Host管理两条连接</title>
+<desc id="G4-desc">Host内有两个MCP Client，各维护自己与MCP Server的连接。连接一暴露制度查询工具，连接二暴露咨询工单工具。Host负责模型调用、工具选择和权限控制；MCP不是模型，也不要求全部工具都写入。此图说明协议连接，不表示policy_agent实验已经接入MCP。</desc>
+<defs><marker id="G4-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087e84"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#162c40}.small{font-size:15px;fill:#526879}.body{font-size:17px}.label{font-size:16px;font-weight:600}.title{font-size:25px;font-weight:700}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px}.line{fill:none;stroke:#087e84;stroke-width:2;marker-end:url(#G4-arrow)}.rule{stroke:#b5c5d0;stroke-width:1}</style>
+<rect width="440" height="960" rx="16" fill="#f6f8fb"/>
+<rect x="20" y="22" width="44" height="28" rx="7" fill="#162c40"/><text x="42" y="42" text-anchor="middle" style="fill:white;font-size:16px;font-weight:700">G4</text>
+<text x="20" y="85" class="title">MCP：Host管理两条连接</text>
+<text x="20" y="113" class="small">协议结构示意；不是新增实验的部署图。</text>
+<rect x="20" y="137" width="400" height="429" rx="12" fill="#e7f1f2" stroke="#087e84"/>
+<text x="37" y="169" class="label" style="fill:#087e84">Host：你的应用 / Agent运行时</text>
+<text x="37" y="196" class="small">管理模型、用户会话、授权和调用结果</text>
+<rect x="36" y="218" width="368" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="36" y="231" width="4" height="83" rx="2" fill="#2667ac"/>
+<text x="53" y="246" class="label" style="fill:#2667ac">MCP Client A</text>
+<text x="53" y="273" class="body">独立维护连接A的协议会话</text>
+<text x="53" y="298" class="body">发现制度查询工具</text>
+<rect x="36" y="350" width="368" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="36" y="363" width="4" height="83" rx="2" fill="#a35d18"/>
+<text x="53" y="378" class="label" style="fill:#a35d18">MCP Client B</text>
+<text x="53" y="405" class="body">独立维护连接B的协议会话</text>
+<text x="53" y="430" class="body">发现咨询工单工具</text>
+<text x="37" y="498" class="small">Host按请求选择工具，并检查参数与权限</text>
+<text x="37" y="526" class="small">Client不是模型；Server不是运行时调度器</text>
+<path class="line" d="M100 327 H9 V621 H20"/>
+<path class="line" d="M340 459 H432 V775 H420"/>
+<rect x="20" y="591" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="604" width="4" height="83" rx="2" fill="#2667ac"/>
+<text x="37" y="619" class="label" style="fill:#2667ac">连接A ↔ MCP Server A</text>
+<text x="37" y="646" class="body">制度查询：search_policy / get_policy</text>
+<text x="37" y="671" class="body">只读工具也可以通过MCP暴露</text>
+<rect x="20" y="745" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="758" width="4" height="83" rx="2" fill="#a35d18"/>
+<text x="37" y="773" class="label" style="fill:#a35d18">连接B ↔ MCP Server B</text>
+<text x="37" y="800" class="body">咨询工单：create_ticket 等</text>
+<text x="37" y="825" class="body">写入批准仍由应用合同决定</text>
+<rect x="20" y="876" width="400" height="70" rx="8" fill="#e7f1f2"/>
+<text x="33" y="901" class="small">每个Client–Server连接分别维护。</text>
+<text x="33" y="925" class="small">本实验直接调用Python工具，不依赖MCP。</text>
+</svg>

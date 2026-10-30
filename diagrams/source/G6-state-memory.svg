@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="G6" width="440" height="1080" viewBox="0 0 440 1080" role="img" aria-labelledby="G6-title G6-desc">
+<title id="G6-title">G6 状态、记忆与窗口怎么连接？</title>
+<desc id="G6-desc">持久状态保存在SQLite，原文保存在工具环境，当前context只是从这些信息中选取的本轮输入。用户把海岚更正为云洲时更新known和revision，将旧证据留作历史但移出当前有效集合，取消依赖旧条件的未执行调用，再查询云洲政策。跨会话长期记忆按需另设。</desc>
+<defs><marker id="G6-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087e84"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#162c40}.small{font-size:15px;fill:#526879}.body{font-size:17px}.label{font-size:16px;font-weight:600}.title{font-size:25px;font-weight:700}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px}.line{fill:none;stroke:#087e84;stroke-width:2;marker-end:url(#G6-arrow)}.rule{stroke:#b5c5d0;stroke-width:1}</style>
+<rect width="440" height="1080" rx="16" fill="#f6f8fb"/>
+<rect x="20" y="22" width="44" height="28" rx="7" fill="#162c40"/><text x="42" y="42" text-anchor="middle" style="fill:white;font-size:16px;font-weight:700">G6</text>
+<text x="20" y="85" class="title">状态、记忆与窗口怎么连接？</text>
+<text x="20" y="113" class="small">窗口外保存，并不等于自动进入下一轮。</text>
+<rect x="20" y="137" width="400" height="134" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="150" width="4" height="108" rx="2" fill="#2667ac"/>
+<text x="37" y="165" class="label" style="fill:#2667ac">① 窗口外：任务状态 task.sqlite</text>
+<text x="37" y="192" class="body">known：海岚 / 11月12日 / 650元</text>
+<text x="37" y="217" class="body">observations、pending_calls、budget</text>
+<text x="37" y="242" class="body">不是完整数据库全部交给模型</text>
+<path class="line" d="M220 271 V298"/>
+<rect x="20" y="301" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="314" width="4" height="83" rx="2" fill="#087e84"/>
+<text x="37" y="329" class="label" style="fill:#087e84">② 装配本轮 context</text>
+<text x="37" y="356" class="body">选当前目标、条件、未知项、证据</text>
+<text x="37" y="381" class="body">保留call_id与必要的历史关联</text>
+<path class="line" d="M220 410 V437"/>
+<rect x="20" y="440" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="453" width="4" height="83" rx="2" fill="#087e84"/>
+<text x="37" y="468" class="label" style="fill:#087e84">③ 本轮决定与工具观察</text>
+<text x="37" y="495" class="body">新观察更新状态；大资料保留引用</text>
+<text x="37" y="520" class="body">下一轮按任务需要重新选取</text>
+<text x="20" y="587" class="label" style="fill:#a35d18">T08：用户可信更正“改去云洲”</text>
+<rect x="20" y="609" width="400" height="134" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="622" width="4" height="108" rx="2" fill="#a35d18"/>
+<text x="37" y="637" class="label" style="fill:#a35d18">④ 更新事实，而非抹掉过去</text>
+<text x="37" y="664" class="body">known.city：海岚 → 云洲</text>
+<text x="37" y="689" class="body">revision递增；原始观察留作历史</text>
+<text x="37" y="714" class="body">旧城市证据退出当前有效集合</text>
+<path class="line" d="M220 743 V770"/>
+<rect x="20" y="773" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="786" width="4" height="83" rx="2" fill="#087e84"/>
+<text x="37" y="801" class="label" style="fill:#087e84">⑤ 处理依赖，继续查询</text>
+<text x="37" y="828" class="body">取消依赖海岚的未执行步骤</text>
+<text x="37" y="853" class="body">查询云洲P19-v1：650元</text>
+<rect x="20" y="904" width="400" height="118" rx="8" fill="#e7f1f2"/>
+<text x="33" y="929" class="small">日志、任务事实、长期偏好是不同内容。</text>
+<text x="33" y="953" class="small">同一事实可存字段或事件，需明确修订规则。</text>
+<text x="33" y="977" class="small">跨会话长期记忆按需增加；本例不必配置。</text>
+<text x="33" y="1001" class="small">已完成的外部动作需要核对，不能靠改状态撤销。</text>
+</svg>

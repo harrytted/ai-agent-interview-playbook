@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="G5" width="440" height="1130" viewBox="0 0 440 1130" role="img" aria-labelledby="G5-title G5-desc">
+<title id="G5-title">G5 RAG有两条不同的链路</title>
+<desc id="G5-desc">入库链路把原文分段，保存版本、适用时间、租户与条款标识，并建立可检索索引。查询链路由问题和可信条件检索候选，再做权限、日期、适用类别与证据覆盖检查，选入上下文后回答。漏召回时需要追加查询或明确证据不足。</desc>
+<defs><marker id="G5-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087e84"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#162c40}.small{font-size:15px;fill:#526879}.body{font-size:17px}.label{font-size:16px;font-weight:600}.title{font-size:25px;font-weight:700}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px}.line{fill:none;stroke:#087e84;stroke-width:2;marker-end:url(#G5-arrow)}.rule{stroke:#b5c5d0;stroke-width:1}</style>
+<rect width="440" height="1130" rx="16" fill="#f6f8fb"/>
+<rect x="20" y="22" width="44" height="28" rx="7" fill="#162c40"/><text x="42" y="42" text-anchor="middle" style="fill:white;font-size:16px;font-weight:700">G5</text>
+<text x="20" y="85" class="title">RAG有两条不同的链路</text>
+<text x="20" y="113" class="small">索引找到候选，不替代适用性判断。</text>
+<rect x="20" y="137" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="150" width="4" height="83" rx="2" fill="#2667ac"/>
+<text x="37" y="165" class="label" style="fill:#2667ac">A1 入库：原文与元数据</text>
+<text x="37" y="192" class="body">P17-v1：600元；v2：700元</text>
+<text x="37" y="217" class="body">保存租户、类别、生效区间与条款ID</text>
+<path class="line" d="M220 246 V273"/>
+<rect x="20" y="276" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="289" width="4" height="83" rx="2" fill="#2667ac"/>
+<text x="37" y="304" class="label" style="fill:#2667ac">A2 分段、建索引</text>
+<text x="37" y="331" class="body">原文 → 可回查条款 → 检索索引</text>
+<text x="37" y="356" class="body">索引保存引用，原文保留权威来源</text>
+<text x="20" y="422" class="label" style="fill:#087e84">B 查询：从一个具体问题开始</text>
+<rect x="20" y="444" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="457" width="4" height="83" rx="2" fill="#087e84"/>
+<text x="37" y="472" class="label" style="fill:#087e84">B1 问题 + 可信条件</text>
+<text x="37" y="499" class="body">海岚 / staff / 2026-11-12</text>
+<text x="37" y="524" class="body">search_policy取回候选政策</text>
+<path class="line" d="M220 553 V580"/>
+<rect x="20" y="583" width="400" height="134" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="596" width="4" height="108" rx="2" fill="#a35d18"/>
+<text x="37" y="611" class="label" style="fill:#a35d18">B2 核对与筛选</text>
+<text x="37" y="638" class="body">权限 → 日期 → 适用类别 → 覆盖</text>
+<text x="37" y="663" class="body">v1过期不能支撑当日结论</text>
+<text x="37" y="688" class="body">缺少材料条款？追加查P20</text>
+<path class="line" d="M220 717 V744"/>
+<rect x="20" y="747" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="760" width="4" height="83" rx="2" fill="#087e84"/>
+<text x="37" y="775" class="label" style="fill:#087e84">B3 装配输入，生成引用回答</text>
+<text x="37" y="802" class="body">只选足够且适用的证据进入context</text>
+<text x="37" y="827" class="body">金额700元；引用P17-v2#4</text>
+<path class="line" d="M220 856 V883"/>
+<rect x="20" y="886" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="899" width="4" height="83" rx="2" fill="#087e84"/>
+<text x="37" y="914" class="label" style="fill:#087e84">B4 核验，不足就保留缺口</text>
+<text x="37" y="941" class="body">引用是否实际取得且仍有效？</text>
+<text x="37" y="966" class="body">没有当前证据 → insufficient_evidence</text>
+<rect x="20" y="1017" width="400" height="94" rx="8" fill="#e7f1f2"/>
+<text x="33" y="1042" class="small">漏召回：资料存在，但本轮没有查到。</text>
+<text x="33" y="1066" class="small">生成器无法可靠补回未取得的依据。</text>
+<text x="33" y="1090" class="small">“检索得分高”不等于“制度适用”。</text>
+</svg>
