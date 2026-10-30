@@ -1,19 +1,5 @@
 # 05 · 工具调用与 MCP：把动作交给可检查的执行器
 
-本章主线：**从工具调用到协议连接**。先分清提出请求与实际执行，再理解接口、参数和MCP连接的职责。
-
-## 按这个顺序逐题阅读
-
-- [Q025 Function Calling 的真正执行者是谁？](../questions/Q025.md)
-- [Q026 怎样设计易用且可控的工具接口？](../questions/Q026.md)
-- [Q027 Schema 合法为什么仍然不够？](../questions/Q027.md)
-- [Q028 MCP 的 Host、Client、Server 分别负责什么？](../questions/Q028.md)
-- [Q029 MCP 是否自动解决鉴权和 Prompt Injection？](../questions/Q029.md)
-
-想查这一章与其他主题的关系，回到 [知识主线](knowledge-map.md)。
-
-<details><summary>展开课程补充：机制、算例与实现</summary>
-
 [上一章：Agent 循环](04-agent-loop.md) · [学习目录](README.md) · [下一章：RAG 与检索](06-rag-and-retrieval.md)
 
 林悦请内部政策助手查差旅住宿上限，助手给出一份字段齐全的调用参数，却夹带了另一名员工的身份。JSON 能解析，工具也确实存在，这次调用依然应被拦住。要找出拦在哪里，需要把模型建议、协议连接和业务权限逐层展开。
@@ -206,5 +192,3 @@ MCP 与 A2A 也不宜画成两个互斥阵营。MCP 围绕应用与能力提供�
 
 </details>
 <!-- question-links:end -->
-
-</details>

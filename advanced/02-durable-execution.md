@@ -1,17 +1,5 @@
 # 02 · 持久执行：恢复进度与控制外部副作用
 
-本章主线：**持久执行：恢复进度与控制外部副作用**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
-
-## 按这个顺序逐题阅读
-
-- [Q060 持久执行为什么仍需要外部幂等？](../questions/Q060.md)
-- [Q061 怎样让审批与 Outbox 在恢复后仍保持正确含义？](../questions/Q061.md)
-- [Q062 租约、Fencing 与取消分别保护什么？](../questions/Q062.md)
-
-想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
-
-<details><summary>展开课程补充：机制、算例与实现</summary>
-
 [上一章：Harness](01-harness-and-deep-agents.md) · [进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
 
 政策助手刚把研究报告的发布工单创建好，程序却在显示“成功”前退出了。几小时后点击继续，应该再创建一次，还是先找回那张工单？如果连原来的批准也找不到，恢复就会同时遇到进度和副作用两个难题。
@@ -118,5 +106,3 @@ Fencing 控制陈旧执行者，幂等控制同一意图重复请求，二者处
 [上一章](01-harness-and-deep-agents.md) · [进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
 
 [配套进阶面试题](../docs/advanced/02-durable-execution.md)
-
-</details>

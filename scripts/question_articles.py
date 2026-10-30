@@ -159,7 +159,7 @@ def article_pages(bank, root: Path) -> dict[Path, str]:
                    + _body(question, by_id) + "\n---\n\n" + " · ".join(navigation)
                    + f"\n\n[按模块阅读]({source_url}#{_slug(heading)})\n")
         result[article_path(question.id)] = content
-    index = ["# 逐题阅读", "", "每道题是一篇独立文章：先读简要回答，再沿详细解析、图解、案例与追问理解知识。课程用于串联主题与安排阅读顺序。", "",
+    index = ["# 逐题阅读", "", "每道题是一篇独立文章：先读简要回答，再沿详细解析、图解、案例与追问理解知识。基础与进阶课程另有完整的连续讲解，题目文章供复习、追问与查漏。", "",
              "[知识主线](../learning/knowledge-map.md) · [基础课程](../learning/README.md) · [进阶课程](../advanced/README.md)", ""]
     for folder, title in (("foundations", "基础原理"), ("engineering", "工程应用"), ("advanced", "进阶系统")):
         topics = [(source, items) for source, items in groups.items() if source.parent.name == folder]

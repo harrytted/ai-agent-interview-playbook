@@ -1,17 +1,5 @@
 # 06 · Agentic RAG：按证据缺口选择下一次检索
 
-本章主线：**Agentic RAG：按证据缺口选择下一次检索**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
-
-## 按这个顺序逐题阅读
-
-- [Q072 Agentic RAG 怎样围绕证据依赖选择检索路径？](../questions/Q072.md)
-- [Q073 GraphRAG 的局部与全局查询怎样选择和维护？](../questions/Q073.md)
-- [Q074 研究助手怎样反向核验证据并决定停止？](../questions/Q074.md)
-
-想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
-
-<details><summary>展开课程补充：机制、算例与实现</summary>
-
 [上一章：工具路由与 MCP](05-tool-routing-and-mcp.md) · [进阶目录](README.md) · [下一章：多 Agent 系统](07-multi-agent-systems.md)
 
 你问“例外审批增加，是不是新政策造成的”，助手搜了十轮，引用也排满一页，结论就更可靠吗？如果缺的是申请分母，再多找几份政策也补不上；如果缺的是正式条文，搜索摘要又不能替它签字。
@@ -111,5 +99,3 @@ T06问11月12日海岚报价800元是否超标，以及例外咨询需要什么�
 - [基础课：RAG 与检索](../learning/06-rag-and-retrieval.md)：候选召回、融合与引用链路。
 
 [配套进阶面试题](../docs/advanced/06-agentic-rag.md)
-
-</details>

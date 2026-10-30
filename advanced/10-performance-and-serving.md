@@ -1,17 +1,5 @@
 # 10 · 性能、预算与推理服务
 
-本章主线：**性能、预算与推理服务**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
-
-## 按这个顺序逐题阅读
-
-- [Q084 怎样定位 Agent 的延迟瓶颈，为什么加 Worker 未必更快？](../questions/Q084.md)
-- [Q085 KV / 前缀缓存与检索、工具、答案缓存有什么区别？](../questions/Q085.md)
-- [Q086 多分支 Agent 怎样控制共享预算，并设计模型升级与降级？](../questions/Q086.md)
-
-想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
-
-<details><summary>展开课程补充：机制、算例与实现</summary>
-
 助手第一句话很快就出现，完整报告却让人等了半分钟。你换了更快的模型，结果数据库开始排队。用户等的是任务完成，服务看板却只庆祝首 token；这两个计时器讲的是不同故事。
 
 本章沿完整路径找耗时：哪些步骤能并行，缓存省掉什么，预算怎样由所有分支共同遵守。建议先读[上下文工程](03-context-engineering.md)与[评测闭环](09-evaluation-and-feedback.md)。
@@ -124,5 +112,3 @@ python3 examples/advanced/runtime_lab.py --scenario budget
 [上一章](09-evaluation-and-feedback.md) · [下一章](11-security-and-governance.md) · [课程目录](README.md)
 
 [对应面试题：Q084、Q085、Q086](../docs/advanced/10-performance-and-serving.md)
-
-</details>

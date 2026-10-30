@@ -1,17 +1,5 @@
 # 04 · 工具循环：把一次决定变成可追踪的行动
 
-本章主线：**从一次决定到连续行动**。沿最小循环理解观察如何影响下一步，再看停止条件与具体应用状态。
-
-## 按这个顺序逐题阅读
-
-- [Q009 最小 Agent Loop 应包含哪些环节？](../questions/Q009.md)
-- [Q012 如何防止循环、反复重规划与无效重试？](../questions/Q012.md)
-- [Q051 设计一个能创建、分派工单的 Agent，状态如何流转？](../questions/Q051.md)
-
-想查这一章与其他主题的关系，回到 [知识主线](knowledge-map.md)。
-
-<details><summary>展开课程补充：机制、算例与实现</summary>
-
 运行日志出现一条 `decision`，随后又出现 `stop`，中间却没有工具结果：这次搜索到底做成了吗？如果只看最后的“处理完成”，很容易把提出动作、实际执行和得到答案混在一起。政策助手需要把每一步留下来，才能回答这个问题。
 
 本章结合仓库 [lab.py](../examples/agent_lab/lab.py) 跟踪一次工具循环，练习从事件和计数还原执行经过。读完应能区分策略做了什么决定、运行时允许了什么，以及环境实际改变了什么。建议先读 [组成与协作](01-system-map.md)、[模型原理](02-llm-primer.md)和[提示与上下文](03-context-and-prompts.md)，并熟悉 Python 的函数与异常。
@@ -133,5 +121,3 @@ python3 examples/agent_lab/lab.py --scenario loop
 
 </details>
 <!-- question-links:end -->
-
-</details>

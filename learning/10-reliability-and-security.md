@@ -1,23 +1,5 @@
 # 10 · 可靠性与安全：让行动边界可执行
 
-本章主线：**从失败观察到恢复与安全**。分清重试、幂等、批准和授权，再看取消、注入、恢复与故障收敛。
-
-## 按这个顺序逐题阅读
-
-- [Q041 工具失败后应该怎样重试？](../questions/Q041.md)
-- [Q042 什么是幂等，为什么“工具超时”不等于“工具没执行”？](../questions/Q042.md)
-- [Q043 人工审批应该放在哪里，审批后还能改参数吗？](../questions/Q043.md)
-- [Q044 怎么应对网页或文档中的 Prompt Injection？](../questions/Q044.md)
-- [Q045 工具沙箱、参数校验和 ACL 分别解决什么？](../questions/Q045.md)
-- [Q046 Checkpoint 能保证崩溃恢复后不重复执行工具吗？](../questions/Q046.md)
-- [Q047 用户点了停止，怎样取消流式 Agent？](../questions/Q047.md)
-- [Q048 如何防止 Agent 死循环与故障扩散？](../questions/Q048.md)
-- [Q014 Checkpoint 能保证恢复后不重复扣款吗？](../questions/Q014.md)
-
-想查这一章与其他主题的关系，回到 [知识主线](knowledge-map.md)。
-
-<details><summary>展开课程补充：机制、算例与实现</summary>
-
 创建工单的请求转了很久，最后显示超时。员工再点一次，后台却出现两张相同工单；原来第一次已经成功，只是回执没回来。助手要处理的既有“做失败了”，也有“做没做成还不知道”，这两种情况需要不同的下一步。
 
 本章学习为失败分类，给写操作设计可恢复的状态，并让身份、权限和批准在执行边界生效。读完应能解释超时、重试和取消各自说明了什么，画出从结果未知走到确认终态的路径。建议先读 [工具合同](05-tools-and-mcp.md)、[状态与记忆](07-memory-and-state.md)和[评测](09-evaluation.md)，再看失败后该怎样继续或停止。
@@ -165,5 +147,3 @@ python3 -m unittest discover -s tests -p 'test_agent_lab.py' -v
 
 </details>
 <!-- question-links:end -->
-
-</details>

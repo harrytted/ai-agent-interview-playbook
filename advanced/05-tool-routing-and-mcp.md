@@ -1,17 +1,5 @@
 # 05 · 工具路由与 MCP：管理能力目录与执行权限
 
-本章主线：**工具路由与 MCP：管理能力目录与执行权限**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
-
-## 按这个顺序逐题阅读
-
-- [Q069 大工具目录怎样做到发现、加载与执行一致？](../questions/Q069.md)
-- [Q070 程序化工具调用怎样节省上下文并保持调用边界？](../questions/Q070.md)
-- [Q071 MCP 授权、业务 ACL 与 A2A 任务合同怎样区分？](../questions/Q071.md)
-
-想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
-
-<details><summary>展开课程补充：机制、算例与实现</summary>
-
 [上一章：记忆与 Skills](04-memory-and-skills.md) · [进阶目录](README.md) · [下一章：Agentic RAG](06-agentic-rag.md)
 
 让助手比较政策，它却挑中了“创建政策申请”，而不是“检索政策”。名字只差几个字，副作用却差一大截。企业研究助手连上政策库、财务系统、项目平台与外部搜索后，上千个相似接口会把选工具变成另一道检索题。
@@ -117,5 +105,3 @@ A2A 则为远程 Agent 的发现、消息和任务状态提供合同。研究助
 - [A2A 与 MCP](https://a2a-protocol.org/latest/topics/a2a-and-mcp/)：远程任务协作与工具连接的组合。
 
 [配套进阶面试题](../docs/advanced/05-tool-routing-and-mcp.md)
-
-</details>

@@ -1,17 +1,5 @@
 # 03 · 上下文工程：选择、压缩与分层复用
 
-本章主线：**上下文工程：选择、压缩与分层复用**。这一章把以下三篇独立文章接起来阅读。先把每题的概念和机制讲清，再回到课程补充中的设计、推导与实现例子。
-
-## 按这个顺序逐题阅读
-
-- [Q063 上下文选择、外置与摘要应该怎样配合？](../questions/Q063.md)
-- [Q064 怎样区分 KV、前缀、检索与最终答案缓存？](../questions/Q064.md)
-- [Q065 长任务怎样分配上下文预算并传播证据失效？](../questions/Q065.md)
-
-想查这一章与其他主题的关系，回到 [知识主线](../learning/knowledge-map.md)。
-
-<details><summary>展开课程补充：机制、算例与实现</summary>
-
 [上一章：持久执行](02-durable-execution.md) · [进阶目录](README.md) · [下一章：记忆与技能](04-memory-and-skills.md)
 
 政策助手读了几十份制度，为什么比较地区差异时反而漏掉一条关键限制？如果把原文、搜索页面、失败记录和草稿全装进下一次输入，容量可能超限，过时判断也会与当前证据混在一起。行李越重，未必越容易找到登机证。
@@ -130,5 +118,3 @@ Deep Agents 分别提供 offloading 与 summarization。两条路径都要保住
 [上一章](02-durable-execution.md) · [进阶目录](README.md) · [下一章：记忆与技能](04-memory-and-skills.md)
 
 [配套进阶面试题](../docs/advanced/03-context-engineering.md)
-
-</details>
