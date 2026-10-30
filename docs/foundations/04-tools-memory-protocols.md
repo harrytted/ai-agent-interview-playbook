@@ -42,7 +42,7 @@
 
 画“查订单”调用链。验收：标明意图产生、schema 校验、身份绑定、归属检查和真实执行的位置，并为成功、拒绝和超时分别写可核验状态。
 
-**学习与参考：** [学习章：工具与 MCP](../../learning/05-tools-and-mcp.md) · [Claude 工具概览](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) · [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
+**学习与参考：** [学习章：工具与 MCP](../../learning/05-tools-and-mcp.md) · [Claude 工具概览](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) · [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) · [首次完整任务](../../learning/00-first-agent.md)
 
 ### Q026 怎样设计易用且可控的工具接口？
 
@@ -122,7 +122,7 @@ Schema 像填表规则，主要约束数据形状与部分取值；表填完整�
 
 构造他人订单、超额金额和已完成重复退款三个合法 schema 请求。验收：说明各自拒绝层、可信依据、竞争时再次保证的位置，以及怎样确认没有真实副作用。
 
-**学习与参考：** [学习章：工具与 MCP](../../learning/05-tools-and-mcp.md) · [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) · [OWASP 授权指南](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) · [AWS 幂等 API](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+**学习与参考：** [学习章：工具与 MCP](../../learning/05-tools-and-mcp.md) · [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) · [OWASP 授权指南](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) · [AWS 幂等 API](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) · [首次完整任务](../../learning/00-first-agent.md)
 
 ### Q028 MCP 的 Host、Client、Server 分别负责什么？
 

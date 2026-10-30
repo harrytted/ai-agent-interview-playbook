@@ -24,6 +24,50 @@ Coding Agent 改代码，Browser Agent 操作网页，Computer Use 操作桌面�
 
 固定仓库版本、依赖锁文件、环境镜像、必要配置和数据快照，有助于重建相同实验。外部服务响应、系统时间与随机性也要控制或记录。重建环境不只是保存一个对话 transcript；没有依赖和数据，重放命令仍可能得到不同结果。
 
+## 一个能复现的日期补丁
+
+把业务时区固定为UTC+08:00，政策在当地11月1日起生效。旧写法直接取UTC日历日期：
+
+```python
+# 故障样本，勿用于实际模块
+wrong = datetime.fromisoformat("2026-10-31T16:00:00+00:00").date()
+# 2026-10-31；业务当地此时已经是11月1日
+```
+
+正确修法先要求时区信息，再转换到明确业务时区。下面与实际模块同名、同输入输出合同，返回ISO日期字符串：
+
+```python
+from datetime import datetime, timezone, timedelta
+
+def business_date(iso_datetime: str) -> str:
+    value = datetime.fromisoformat(iso_datetime.replace("Z", "+00:00"))
+    if value.tzinfo is None or value.utcoffset() is None:
+        raise ValueError("a timezone-aware timestamp is required")
+    return value.astimezone(timezone(timedelta(hours=8))).date().isoformat()
+```
+
+| 测试输入 | 期望业务日期/结果 | 防止什么 |
+| --- | --- | --- |
+| 2026-10-31T15:59:59+00:00 | 2026-10-31 | 提前切换新版 |
+| 2026-10-31T16:00:00+00:00 | 2026-11-01 | 沿用旧版 |
+| 2026-11-01T00:00:00 | 拒绝无时区输入 | 随机器环境猜测时区 |
+
+完成实现见 [date_boundary.py](../examples/policy_agent/date_boundary.py)，针对性测试见 [政策测试](../tests/test_policy_agent.py)。代码修改与版本选择是两个阶段：先得到业务日期，再按半开有效区间选择制度；单个日期修复不等于整个政策助手已可靠。
+
+## 模拟页面：保存前后核对同一个对象
+
+下面是明确标注的模拟页面记录，不是已运行Browser Agent：
+
+```json
+{
+  "before":{"object_id":"draft-17","version":3,"effective_date":"2026-10-31","status":"draft"},
+  "action":{"object_id":"draft-17","expected_version":3,"set_effective_date":"2026-11-01"},
+  "after":{"object_id":"draft-17","version":4,"effective_date":"2026-11-01","status":"draft"}
+}
+```
+
+合格证据为对象ID一致、目标日期正确、版本增长且仍为草稿。页面重排后按钮位置不再可靠，应重新定位draft-17；保存回执丢失时先读取对象，不能重复点保存。变式：after的ID为draft-18，即使日期正确也判错对象；按钮“成功”文案无法补救。
+
 ## 文件系统抽象不等于执行沙箱
 
 同样叫 `/workspace`，背后可能是状态中的虚拟文件、真实本地目录，也可能是远程沙箱。先问文件工具最终读写在哪里，再问命令能接触哪些资源；两个问题不能用一个路径名回答。

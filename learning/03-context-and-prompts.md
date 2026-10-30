@@ -16,6 +16,119 @@
 
 可以先写一份输入清单：“回答谁的问题；允许哪些动作；证据是否足够；还缺什么条件；输出怎样验收”。清单不是万能提示模板，而是审查实际请求的工具。把它与最后发送的内容逐项核对，才知道某条用户约束是否在拼接、裁剪或摘要过程中丢失。
 
+## 完成样本：从候选材料装配本轮输入
+
+先看候选材料的取舍，再检查真正进入策略的输入。表格说明各类材料的处理规则，正常T01实际搜索结果只返回适用P17-v2，不表示下面每份候选都曾进入策略。
+
+| 候选项 | 选择依据 | 本轮处理 |
+| --- | --- | --- |
+| 用户问题：海岚，11月12日，650元 | 当前目标与已确认事实 | 保留 |
+| P17-v1，截止11月1日前 | 不适用当前出行日期 | 不作当前金额证据 |
+| P17-v2#4，700元 | 当前身份可读、员工类别和日期匹配 | 保留正文与来源 |
+| P21财务受限附件 | 当前身份无权读取 | 正文不进入模型 |
+| P22办公制度 | 与住宿金额无关 | 不占本轮证据位置 |
+
+下面逐字段保留[正常离线运行的context.json](../examples/policy_agent/traces/normal/context.json)，不是手写答案。它是规则策略可见的完整PolicyView；在线HTTP请求还会附加适配器的指令、工具定义与协议消息，不能把这份业务输入当作完整供应商请求。
+
+<details><summary>展开工具返回后、作答前的完整业务输入</summary>
+
+```json
+{
+  "goal": "林悦11月12日去海岚，住宿每晚650元，是否超过金额上限？",
+  "messages": [
+    {
+      "role": "user",
+      "content": "林悦11月12日去海岚，住宿每晚650元，是否超过金额上限？"
+    }
+  ],
+  "known": {
+    "city": "海岚",
+    "trip_date": "2026-11-12",
+    "amount_cny": 650,
+    "topic": "lodging",
+    "employee_category": "staff"
+  },
+  "unknowns": [],
+  "observations": [
+    {
+      "call_id": "call-1",
+      "name": "search_policy",
+      "arguments": {
+        "query": "lodging",
+        "city": "海岚",
+        "trip_date": "2026-11-12"
+      },
+      "result": {
+        "call_id": "call-1",
+        "status": "ok",
+        "data": {
+          "documents": [
+            {
+              "policy_id": "P17",
+              "document_id": "P17-v2",
+              "version": 2,
+              "tenant_id": "demo-a",
+              "topic": "lodging",
+              "city": "海岚",
+              "employee_category": "staff",
+              "valid_from": "2026-11-01",
+              "valid_to": null,
+              "allowed_roles": [
+                "staff",
+                "manager"
+              ],
+              "clauses": [
+                {
+                  "clause_id": "P17-v2#4",
+                  "text": "本虚构制度下，staff在海岚的住宿金额上限为每晚700元。",
+                  "amount_cny": 700
+                }
+              ]
+            }
+          ],
+          "rejected": []
+        },
+        "evidence_refs": [
+          "P17-v2#4"
+        ],
+        "error": null
+      },
+      "state_revision": 1
+    }
+  ],
+  "evidence": [
+    {
+      "policy_id": "P17",
+      "document_id": "P17-v2",
+      "version": 2,
+      "tenant_id": "demo-a",
+      "topic": "lodging",
+      "city": "海岚",
+      "employee_category": "staff",
+      "valid_from": "2026-11-01",
+      "valid_to": null,
+      "allowed_roles": [
+        "staff",
+        "manager"
+      ],
+      "clauses": [
+        {
+          "clause_id": "P17-v2#4",
+          "text": "本虚构制度下，staff在海岚的住宿金额上限为每晚700元。",
+          "amount_cny": 700
+        }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+`known.amount_cny=650`是用户给的金额；`employee_category=staff`由运行时从可信身份源加入；证据中`amount_cny=700`是工具取得的制度上限。`observations`保留调用与回包的关联，`evidence`列当前仍适用的政策。700元第一次出现于工具返回，输入没有预先填写最终answer或claims。策略也看不到task_id、run_id、故障标签与expected答案。
+
+第一次决定前`observations`和`evidence`为空，需要先取得资料。将日期改为10月31日，必须重新核对适用版本；删掉日期时，`unknowns`含`trip_date`，不能把v2当已确认依据。实际输入与结果分文件保存，读者可用[首次任务](00-first-agent.md)复跑比较。
+
 ## 算例：为政策助手分配预算
 
 假设模型共有 8192 个可用位置，统一考虑输入与输出；先预留输出 1024，输入最多 7168，再分配如下。实际接口的窗口计算方式和限制应按对应版本核对。
@@ -39,7 +152,7 @@
 
 ## 证据进入上下文，权限不能丢失
 
-假设政策 D17-v1 在本月以前有效，D17-v2 从本月起生效。员工询问下周住宿，系统应检查适用时间后选 v2，并保留文档 ID、版本、生效日期及条款位置。两份材料内容冲突时，不能用“较长”“排名更高”或“多数页面这么说”替代版本判断。若有效区间不清，应说明无法确定，而不是自行补全。
+假设政策 P17-v1 在本月以前有效，P17-v2 从本月起生效。员工询问下周住宿，系统应检查适用时间后选 v2，并保留文档 ID、版本、生效日期及条款位置。两份材料内容冲突时，不能用“较长”“排名更高”或“多数页面这么说”替代版本判断。若有效区间不清，应说明无法确定，而不是自行补全。
 
 权限还应在内容进入模型前检查。把机密段落先给模型、最后再要求它不要输出，已经使不该可见的数据越过边界。身份从可信会话传入，文档服务执行 ACL；模型可以解释拒绝原因，但不能凭自己的判断授予访问权。[OWASP 访问控制原则](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
 
@@ -56,7 +169,7 @@
 ```json
 {
   "decision": "need_clarification",
-  "evidence": [{"document_id": "D17", "version": "v2"}],
+  "evidence": [{"document_id": "P17-v2", "version": 2}],
   "unknowns": ["培训类型"],
   "next_step": "请补充培训类型，再核对对应条款"
 }

@@ -61,6 +61,23 @@ Confused deputy 的关键是代理被诱导用自己的权限替未获同意的�
 
 A2A 则为远程 Agent 的发现、消息和任务状态提供合同。研究助手可以把一个子研究任务交给远程 Agent，而对方内部继续用 MCP 访问工具。任务 ID 不代替工具调用 ID；任务被接受不表示数据读取获准，取消任务也不自动撤销已经发生的外部动作。[A2A 核心概念](https://a2a-protocol.org/latest/topics/key-concepts/)
 
+## 四个工具就能检查路由的四种错误
+
+![G4：Host管理多个Client到不同Server的连接；业务权限在各执行边界判断](../website/assets/diagrams/G4-mcp-connections.svg)
+
+本地政策实验的最小能力目录如下。它使用函数工具，不实际启动MCP连接；MCP图用于说明将来服务化时职责如何对应。
+
+| 工具 | 何时选 | 必要业务字段 | 不承担什么 |
+| --- | --- | --- | --- |
+| search_policy | 缺相关制度 | query、city、trip_date | 不创建对象、不决定身份 |
+| get_policy | 已知制度ID，要核对适用版本 | policy_id、trip_date | 不以相似度决定新旧 |
+| create_ticket | 用户明确要求、草稿批准后 | title、city、trip_date、amount_cny、evidence_refs | 不把模型approved字段当批准 |
+| lookup_ticket | 恢复已保存意图、核对对象 | operation_id | 不查询其他租户意图 |
+
+逐题选择：T01先search；T01/stale-first随后get；T11依据已取得证据提出create，运行时先暂停批准；T12恢复先按原操作核对。T09缺日期时四者都不应执行。T10找不到餐补证据不能挑一个写工具掩盖读失败。
+
+诊断也要分层：工具目录未暴露search是发现失败；有search却选create是选择失败；日期写“下周”是参数失败；U003读取demo-a资料是授权失败。给四类各留明确错误与零副作用断言，才能知道改目录描述还是改执行器。
+
 ## 设计练习
 
 为上述请求设计目录路由日志，分别保存候选集合、选中版本、身份来源、每次调用 ID、预算扣减和结果状态。加入三个故障：缓存中残留已撤权工具、第二个地区超时、PTC 代码尝试调用创建申请工具。验收时确认过期权限被拒绝，已成功地区不重复查询，写工具不能因代码入口而绕过审批，并能说明缺失地区如何影响最终结论。

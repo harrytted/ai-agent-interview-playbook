@@ -1,37 +1,31 @@
 # AI Agent 系统学习与面试手册
 
-Agent 能把答案说得很像已经办成了。学这份手册，要再往前走一步：看清它读了什么、做了什么，失败后还能不能收拾现场。
+**从一条问题走完工具调用，再解释它为什么这样做。** 林悦11月12日去海岚出差，住宿每晚650元，是否超过制度上限？本手册用同一份虚构政策案例，逐步解释模型、上下文、工具、状态、检索与恢复。
 
-面向 **AI Agent / 大模型应用工程师**，以 Python 实践为主。仓库包含 **10 章基础、12 章进阶、92 道原创详解题**，配有数值算例、执行器与恢复实验、项目工作坊、学习路线和模拟面试。
-
-全部题目都有口述短答、详细答案、3 个带回答的追问、实战案例、误区与验收练习，共 **276 组追问、92 个案例**。每题直接链接对应学习内容，章节末尾也能找到相关题目。
-
-可以从一个具体问题开始：为什么引用存在却不支持结论？为什么超时之后反而创建了两张工单？章节沿着案例解释机制，题库再用追问和故障检查理解。术语会逐步出现，不需要入场先背一袋缩写。
-
-## 配套在线阅读
-
-**[打开在线学习手册 →](https://harrytted.github.io/ai-agent-interview-playbook/)**：按课程目录连续阅读，搜索知识点和题号，在学习章节与面试题之间跳转。电脑、手机都可以直接打开，无需下载仓库。
-
-读到陌生词，可以先查字典；学完一章，还可以到博客看图解和工程文章。两个网站都由本仓库作者维护：
-
-- [AI 编程字典：查术语、看关系图](https://agent.harrylab.cn/dictionary/)：查询中英术语，沿概念关系理解 Token、Context、Harness、MCP 等知识怎样连接。
-- [Agent 技术博客：读图解与工程实践](https://agent.harrylab.cn/articles/)：阅读 Agent 工程实践、原理图解和技术笔记，把课程里的机制放回具体问题中理解。
-
-可以把仓库当作学习与练习主线，把字典放在手边查词，再按问题选读博客文章。
-
-## 从这里开始
-
-| 你的状态 | 建议入口 | 本次产出 |
+| 现在想完成什么 | 直接入口 | 可检查的产出 |
 | --- | --- | --- |
-| 想从原理开始学 | [基础课程](learning/README.md) | 理解从 LLM 到 Agent 系统的完整链路 |
-| 已经掌握基础 | [进阶课程](advanced/README.md) | 系统学习长任务、Agentic RAG、协作、质量优化与训练 |
-| 开始准备面试 | [学习路线](docs/00-roadmap.md) | 确定 30 天安排与验收标准 |
-| 已经做过 LLM 应用 | [92 题索引](docs/question-index.md) | 找出解释不清的机制与失败路径 |
-| 要准备进阶追问 | [36 道进阶题](docs/advanced/README.md) | 用详细解析、追问和案例连接 12 章知识 |
-| 面试前一周 | [7 天冲刺](docs/00-roadmap.md#7-天冲刺) | 两轮模拟面试和一个可验证的项目演示 |
-| 想动手补工程能力 | [离线实验](examples/agent_lab/README.md) | 运行工具循环，观察重试、审批、幂等和步数上限 |
-| 想挑外部学习资料 | [GitHub 项目调研](research/github-survey.md) | 按用途组合资料，避免只收藏不练习 |
-| 想跟进进阶方向 | [进阶项目与技术博客](research/advanced-landscape.md) | 判断新能力的用途、工程取舍及对应学习章节 |
+| 第一次理解Agent怎样工作 | **[00 · 走完一次任务](learning/00-first-agent.md)** | 系统图、工具往返、正常/缺日期/旧证据三个过程 |
+| 做过应用，按问题查漏 | **[92题索引](docs/question-index.md)** | 找到解释不清的一步，再跳回对应课程和实验 |
+| 为面试组织知识与项目 | **[准备路线](docs/00-roadmap.md)** | 闭卷短答、追问、真实项目证据与模拟面试 |
+
+## 先看一个能复现的结果
+
+![模型或策略提出动作，运行时检查和执行，工具观察更新状态并进入下一步](website/assets/diagrams/G1-system-flow.svg)
+
+在仓库根目录，用Python 3.10+运行：
+
+```bash
+python3 -m examples.policy_agent run --task T01 --mode offline --run-id first-look
+python3 -m examples.policy_agent eval --suite pilot --mode offline --output .local/policy_agent/pilot-report.json
+```
+
+已保存的[正常运行结果](examples/policy_agent/traces/normal/result.json)为 `answered`，2次决定、1次工具调用、0次模型请求、0个工单对象；引用为P17-v2#4，上限700元。这次只判断650元是否超过该金额标准。再删掉日期，系统应先请求补充；让搜索先返回旧资料，它应继续核对。你可以打开保存的输入、事件和结果，检查下一步是否真的受观察影响。
+
+离线模式是读取观察的有限规则策略，默认无密钥、无网络；它用于理解与验证执行机制。可选真实模型路径单独记录验证状态，离线全绿不代表模型能力已验证。[实验说明与能力边界](examples/policy_agent/README.md)
+
+本手册面向会Python函数、字典和JSON的AI Agent / 大模型应用工程读者。包含**10章基础、12章进阶与92道原创详解题**；每题有短答、详细答案、带答案的追问、案例与练习。八张核心图分别解释系统、生成、工具、MCP、RAG、记忆、规划和恢复，图中对象与贯穿案例一致。
+
+按目录阅读可打开 [在线学习手册](https://harrytted.github.io/ai-agent-interview-playbook/)。遇到术语，可查作者的 [AI编程字典](https://agent.harrylab.cn/dictionary/)；需要另一组图解与工程文章，可选读 [Agent技术博客](https://agent.harrylab.cn/articles/)，再回课程做变式练习。
 
 ## 基础课程
 
@@ -81,7 +75,7 @@ Q001–Q056 覆盖基础与通用工程，Q057–Q092 对应 12 章进阶系统�
 
 别急着把每页都涂成已读。对同一个例子加一句“这时网络断了呢”，往往比多背三个框架名更能发现缺口。
 
-只阅读文档无需安装。运行工具需要 **Python 3.10+**，仅使用标准库，无需联网、安装依赖或配置密钥。在仓库根目录运行：
+只阅读文档无需安装。默认离线工具需要 **Python 3.10+**，仅使用标准库，无需联网、安装依赖或配置密钥；可选live路径需要单独提供供应商凭据。在仓库根目录运行：
 
 ```bash
 # 抽 5 题，只显示问题，先口述再看答案
@@ -101,7 +95,10 @@ python3 scripts/study.py review Q001 --score 2
 python3 scripts/study.py due
 python3 scripts/study.py stats
 
-# 运行离线教学实验
+# 观察驱动的政策任务与独立评分
+python3 -m examples.policy_agent eval --suite all --mode offline --output .local/policy_agent/all-report.json
+
+# 隔离的执行器边界实验
 python3 examples/agent_lab/lab.py --scenario all
 
 # 复算 Attention、余弦、RRF 与检索指标
@@ -115,7 +112,7 @@ python3 examples/advanced/runtime_lab.py --scenario all
 
 ## 用项目支撑面试回答
 
-[7 天项目实验](docs/engineering/08-project-lab.md)提供从工具循环到真实模型接入的验收步骤。当前代码使用脚本决策器和关键词检索，实验重点是执行器边界。接入模型、持久化、多租户和部署见后续练习。
+[7 天项目实验](docs/engineering/08-project-lab.md)提供从工具循环到真实模型接入的验收步骤。旧执行器实验使用固定脚本；新增政策实验提供观察驱动规则、持久状态和本地授权/恢复替身。模型接入状态、模拟权限与生产系统之间的边界见各实验README；项目经历和线上效果须用自己的实测填写。
 
 准备面试时使用 [模拟面试](practice/mock-interviews.md)、[项目表达模板](practice/project-story-template.md) 和 [错题复盘模板](practice/review-template.md)。所有业务数据、项目职责和指标请用自己的真实材料填写。
 

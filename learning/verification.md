@@ -29,12 +29,20 @@
 | K23 | 访问控制须由可信系统落实；不可信资料不能自行授权 | [OWASP authorization](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)、[injection](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html) | 在可信执行边界落实权限、参数与资源限制。 |
 | K24 | 多 Agent、缓存、阈值和具体框架选型需任务内验证 | [本课程第 08 章](08-planning-and-multi-agent.md)、[第 09 章](09-evaluation.md) | 以目标任务的质量、延迟和成本比较架构与参数。 |
 
+## 新案例的证据边界
+
+[首次任务](00-first-agent.md)及八张图是本仓库原创教学设计。P17–P23均为虚构政策，金额和日期不是外部事实；它们检验同一案例的适用性与运行合同。概念依上表K01、K07–K10、K15–K23核对，不把源博客的类比当定义条件。
+
+正文中“协议样本”“设计样本”“教学耗时”是可手工核对的示范，不表示供应商实测。已保存的运行记录来自政策实验；模型路径只有实际调用并保留证据后才能标为已验证。课程的学习效果需要试读记录，程序测试通过不能替代。
+
 ## 配套实验
 
+- [政策实验](../examples/policy_agent/README.md)：同案例查询、补参、证据变式、持久恢复与独立评分；默认有限规则策略。
 - [基础数学实验](../examples/foundations/README.md)：Attention、余弦、RRF 与检索指标。
 - [工具循环实验](../examples/agent_lab/README.md)：工具校验、重试、审批、幂等和循环终止。
 
 ```bash
+python3 -m examples.policy_agent eval --suite pilot --mode offline --output .local/policy_agent/pilot-report.json
 python3 examples/foundations/math_lab.py --section all
 python3 examples/agent_lab/lab.py --scenario all
 ```
