@@ -142,7 +142,7 @@ python3 -m unittest discover -s tests -p 'test_agent_lab.py' -v
 不能。模型之间达成一致不产生用户身份、资源权限或业务批准。授权仍须由可信系统落实。
 </details>
 
-[上一章](09-evaluation.md) · [参考资料](verification.md) · [课程目录](README.md)
+[上一章](09-evaluation.md) · [参考资料](verification.md) · [阅读目录](README.md)
 
 <!-- question-links:start -->
 ## 配套面试练习

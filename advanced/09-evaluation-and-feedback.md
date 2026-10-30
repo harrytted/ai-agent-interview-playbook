@@ -2,7 +2,7 @@
 
 ## 评测、执行轨迹与反馈如何连接
 
-**Agent 评测**是把系统的实际行为和最终产物，与预先明确的任务要求进行比较。它要回答能否完成目标、哪里失败，以及完成时用了多少资源，连接了基础课中的成功标准、执行轨迹和成本记录。
+**Agent 评测**是把系统的实际行为和最终产物，与预先明确的任务要求进行比较。它要回答能否完成目标、哪里失败，以及完成时用了多少资源，连接了基础原理中的成功标准、执行轨迹和成本记录。
 
 **执行轨迹（trace）** 保留行动与观察的过程，帮助定位错误；固定任务集上的重复评测则帮助比较不同版本。**反馈闭环**把二者连起来：观察失败、定位原因、提出改动，再在可比条件下复测。一次好看的演示提供一个样本，还需要更多任务检验适用范围。
 
@@ -124,6 +124,6 @@ python3 examples/advanced/runtime_lab.py --scenario evaluation
 
 [Hamel：AI Evals FAQ](https://hamel.dev/blog/posts/evals-faq/) · [OpenAI：Agent evals](https://developers.openai.com/api/docs/guides/agent-evals) · [HumanEval](https://arxiv.org/abs/2107.03374) · [MT-Bench](https://arxiv.org/abs/2306.05685)
 
-[上一章](08-coding-and-computer-use.md) · [下一章](10-performance-and-serving.md) · [课程目录](README.md)
+[上一章](08-coding-and-computer-use.md) · [下一章](10-performance-and-serving.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q081、Q082、Q083](../docs/advanced/09-evaluation-and-feedback.md)

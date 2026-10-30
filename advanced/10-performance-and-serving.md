@@ -4,7 +4,7 @@
 
 **Agent 性能**描述系统在一定资源条件下完成任务的速度与承载能力。**延迟（latency）** 关注一次请求或任务要等多久，**吞吐（throughput）** 关注单位时间处理多少工作；费用和质量又为优化设定了约束，几个指标需要一起看。
 
-基础课已经区分模型生成和工具执行，本章把它们放回完整任务路径。**关键路径**是依赖图中累计耗时最长的路径，它给出忽略额外资源等待时的完成时间下界。只有互不等待输入的工作才有并行空间。任务预算则由各分支共同消耗，需要统一记录和结算。
+基础原理部分已经区分模型生成和工具执行，本章把它们放回完整任务路径。**关键路径**是依赖图中累计耗时最长的路径，它给出忽略额外资源等待时的完成时间下界。只有互不等待输入的工作才有并行空间。任务预算则由各分支共同消耗，需要统一记录和结算。
 
 模型服务内部也有不同阶段：**prefill（预填充）** 主要处理已有输入，**decode（解码）** 逐步生成新 token；**KV Cache（Key-Value Cache，键值缓存）** 保存可复用的注意力中间表示。后文会说明这些计算复用与检索、工具结果、最终答案缓存分别省掉什么工作。
 
@@ -119,6 +119,6 @@ python3 examples/advanced/runtime_lab.py --scenario budget
 
 [vLLM：Automatic Prefix Caching](https://docs.vllm.ai/en/stable/features/automatic_prefix_caching/) · [PagedAttention](https://arxiv.org/abs/2309.06180) · [上下文工程](03-context-engineering.md) · [机制实验](../examples/advanced/README.md)
 
-[上一章](09-evaluation-and-feedback.md) · [下一章](11-security-and-governance.md) · [课程目录](README.md)
+[上一章](09-evaluation-and-feedback.md) · [下一章](11-security-and-governance.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q084、Q085、Q086](../docs/advanced/10-performance-and-serving.md)

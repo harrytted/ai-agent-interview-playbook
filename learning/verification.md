@@ -29,13 +29,13 @@
 | K21 | 多层重试可能放大负载；次数上限不同于总耗时上限 | [AWS retry/backoff](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/) | 协调重试层和总期限；每层含首次最多尝试 3 次时，3 层最坏为 27 次。 |
 | K22 | 恢复执行可能重放外部副作用 | [LangGraph re-execution and idempotency](https://docs.langchain.com/oss/python/langgraph/graph-api#re-execution-and-idempotency) | 恢复节点时结合外部事务、幂等合同与查询对账。 |
 | K23 | 访问控制须由可信系统落实；不可信资料不能自行授权 | [OWASP authorization](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)、[injection](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html) | 在可信执行边界落实权限、参数与资源限制。 |
-| K24 | 多 Agent、缓存、阈值和具体框架选型需任务内验证 | [本课程第 08 章](08-planning-and-multi-agent.md)、[第 09 章](09-evaluation.md) | 以目标任务的质量、延迟和成本比较架构与参数。 |
+| K24 | 多 Agent、缓存、阈值和具体框架选型需任务内验证 | [本手册第 08 章](08-planning-and-multi-agent.md)、[第 09 章](09-evaluation.md) | 以目标任务的质量、延迟和成本比较架构与参数。 |
 
 ## 新案例的证据边界
 
 [独立题目文章](../questions/README.md)、概念图及运行机制图使用本仓库自己的教学案例与布局。P17–P23均为虚构政策，金额和日期不是外部事实；它们检验同一案例的适用性与运行合同。概念依上表K01、K07–K10、K15–K23核对，不把源博客的类比当定义条件。
 
-正文中“协议样本”“设计样本”“教学耗时”是可手工核对的示范，不表示供应商实测。已保存的运行记录来自政策实验；模型路径只有实际调用并保留证据后才能标为已验证。课程的学习效果需要试读记录，程序测试通过不能替代。
+正文中“协议样本”“设计样本”“教学耗时”是可手工核对的示范，不表示供应商实测。已保存的运行记录来自政策实验；模型路径只有实际调用并保留证据后才能标为已验证。手册的学习效果需要试读记录，程序测试通过不能替代。
 
 ## 配套实验
 
@@ -49,4 +49,4 @@ python3 examples/foundations/math_lab.py --section all
 python3 examples/agent_lab/lab.py --scenario all
 ```
 
-[课程目录](README.md) · [资源深度调研](../research/learning-resources.md) · [来源数据](../research/learning-sources.json) · [面试知识参考资料](../docs/claim-ledger.md)
+[阅读目录](README.md) · [资源深度调研](../research/learning-resources.md) · [来源数据](../research/learning-sources.json) · [面试知识参考资料](../docs/claim-ledger.md)

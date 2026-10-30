@@ -2,7 +2,7 @@
 
 ## 信任边界与分层安全控制
 
-**Agent 安全治理**是把身份、权限、数据使用和动作范围落实到整个运行过程，使模型与工具链在明确边界内工作。基础课区分了用户要求和外部资料，本章继续追踪这些边界怎样跨过检索、记忆、委派和服务连接。
+**Agent 安全治理**是把身份、权限、数据使用和动作范围落实到整个运行过程，使模型与工具链在明确边界内工作。基础原理部分区分了用户要求和外部资料，本章继续追踪这些边界怎样跨过检索、记忆、委派和服务连接。
 
 **信任边界**是不同信任级别或权限范围之间的分界，信息或动作跨过它时，需要重新检查相应的来源与权限。**提示注入（prompt injection）** 试图让系统把低信任内容当成有权指挥行动的指令；内容经摘要或记忆传播后，原来的来源仍然重要。读懂一句要求，并不赋予它执行资格。
 
@@ -107,6 +107,6 @@ MCP 代理连接上游 API 时，应明确令牌发给谁、哪些 scope 被同�
 
 [MCP 安全实践](https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices) · [OWASP 授权](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) · [Claude SDK 权限](https://code.claude.com/docs/en/agent-sdk/permissions) · [OpenAI Guardrails 与审批](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals)
 
-[上一章](10-performance-and-serving.md) · [下一章](12-agent-training.md) · [课程目录](README.md)
+[上一章](10-performance-and-serving.md) · [下一章](12-agent-training.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q087、Q088、Q089](../docs/advanced/11-security-and-governance.md)

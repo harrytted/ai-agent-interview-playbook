@@ -1,12 +1,12 @@
 # 01 · Harness 与 Deep Agents：组织跨会话的工作
 
-[进阶目录](README.md) · [下一章：持久执行](02-durable-execution.md)
+[工程进阶目录](README.md) · [下一章：持久执行](02-durable-execution.md)
 
 ## Harness 的职责与 Deep Agents 的位置
 
 **Harness（Agent 的运行支撑层）** 是围绕模型建立的一组运行机制。模型根据当前输入提出回答或动作请求，harness 将输入组织、工具执行、状态保存、调度、权限和停止规则接起来，使任务能够连续推进。它处理的是“怎样让模型在一个真实系统里持续工作”。
 
-基础课的工具循环描述一轮轮怎样行动；harness 进一步管理轮与轮之间、会话与会话之间的工作条件。框架可以提供这些机制的一部分，应用仍要定义完成标准与业务权限。**Deep Agents 是一种具体的 harness 实现**，把计划、文件上下文和子任务等能力组合起来；阅读它时，要把通用职责与这个项目的接口分开。
+基础原理中的工具循环描述一轮轮怎样行动；harness 进一步管理轮与轮之间、会话与会话之间的工作条件。框架可以提供这些机制的一部分，应用仍要定义完成标准与业务权限。**Deep Agents 是一种具体的 harness 实现**，把计划、文件上下文和子任务等能力组合起来；阅读它时，要把通用职责与这个项目的接口分开。
 
 理解这层分工后，再看一个跨会话任务，就能知道该补任务记录、执行控制还是模型输入，不必每次都先给模型换个更响亮的名字。
 
@@ -14,7 +14,7 @@
 
 你让政策助手比较三个地区的差旅制度，整理冲突与例外流程，明天下午交付带出处的报告。它查到一半退出，第二天换一个会话继续。你最想知道的不是它还能写多少字，而是：昨天查过什么，证据还有效吗，今天从哪里接着做？
 
-这个任务会经历检索、草稿修改、等待补充和会话切换，需要把进度、依据与下一动作留在可交接的工作台上。建议先读基础课的[工具循环](../learning/04-agent-loop.md)、[状态与记忆](../learning/07-memory-and-state.md)和[可靠性与安全](../learning/10-reliability-and-security.md)；学完本章，应能把长任务拆成可交接的工作单元，解释计划、文件、子任务和执行环境分别由谁管理。
+这个任务会经历检索、草稿修改、等待补充和会话切换，需要把进度、依据与下一动作留在可交接的工作台上。建议先读基础原理中的[工具循环](../learning/04-agent-loop.md)、[状态与记忆](../learning/07-memory-and-state.md)和[可靠性与安全](../learning/10-reliability-and-security.md)；学完本章，应能把长任务拆成可交接的工作单元，解释计划、文件、子任务和执行环境分别由谁管理。
 
 ## Harness 管理行动条件
 
@@ -122,6 +122,6 @@ Deep Agents 将计划、文件系统上下文、子任务委派和记忆等能�
 - [Anthropic：Harness design for long-running application development](https://www.anthropic.com/research/harness-design-long-running-apps)
 - [Deep Agents 概览](https://docs.langchain.com/oss/python/deepagents/overview)、[Backends](https://docs.langchain.com/oss/python/deepagents/backends)、[Subagents](https://docs.langchain.com/oss/python/deepagents/subagents)
 
-[进阶目录](README.md) · [下一章：持久执行](02-durable-execution.md)
+[工程进阶目录](README.md) · [下一章：持久执行](02-durable-execution.md)
 
 [配套进阶面试题](../docs/advanced/01-harness-and-deep-agents.md)

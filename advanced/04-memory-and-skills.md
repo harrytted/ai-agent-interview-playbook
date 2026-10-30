@@ -1,6 +1,6 @@
 # 04 · 记忆与技能：管理事实变化和可复用过程
 
-[上一章：上下文工程](03-context-engineering.md) · [进阶目录](README.md) · [下一章：工具路由与 MCP](05-tool-routing-and-mcp.md)
+[上一章：上下文工程](03-context-engineering.md) · [工程进阶目录](README.md) · [下一章：工具路由与 MCP](05-tool-routing-and-mcp.md)
 
 ## 记忆与技能怎样分工
 
@@ -8,13 +8,13 @@
 
 **技能（Skills）** 把可复用的做事方法组织成过程包，例如检查步骤、参考资料、脚本与模板。记忆描述信息怎样保留和复用，技能描述过程知识怎样封装，二者可以配合。本章分别管理带来源的事实记录与可复用的过程；把事实写进文件、把步骤写进数据库，都不会改变内容的性质。读取记忆或技能会改变推理时可用的信息，**不意味着模型参数已经更新**。
 
-这一章接着基础课的状态与记忆，重点看事实变化怎样被记录，以及过程升级怎样被管理。先认清抽屉里放的是名册还是操作手册，再决定怎么更新。
+这一章接着基础原理中的状态与记忆，重点看事实变化怎样被记录，以及过程升级怎样被管理。先认清抽屉里放的是名册还是操作手册，再决定怎么更新。
 
 ## 旧事实与旧流程会带来什么问题
 
 助手昨天记住了住宿金额，今天却拿旧制度指导新申请；你更新了比较流程，它又把一次成功经验套到所有任务上。问题可能不在“记得不够多”，而在它把事实与做事方法装进了同一个抽屉。
 
-关于人、制度和任务的事实会随业务变化，比较、引用和审阅的过程会随工具与方法升级。把两者分开管理，才能避免旧制度变成操作步骤、偶然成功变成普遍规则。建议先读基础课的[状态与记忆](../learning/07-memory-and-state.md)、[RAG](../learning/06-rag-and-retrieval.md)和[提示与上下文](../learning/03-context-and-prompts.md)；学完本章，应能设计两类知识的生命周期，解释时间、冲突、版本及权限如何共同影响读取。
+关于人、制度和任务的事实会随业务变化，比较、引用和审阅的过程会随工具与方法升级。把两者分开管理，才能避免旧制度变成操作步骤、偶然成功变成普遍规则。建议先读基础原理中的[状态与记忆](../learning/07-memory-and-state.md)、[RAG](../learning/06-rag-and-retrieval.md)和[提示与上下文](../learning/03-context-and-prompts.md)；学完本章，应能设计两类知识的生命周期，解释时间、冲突、版本及权限如何共同影响读取。
 
 ## 工作记忆与长期事实的身份
 
@@ -113,6 +113,6 @@ Skill 可以把适用条件、操作步骤、示例、脚本和模板组成可�
 - [Reflexion](https://arxiv.org/abs/2303.11366)
 - [Agent Skills 规范](https://agentskills.io/specification)、[Deep Agents Skills](https://docs.langchain.com/oss/python/deepagents/skills)
 
-[上一章](03-context-engineering.md) · [进阶目录](README.md) · [下一章：工具路由与 MCP](05-tool-routing-and-mcp.md)
+[上一章](03-context-engineering.md) · [工程进阶目录](README.md) · [下一章：工具路由与 MCP](05-tool-routing-and-mcp.md)
 
 [配套进阶面试题](../docs/advanced/04-memory-and-skills.md)

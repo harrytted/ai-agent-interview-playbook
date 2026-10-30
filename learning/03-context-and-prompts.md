@@ -205,7 +205,7 @@
 
 </details>
 
-关联复习：[Q027、Q030–Q032](../docs/foundations/04-tools-memory-protocols.md)。[课程目录](README.md) · 上一章：[02 大模型原理](02-llm-primer.md) · 下一章：[04 工具循环](04-agent-loop.md)
+关联复习：[Q027、Q030–Q032](../docs/foundations/04-tools-memory-protocols.md)。[阅读目录](README.md) · 上一章：[02 大模型原理](02-llm-primer.md) · 下一章：[04 工具循环](04-agent-loop.md)
 
 <!-- question-links:start -->
 ## 配套面试练习

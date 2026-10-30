@@ -108,7 +108,7 @@ KV Cache 保存计算中间表示，员工偏好档案保存业务数据，两�
 
 </details>
 
-关联复习：[Q002–Q006](../docs/foundations/01-agent-and-llm.md)。[课程目录](README.md) · 上一章：[01 组成与协作](01-system-map.md) · 下一章：[03 上下文与提示](03-context-and-prompts.md)
+关联复习：[Q002–Q006](../docs/foundations/01-agent-and-llm.md)。[阅读目录](README.md) · 上一章：[01 组成与协作](01-system-map.md) · 下一章：[03 上下文与提示](03-context-and-prompts.md)
 
 <!-- question-links:start -->
 ## 配套面试练习

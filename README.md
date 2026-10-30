@@ -4,7 +4,7 @@
 
 | 你想怎样阅读 | 从这里开始 |
 | --- | --- |
-| 先理解 Agent 的组成和工作方式 | **[01 · Agent 的组成与协作](learning/01-system-map.md)**：在课程本页阅读概念、图解和完整例子 |
+| 先理解 Agent 的组成和工作方式 | **[01 · Agent 的组成与协作](learning/01-system-map.md)**：在本章阅读概念、图解和完整例子 |
 | 已有基础，深入工程问题 | **[工程进阶（12 章）](advanced/README.md)**：按章节阅读机制、案例、推导与设计 |
 | 按面试问题查漏补缺 | **[92 篇逐题文章](questions/README.md)**：每题独立阅读，包含短答、详细解释、追问与案例 |
 
@@ -16,7 +16,7 @@
 
 [查看原图](website/assets/diagrams/concepts/C1-capability-map.png)
 
-小明问：“2026年11月12日去海岚出差，住宿每晚650元，超过标准吗？”本例的普通员工类别由可信档案提供。模型要读懂问题，工具负责取得适用制度，任务记录保留日期与已查资料，规划决定先查什么、还缺什么。运行时把这些能力组织成连续的过程。[进入课程完整讲解](learning/01-system-map.md)
+小明问：“2026年11月12日去海岚出差，住宿每晚650元，超过标准吗？”本例的普通员工类别由可信档案提供。模型要读懂问题，工具负责取得适用制度，任务记录保留日期与已查资料，规划决定先查什么、还缺什么。运行时把这些能力组织成连续的过程。[进入章节完整讲解](learning/01-system-map.md)
 
 手册包含10章基础、12章进阶与92道详解题。基础原理与工程进阶两部分保留完整讲解，能够按章节连续学习；独立面试题提供短答、深入解析与追问，供复习和查漏。代码和实验作为理解后的进一步练习。图解帮助你看清信息如何流动，追问用来检查能否用自己的话说清。
 
@@ -28,14 +28,14 @@
 
 从概念和运行机制讲起，结合图解、案例与实验理解 Agent。基础部分先回答“是什么、为什么需要、怎样工作”，再用同一个政策助手串起概念。模型与输入、行动与知识、状态与规划、质量与可靠性四条线相互连接；具体章节关系见 [知识主线](learning/knowledge-map.md)。
 
-| 学习阶段 | 课程 | 核心产出 |
+| 学习阶段 | 章节 | 核心产出 |
 | --- | --- | --- |
 | 模型和输入 | [01 组成与协作](learning/01-system-map.md) · [02 LLM 原理](learning/02-llm-primer.md) · [03 上下文](learning/03-context-and-prompts.md) | 画清职责，复算注意力，组织有效证据 |
 | 行动与知识 | [04 工具循环](learning/04-agent-loop.md) · [05 工具/MCP](learning/05-tools-and-mcp.md) · [06 RAG](learning/06-rag-and-retrieval.md) | 读执行轨迹，定义工具合同，检查检索链路 |
 | 状态与协作 | [07 记忆](learning/07-memory-and-state.md) · [08 规划与多 Agent](learning/08-planning-and-multi-agent.md) | 管理状态与版本，解释协作和恢复的边界 |
 | 质量与交付 | [09 评测](learning/09-evaluation.md) · [10 可靠性与安全](learning/10-reliability-and-security.md) | 定义指标与终态，处理失败和越权 |
 
-[完整课程与阅读顺序](learning/README.md) · [术语回查](learning/glossary.md) · [课程参考资料](learning/verification.md) · [GitHub 学习资源深度调研](research/learning-resources.md)
+[完整目录与阅读顺序](learning/README.md) · [术语回查](learning/glossary.md) · [基础原理参考资料](learning/verification.md) · [GitHub 学习资源深度调研](research/learning-resources.md)
 
 <div id="进阶课程"></div>
 
@@ -43,7 +43,7 @@
 
 深入长任务、系统设计、故障恢复与质量优化。沿同一个政策研究助手案例，结合 GitHub 项目、技术博客、官方文档、协议和论文，从运行机制走到设计练习，再用轨迹、故障和评测判断改进。
 
-| 学&#8288;习&#8288;阶&#8288;段 | 课程 | 核心产出 |
+| 学&#8288;习&#8288;阶&#8288;段 | 章节 | 核心产出 |
 | --- | --- | --- |
 | 运&#8288;行&#8288;基&#8288;础 | [01 Harness](advanced/01-harness-and-deep-agents.md) · [02 持久执行](advanced/02-durable-execution.md) · [03 上下文工程](advanced/03-context-engineering.md) · [04 记忆与技能](advanced/04-memory-and-skills.md) | 长任务交接、恢复状态图、上下文与记忆合同 |
 | 能&#8288;力&#8288;组&#8288;织 | [05 工具路由/MCP](advanced/05-tool-routing-and-mcp.md) · [06 Agentic RAG](advanced/06-agentic-rag.md) · [07 多 Agent](advanced/07-multi-agent-systems.md) · [08 编码与计算机操作](advanced/08-coding-and-computer-use.md) | 工具选择、证据策略、协作图和操作环境 |
@@ -55,7 +55,7 @@
 
 ## 知识地图
 
-Q001–Q056 覆盖基础与通用工程，Q057–Q092 对应 12 章进阶系统知识，采用相同的详解与案例标准。课程按知识关系完整讲解，面试题按问题组织回答与追问；学习和复习可以沿两种入口往返。
+Q001–Q056 覆盖基础与通用工程，Q057–Q092 对应 12 章进阶系统知识，采用相同的详解与案例标准。正文按知识关系完整讲解，面试题按问题组织回答与追问；学习和复习可以沿两种入口往返。
 
 | 模块 | 题号 | 你应当能够解释 |
 | --- | --- | --- |

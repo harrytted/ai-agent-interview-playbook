@@ -126,6 +126,6 @@ python3 examples/advanced/runtime_lab.py --scenario evaluation
 
 [DPO](https://arxiv.org/abs/2305.18290) · [DeepSeekMath / GRPO](https://arxiv.org/html/2402.03300v3) · [Agent Lightning 原论文](https://arxiv.org/abs/2508.03680) · [Agent Lightning v1.0](https://arxiv.org/abs/2608.17528) · [项目仓库](https://github.com/microsoft/agent-lightning)
 
-[上一章](11-security-and-governance.md) · [课程目录](README.md)
+[上一章](11-security-and-governance.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q090、Q091、Q092](../docs/advanced/12-agent-training.md)

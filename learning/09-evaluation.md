@@ -125,12 +125,12 @@ python3 examples/foundations/math_lab.py --section metrics
 </details>
 
 <details>
-<summary>3. 自动测试全绿，等于课程知识和真实 LLM 都正确吗？</summary>
+<summary>3. 自动测试全绿，等于知识讲解和真实 LLM 都正确吗？</summary>
 
 不等于。代码测试只验证覆盖到的实现与算例；知识还需来源审阅；模型能力与线上行为还需要相应任务、环境与实测。
 </details>
 
-[参考资料](verification.md) · [上一章](08-planning-and-multi-agent.md) · [下一章](10-reliability-and-security.md) · [课程目录](README.md)
+[参考资料](verification.md) · [上一章](08-planning-and-multi-agent.md) · [下一章](10-reliability-and-security.md) · [阅读目录](README.md)
 
 <!-- question-links:start -->
 ## 配套面试练习

@@ -1,10 +1,10 @@
 # 06 · Agentic RAG：按证据缺口选择下一次检索
 
-[上一章：工具路由与 MCP](05-tool-routing-and-mcp.md) · [进阶目录](README.md) · [下一章：多 Agent 系统](07-multi-agent-systems.md)
+[上一章：工具路由与 MCP](05-tool-routing-and-mcp.md) · [工程进阶目录](README.md) · [下一章：多 Agent 系统](07-multi-agent-systems.md)
 
 ## RAG 的流程、Agent 的决策与图索引
 
-**RAG（Retrieval-Augmented Generation，检索增强生成）** 是在生成回答时引入检索所得资料，让模型依据外部证据作答。基础课先讲了文档入库、检索筛选和生成这条链路；固定流程可以预先决定这些阶段怎样连接。
+**RAG（Retrieval-Augmented Generation，检索增强生成）** 是在生成回答时引入检索所得资料，让模型依据外部证据作答。基础原理部分先讲了文档入库、检索筛选和生成这条链路；固定流程可以预先决定这些阶段怎样连接。
 
 **智能体驱动的检索增强生成（Agentic RAG）** 进一步让 Agent 根据问题与已有结果选择检索动作：是否需要检索、查哪种来源、缺什么证据、是否继续。一次查询不够时，它会把结果作为下一步选择的依据。关键能力是围绕证据缺口作决定，检索轮数本身不代表研究质量。
 
@@ -108,6 +108,6 @@ T06问11月12日海岚报价800元是否超标，以及例外咨询需要什么�
 - [Microsoft GraphRAG Indexing](https://microsoft.github.io/graphrag/index/overview/)：抽取、社区构建与派生索引。
 - [Microsoft GraphRAG Query](https://microsoft.github.io/graphrag/query/overview/)：局部、全局与其他查询方式。
 - [PostgreSQL Row Security Policies](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)：行级过滤与执行角色边界。
-- [基础课：RAG 与检索](../learning/06-rag-and-retrieval.md)：候选召回、融合与引用链路。
+- [基础原理：RAG 与检索](../learning/06-rag-and-retrieval.md)：候选召回、融合与引用链路。
 
 [配套进阶面试题](../docs/advanced/06-agentic-rag.md)

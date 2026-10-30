@@ -1,6 +1,6 @@
 # 网站维护与部署
 
-网站使用 MkDocs 与 Material 主题，由仓库中的 Markdown 生成。课程、题目和资料仍在原目录维护，GitHub 上的原有阅读路径保持可用。
+网站使用 MkDocs 与 Material 主题，由仓库中的 Markdown 生成。章节正文、题目和资料仍在原目录维护，GitHub 上的原有阅读路径保持可用。
 
 `scripts/prepare_site.py` 将公开内容整理到 `.site-src/`，其中各级 `README.md` 映射为 `index.md`；MkDocs 根据根目录的 `mkdocs.yml` 构建到 `site/`。`.site-src/`、`site/` 都是生成产物，修改内容时编辑原 Markdown，再重新准备与构建。`website/` 保存网站样式和维护说明，本页不进入学习站点。
 

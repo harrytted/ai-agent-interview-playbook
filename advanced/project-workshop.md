@@ -63,4 +63,4 @@
 
 这些材料也可以用于 [项目表达模板](../practice/project-story-template.md)：从任务约束、实际决策、失败证据和结果讲起。真实模型的端到端评测与本地机制实验应分别记录，使每一项结果都能追溯到对应实现。
 
-[课程目录](README.md) · [官方选读地图](official-learning-map.md)
+[工程进阶目录](README.md) · [官方选读地图](official-learning-map.md)

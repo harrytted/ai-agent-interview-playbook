@@ -103,7 +103,7 @@ nav:
       - 官方知识体系: advanced/official-learning-map.md
   - 面试题库:
       - questions/index.md
-      - 题目与课程对照: docs/question-index.md
+      - 题目与章节对照: docs/question-index.md
       - 学习路线与冲刺: docs/00-roadmap.md
       - 基础原理:
           - Agent 与 LLM:
@@ -257,7 +257,7 @@ nav:
       - GitHub 项目调研: research/github-survey.md
       - 基础学习资源: research/learning-resources.md
       - 进阶项目与技术博客: research/advanced-landscape.md
-      - 课程参考资料: learning/verification.md
+      - 基础原理参考资料: learning/verification.md
       - 本轮改版与验证边界: research/learning-redesign.md
       - 面试知识参考资料: docs/claim-ledger.md
       - 参与完善: CONTRIBUTING.md

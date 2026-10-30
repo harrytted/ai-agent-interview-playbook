@@ -1,10 +1,10 @@
 # 02 · 持久执行：恢复进度与控制外部副作用
 
-[上一章：Harness](01-harness-and-deep-agents.md) · [进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
+[上一章：Harness](01-harness-and-deep-agents.md) · [工程进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
 
 ## 持久执行为何要分别处理进度与副作用
 
-**持久执行（durable execution）** 是把任务进度与已确认结果保存到可靠记录中，使程序中断后能够恢复工作的运行方式。基础课的状态告诉我们“任务走到哪里”，持久执行还要规定“恢复时取回哪些结果、重跑哪些计算”。
+**持久执行（durable execution）** 是把任务进度与已确认结果保存到可靠记录中，使程序中断后能够恢复工作的运行方式。基础原理中的状态告诉我们“任务走到哪里”，持久执行还要规定“恢复时取回哪些结果、重跑哪些计算”。
 
 **检查点（checkpoint）** 保存某个边界的应用状态；**重放（replay）** 依据记录重新推进代码。它们帮助恢复本地计算，而创建工单、发送消息等**外部副作用**发生在另一个系统中，是否完成需要另外确认。**幂等**关心重复执行同一操作能否保持与执行一次相同的业务效果；具体响应与幂等键保留期仍以服务合同为准。它与保存进度解决不同的问题。
 
@@ -14,7 +14,7 @@
 
 政策助手刚把研究报告的发布工单创建好，程序却在显示“成功”前退出了。几小时后点击继续，应该再创建一次，还是先找回那张工单？如果连原来的批准也找不到，恢复就会同时遇到进度和副作用两个难题。
 
-我们沿“生成草稿→等待负责人批准→创建工单→登记发布状态”拆开故障窗口。建议先读基础课的[状态与记忆](../learning/07-memory-and-state.md)和[可靠性与安全](../learning/10-reliability-and-security.md)，熟悉检查点、幂等与工具错误处理；学完本章，应能为等待审批、重放、升级和取消设计明确语义。
+我们沿“生成草稿→等待负责人批准→创建工单→登记发布状态”拆开故障窗口。建议先读基础原理中的[状态与记忆](../learning/07-memory-and-state.md)和[可靠性与安全](../learning/10-reliability-and-security.md)，熟悉检查点、幂等与工具错误处理；学完本章，应能为等待审批、重放、升级和取消设计明确语义。
 
 ## 恢复的是已记录的计算，不是原来的调用栈
 
@@ -115,6 +115,6 @@ Fencing 控制陈旧执行者，幂等控制同一意图重复请求，二者处
 - [AWS：幂等 API](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)、[Transactional outbox](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html)
 - [Martin Kleppmann：How to do distributed locking](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)
 
-[上一章](01-harness-and-deep-agents.md) · [进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
+[上一章](01-harness-and-deep-agents.md) · [工程进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
 
 [配套进阶面试题](../docs/advanced/02-durable-execution.md)

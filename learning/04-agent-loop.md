@@ -56,7 +56,7 @@
 
 `run()` 管理步数和错误分支；`Runtime.invoke()` 在执行边界调用 `validate()`，检查工具白名单、字段与取值，写路径还要匹配运行时配置的 `Approval`。`search` 只对四条英文样例文本按关键词交集排序，既不是语义检索，也没有真实制度库。工单只存在同一进程的字典里，当前代码没有用户认证、租户对象权限或操作系统安全隔离。
 
-因此，课程里的政策助手在本章先缩成“查询教学条目”的控制实验。先沿事件看清边界，再为真实政策资料更换适配器；新政策实验已经另列固定制度数据与观察驱动策略；真实模型路径按其验证记录单独判断。
+因此，手册中的政策助手在本章先缩成“查询教学条目”的控制实验。先沿事件看清边界，再为真实政策资料更换适配器；新政策实验已经另列固定制度数据与观察驱动策略；真实模型路径按其验证记录单独判断。
 
 ## worked example：沿一次真实 trace 走到底
 
@@ -122,7 +122,7 @@ python3 examples/agent_lab/lab.py --scenario loop
 
 </details>
 
-关联复习：[Q009–Q016](../docs/foundations/02-planning-and-orchestration.md)、[Q055](../docs/engineering/07-system-design-and-projects.md)。[课程目录](README.md) · 上一章：[03 上下文](03-context-and-prompts.md) · 下一章：[05 工具与 MCP](05-tools-and-mcp.md)
+关联复习：[Q009–Q016](../docs/foundations/02-planning-and-orchestration.md)、[Q055](../docs/engineering/07-system-design-and-projects.md)。[阅读目录](README.md) · 上一章：[03 上下文](03-context-and-prompts.md) · 下一章：[05 工具与 MCP](05-tools-and-mcp.md)
 
 <!-- question-links:start -->
 ## 配套面试练习

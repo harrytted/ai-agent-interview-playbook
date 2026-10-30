@@ -1,12 +1,12 @@
 # 03 · 上下文工程：选择、压缩与分层复用
 
-[上一章：持久执行](02-durable-execution.md) · [进阶目录](README.md) · [下一章：记忆与技能](04-memory-and-skills.md)
+[上一章：持久执行](02-durable-execution.md) · [工程进阶目录](README.md) · [下一章：记忆与技能](04-memory-and-skills.md)
 
 ## 上下文工程怎样组织模型当前输入
 
 **上下文（context）** 是模型在当前一次调用中实际收到的信息，包括指令、用户请求、任务状态、工具说明和选入的资料。**上下文工程（context engineering）** 是持续决定这些信息如何选择、组织、更新和按需读取的工作，使当前判断拿得到必要依据。
 
-提示工程通常更聚焦指令和表达方式，上下文工程进一步处理信息来源、生命周期与有限容量；两者相互配合。基础课中的检索提供证据，状态保存任务进展，本章把它们接到“下一次模型调用究竟看见什么”这个问题上。**资料已经保存，与资料已经进入当前输入，是两件事。**
+提示工程通常更聚焦指令和表达方式，上下文工程进一步处理信息来源、生命周期与有限容量；两者相互配合。基础原理中的检索提供证据，状态保存任务进展，本章把它们接到“下一次模型调用究竟看见什么”这个问题上。**资料已经保存，与资料已经进入当前输入，是两件事。**
 
 内容太长时，可以外置原文并保留指针，也可以摘要重写表达。前者要保证还能找回，后者要检查是否丢了条件；后面的例子会分别检验这两类处理。
 
@@ -14,7 +14,7 @@
 
 政策助手读了几十份制度，为什么比较地区差异时反而漏掉一条关键限制？如果把原文、搜索页面、失败记录和草稿全装进下一次输入，容量可能超限，过时判断也会与当前证据混在一起。行李越重，未必越容易找到登机证。
 
-上下文工程要持续选择下一次推理该看什么。建议先读基础课的[提示与上下文](../learning/03-context-and-prompts.md)及[RAG](../learning/06-rag-and-retrieval.md)，了解 token 预算与证据选择；学完本章，应能建立可回查的上下文组织方式，并区分信息筛选、文本压缩、KV 复用与答案缓存。[上下文的持续组织](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents)
+上下文工程要持续选择下一次推理该看什么。建议先读基础原理中的[提示与上下文](../learning/03-context-and-prompts.md)及[RAG](../learning/06-rag-and-retrieval.md)，了解 token 预算与证据选择；学完本章，应能建立可回查的上下文组织方式，并区分信息筛选、文本压缩、KV 复用与答案缓存。[上下文的持续组织](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents)
 
 ## 用任务依赖选择信息
 
@@ -127,6 +127,6 @@ Deep Agents 分别提供 offloading 与 summarization。两条路径都要保住
 - [Agent Skills 规范](https://agentskills.io/specification)
 - [vLLM：自动前缀缓存](https://docs.vllm.ai/en/stable/features/automatic_prefix_caching/)、[缓存设计与隔离](https://docs.vllm.ai/en/stable/design/prefix_caching/)
 
-[上一章](02-durable-execution.md) · [进阶目录](README.md) · [下一章：记忆与技能](04-memory-and-skills.md)
+[上一章](02-durable-execution.md) · [工程进阶目录](README.md) · [下一章：记忆与技能](04-memory-and-skills.md)
 
 [配套进阶面试题](../docs/advanced/03-context-engineering.md)

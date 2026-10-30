@@ -4,7 +4,9 @@
 
 项目按技术层次排列。Star 使用项目页面显示的近似快照，表示关注规模；选材同时考虑机制是否清楚、关键实现能否阅读、是否能形成可比较的实验。[来源元数据](advanced-sources.json)保存具体阅读入口与版本信息。
 
-## 相对基础课增加了什么
+## 相对基础原理增加了什么
+
+<div id="相对基础课增加了什么"></div>
 
 | 基础问题 | 进阶问题 | 对应章节 |
 | --- | --- | --- |
@@ -43,11 +45,13 @@
 
 这几层可以组合：Harness 管理任务执行，记忆系统保存可再利用的信息，检索管线组织知识访问，训练系统根据轨迹更新策略。学习时先确定缺少哪一层，再选择项目，能减少把多套框架重复叠在一起的成本。
 
-## 八篇博客如何变成课程内容
+## 八篇博客怎样融入章节内容
+
+<div id="八篇博客如何变成课程内容"></div>
 
 | 想解决的问题 | 阅读材料 | 采用的方法与讨论范围 |
 | --- | --- | --- |
-| 长任务跨上下文窗口怎样交接？ | Anthropic：[Effective harnesses for long-running agents](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents) | 用初始化、功能清单、进度记录、版本控制与增量测试组织编码任务。课程将“交接后能继续推进”作为实验目标；具体效果需在自己的任务集上比较。对应 01、02、08。 |
+| 长任务跨上下文窗口怎样交接？ | Anthropic：[Effective harnesses for long-running agents](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents) | 用初始化、功能清单、进度记录、版本控制与增量测试组织编码任务。本手册将“交接后能继续推进”作为实验目标；具体效果需在自己的任务集上比较。对应 01、02、08。 |
 | 上下文为什么越长越难管理？ | Anthropic：[Effective context engineering](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents) | 从整个输入集合出发安排高信号内容，按需读取外部信息，讨论压缩与子 Agent 的信息损失。上下文工程也包含工具返回和状态组织。对应 03、04。 |
 | 数百个工具怎样让模型选得动？ | Anthropic：[Advanced tool use](https://www.anthropic.com/research/advanced-tool-use) | 比较工具按需发现、在执行环境中聚合调用结果、用示例补充接口约束。工具搜索会增加发现环节，适合与小工具集直接暴露做成本比较。对应 05、10。 |
 | Deep Agent 比工具循环多了什么？ | LangChain：[Deep Agents](https://www.langchain.com/blog/deep-agents) | 将规划、文件、子 Agent 和详细任务指导视作可组合的运行机制；逐项移除做消融比较，观察成功率、上下文与调用数变化。对应 01、03、07。 |

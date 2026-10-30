@@ -171,7 +171,7 @@ def article_pages(bank, root: Path) -> dict[Path, str]:
             for question in items:
                 index.append(f"- [{question.id} {question.title}]({question.id}.md)")
             index.append("")
-    index.extend(["[带课程对应的总索引](../docs/question-index.md) · [返回首页](../README.md)", ""])
+    index.extend(["[题目与章节对照](../docs/question-index.md) · [返回首页](../README.md)", ""])
     result[Path("questions/README.md")] = "\n".join(index)
     return result
 
