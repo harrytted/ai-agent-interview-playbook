@@ -45,7 +45,9 @@ TTL 是本例的保存或再确认期限，到了期限可以触发重新检索�
 
 ## 一份事实，用三种粒度保存
 
-![G6：历史、持久状态与当前输入之间的选择和更新](../website/assets/diagrams/G6-state-memory.svg)
+![G6：历史、持久状态与当前输入之间的选择和更新](../website/assets/diagrams/G6-state-memory.png)
+
+[查看原图](../website/assets/diagrams/G6-state-memory.png)
 
 对同一句“出行地改为云洲，其他条件不变”，三种保存方式各有用处：
 

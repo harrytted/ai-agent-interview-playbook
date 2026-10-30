@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Check the editable SVG sources and their exact published copies; never repair."""
+"""Check SVG semantic sketches and generated PNG publication assets; never repair."""
 from __future__ import annotations
 
 import argparse
 from collections import Counter
 from dataclasses import dataclass, field
 import math
+import json
 from pathlib import Path
 import re
+import struct
 import sys
 import xml.etree.ElementTree as ET
+import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 SVG_NS = "http://www.w3.org/2000/svg"
@@ -37,6 +40,89 @@ CONCEPT_FILES = {
 class Result:
     errors: list[str] = field(default_factory=list)
     diagrams: int = 0
+    generated_images: int = 0
+
+
+def validate_png(data: bytes) -> list[str]:
+    """Check PNG structure, chunk checksums and usable illustration dimensions."""
+    if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return ["invalid PNG signature"]
+    position = 8
+    kinds = []
+    while position < len(data):
+        if len(data) - position < 12:
+            return ["truncated PNG chunk"]
+        length = struct.unpack_from(">I", data, position)[0]
+        end = position + 12 + length
+        if end > len(data):
+            return ["truncated PNG chunk data"]
+        kind = data[position + 4:position + 8]
+        payload = data[position + 8:end - 4]
+        checksum = struct.unpack_from(">I", data, end - 4)[0]
+        if zlib.crc32(kind + payload) & 0xffffffff != checksum:
+            return ["PNG chunk checksum mismatch"]
+        if not kinds and kind != b"IHDR":
+            return ["PNG must begin with IHDR"]
+        if kind == b"IHDR":
+            if kinds or length != 13:
+                return ["invalid PNG IHDR"]
+            width, height = struct.unpack_from(">II", payload)
+            if not (768 <= width <= 8192 and 768 <= height <= 8192):
+                return [f"PNG dimensions must be 768–8192 px per side, got {width}x{height}"]
+        kinds.append(kind)
+        position = end
+        if kind == b"IEND":
+            if length or position != len(data):
+                return ["invalid PNG ending"]
+            break
+    if b"IDAT" not in kinds or not kinds or kinds[-1] != b"IEND":
+        return ["PNG needs image data and IEND"]
+    return []
+
+
+def check_generated_images(root: Path) -> tuple[list[str], int]:
+    """The manifest opts in to the complete generated illustration collection."""
+    manifest = root / "diagrams/imagegen-manifest.json"
+    if not manifest.exists():
+        return [], 0
+    try:
+        metadata = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        return [f"cannot read imagegen manifest: {exc}"], 0
+    if not isinstance(metadata, dict) or not isinstance(metadata.get("assets"), list):
+        return ["imagegen manifest must contain an assets list"], 0
+    expected = {f"G{number}": filename for number, filename in FILES.items()} | CONCEPT_FILES
+    errors = []
+    seen = set()
+    count = 0
+    for entry in metadata["assets"]:
+        if (not isinstance(entry, dict) or not isinstance(entry.get("id"), str)
+                or entry["id"] not in expected):
+            errors.append("unexpected imagegen manifest entry")
+            continue
+        identity = entry["id"]
+        if identity in seen:
+            errors.append(f"duplicate imagegen manifest id: {identity}")
+            continue
+        seen.add(identity)
+        sketch = expected[identity]
+        image = str(Path(sketch).with_suffix(".png"))
+        expected_path = f"website/assets/diagrams/{image}"
+        if (entry.get("path") != expected_path
+                or entry.get("semantic_source") != f"diagrams/source/{sketch}"):
+            errors.append(f"incorrect imagegen publication/source path: {identity}")
+            continue
+        path = root / expected_path
+        if not path.is_file():
+            errors.append(f"missing generated image: {expected_path}")
+            continue
+        if path.is_symlink() or not path.resolve().is_relative_to(root.resolve()):
+            errors.append(f"generated image escapes repository: {expected_path}")
+            continue
+        errors.extend(f"{expected_path}: {error}" for error in validate_png(path.read_bytes()))
+        count += 1
+    errors.extend(f"missing imagegen manifest entry: {identity}" for identity in sorted(expected.keys() - seen))
+    return errors, count
 
 
 def validate_svg(data: bytes, number: int | str) -> list[str]:
@@ -136,6 +222,8 @@ def check_diagrams(root: Path = ROOT, suite: str = "all") -> Result:
         for label, value in zip(("source", "published"), data):
             result.errors.extend(f"{name} ({label}): {err}" for err in validate_svg(value, numbers[name]))
         result.diagrams += 1
+    generated_errors, result.generated_images = check_generated_images(root)
+    result.errors.extend(generated_errors)
     return result
 
 
@@ -149,7 +237,8 @@ def main(argv: list[str] | None = None) -> int:
         for error in result.errors:
             print(error, file=sys.stderr)
         return 1
-    print(f"PASS diagrams ({args.suite}): {result.diagrams} exact source/published pairs")
+    print(f"PASS diagrams ({args.suite}): {result.diagrams} SVG source/published pairs; "
+          f"{result.generated_images} generated PNGs")
     return 0
 
 

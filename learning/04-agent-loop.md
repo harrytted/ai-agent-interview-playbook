@@ -16,7 +16,9 @@
 
 ## 新实验：观察真正参与下一步决定
 
-![G3：一次工具请求和对应回包进入下一轮输入](../website/assets/diagrams/G3-tool-roundtrip.svg)
+![G3：一次工具请求和对应回包进入下一轮输入](../website/assets/diagrams/G3-tool-roundtrip.png)
+
+[查看原图](../website/assets/diagrams/G3-tool-roundtrip.png)
 
 [政策实验](../examples/policy_agent/README.md)把策略输入限制为目标、条件、未知项和已经取得的可见观察；task_id、故障标签和标准答案不进入策略。因此同一任务可以因观察不同而走出不同路径：
 

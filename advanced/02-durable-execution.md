@@ -45,7 +45,9 @@ Checkpoint 更像账本上的一页：它记住某个边界的应用状态，恢
 
 ## 从临时模拟走到跨命令恢复
 
-![G8：远端提交、本地未确认的故障窗口](../website/assets/diagrams/G8-write-recovery.svg)
+![G8：远端提交、本地未确认的故障窗口](../website/assets/diagrams/G8-write-recovery.png)
+
+[查看原图](../website/assets/diagrams/G8-write-recovery.png)
 
 旧`runtime_lab.py --scenario replay`用两个独立SQLite数据库说明事务窗口，场景结束会清理临时目录。新[政策实验T12](../examples/policy_agent/README.md)保留`.local/policy_agent/<run-id>/`，用两个Python进程演示恢复，便于亲自检查持久对象。
 

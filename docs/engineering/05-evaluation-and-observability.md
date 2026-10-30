@@ -184,7 +184,9 @@ Judge 也会判错，要先明确评分维度、锚定样例和可核对证据�
 
 **详细答案：**
 
-![一次工具往返用相同调用标识关联请求与回包，观察进入下一轮模型输入](../../website/assets/diagrams/G3-tool-roundtrip.svg)
+![一次工具往返用相同调用标识关联请求与回包，观察进入下一轮模型输入](../../website/assets/diagrams/G3-tool-roundtrip.png)
+
+[查看原图](../../website/assets/diagrams/G3-tool-roundtrip.png)
 
 图只展开一次往返，追踪时应把请求、实际执行、回包与下一轮输入关联起来，再扩展到整条任务轨迹。
 

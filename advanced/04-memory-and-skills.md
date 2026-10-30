@@ -58,7 +58,9 @@ Skill 可以把适用条件、操作步骤、示例、脚本和模板组成可�
 
 ## 修订记录与过程合同，分别保存
 
-![G6：事实修订、历史保存与当前上下文选择](../website/assets/diagrams/G6-state-memory.svg)
+![G6：事实修订、历史保存与当前上下文选择](../website/assets/diagrams/G6-state-memory.png)
+
+[查看原图](../website/assets/diagrams/G6-state-memory.png)
 
 用P17完成一份双时间记录，日期均为教学设定：
 

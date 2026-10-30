@@ -23,7 +23,9 @@ python3 -m examples.policy_agent eval --suite pilot --mode offline --output .loc
 
 补参从同一状态继续，预算不归零。旧索引变式需追加get_policy核对，不能凭题号直接填700元。pilot包含正常、缺日期及恢复、旧证据三项；eval输出摘要，完整逐项断言保存在指定JSON中。
 
-![一次工具请求、执行、回填与第二次决定](../../website/assets/diagrams/G3-tool-roundtrip.svg)
+![一次工具请求、执行、回填与第二次决定](../../website/assets/diagrams/G3-tool-roundtrip.png)
+
+[查看原图](../../website/assets/diagrams/G3-tool-roundtrip.png)
 
 ## 打开已经运行的样本
 
@@ -86,7 +88,9 @@ python3 -m examples.policy_agent resume --run-id ticket-11
 
 任务状态与批准保存于 `.local/policy_agent/<run-id>/task.sqlite`，模拟工单在同目录的service.sqlite，两个数据库没有共同事务。服务按tenant_id+operation_id唯一，并比较规范化完整参数；同ID异内容拒绝，相同内容返回已有对象。
 
-![服务已提交但本地尚未确认时，第二进程按原操作ID恢复](../../website/assets/diagrams/G8-write-recovery.svg)
+![服务已提交但本地尚未确认时，第二进程按原操作ID恢复](../../website/assets/diagrams/G8-write-recovery.png)
+
+[查看原图](../../website/assets/diagrams/G8-write-recovery.png)
 
 T12手动演示使用同样的run→approve→resume命令，将任务与run-id换为T12/ticket-12。第一次resume预期退出码73，模拟进程在服务提交后、本地确认前退出；再运行同一resume命令恢复。不要删运行目录或换操作ID。自动all套件也会启动两个真实Python子进程核对这一过程。该实验验证本地模拟合同，不能推导所有远端服务都支持相同保证。
 

@@ -63,7 +63,9 @@ A2A 则为远程 Agent 的发现、消息和任务状态提供合同。研究助
 
 ## 四个工具就能检查路由的四种错误
 
-![G4：Host管理多个Client到不同Server的连接；业务权限在各执行边界判断](../website/assets/diagrams/G4-mcp-connections.svg)
+![G4：Host管理多个Client到不同Server的连接；业务权限在各执行边界判断](../website/assets/diagrams/G4-mcp-connections.png)
+
+[查看原图](../website/assets/diagrams/G4-mcp-connections.png)
 
 本地政策实验的最小能力目录如下。它使用函数工具，不实际启动MCP连接；MCP图用于说明将来服务化时职责如何对应。
 

@@ -60,7 +60,9 @@ Handoff 则改变当前处理对话的角色或状态。政策问答转到申请
 
 ## 已完成的单流程与分支流程设计
 
-![G7：共同条件、独立读取与合并依赖；重规划使旧待办失效](../website/assets/diagrams/G7-planning-compare.svg)
+![C5：共同日期约束下，两地独立查询，结果齐备后再汇合比较](../website/assets/diagrams/concepts/C5-planning-feedback.png)
+
+[查看原图](../website/assets/diagrams/concepts/C5-planning-feedback.png)
 
 T05两地比较的共同输入固定为日期11月12日、staff类别、同一租户范围。单流程按海岚→云洲→比较推进；分支设计让两路只返回证据，协调者独占结论。下表是设计账本，不是运行了两个模型的性能报告：
 

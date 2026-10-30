@@ -10,7 +10,9 @@
 
 规划是安排下一步及其依赖，可以由模型承担，也可以由程序约束；长期记忆是跨任务保留信息的一种选择。本例先不引入独立规划器或跨会话用户记忆，仍能说明观察、决定、执行、反馈的关系。离线模式用有限规则代替模型，便于检查控制机制；它不展示真实模型的自然语言理解能力。[定义与复杂度取舍参考](https://www.anthropic.com/research/building-effective-agents)
 
-![G1：用户目标进入运行时，策略提出动作，运行时校验后调用工具，观察更新状态并进入下一次决定](../website/assets/diagrams/G1-system-flow.svg)
+![G1：用户目标进入运行时，策略提出动作，运行时校验后调用工具，观察更新状态并进入下一次决定](../website/assets/diagrams/G1-system-flow.png)
+
+[查看原图](../website/assets/diagrams/G1-system-flow.png)
 
 读图时先找到三条不同的信息：用户目标、拟执行的动作、执行后取得的观察。可信身份由运行时提供，不由模型自行填写。问自己：“系统说了已完成，环境中应有什么证据？”在查询任务中是有效条款与正确比较；创建任务中还必须有真实后端对象。
 
@@ -39,7 +41,9 @@ python3 -m examples.policy_agent run --task T01 --mode offline --run-id intro-t0
 | 工具返回后 | P17-v2#4、有效日期、700元 | 比较并回答 | 必要金额证据已齐 |
 | 任务结束 | 条款、比较结果、终态 | 不再调用工具 | 当前问答已满足验收 |
 
-![G3：模型或策略提出工具调用，运行时执行后将对应 call_id 的结果送入下一轮输入](../website/assets/diagrams/G3-tool-roundtrip.svg)
+![G3：模型或策略提出工具调用，运行时执行后将对应 call_id 的结果送入下一轮输入](../website/assets/diagrams/G3-tool-roundtrip.png)
+
+[查看原图](../website/assets/diagrams/G3-tool-roundtrip.png)
 
 图中的“回填”是关键：工具结果必须关联原调用，并成为下一轮实际可见的信息。只把它写到日志、却不给策略看，下一步仍可能按旧前提走。离线策略的 [实现](../examples/policy_agent/policies.py)读取可见观察，不按 T01 等题号决定答案。
 

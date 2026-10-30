@@ -12,7 +12,9 @@ Agent 怎样理解一个目标，为什么需要工具，任务做到一半又�
 
 ## 从组成看懂协作
 
-![模型负责理解与决策，工具提供外部能力，记忆保留可用信息，规划组织步骤；四类能力围绕目标协作](website/assets/diagrams/concepts/C1-capability-map.svg)
+![模型负责理解与决策，工具提供外部能力，记忆保留可用信息，规划组织步骤；四类能力围绕目标协作](website/assets/diagrams/concepts/C1-capability-map.png)
+
+[查看原图](website/assets/diagrams/concepts/C1-capability-map.png)
 
 小明问：“11月12日去海岚出差，住宿每晚650元，超过标准吗？”模型要读懂这名员工的问题，工具负责取得制度，任务记录保留日期与已查资料，规划决定先查什么、还缺什么。运行时把这些能力组织成连续的过程。[进入课程完整讲解](learning/01-system-map.md)
 

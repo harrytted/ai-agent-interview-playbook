@@ -1,9 +1,13 @@
 """Reject misleading publication pairs and unsafe SVGs using isolated fixtures."""
 from pathlib import Path
+import json
+import struct
 import tempfile
 import unittest
+import zlib
 
-from scripts.check_diagrams import CONCEPT_FILES, FILES, check_diagrams, validate_svg
+from scripts.check_diagrams import (CONCEPT_FILES, FILES, check_diagrams,
+                                    check_generated_images, validate_png, validate_svg)
 
 
 def sample(number):
@@ -14,6 +18,16 @@ viewBox="0 0 440 600" role="img" aria-labelledby="title desc">
 <defs><marker id="arrow"><path d="M0 0 L5 3 L0 6"/></marker></defs>
 <path d="M10 20 V80" marker-end="url(#arrow)"/>
 </svg>'''.encode()
+
+
+def png(width=1024, height=1024):
+    def chunk(kind, data):
+        return (struct.pack(">I", len(data)) + kind + data
+                + struct.pack(">I", zlib.crc32(kind + data) & 0xffffffff))
+    return (b"\x89PNG\r\n\x1a\n"
+            + chunk(b"IHDR", struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0))
+            + chunk(b"IDAT", zlib.compress((b"\0" + b"\xff" * width * 3) * height))
+            + chunk(b"IEND", b""))
 
 
 class DiagramTests(unittest.TestCase):
@@ -93,6 +107,7 @@ class DiagramTests(unittest.TestCase):
         result = check_diagrams(Path(__file__).resolve().parents[1], "all")
         self.assertEqual(result.errors, [])
         self.assertEqual(result.diagrams, 8 + len(CONCEPT_FILES))
+        self.assertEqual(result.generated_images, 14)
 
     def test_concept_group_is_checked_recursively_and_requires_complete_pairs(self):
         self.write(1)
@@ -107,6 +122,59 @@ class DiagramTests(unittest.TestCase):
         result = check_diagrams(self.root, "pilot")
         self.assertEqual(result.errors, [])
         self.assertEqual(result.diagrams, 8)
+
+
+class GeneratedImageTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+
+    def manifest(self):
+        expected = {f"G{number}": filename for number, filename in FILES.items()} | CONCEPT_FILES
+        metadata = {"assets": []}
+        for identity, name in expected.items():
+            path = "website/assets/diagrams/" + str(Path(name).with_suffix(".png"))
+            metadata["assets"].append({"id": identity, "path": path,
+                                       "semantic_source": "diagrams/source/" + name})
+            target = self.root / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(png())
+        self.save(metadata)
+        return metadata
+
+    def save(self, metadata):
+        path = self.root / "diagrams/imagegen-manifest.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(metadata), encoding="utf-8")
+
+    def test_png_rejects_wrong_signature_truncation_and_corrupt_chunks(self):
+        data = png()
+        self.assertEqual(validate_png(data), [])
+        self.assertIn("signature", " ".join(validate_png(b"not a png")))
+        self.assertIn("truncated", " ".join(validate_png(data[:-3])))
+        damaged = data[:40] + bytes([data[40] ^ 1]) + data[41:]
+        self.assertIn("checksum", " ".join(validate_png(damaged)))
+        self.assertIn("dimensions", " ".join(validate_png(png(100, 100))))
+
+    def test_manifest_covers_all_assets_and_detects_missing_nested_image(self):
+        metadata = self.manifest()
+        self.assertEqual(check_generated_images(self.root), ([], 14))
+        (self.root / metadata["assets"][-1]["path"]).unlink()
+        errors, count = check_generated_images(self.root)
+        self.assertEqual(count, 13)
+        self.assertIn("missing generated image", "\n".join(errors))
+
+    def test_manifest_rejects_duplicate_entries_and_unexpected_paths(self):
+        metadata = self.manifest()
+        metadata["assets"][0]["path"] = "../outside.png"
+        metadata["assets"].append(metadata["assets"][1])
+        metadata["assets"].pop(2)
+        self.save(metadata)
+        errors, _ = check_generated_images(self.root)
+        self.assertIn("incorrect imagegen publication/source path", "\n".join(errors))
+        self.assertIn("duplicate imagegen manifest id", "\n".join(errors))
+        self.assertIn("missing imagegen manifest entry: G3", "\n".join(errors))
 
 
 if __name__ == "__main__":

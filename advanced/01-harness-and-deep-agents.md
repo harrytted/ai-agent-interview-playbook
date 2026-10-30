@@ -52,7 +52,9 @@ Deep Agents 将计划、文件系统上下文、子任务委派和记忆等能�
 
 ## 可直接交接的成品：两地政策比较包
 
-![G1：模型、运行时、工具、状态和环境的职责](../website/assets/diagrams/G1-system-flow.svg)
+![G1：模型、运行时、工具、状态和环境的职责](../website/assets/diagrams/G1-system-flow.png)
+
+[查看原图](../website/assets/diagrams/G1-system-flow.png)
 
 把T05做到可交接的位置，留下下面这份设计样本。它表达进展与依据，不授予接手者额外权限。
 

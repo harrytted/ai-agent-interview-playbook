@@ -6,7 +6,9 @@
 
 **阅读分层：** 必读“文本先变成token”“逐步选择”“Prefill/Decode”三节，能说明输入、输出和延迟来源即可；Attention数值推导及训练方法为数学与模型方向选读，可以稍后回查。选读不改变理解工具循环所需的前提。
 
-![G2：文本编码成token表示，经过因果注意力与后续变换，得到下一token分布，再逐步生成](../website/assets/diagrams/G2-model-output.svg)
+![G2：文本编码成token表示，经过因果注意力与后续变换，得到下一token分布，再逐步生成](../website/assets/diagrams/G2-model-output.png)
+
+[查看原图](../website/assets/diagrams/G2-model-output.png)
 
 下文算例只对应图中的注意力信息混合。算得7是手工Value的加权结果，不是“答案7元”，也没有完成从词表分布到语言输出的整个模型。用图定位计算的位置，避免把一段公式误当整台模型。
 

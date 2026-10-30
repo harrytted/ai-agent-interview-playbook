@@ -131,11 +131,15 @@ MCP 的工具接口同样包含输入 schema，接入时要核对服务与校验
 
 同一个call_id关联成功或失败，不用自由文本“failed”替代合同。空结果是`empty`观察，不等于权限拒绝，也不自动等于任务成功。读失败的重试次数和整个任务预算分别计数。
 
-![G3：工具调用、运行时执行、结果关联和下一次输入](../website/assets/diagrams/G3-tool-roundtrip.svg)
+![G3：工具调用、运行时执行、结果关联和下一次输入](../website/assets/diagrams/G3-tool-roundtrip.png)
+
+[查看原图](../website/assets/diagrams/G3-tool-roundtrip.png)
 
 模型或策略只有取得结果后才能有新证据。[完整实现与返回合同](../examples/policy_agent/README.md)；新实验实现本地函数工具，下面的MCP图用于协议职责教学，不表示它已运行MCP Server。
 
-![G4：同一个Host中的两个Client分别连接政策与工单Server](../website/assets/diagrams/G4-mcp-connections.svg)
+![G4：同一个Host中的两个Client分别连接政策与工单Server](../website/assets/diagrams/G4-mcp-connections.png)
+
+[查看原图](../website/assets/diagrams/G4-mcp-connections.png)
 
 ## MCP 把哪些连接方式统一起来
 

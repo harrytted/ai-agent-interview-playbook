@@ -44,7 +44,9 @@
 
 ## 两个进程，验证一次真实的故障窗口
 
-![G8：本地意图、模拟服务提交与本地确认之间的崩溃窗口及恢复查询](../website/assets/diagrams/G8-write-recovery.svg)
+![G8：本地意图、模拟服务提交与本地确认之间的崩溃窗口及恢复查询](../website/assets/diagrams/G8-write-recovery.png)
+
+[查看原图](../website/assets/diagrams/G8-write-recovery.png)
 
 新政策实验T12将本地任务与模拟工单服务分放两个SQLite数据库。进程一保存意图，经批准后提交服务，在服务commit之后、本地确认之前退出73；进程二读取原意图，按同一operation_id查询或幂等恢复。服务按租户和操作ID唯一，并核对完整参数指纹。
 

@@ -36,7 +36,9 @@ SQL 工具应限制可访问表、列、行和执行资源；只读账号、参�
 
 ## 把“继续搜索”写成可核对的证据缺口
 
-![G5：索引与查询分离；追加检索补足具体证据](../website/assets/diagrams/G5-rag-pipelines.svg)
+![G5：入库建立索引，查询取得候选并筛选适用证据，再组装上下文生成引用回答](../website/assets/diagrams/G5-rag-pipelines.png)
+
+[查看原图](../website/assets/diagrams/G5-rag-pipelines.png)
 
 T06问11月12日海岚报价800元是否超标，以及例外咨询需要什么。不是“相关资料越多越好”，而是分别满足两项证据需求：
 
