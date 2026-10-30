@@ -87,6 +87,31 @@ class StudyTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "重复"):
             study.questions(self.work)
 
+    def test_fenced_headings_neither_create_questions_nor_truncate_answers(self):
+        folder = self.work / "docs" / "foundations"
+        folder.mkdir(parents=True)
+        source = folder / "examples.md"
+        for opening, closing in (("```markdown", "```"), ("~~~markdown", "~~~"), ("````markdown", "````")):
+            inner = "```\n" if opening.startswith("````") else ""
+            sample = opening + "\n## 示例小节\n### Q999 示例题号\n" + inner + "正文示例\n" + closing
+            source.write_text("### Q001 first\n\n正文开始。\n\n" + sample
+                              + "\n\n真实答案结尾。\n\n### Q002 second\n\n第二题答案。\n\n## 参考资料\n不属于答案。\n")
+            with self.subTest(fence=opening):
+                bank = study.questions(self.work)
+                self.assertEqual([question.id for question in bank], ["Q001", "Q002"])
+                self.assertIn(sample, bank[0].body)
+                self.assertTrue(bank[0].body.endswith("真实答案结尾。"))
+                self.assertEqual(bank[1].body, "第二题答案。")
+
+    def test_terminal_expands_real_folds_but_preserves_html_examples(self):
+        sample = "```html\n<details><summary>示例</summary>\n示例内容\n</details>\n```"
+        body = "<details><summary>展开答案</summary>\n\n真实答案。\n\n" + sample + "\n\n</details>"
+        expanded = study.readable_answer(body)
+        self.assertIn(sample, expanded)
+        self.assertTrue(expanded.startswith("展开答案\n"))
+        self.assertTrue(expanded.endswith("```"))
+        self.assertNotIn("<summary>展开答案</summary>", expanded)
+
     def test_list_filters_by_topic_path_without_writing_progress(self):
         code, out, err = self.cli("list", "--topic", "engineering/05-")
         self.assertEqual((code, err), (0, ""))

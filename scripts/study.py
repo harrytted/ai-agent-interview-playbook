@@ -15,6 +15,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 HEADING = re.compile(r"^### (Q\d{3}) (.+)$", re.MULTILINE)
+FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
 BANK_FOLDERS = ("foundations", "engineering", "advanced")
 
 
@@ -26,16 +27,38 @@ class Question:
     body: str
 
 
+def _structural_text(content: str) -> str:
+    """Hide fenced examples while retaining offsets into the original answer."""
+    lines = []
+    character, length = "", 0
+    for line in content.splitlines(keepends=True):
+        marker = FENCE.match(line)
+        if character:
+            lines.append("".join("\n" if char == "\n" else " " for char in line))
+            if marker and marker[1][0] == character and len(marker[1]) >= length and not marker[2].strip():
+                character, length = "", 0
+        elif marker:
+            character, length = marker[1][0], len(marker[1])
+            lines.append("".join("\n" if char == "\n" else " " for char in line))
+        else:
+            lines.append(line)
+    return "".join(lines)
+
+
 def questions(root: Path = ROOT) -> list[Question]:
     found = []
     for folder in BANK_FOLDERS:
         for path in sorted((root / "docs" / folder).glob("*.md")):
             content = path.read_text(encoding="utf-8")
-            matches = list(HEADING.finditer(content))
+            structural = _structural_text(content)
+            matches = list(HEADING.finditer(structural))
             for i, match in enumerate(matches):
                 end = matches[i + 1].start() if i + 1 < len(matches) else len(content)
                 # Chapter navigation and reference sections are outside individual answers.
-                body = content[match.end():end].split("\n## ", 1)[0].strip()
+                section = re.search(r"\n## ", structural[match.end():end])
+                if section:
+                    end = match.end() + section.start()
+                body = content[match.end():end].strip()
                 found.append(Question(match[1], match[2], path.relative_to(root), body))
     ids = [q.id for q in found]
     if len(ids) != len(set(ids)):
@@ -45,8 +68,15 @@ def questions(root: Path = ROOT) -> list[Question]:
 
 def readable_answer(body: str) -> str:
     """Expand GitHub's answer folds for a terminal while retaining all answer text."""
-    body = re.sub(r"<summary>(.*?)</summary>", r"\1\n", body, flags=re.S)
-    return re.sub(r"</?details\b[^>]*>", "", body).strip()
+    visible = _structural_text(body)
+    output, position = [], 0
+    for match in re.finditer(r"<summary>(.*?)</summary>|</?details\b[^>]*>", visible, re.S):
+        output.append(body[position:match.start()])
+        if match[1] is not None:
+            output.append(body[match.start(1):match.end(1)] + "\n")
+        position = match.end()
+    output.append(body[position:])
+    return "".join(output).strip()
 
 
 def today() -> date:

@@ -104,11 +104,21 @@ def build_context(state):
     known = deepcopy(state["known"])
     known["employee_category"] = user["employee_category"]
     cities = known.get("cities", [known.get("city")])
+    current_documents = {d["document_id"]: d for d in read_json(DATA / "policies.json")}
     observations, evidence = [], {}
     for raw in state["observations"]:
         observation = deepcopy(raw)
         if observation["name"] in {"search_policy", "get_policy"}:
-            documents = [d for d in observation["result"]["data"].get("documents", []) if is_authorized(d, user)]
+            documents = []
+            for document in observation["result"]["data"].get("documents", []):
+                source_id = document["document_id"]
+                if source_id == "P17-conflict-v2":
+                    # Only the trusted fault injector can record this synthetic
+                    # document's real authorization source; never the policy.
+                    source_id = state.get("injected_sources", {}).get(observation["call_id"])
+                source = current_documents.get(source_id)
+                if source and is_authorized(source, user) and is_authorized(document, user):
+                    documents.append(document)  # Keep observed text, not new source text.
             observation["result"]["data"]["documents"] = documents
             allowed_refs = {c["clause_id"] for d in documents for c in d["clauses"]}
             observation["result"]["evidence_refs"] = [r for r in observation["result"]["evidence_refs"] if r in allowed_refs]
@@ -201,6 +211,7 @@ def _read(action, state):
     current = [d for d in documents if applicable(d, state, user, trip_date=args["trip_date"])]
     if fault == "conflicting-current" and current:
         conflict = deepcopy(current[0])
+        state.setdefault("injected_sources", {})[action["call_id"]] = current[0]["document_id"]
         conflict["document_id"] = "P17-conflict-v2"
         conflict["clauses"] = [{"clause_id": "P17-conflict-v2#4", "text": "同等级来源的冲突夹具：每晚500元。", "amount_cny": 500}]
         return _tool_result(action, "conflicting_evidence", documents=current + [conflict])
@@ -292,11 +303,12 @@ def _validate_output_evidence(output, state):
     if output["claims"]:
         _validate_claims(output, state)
     user = subject(state)
-    observed = {c["clause_id"] for o in state["observations"] if o["name"] in {"search_policy", "get_policy"} and o["result"]["status"] in {"ok", "conflicting_evidence"} for d in o["result"]["data"].get("documents", []) if applicable(d, state, user) for c in d["clauses"]}
+    observations = build_context(state)["observations"]
+    observed = {c["clause_id"] for o in observations if o["name"] in {"search_policy", "get_policy"} and o["result"]["status"] in {"ok", "conflicting_evidence"} for d in o["result"]["data"].get("documents", []) if applicable(d, state, user) for c in d["clauses"]}
     if any(not isinstance(ref, str) or ref not in observed for ref in output["evidence_refs"]):
         raise ValueError("non-answer cites unobserved or unauthorized evidence")
     if output["status"] == "human_required":
-        conflicts = [o for o in state["observations"] if o["result"]["status"] == "conflicting_evidence"]
+        conflicts = [o for o in observations if o["result"]["status"] == "conflicting_evidence"]
         values = {c["amount_cny"] for o in conflicts for d in o["result"]["data"].get("documents", []) if applicable(d, state, user) for c in d["clauses"] if "amount_cny" in c and c["clause_id"] in output["evidence_refs"]}
         if len(values) < 2:
             raise ValueError("human_required needs actual conflicting observations")

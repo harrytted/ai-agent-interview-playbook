@@ -3,6 +3,7 @@
 from copy import deepcopy
 import json
 from pathlib import Path
+import shutil
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -240,6 +241,58 @@ class PolicyAgentTests(unittest.TestCase):
         self.assertEqual(result["status"], "permission_denied")
         self.assertEqual(self.stores().snapshot(), [])
         self.assertEqual(core.read_json(self.root / "demo" / "context.json")["evidence"], [])
+
+    def test_current_document_acl_withdraws_old_evidence_before_resumed_write(self):
+        data = self.root / "data"
+        shutil.copytree(core.DATA, data)
+        with patch.object(core, "DATA", data):
+            waiting = self.run_task("T11")
+            core.approve_task("demo", waiting["approval_request"]["request_id"], self.root)
+            documents = core.read_json(data / "policies.json")
+            for document in documents:
+                if document["document_id"] == "P17-v2":
+                    document["allowed_roles"] = ["manager"]
+            core.write_json(data / "policies.json", documents)
+            result = core.resume_task("demo", self.root)
+            context = core.read_json(self.root / "demo" / "context.json")
+        self.assertEqual(result["status"], "permission_denied")
+        self.assertEqual(self.stores().snapshot(), [])
+        self.assertEqual(context["evidence"], [])
+        self.assertEqual(context["observations"][0]["result"]["data"]["documents"], [])
+        self.assertEqual(context["observations"][0]["result"]["evidence_refs"], [])
+        self.assertNotIn("本虚构制度下", json.dumps(context, ensure_ascii=False))
+
+    def test_refreshed_document_metadata_does_not_replace_observed_body(self):
+        data = self.root / "data"
+        shutil.copytree(core.DATA, data)
+        with patch.object(core, "DATA", data):
+            self.run_task()
+            documents = core.read_json(data / "policies.json")
+            for document in documents:
+                if document["document_id"] == "P17-v2":
+                    document["clauses"][0]["text"] = "new body that was not observed"
+            core.write_json(data / "policies.json", documents)
+            context = core.build_context(self.stores().load())
+        self.assertNotIn("new body that was not observed", json.dumps(context))
+        self.assertEqual(context["evidence"][0]["clauses"][0]["amount_cny"], 700)
+
+    def test_handoff_cannot_reuse_references_after_document_acl_revocation(self):
+        data = self.root / "data"
+        shutil.copytree(core.DATA, data)
+        with patch.object(core, "DATA", data):
+            self.run_task("T07")
+            state = self.stores().load()
+            output = state["output"]
+            documents = core.read_json(data / "policies.json")
+            for document in documents:
+                if document["document_id"] == "P17-v2":
+                    document["allowed_roles"] = ["manager"]
+            core.write_json(data / "policies.json", documents)
+            context = core.build_context(state)
+            self.assertNotIn("injected_sources", context)
+            with self.assertRaisesRegex(ValueError, "unauthorized evidence"):
+                core._validate_output_evidence(output, state)
+        self.assertEqual(context["observations"][0]["result"]["data"]["documents"], [])
 
     def test_fake_service_deduplicates_full_payload_and_rejects_id_reuse(self):
         service = self.stores()
