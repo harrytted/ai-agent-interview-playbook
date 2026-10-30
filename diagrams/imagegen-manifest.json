@@ -19,7 +19,11 @@
       "id": "G3",
       "path": "website/assets/diagrams/G3-tool-roundtrip.png",
       "semantic_source": "diagrams/source/G3-tool-roundtrip.svg",
-      "topic": "工具请求、执行和对应结果的完整往返"
+      "topic": "工具请求、执行和对应结果的完整往返",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "6d092611d637bcc7865724c7ea7563841243d603187a7e1bdea8b5abaea77a64",
+      "revised_on": "2026-10-31"
     },
     {
       "id": "G4",

@@ -48,7 +48,7 @@
 
 **微练习：**
 
-为该研究画证据 DAG，标来源、前置条件和失败状态。验收：能够指出哪些节点可并发，正确复算 A 的比例，并明确 B 缺哪个映射、为什么不能靠文本检索补猜。
+为该研究画证据依赖图（DAG，有向无环图），用有向边表示前置依赖，标来源、前置条件和失败状态。验收：能够指出哪些节点可并发，正确复算 A 的比例，并明确 B 缺哪个映射、为什么不能靠文本检索补猜。
 
 
 **学习与参考：** [配套学习章](../../advanced/06-agentic-rag.md) · [Adaptive-RAG 原论文](https://arxiv.org/abs/2403.14403) · [PostgreSQL 行级权限](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)

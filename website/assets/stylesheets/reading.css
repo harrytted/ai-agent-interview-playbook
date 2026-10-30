@@ -128,6 +128,11 @@ textarea {
   letter-spacing: -0.02em;
 }
 
+/* Legacy anchors follow headings; leave room for a wrapped heading and header. */
+.md-typeset div[id]:empty {
+  scroll-margin-top: 8rem;
+}
+
 .md-typeset h2 {
   margin: 2.3em 0 1em;
   padding-bottom: 0.35em;
