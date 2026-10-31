@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>18B · 播放进度与打断实验</title>
+<style>
+body{margin:0;background:#f4f3ee;color:#203a33;font:16px/1.7 system-ui,sans-serif}main{max-width:820px;margin:40px auto;padding:24px}h1{font-size:30px;line-height:1.3}button{font:inherit;padding:10px 18px;margin:5px 8px 5px 0;border:1px solid #315b49;border-radius:6px;background:#fff;color:#203a33;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #bd6b2d;outline-offset:3px}button:first-of-type{background:#315b49;color:white}img{max-width:100%;width:440px;border-radius:8px}progress{width:100%;height:20px}pre{background:#fff;padding:16px;overflow:auto;max-height:280px;border:1px solid #ccc;border-radius:8px;font-size:13px;white-space:pre-wrap}#status{font-weight:600}small{display:block}audio{width:100%}.note{border-left:3px solid #bd6b2d;padding-left:16px}
+</style>
+<main>
+<p>应用专题 18B · 本地媒体实验</p>
+<h1>听到哪里，历史就保留到哪里</h1>
+<p class="note">下方是本手册用数学波形生成的4秒提示音，没有人声。它用于验证真实浏览器播放、暂停和打断，不能证明语音识别、TTS、模型推理或网络时延。</p>
+<details><summary>查看18A的原始票据和证据区域</summary><img src="assets/receipt.svg" alt="虚构教学票据：海岚，2026年11月12日，住宿650元；金额框区域80,180,460,70"><p>图片是自绘SVG；区域坐标可核查，但金额观察由固定夹具给出，未运行OCR。</p></details>
+<audio id="audio" preload="metadata" src="assets/playback-tone.wav"></audio>
+<p><button id="play">播放 / 继续</button><button id="pause">暂停</button><button id="interrupt">模拟用户打断</button><button id="reset">重置</button><button id="download">下载播放日志</button></p>
+<label for="progress">实际播放进度</label><progress id="progress" value="0" max="4"></progress>
+<p id="status" role="status" aria-live="polite">尚未播放</p>
+<dl><dt>已生成音频</dt><dd id="generated">等待媒体元数据</dd><dt>浏览器报告已播放</dt><dd id="played">0.000 秒</dd><dt>打断后保留的历史范围</dt><dd id="history">尚未打断</dd></dl>
+<small>currentTime 是媒体时钟，近似表示播放位置；并不能证明用户实际听见或理解。暂停可以继续；打断取消本次输出，后续播放要先重置。</small>
+<pre id="log" aria-label="播放事件日志"></pre>
+</main>
+<script>
+const audio=document.getElementById('audio'),status=document.getElementById('status'),log=document.getElementById('log');
+let records=[],cancelled=false,generation=1;
+function record(type,extra={}){const event={type,generation,position:Number(audio.currentTime.toFixed(3)),at_ms:Math.round(performance.now()),...extra};records.push(event);log.textContent=records.slice(-35).map(x=>JSON.stringify(x)).join('\n');}
+function paint(){document.getElementById('played').textContent=audio.currentTime.toFixed(3)+' 秒';document.getElementById('progress').value=audio.currentTime;}
+audio.addEventListener('loadedmetadata',()=>{document.getElementById('generated').textContent=audio.duration.toFixed(3)+' 秒';document.getElementById('progress').max=audio.duration;record('media_ready',{duration:audio.duration});});
+audio.addEventListener('timeupdate',()=>{paint();if(!cancelled)record('playback');});
+audio.addEventListener('playing',()=>{status.textContent='播放中';record('playing');});
+audio.addEventListener('pause',()=>{paint();if(!cancelled){status.textContent='已暂停，可以继续';record('paused');}});
+audio.addEventListener('ended',()=>{paint();status.textContent='播放完毕';record('ended');});
+audio.addEventListener('error',()=>{status.textContent='音频加载失败，请确认assets/playback-tone.wav存在';record('media_error');});
+document.getElementById('play').onclick=async()=>{if(cancelled){status.textContent='本次输出已取消，请先重置';record('play_rejected_after_cancel');return;}try{await audio.play();}catch(e){status.textContent='浏览器未开始播放：'+e.message;record('play_error');}};
+document.getElementById('pause').onclick=()=>{if(!cancelled)audio.pause();};
+document.getElementById('interrupt').onclick=()=>{if(cancelled)return;const position=audio.currentTime;cancelled=true;audio.pause();paint();document.getElementById('history').textContent='0 至 '+position.toFixed(3)+' 秒';status.textContent='已打断，生成时长不能冒充已播放时长';record('interrupt',{history_seconds:Number(position.toFixed(3))});};
+document.getElementById('reset').onclick=()=>{audio.pause();audio.currentTime=0;generation++;cancelled=false;records=[];document.getElementById('history').textContent='尚未打断';status.textContent='已重置';paint();record('reset');};
+document.getElementById('download').onclick=()=>{const blob=new Blob([records.map(x=>JSON.stringify(x)).join('\n')+'\n'],{type:'application/x-ndjson'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='playback-trace.jsonl';a.click();URL.revokeObjectURL(url);};
+</script>
+</html>

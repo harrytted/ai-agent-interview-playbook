@@ -1,5 +1,5 @@
 site_name: Agent 学习手册
-site_description: 从基础原理到工程进阶，配合 92 道详解面试题与 Python 实验，系统学习 AI Agent。
+site_description: 从基础原理到工程进阶，配合 110 道详解面试题与 Python 实验，系统学习 AI Agent。
 site_url: https://harrytted.github.io/ai-agent-interview-playbook/
 repo_url: https://github.com/harrytted/ai-agent-interview-playbook
 repo_name: GitHub 仓库
@@ -87,18 +87,26 @@ nav:
       - 术语回查: learning/glossary.md
   - 工程进阶:
       - advanced/index.md
-      - 01 · Harness 与深度 Agent: advanced/01-harness-and-deep-agents.md
-      - 02 · 持久执行: advanced/02-durable-execution.md
-      - 03 · 上下文工程: advanced/03-context-engineering.md
-      - 04 · 记忆与技能: advanced/04-memory-and-skills.md
-      - 05 · 工具路由与 MCP: advanced/05-tool-routing-and-mcp.md
-      - 06 · Agentic RAG: advanced/06-agentic-rag.md
-      - 07 · 多 Agent 系统: advanced/07-multi-agent-systems.md
-      - 08 · 编码与计算机操作: advanced/08-coding-and-computer-use.md
-      - 09 · 评测与反馈: advanced/09-evaluation-and-feedback.md
-      - 10 · 性能与推理: advanced/10-performance-and-serving.md
-      - 11 · 安全与治理: advanced/11-security-and-governance.md
-      - 12 · Agent 训练: advanced/12-agent-training.md
+      - 系统机制 01–12:
+          - 01 · Harness 与深度 Agent: advanced/01-harness-and-deep-agents.md
+          - 02 · 持久执行: advanced/02-durable-execution.md
+          - 03 · 上下文工程: advanced/03-context-engineering.md
+          - 04 · 记忆与技能: advanced/04-memory-and-skills.md
+          - 05 · 工具路由与 MCP: advanced/05-tool-routing-and-mcp.md
+          - 06 · Agentic RAG: advanced/06-agentic-rag.md
+          - 07 · 多 Agent 系统: advanced/07-multi-agent-systems.md
+          - 08 · 编码与计算机操作: advanced/08-coding-and-computer-use.md
+          - 09 · 评测与反馈: advanced/09-evaluation-and-feedback.md
+          - 10 · 性能与推理: advanced/10-performance-and-serving.md
+          - 11 · 安全与治理: advanced/11-security-and-governance.md
+          - 12 · Agent 训练: advanced/12-agent-training.md
+      - 应用专题 13–18:
+          - 13 · 模型 API 与输出合同: advanced/13-model-api-and-output-contracts.md
+          - 14 · 知识摄取与索引生命周期: advanced/14-ingestion-and-index-lifecycle.md
+          - 15 · Text-to-SQL 与数据分析: advanced/15-text-to-sql-and-data-analysis.md
+          - 16 · 服务交付与运维: advanced/16-service-deployment-and-operations.md
+          - 17 · 事件驱动与主动任务: advanced/17-event-driven-and-proactive-agents.md
+          - 18 · 多模态与实时语音: advanced/18-multimodal-and-realtime-agents.md
       - 贯穿项目工作坊: advanced/project-workshop.md
       - 官方知识体系: advanced/official-learning-map.md
   - 面试题库:
@@ -219,6 +227,31 @@ nav:
               - "Q090 · Agent 出错时，怎样选择改运行时、SFT、DPO 或 Agent RL？": questions/Q090.md
               - "Q091 · GRPO 的组内相对奖励怎样计算，为什么标准化不等于完整训练？": questions/Q091.md
               - "Q092 · Harnessed Agent RL 怎样组织训练数据，如何理解 Agent Lightning 的版本？": questions/Q092.md
+      - 应用专题:
+          - 模型API与输出:
+              - "Q093 · 提示要求JSON、JSON模式与Schema约束输出有什么区别？": questions/Q093.md
+              - "Q094 · 一次响应包含多个工具调用时，怎样按ID完整回填？": questions/Q094.md
+              - "Q095 · 收到半截参数或发生断流后，怎样判断响应是否完整？": questions/Q095.md
+          - 知识摄取与索引:
+              - "Q096 · 知识摄取怎样保留文档身份、来源位置和有效版本？": questions/Q096.md
+              - "Q097 · 增量摄取怎样处理中断重跑，并避免半成品进入查询？": questions/Q097.md
+              - "Q098 · 删除、撤权和索引回退怎样避免旧内容再次被使用？": questions/Q098.md
+          - SQL分析:
+              - "Q099 · Text-to-SQL 怎样明确指标、映射 Schema，并避免 JOIN 放大？": questions/Q099.md
+              - "Q100 · 模型生成的 SQL 怎样限制表列行、写操作和查询资源？": questions/Q100.md
+              - "Q101 · SQL 助手怎样有限修复，并用多数据实例核验语义？": questions/Q101.md
+          - 任务服务与运维:
+              - "Q102 · 任务API、会话和后台Worker怎样分工并支持恢复？": questions/Q102.md
+              - "Q103 · 怎样联合发布模型、提示、工具和索引，并处理在途任务？": questions/Q103.md
+              - "Q104 · HTTP请求正常但任务失败时，怎样设计服务指标与告警？": questions/Q104.md
+          - 事件与订阅:
+              - "Q105 · 事件ID、业务意图ID和运行ID分别解决什么问题？": questions/Q105.md
+              - "Q106 · 重复、乱序和迟到事件怎样收敛而不覆盖新状态？": questions/Q106.md
+              - "Q107 · 主动任务怎样分离触发条件、执行授权与通知条件？": questions/Q107.md
+          - 媒体与实时交互:
+              - "Q108 · 图片区域、页码与语音片段怎样对应到可核验的事实？": questions/Q108.md
+              - "Q109 · 用户打断后，生成、播放、历史和在途工具怎样保持一致？": questions/Q109.md
+              - "Q110 · 怎样比较两类语音架构，并设计专项评测？": questions/Q110.md
       - 按模块合订:
           - 进阶合订目录: docs/advanced/index.md
           - "Agent 与 LLM": docs/foundations/01-agent-and-llm.md
@@ -240,6 +273,12 @@ nav:
           - "进阶 · 性能与服务": docs/advanced/10-performance-and-serving.md
           - "进阶 · 安全与治理": docs/advanced/11-security-and-governance.md
           - "进阶 · 优化与训练": docs/advanced/12-agent-training.md
+          - "应用 · 模型 API 与输出合同": docs/advanced/13-model-api-and-output-contracts.md
+          - "应用 · 知识摄取与索引生命周期": docs/advanced/14-ingestion-and-index-lifecycle.md
+          - "应用 · Text-to-SQL 与数据分析": docs/advanced/15-text-to-sql-and-data-analysis.md
+          - "应用 · 服务交付与运维": docs/advanced/16-service-deployment-and-operations.md
+          - "应用 · 事件驱动与主动任务": docs/advanced/17-event-driven-and-proactive-agents.md
+          - "应用 · 多模态与实时语音": docs/advanced/18-multimodal-and-realtime-agents.md
   - 动手练习:
       - practice/index.md
       - 7 天项目实验: docs/engineering/08-project-lab.md
@@ -248,6 +287,12 @@ nav:
       - Agent 工具循环实验: examples/agent_lab/index.md
       - 基础数值实验: examples/foundations/index.md
       - 进阶运行机制实验: examples/advanced/index.md
+      - 模型协议与输出合同: examples/model_protocol_lab/index.md
+      - 知识摄取与索引: examples/knowledge_pipeline_lab/index.md
+      - SQL分析与结果核验: examples/sql_agent_lab/index.md
+      - HTTP任务服务: examples/service_lab/index.md
+      - 事件与订阅: examples/event_agent_lab/index.md
+      - 媒体证据与播放: examples/multimodal_lab/index.md
       - 模拟面试: practice/mock-interviews.md
       - 项目表达模板: practice/project-story-template.md
       - 错题复盘模板: practice/review-template.md
@@ -256,6 +301,7 @@ nav:
       - GitHub 项目调研: research/github-survey.md
       - 基础学习资源: research/learning-resources.md
       - 进阶项目与技术博客: research/advanced-landscape.md
+      - 应用扩充与验收矩阵: research/application-expansion.md
       - 基础原理参考资料: learning/verification.md
       - 本轮改版与验证边界: research/learning-redesign.md
       - 面试知识参考资料: docs/claim-ledger.md

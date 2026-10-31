@@ -1,0 +1,18 @@
+event: message_start
+data: {"type":"message_start","message":{"id":"fixture-answer","content":[]}}
+
+event: content_block_start
+data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"{\"claims\": [{\"city\": \"海岚\", \"limit_cny\": 700, \"reference\": \"P17-v2#4\"}, {\"city\": \"云洲\", \"limit_cny\": 650, \"reference\": \"P19-v1#4\"}]}"}}
+
+event: content_block_stop
+data: {"type":"content_block_stop","index":0}
+
+event: message_delta
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn"}}
+
+event: message_stop
+data: {"type":"message_stop"}
+

@@ -18,6 +18,13 @@ REPOSITORY_URL = "https://github.com/harrytted/ai-agent-interview-playbook"
 ROOT_PAGES = ("README.md", "CONTRIBUTING.md")
 PAGE_FOLDERS = ("questions", "learning", "advanced", "docs", "practice", "research")
 ASSET_EXTENSIONS = {".css", ".js", ".svg", ".png", ".ico", ".woff2"}
+# A reviewed interactive lab is published explicitly, without widening the
+# general examples allowlist to source code, arbitrary HTML or user media.
+DEMO_FILES = (
+    "examples/multimodal_lab/player.html",
+    "examples/multimodal_lab/assets/playback-tone.wav",
+    "examples/multimodal_lab/assets/receipt.svg",
+)
 PRIVATE_NAMES = {".git", ".local", "env", "venv", ".venv", "__pycache__",
                  "node_modules", "credentials", "credential", "secrets"}
 MARKER = ".prepared-site-source"
@@ -86,10 +93,9 @@ def page_mapping(root: Path) -> dict[PurePosixPath, PurePosixPath]:
 def asset_mapping(root: Path) -> dict[PurePosixPath, PurePosixPath]:
     """Publish only known static formats from the dedicated website/assets tree."""
     base = root / "website/assets"
-    if not base.is_dir() or base.is_symlink() or (root / "website").is_symlink():
-        return {}
     mapping = {}
-    for current, directories, files in os.walk(base, followlinks=False):
+    permitted_base = base.is_dir() and not base.is_symlink() and not (root / "website").is_symlink()
+    for current, directories, files in os.walk(base, followlinks=False) if permitted_base else ():
         current_path = Path(current)
         directories[:] = sorted(name for name in directories
                                 if not private_path(PurePosixPath(name))
@@ -100,6 +106,12 @@ def asset_mapping(root: Path) -> dict[PurePosixPath, PurePosixPath]:
             if (path.suffix.casefold() in ASSET_EXTENSIONS and not path.is_symlink()
                     and not private_path(relative)):
                 mapping[relative] = PurePosixPath("assets") / path.relative_to(base).as_posix()
+    for name in DEMO_FILES:
+        relative = PurePosixPath(name)
+        path = root / name
+        if path.is_file() and not any((root / Path(*relative.parts[:n])).is_symlink()
+                                      for n in range(1, len(relative.parts) + 1)):
+            mapping[relative] = relative
     return mapping
 
 

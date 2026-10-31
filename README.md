@@ -10,10 +10,10 @@
   先认识 Agent 的组成与协作，再按十章主线理解各部分怎样工作。
 
 - **[深入工程进阶](advanced/README.md)**<br>
-  已有基础，可以沿十二章学习长任务、系统设计、恢复与质量优化。
+  已有基础，可以沿系统机制与应用专题学习长任务、数据、服务交付和质量优化。
 
 - **[按面试题查漏补缺](questions/README.md)**<br>
-  进入 92 篇独立题解，先口述短答，再看完整解释、追问与案例。
+  进入 110 篇独立题解，先口述短答，再看完整解释、追问与案例。
 
 </div>
 
@@ -25,7 +25,7 @@
 
 小明问：“2026年11月12日去海岚出差，住宿每晚650元，超过标准吗？”本例的普通员工类别由可信档案提供。模型要读懂问题，工具负责取得适用制度，任务记录保留日期与已查资料，规划决定先查什么、还缺什么。运行时把这些能力组织成连续的过程。[进入章节完整讲解](learning/01-system-map.md)
 
-手册包含10章基础、12章进阶与92道详解题。基础原理与工程进阶两部分保留完整讲解，能够按章节连续学习；独立面试题提供短答、深入解析与追问，供复习和查漏。代码和实验作为理解后的进一步练习。图解帮助你看清信息如何流动，追问用来检查能否用自己的话说清。
+手册包含10章基础、18章进阶与110道详解题；进阶分为12章系统机制和6章应用专题。基础原理与工程进阶两部分保留完整讲解，能够按章节连续学习；独立面试题提供短答、深入解析与追问，供复习和查漏。代码和实验作为理解后的进一步练习。图解帮助你看清信息如何流动，追问用来检查能否用自己的话说清。
 
 按目录阅读可打开 [在线学习手册](https://harrytted.github.io/ai-agent-interview-playbook/)。遇到术语，可查作者的 [AI编程字典](https://agent.harrylab.cn/dictionary/)；需要更多图解与工程文章，可选读 [Agent技术博客](https://agent.harrylab.cn/articles/)。
 
@@ -55,6 +55,10 @@
 | 运&#8288;行&#8288;基&#8288;础 | [01 Harness](advanced/01-harness-and-deep-agents.md) · [02 持久执行](advanced/02-durable-execution.md) · [03 上下文工程](advanced/03-context-engineering.md) · [04 记忆与技能](advanced/04-memory-and-skills.md) | 长任务交接、恢复状态图、上下文与记忆合同 |
 | 能&#8288;力&#8288;组&#8288;织 | [05 工具路由/MCP](advanced/05-tool-routing-and-mcp.md) · [06 Agentic RAG](advanced/06-agentic-rag.md) · [07 多 Agent](advanced/07-multi-agent-systems.md) · [08 编码与计算机操作](advanced/08-coding-and-computer-use.md) | 工具选择、证据策略、协作图和操作环境 |
 | 质&#8288;量&#8288;优&#8288;化 | [09 评测反馈](advanced/09-evaluation-and-feedback.md) · [10 性能与推理](advanced/10-performance-and-serving.md) · [11 安全治理](advanced/11-security-and-governance.md) · [12 Agent 训练](advanced/12-agent-training.md) | 回归集合、共享预算、授权边界与训练决策 |
+| 应用主线 | [13 模型API](advanced/13-model-api-and-output-contracts.md) · [14 知识摄取](advanced/14-ingestion-and-index-lifecycle.md) · [16 任务服务](advanced/16-service-deployment-and-operations.md) | 模型往返、可更新索引与可恢复的HTTP任务 |
+| 方向选读 | [15 SQL分析](advanced/15-text-to-sql-and-data-analysis.md) · [17 事件订阅](advanced/17-event-driven-and-proactive-agents.md) · [18 媒体与语音](advanced/18-multimodal-and-realtime-agents.md) | 统计核验、主动任务、证据关联与播放打断 |
+
+建议动手顺序为13→16最小服务→14→16发布运维；SQL按数据分析方向选读，之后再推进事件和媒体专题。
 
 [完整进阶路线](advanced/README.md) · [贯穿项目工作坊](advanced/project-workshop.md) · [官方知识体系](advanced/official-learning-map.md) · [机制实验](examples/advanced/README.md)
 
@@ -62,7 +66,7 @@
 
 ## 知识地图
 
-Q001–Q056 覆盖基础与通用工程，Q057–Q092 对应 12 章进阶系统知识，采用相同的详解与案例标准。正文按知识关系完整讲解，面试题按问题组织回答与追问；学习和复习可以沿两种入口往返。
+Q001–Q056 覆盖基础与通用工程，Q057–Q092 对应12章进阶系统机制，Q093–Q110对应6章应用专题，采用相同的详解与案例标准。正文按知识关系完整讲解，面试题按问题组织回答与追问；学习和复习可以沿两种入口往返。
 
 | 模块 | 题号 | 你应当能够解释 |
 | --- | --- | --- |
@@ -73,7 +77,7 @@ Q001–Q056 覆盖基础与通用工程，Q057–Q092 对应 12 章进阶系统�
 | [评测与可观测性](questions/README.md#05--评测与可观测性) | Q033–Q040 | 数据集、失败归因、Judge 偏差、成本与延迟 |
 | [可靠性与安全](questions/README.md#06--可靠性与安全) | Q041–Q048 | 重试、幂等、人审、注入、隔离与故障恢复 |
 | [系统设计与项目表达](questions/README.md#07--系统设计与项目表达) | Q049–Q056 | 需求、架构、验收、真实贡献与可复现证据 |
-| [12 章进阶面试](docs/advanced/README.md) | Q057–Q092 | 长任务、上下文、检索协作、运行质量与训练取舍 |
+| [18 章进阶面试](docs/advanced/README.md) | Q057–Q110 | 系统机制、模型接入、摄取、SQL、任务服务、事件与媒体 |
 
 ## 每天怎么学
 
@@ -87,7 +91,7 @@ Q001–Q056 覆盖基础与通用工程，Q057–Q092 对应 12 章进阶系统�
 # 抽 5 题，只显示问题，先口述再看答案
 python3 scripts/study.py draw --count 5
 
-# 只练新增的 36 道进阶题
+# 只练54道进阶题
 python3 scripts/study.py draw --topic docs/advanced/ --count 3
 
 # 查看单题回答、追问和练习
@@ -113,6 +117,8 @@ python3 examples/foundations/math_lab.py --section all
 # 验证多次尝试指标、共享预算、关键路径与崩溃恢复
 python3 examples/advanced/runtime_lab.py --scenario all
 ```
+
+六组新实验的命令与验证边界见 [模型协议](examples/model_protocol_lab/README.md)、[知识摄取](examples/knowledge_pipeline_lab/README.md)、[SQL分析](examples/sql_agent_lab/README.md)、[任务服务](examples/service_lab/README.md)、[事件订阅](examples/event_agent_lab/README.md)及 [媒体播放](examples/multimodal_lab/README.md)。默认离线检查可重复运行，真实模型入口需要自行配置凭据。
 
 复习记录保存在 `.local/study-progress.json`，默认不进入 Git。日期间隔规则详见 [复习说明](practice/README.md)。
 

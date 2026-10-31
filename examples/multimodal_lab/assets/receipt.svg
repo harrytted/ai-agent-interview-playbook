@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title description">
+  <title id="title">自绘教学票据：海岚住宿650元</title>
+  <desc id="description">虚构票据，无真实个人数据。金额区域坐标为80,180,460,70。</desc>
+  <rect width="640" height="360" fill="#f4f1e8"/>
+  <rect x="32" y="24" width="576" height="312" rx="8" fill="white" stroke="#35544d" stroke-width="2"/>
+  <g fill="#233d36" font-family="sans-serif">
+    <text x="64" y="75" font-size="25">住宿凭证 · 虚构教学素材</text>
+    <text x="64" y="125" font-size="22">城市：海岚　日期：2026-11-12</text>
+    <text x="64" y="165" font-size="18">项目：住宿一晚　币种：人民币</text>
+    <rect x="80" y="180" width="460" height="70" fill="#eef6ed" stroke="#71916c" stroke-dasharray="6 4"/>
+    <text x="100" y="225" font-size="30">金额：650.00 元</text>
+    <text x="64" y="295" font-size="17">金额框用于区域定位，未运行OCR或视觉模型</text>
+  </g>
+</svg>

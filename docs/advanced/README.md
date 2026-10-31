@@ -1,6 +1,8 @@
-# 36 道进阶面试题：把机制讲到能落地
+# 54 道进阶面试题：把机制讲到能落地
 
-面试官问“框架支持什么”，回答功能列表就够了。再追问一句“远端成功后进程挂了呢”，问题就落到了执行过程。这 36 题沿着 [工程进阶（12 章）](../../advanced/README.md)展开：每章 3 题，分别检查机制、故障与设计取舍。
+<div id="36-道进阶面试题把机制讲到能落地"></div>
+
+面试官问“框架支持什么”，回答功能列表就够了。再追问一句“远端成功后进程挂了呢”，问题就落到了执行过程。这 54 题沿着 [工程进阶（18 章）](../../advanced/README.md)展开：每章 3 题，分别检查机制、故障与设计取舍。
 
 每题先给可口述的短答。展开后可以读详细机制、常见追问的回答、实战案例与练习。先自己想一遍再展开，别让眼睛替大脑打卡。
 
@@ -22,6 +24,17 @@
 | [10 性能与推理服务](../../advanced/10-performance-and-serving.md) | [Q084–Q086](10-performance-and-serving.md) | 关键路径、四类缓存、共享预算与模型路由 |
 | [11 安全与治理](../../advanced/11-security-and-governance.md) | [Q087–Q089](11-security-and-governance.md) | 身份与授权、注入、审批绑定和撤销 |
 | [12 优化与训练](../../advanced/12-agent-training.md) | [Q090–Q092](12-agent-training.md) | SFT/DPO/RL、组内信号、Harness 与轨迹合同 |
+
+系统机制仍为Q057–Q092，新增应用专题为Q093–Q110。编号稳定；先沿13→16最小服务→14的主线动手，SQL可按方向选读。
+
+| 应用专题 | 面试练习 | 要能讲清的决定 |
+| --- | --- | --- |
+| [13 模型API](../../advanced/13-model-api-and-output-contracts.md) | [Q093–Q095](13-model-api-and-output-contracts.md) | 结构约束、多工具回填和流式完整性 |
+| [14 知识摄取](../../advanced/14-ingestion-and-index-lifecycle.md) | [Q096–Q098](14-ingestion-and-index-lifecycle.md) | 表格条件、增量变更、撤权与索引发布 |
+| [15 SQL分析](../../advanced/15-text-to-sql-and-data-analysis.md) | [Q099–Q101](15-text-to-sql-and-data-analysis.md) | 口径、JOIN粒度、有限修复与语义评测 |
+| [16 任务服务](../../advanced/16-service-deployment-and-operations.md) | [Q102–Q104](16-service-deployment-and-operations.md) | 持久接收、任务归属、状态展示与发布恢复 |
+| [17 事件订阅](../../advanced/17-event-driven-and-proactive-agents.md) | [Q105–Q107](17-event-driven-and-proactive-agents.md) | 事件与意图区分、乱序、撤销和通知 |
+| [18 媒体与语音](../../advanced/18-multimodal-and-realtime-agents.md) | [Q108–Q110](18-multimodal-and-realtime-agents.md) | 媒体证据、转写更正、播放打断和迟到结果 |
 
 ## 一题怎样练到能迁移
 
@@ -49,4 +62,4 @@ python3 scripts/study.py show Q060
 python3 scripts/study.py review Q060 --score 2
 ```
 
-[92 题总索引](../question-index.md) · [工程进阶](../../advanced/README.md) · [进阶模拟面试](../../practice/mock-interviews.md#d-轮进阶系统深挖60-分钟) · [项目工作坊](../../advanced/project-workshop.md)
+[110 题总索引](../question-index.md) · [工程进阶](../../advanced/README.md) · [进阶模拟面试](../../practice/mock-interviews.md#d-轮进阶系统深挖60-分钟) · [项目工作坊](../../advanced/project-workshop.md)

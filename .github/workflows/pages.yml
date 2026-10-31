@@ -42,7 +42,18 @@ jobs:
           python -m examples.policy_agent eval --suite all --mode offline --output .local/policy_agent/ci-report.json
 
       - name: Prepare website sources
-        run: python scripts/prepare_site.py
+        env:
+          SITE_SOURCE_REF: ${{ github.head_ref || github.ref_name }}
+        run: python scripts/prepare_site.py --source-ref "$SITE_SOURCE_REF"
+
+      - name: Check application labs
+        run: |
+          python -m examples.model_protocol_lab.lab --scenario all --output .local/model_protocol
+          python -m examples.service_lab.lab --scenario all --output .local/service_lab/checks
+          python -m examples.knowledge_pipeline_lab --scenario all --output .local/knowledge_pipeline_lab
+          python -m examples.sql_agent_lab --scenario all --output .local/sql_agent_lab
+          python examples/event_agent_lab/lab.py --scenario all --output .local/event_agent_lab/all-report.json
+          python examples/multimodal_lab/lab.py --scenario all --output .local/multimodal_lab/all-report.json
 
       - name: Build website
         run: python -m mkdocs build --strict

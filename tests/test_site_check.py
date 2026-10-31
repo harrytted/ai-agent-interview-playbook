@@ -49,7 +49,7 @@ class SiteCheckTests(unittest.TestCase):
     def write_bank(self, missing=None, raw=None):
         return self.write(
             "docs/questions/index.html",
-            "\n".join(question_html(n, rendered=n != raw) for n in range(1, 93) if n != missing),
+            "\n".join(question_html(n, rendered=n != raw) for n in range(1, 111) if n != missing),
         )
 
     def errors(self):
@@ -69,7 +69,7 @@ class SiteCheckTests(unittest.TestCase):
 """)
         result = check_site.check_site(self.site)
         self.assertEqual(result.errors, [])
-        self.assertEqual(result.questions, 92)
+        self.assertEqual(result.questions, 110)
         self.assertEqual(result.references, 5)
 
     def test_missing_resources_are_checked_for_every_supported_element(self):
@@ -82,14 +82,20 @@ class SiteCheckTests(unittest.TestCase):
             self.assertIn(filename, errors)
         self.assertEqual(errors.count("missing file"), 4)
 
+    def test_media_player_checks_both_audio_and_nested_source_dependencies(self):
+        self.write("index.html", '<audio src="missing.wav"></audio><audio><source src="missing.ogg"></audio>')
+        errors = self.errors()
+        self.assertIn("missing.wav", errors)
+        self.assertIn("missing.ogg", errors)
+
     def test_standalone_articles_are_complete_and_keep_the_grouped_anchors(self):
         sections = "".join(f"<h2>{name}</h2><p>解释</p>" for name in
                            ("简要回答", "详细解析", "常见追问", "实战案例", "常见误区", "动手想一想", "学习参考"))
-        for number in range(1, 93):
+        for number in range(1, 111):
             self.write(f"questions/Q{number:03}/index.html", f'<h1 id="q{number:03}-题目">Q{number:03} 题目</h1>' + sections)
         result = check_site.check_site(self.site)
         self.assertEqual(result.errors, [])
-        self.assertEqual((result.questions, result.articles), (92, 92))
+        self.assertEqual((result.questions, result.articles), (110, 110))
         self.write("questions/Q001/index.html", '<h1>Q002 wrong</h1><p>## 简要回答</p>')
         errors = self.errors()
         self.assertIn("H1 disagrees", errors)
@@ -131,10 +137,10 @@ class SiteCheckTests(unittest.TestCase):
         self.assertEqual(self.errors(), "")
 
     def test_missing_fragment_fails_even_when_the_target_file_exists(self):
-        self.write("index.html", '<a href="docs/questions/#q093-题目">missing anchor</a>')
+        self.write("index.html", '<a href="docs/questions/#q111-题目">missing anchor</a>')
         errors = self.errors()
         self.assertIn("missing fragment", errors)
-        self.assertIn("q093-题目", errors)
+        self.assertIn("q111-题目", errors)
 
     def test_duplicate_element_ids_fail_with_both_source_lines(self):
         self.write("index.html", '<input id="__toc" type="checkbox">\n'
@@ -193,13 +199,19 @@ class SiteCheckTests(unittest.TestCase):
         self.assertIn("Q017: details answer is not rendered as structured HTML", errors)
         self.assertNotIn("Missing question h3 IDs", errors)
 
+    def test_new_last_question_is_required_without_replacing_old_endpoints(self):
+        self.write_bank(missing=110)
+        errors = self.errors()
+        self.assertIn("Missing question h3 IDs: Q110", errors)
+        self.assertNotIn("Missing question h3 IDs: Q092", errors)
+
     def test_unclosed_last_answer_cannot_swallow_the_rest_of_the_page(self):
         bank = self.site / "docs/questions/index.html"
         content = bank.read_text(encoding="utf-8")
         before, marker, after = content.rpartition("</details>")
         self.assertTrue(marker)
         bank.write_text(before + after, encoding="utf-8")
-        self.assertIn("Q092: details answer is not rendered as structured HTML", self.errors())
+        self.assertIn("Q110: details answer is not rendered as structured HTML", self.errors())
 
     def test_rendered_code_can_contain_markdown_without_being_misclassified(self):
         bank = self.site / "docs/questions/index.html"
@@ -216,7 +228,7 @@ class SiteCheckTests(unittest.TestCase):
         with redirect_stdout(out), redirect_stderr(err):
             code = check_site.main([str(self.site)])
         self.assertEqual(code, 0)
-        self.assertIn("92 rendered questions", out.getvalue())
+        self.assertIn("110 rendered questions", out.getvalue())
         self.assertEqual(err.getvalue(), "")
         with redirect_stderr(err):
             code = check_site.main([str(self.work / "absent")])

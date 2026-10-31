@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "checked_date": "2026-10-31",
+  "timezone": "Asia/Shanghai",
+  "scope": "应用专题13–18的一手机制来源与限定",
+  "sources": [
+    {
+      "id": "simple-agent",
+      "url": "https://www.anthropic.com/research/building-effective-agents",
+      "type": "first_party_article",
+      "chapters": [
+        13
+      ],
+      "claim": "先从简单结构理解输入、工具与反馈",
+      "boundary": "章节排序为教学判断，不是原文课程建议",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "long-running-harness",
+      "url": "https://www.anthropic.com/research/effective-harnesses-for-long-running-agents",
+      "type": "first_party_article",
+      "chapters": [
+        16
+      ],
+      "claim": "环境、进度工件和端到端检查支持跨会话工作",
+      "boundary": "本地实验未运行文章中的完整长时开发系统",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "agent-evals",
+      "url": "https://www.anthropic.com/research/demystifying-evals-for-ai-agents",
+      "type": "first_party_article",
+      "chapters": [
+        13,
+        16
+      ],
+      "claim": "任务、尝试、轨迹与环境终态分开核验",
+      "boundary": "离线协议测试不证明真实模型任务成功率",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "deepagents-evals",
+      "url": "https://www.langchain.com/blog/how-we-build-evals-for-deep-agents",
+      "type": "first_party_article",
+      "chapters": [
+        13,
+        16
+      ],
+      "claim": "SDK单元/集成测试与模型能力评测分开",
+      "boundary": "本轮不把外部benchmark结果套用到教学任务",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "ingestion-pipeline",
+      "url": "https://developers.llamaindex.ai/python/framework/module_guides/loading/ingestion_pipeline/",
+      "type": "official_documentation",
+      "chapters": [
+        14
+      ],
+      "claim": "文档ID、内容哈希与docstore用于增量处理",
+      "boundary": "教学实现为词项索引，不冒充LlamaIndex或Embedding实现",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "sql-workflows",
+      "url": "https://spider2-sql.github.io/",
+      "type": "benchmark_authors",
+      "chapters": [
+        15
+      ],
+      "claim": "企业SQL工作流依赖数据库环境、文档与结果核验",
+      "boundary": "教学SQLite任务不是Spider2评测结果",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "sql-semantics",
+      "url": "https://arxiv.org/abs/2010.02840",
+      "type": "original_paper",
+      "chapters": [
+        15
+      ],
+      "claim": "使用多数据库实例检验查询语义",
+      "boundary": "三份手工实例只采用多实例核验思路，未复现distilled suite算法，不能证明任意SQL等价。",
+      "checked_date": "2026-10-31",
+      "status": "abstract-reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false,
+      "additional_source": "https://aclanthology.org/2020.emnlp-main.29/"
+    },
+    {
+      "id": "agent-server",
+      "url": "https://docs.langchain.com/langsmith/agent-server",
+      "type": "official_documentation",
+      "chapters": [
+        16
+      ],
+      "claim": "持久资源、任务队列、取消与输出事件组成服务边界",
+      "boundary": "本地标准库单Worker服务不是云平台部署",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "event-runtime",
+      "url": "https://blog.cloudflare.com/project-think/",
+      "type": "first_party_article",
+      "chapters": [
+        17
+      ],
+      "claim": "持久会话与事件入口可以组成Agent运行平台",
+      "boundary": "本地Outbox记录不等于外部消息送达",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "voice-turns",
+      "url": "https://docs.livekit.io/agents/logic/turns/",
+      "type": "official_documentation",
+      "chapters": [
+        18
+      ],
+      "claim": "打断后播放位置与会话历史需对应",
+      "boundary": "合成提示音用于播放演示，没有ASR/TTS性能证据",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "openviking",
+      "url": "https://github.com/volcengine/OpenViking",
+      "type": "official_repository",
+      "chapters": [
+        3,
+        4,
+        6
+      ],
+      "claim": "分层上下文与知识/记忆/技能的组织案例",
+      "boundary": "外部项目未部署，不用Star证明质量",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    },
+    {
+      "id": "switchyard",
+      "url": "https://github.com/NVIDIA-NeMo/Switchyard",
+      "type": "official_repository",
+      "chapters": [
+        10,
+        13
+      ],
+      "claim": "路由决策与模型客户端职责分开",
+      "boundary": "独立服务器的demo边界按采用版本核查，未作为生产底座",
+      "checked_date": "2026-10-31",
+      "status": "reviewed",
+      "version": "mutable documentation / main; fix version before external reproduction",
+      "external_code_executed": false
+    }
+  ]
+}

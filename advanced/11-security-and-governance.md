@@ -114,3 +114,7 @@ MCP 代理连接上游 API 时，应明确令牌发给谁、哪些 scope 被同�
 [上一章](10-performance-and-serving.md) · [下一章](12-agent-training.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q087、Q088、Q089](../docs/advanced/11-security-and-governance.md)
+
+## 应用实验延伸
+
+[在第16章任务服务中验证可信调用者、任务归属、参数更正和具体草稿批准如何进入真实HTTP合同。](16-service-deployment-and-operations.md)

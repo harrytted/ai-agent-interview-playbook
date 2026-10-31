@@ -167,6 +167,11 @@ MCP 与 **A2A（Agent2Agent）** 也不宜画成两个互斥阵营。MCP 围绕�
 
 进一步口述练习见 [工具与记忆题](../docs/foundations/04-tools-memory-protocols.md)。
 
+
+## 应用实验延伸
+
+[想实际接模型，继续阅读第13章模型API与输出合同，先完成请求、工具回填与结束状态的完整往返。](../advanced/13-model-api-and-output-contracts.md)
+
 <!-- question-links:start -->
 ## 配套面试练习
 

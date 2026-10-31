@@ -11,11 +11,17 @@ import re
 import sys
 from urllib.parse import unquote, urlsplit
 
+if __package__:
+    from .curriculum import EXPECTED_QUESTIONS as QUESTION_COUNT
+else:
+    from curriculum import EXPECTED_QUESTIONS as QUESTION_COUNT
+
 PROJECT_BASE = "/ai-agent-interview-playbook/"
 SITE_HOST = "harrytted.github.io"
-EXPECTED_QUESTIONS = frozenset(range(1, 93))
+EXPECTED_QUESTIONS = frozenset(range(1, QUESTION_COUNT + 1))
 HTML_SUFFIXES = frozenset({".html", ".htm"})
-REFERENCE_ATTRIBUTES = {"a": "href", "img": "src", "script": "src", "link": "href"}
+REFERENCE_ATTRIBUTES = {"a": "href", "img": "src", "script": "src", "link": "href",
+                        "audio": "src", "source": "src"}
 
 
 @dataclass
@@ -280,7 +286,7 @@ def check_site(site_dir: Path) -> CheckResult:
     for number, locations in inventory.items():
         if len(locations) > 1:
             result.errors.append(f"Duplicate Q{number:03} h3 IDs: " + "; ".join(locations))
-    # Old grouped URLs retain their 92 anchors. The primary reading surface is
+    # Old grouped URLs retain their anchors. The primary reading surface is
     # separately checked when standalone articles are present.
     if (root / "questions").is_dir():
         articles: dict[int, list[Path]] = defaultdict(list)
@@ -323,7 +329,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     print(
         f"Site check passed: {result.pages} HTML pages, {result.references} local references, "
-        f"{result.questions} rendered questions (Q001–Q092)."
+        f"{result.questions} rendered questions (Q001–Q{QUESTION_COUNT:03})."
         + (f" {result.articles} standalone articles." if result.articles else "")
     )
     return 0

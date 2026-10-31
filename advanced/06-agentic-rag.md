@@ -113,3 +113,7 @@ SQL 工具应限制可访问表、列、行和执行资源；只读账号、参�
 - [基础原理：RAG 与检索](../learning/06-rag-and-retrieval.md)：候选召回、融合与引用链路。
 
 [配套进阶面试题](../docs/advanced/06-agentic-rag.md)
+
+## 应用实验延伸
+
+[结构化分析继续阅读第15章，实际运行SQL并核验统计粒度；文档摄取与发布另见第14章。](15-text-to-sql-and-data-analysis.md)

@@ -1,0 +1,43 @@
+{
+  "normal": {
+    "status": "answered",
+    "answer": {
+      "claims": [
+        {
+          "city": "海岚",
+          "limit_cny": 700,
+          "reference": "P17-v2#4"
+        },
+        {
+          "city": "云洲",
+          "limit_cny": 650,
+          "reference": "P19-v1#4"
+        }
+      ]
+    }
+  },
+  "missing-result": {
+    "status": "protocol_error"
+  },
+  "duplicate-id": {
+    "status": "protocol_error"
+  },
+  "truncated": {
+    "status": "truncated"
+  },
+  "refusal": {
+    "status": "refused"
+  },
+  "disconnect": {
+    "status": "transport_failed"
+  },
+  "semantic-error": {
+    "status": "protocol_error"
+  },
+  "final-truncated": {
+    "status": "truncated"
+  },
+  "final-refusal": {
+    "status": "refused"
+  }
+}

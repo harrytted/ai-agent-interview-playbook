@@ -131,6 +131,11 @@ D = 1/63        ≈ 0.01587302
 
 进一步练习见 [RAG 题](../docs/foundations/03-rag-and-search.md)。
 
+
+## 应用实验延伸
+
+[想从原始资料建立可更新索引，继续阅读第14章知识摄取，实际检查文档更新、删除与撤权后的查询。](../advanced/14-ingestion-and-index-lifecycle.md)
+
 <!-- question-links:start -->
 ## 配套面试练习
 

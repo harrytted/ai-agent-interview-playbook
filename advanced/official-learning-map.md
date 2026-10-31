@@ -19,6 +19,19 @@
 | [11 安全与治理](11-security-and-governance.md)：能连上工具是否就代表有权执行？ | 先读 [MCP Authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)的 HTTP transport 授权范围；再读 Claude SDK [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions)的执行规则与运行时审批。 | 将服务身份、资源访问、用户同意、工具策略与执行隔离画成独立边界；覆盖拒绝、撤销和越权测试。 |
 | [12 Agent 训练](12-agent-training.md)：什么时候需要更新参数？ | 先读 Hugging Face TRL [GRPO Trainer / Agent Training](https://huggingface.co/docs/trl/grpo_trainer#agent-training)，理解工具、环境与奖励；再读 Microsoft [Agent Lightning v1 基础架构](https://microsoft.github.io/agent-lightning/stable/05-basics/)，区分策略训练与 rollout 执行。 | 定义可重置环境、轨迹格式、奖励和独立测试集；解释提示改动、记忆更新与梯度更新分别改变了什么。 |
 
+## 应用专题六章阅读路径
+
+| 章节 | 一手资料 | 阅读后检查什么 |
+| --- | --- | --- |
+| [13 模型API](13-model-api-and-output-contracts.md) | [Claude工具往返](https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works) · [结构化输出](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) | SDK与宿主职责、调用ID、输出完整性和异常终态；字段按实际API版本核对 |
+| [14 摄取生命周期](14-ingestion-and-index-lifecycle.md) | [LlamaIndex Ingestion Pipeline](https://developers.llamaindex.ai/python/framework/module_guides/loading/ingestion_pipeline/) | 文档身份、哈希、变更传播、索引发布和撤权；不把所有后端能力视为相同 |
+| [15 SQL分析](15-text-to-sql-and-data-analysis.md) | [Spider2](https://spider2-sql.github.io/) · [SQL语义测试集论文](https://arxiv.org/abs/2010.02840) | 结果表与业务口径、多数据实例，而不只是SQL字符串相同 |
+| [16 任务服务](16-service-deployment-and-operations.md) | [LangSmith Agent Server](https://docs.langchain.com/langsmith/agent-server) · [长任务Harness](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents) | 任务归属、持久接收、取消、流事件与跨重启恢复 |
+| [17 事件任务](17-event-driven-and-proactive-agents.md) | [Cloudflare Project Think](https://blog.cloudflare.com/project-think/) | 事件资格、会话持久化和订阅生命周期；按本地实现验证投递边界 |
+| [18 媒体与语音](18-multimodal-and-realtime-agents.md) | [LiveKit Turns](https://docs.livekit.io/agents/logic/turns/) | 轮次、打断与实际播放位置；离线转写不能证明识别质量 |
+
+先走13→16A→14→16B，SQL作为方向分支，事件与媒体作为后续扩展。具体机制、采用理由与限定见 [应用扩充说明](../research/application-expansion.md)。
+
 ## 从自己的项目出发
 
 **代码或桌面助手**：按 01 → 02 → 03 → 08 → 11 → 09 阅读。先做到任务状态可恢复、动作可验证，再加入更多自主行为。一次失败至少保留初始状态、动作、观察和停止原因，便于重放比较。

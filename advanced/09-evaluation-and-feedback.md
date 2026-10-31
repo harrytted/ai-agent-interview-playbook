@@ -131,3 +131,7 @@ python3 examples/advanced/runtime_lab.py --scenario evaluation
 [上一章](08-coding-and-computer-use.md) · [下一章](10-performance-and-serving.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q081、Q082、Q083](../docs/advanced/09-evaluation-and-feedback.md)
+
+## 应用实验延伸
+
+[把评测门槛连接到任务服务的发布与回退，继续阅读第16章；真实模型能力与本地组件回归分别报告。](16-service-deployment-and-operations.md)

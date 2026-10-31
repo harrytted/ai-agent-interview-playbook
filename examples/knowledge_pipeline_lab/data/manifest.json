@@ -1,0 +1,5 @@
+[
+  {"doc_id":"lodging-hailan","version":"v1","file":"hailan-v1.md","source_uri":"fixture://policies/hailan/v1","valid_from":"2026-01-01","valid_to":"2026-11-01","access":["employee","admin"]},
+  {"doc_id":"lodging-hailan","version":"v2","file":"hailan-v2.md","source_uri":"fixture://policies/hailan/v2","valid_from":"2026-11-01","valid_to":null,"access":["employee","admin"]},
+  {"doc_id":"finance-private","version":"internal","file":"finance-private.md","source_uri":"fixture://policies/finance/internal","valid_from":"2026-01-01","valid_to":null,"access":["admin"]}
+]

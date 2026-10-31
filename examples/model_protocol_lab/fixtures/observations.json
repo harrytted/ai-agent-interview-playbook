@@ -1,0 +1,12 @@
+{
+  "海岚": {
+    "city": "海岚",
+    "limit_cny": 700,
+    "reference": "P17-v2#4"
+  },
+  "云洲": {
+    "city": "云洲",
+    "limit_cny": 650,
+    "reference": "P19-v1#4"
+  }
+}

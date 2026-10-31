@@ -1,0 +1,2 @@
+# Preserve protocol bytes, including CRLF and the final empty dispatch line.
+examples/model_protocol_lab/fixtures/*.sse -text -whitespace

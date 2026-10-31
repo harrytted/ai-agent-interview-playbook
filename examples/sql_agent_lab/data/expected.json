@@ -1,0 +1,5 @@
+{
+ "base": {"total_cents":135000,"application_count":2,"comparable_count":2,"over_count":1,"over_rate":0.5},
+ "duplicate-amounts": {"total_cents":130000,"application_count":2,"comparable_count":2,"over_count":1,"over_rate":0.5},
+ "missing-values": {"total_cents":75000,"application_count":3,"comparable_count":1,"over_count":1,"over_rate":1.0}
+}

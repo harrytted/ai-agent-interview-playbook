@@ -141,3 +141,7 @@ Deep Agents 的 backend 负责文件映射，执行隔离则决定程序的活�
 - [Playwright Locators](https://playwright.dev/docs/locators)：基于页面语义的重新定位。
 
 [对应面试题：Q078、Q079、Q080](../docs/advanced/08-coding-and-computer-use.md)
+
+## 应用实验延伸
+
+[媒体证据与实时交互继续阅读第18章，区分识别结果、当前条件、实际播放与已确认行动。](18-multimodal-and-realtime-agents.md)

@@ -66,6 +66,24 @@ class SitePrepareTests(unittest.TestCase):
         self.assertIn("(https://example.com/README.md?a=1#x)", generated)
         self.assertIn("(#home)", generated)
 
+    def test_media_demo_publishes_only_its_reviewed_files_and_rejects_symlinks(self):
+        self.write("README.md", "[Player](examples/multimodal_lab/player.html)\n")
+        self.write("examples/multimodal_lab/player.html", '<audio src="assets/playback-tone.wav"></audio>')
+        self.write("examples/multimodal_lab/assets/playback-tone.wav", "synthetic media")
+        self.write("examples/multimodal_lab/assets/receipt.svg", "<svg></svg>")
+        self.write("examples/multimodal_lab/private.html", "private")
+        self.write("examples/multimodal_lab/assets/other.wav", "private")
+        self.prepare()
+        self.assertIn("(examples/multimodal_lab/player.html)", (self.output / "index.md").read_text())
+        self.assertTrue((self.output / "examples/multimodal_lab/assets/playback-tone.wav").is_file())
+        self.assertFalse((self.output / "examples/multimodal_lab/private.html").exists())
+        self.assertFalse((self.output / "examples/multimodal_lab/assets/other.wav").exists())
+        media = self.root / "examples/multimodal_lab/assets/playback-tone.wav"
+        media.unlink()
+        media.symlink_to(self.root / "examples/multimodal_lab/assets/other.wav")
+        self.prepare()
+        self.assertFalse((self.output / "examples/multimodal_lab/assets/playback-tone.wav").exists())
+
     def test_branch_preview_links_code_to_review_branch_without_changing_page_links(self):
         self.write("README.md", "[Code](examples/policy_agent/core.py)\n[Course](learning/00-first-agent.md)\n")
         self.write("examples/policy_agent/core.py", "# example\n")
@@ -245,12 +263,12 @@ class SitePrepareTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "same destination"):
             self.prepare()
 
-    def test_real_question_anchors_include_q031_and_all_92_questions(self):
+    def test_real_question_anchors_include_q031_and_all_110_questions(self):
         sys.path.insert(0, str(ROOT / "scripts"))
         import check_repo
         from scripts import study
         bank = study.questions()
-        self.assertEqual(len(bank), 92)
+        self.assertEqual(len(bank), 110)
         mapping = site.page_mapping(ROOT)
         source = PurePosixPath("docs/foundations/04-tools-memory-protocols.md")
         content = (ROOT / source).read_text(encoding="utf-8")

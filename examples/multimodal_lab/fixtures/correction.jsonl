@@ -1,0 +1,10 @@
+{"type": "media", "id": "receipt", "kind": "image", "width": 640, "height": 360, "path": "assets/receipt.svg"}
+{"type": "media", "id": "audio", "kind": "audio", "duration": 4, "path": "assets/playback-tone.wav", "origin": "synthetic_tone_no_speech"}
+{"type": "evidence", "id": "receipt-amount", "media_id": "receipt", "region": [80, 180, 460, 70], "amount": 650, "confidence": "clear", "origin": "authored_fixture_not_ocr"}
+{"type": "evidence", "id": "turn-1", "media_id": "audio", "time": [0.2, 1.8], "confidence": "clear", "origin": "authored_transcript_fixture_not_asr"}
+{"type": "transcript", "stage": "final", "evidence_id": "turn-1", "city": "海岚", "date": "2026-11-12", "amount": 650, "text": "海岚，11月12日，650元", "origin": "authored_fixture_not_asr"}
+{"type": "tool_start", "call_id": "policy-1"}
+{"type": "transcript", "stage": "final", "evidence_id": "turn-1", "city": "云洲", "date": "2026-11-12", "amount": 650, "text": "更正，是云洲", "origin": "authored_fixture_not_asr"}
+{"type": "tool_result", "call_id": "policy-1", "city": "海岚", "limit": 700, "source": "P17-v2#4"}
+{"type": "tool_start", "call_id": "policy-2"}
+{"type": "tool_result", "call_id": "policy-2", "city": "云洲", "limit": 650, "source": "P19-v1#4"}

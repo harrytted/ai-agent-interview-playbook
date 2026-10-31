@@ -19,6 +19,7 @@
 | 比较面试题库、教程和框架，了解各自用途 | [GitHub 项目调研](github-survey.md) |
 | 挑选基础学习课程，了解阅读顺序与示例环境 | [基础学习资源调研](learning-resources.md) |
 | 深读 Harness、记忆、检索、协作与训练等进阶方向 | [进阶项目与技术博客](advanced-landscape.md) |
+| 将协议、知识、SQL、任务、事件和媒体接成应用实验 | [应用扩充与验收矩阵](application-expansion.md) · [一手来源台账](application-sources.json) |
 
 选定一个主题后，可以带着自己的案例阅读，再回对应章节做练习。例如研究恢复机制时，重点查哪些步骤会重放、外部写入怎样确认，以及实验能证明什么。
 

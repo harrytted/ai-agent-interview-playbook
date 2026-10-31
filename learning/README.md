@@ -29,7 +29,7 @@
 | [09 评测](09-evaluation.md) | 检索/动作/终态指标、数据集、Judge、成本与延迟 | 复算指标并为 6 个任务写验收条件 | Q008、Q033–Q040、Q054、Q056 |
 | [10 可靠性与安全](10-reliability-and-security.md) | 超时、结果未知、幂等、重试、注入、隔离 | 一张含对账与停止条件的故障状态表 | Q014、Q041–Q048 |
 
-配套题号按仓库固定题目映射列出；章末生成区另列跨章复习关联，两者用途不同。完整答案见 [92 题索引](../docs/question-index.md)。基础与工程题也有详细解析、三个已答追问和实战案例；各学习章末尾可展开相关题目，题目中的“学习与参考”能跳回正文。[术语表](glossary.md) 用于遇到陌生词时回查，先不要把它当作需要背完的词表。
+配套题号按仓库固定题目映射列出；章末生成区另列跨章复习关联，两者用途不同。完整答案见 [110 题索引](../docs/question-index.md)。基础与工程题也有详细解析、三个已答追问和实战案例；各学习章末尾可展开相关题目，题目中的“学习与参考”能跳回正文。[术语表](glossary.md) 用于遇到陌生词时回查，先不要把它当作需要背完的词表。
 
 <div id="在课程中学懂再用题目检查"></div>
 
@@ -71,7 +71,7 @@ python3 examples/agent_lab/lab.py --scenario all
 
 各章正文附有官方文档、协议和原论文，集中索引见 [基础原理参考资料](verification.md)。外部课程的章节选择、依赖环境和阅读顺序见 [学习资源深度调研](../research/learning-resources.md)。
 
-学完后进入 [工程进阶（12 章）](../advanced/README.md)，继续学习长任务 Harness、持久执行、上下文工程、Agentic RAG、多 Agent、计算机操作、性能与训练，并通过 [项目工作坊](../advanced/project-workshop.md)串成一套系统。
+学完后进入 [工程进阶（18 章）](../advanced/README.md)，继续学习长任务 Harness、持久执行、上下文工程、Agentic RAG、多 Agent、计算机操作、性能与训练，再进入模型接入、知识摄取、SQL、任务服务、事件和媒体专题，并通过 [项目工作坊](../advanced/project-workshop.md)串成一套系统。
 
 后续接入真实模型，可沿用 [7 天项目实验](../docs/engineering/08-project-lab.md)；需要数学、训练或推理系统更深知识时，再按 [调研报告](../research/learning-resources.md) 选修对应原课程。
 

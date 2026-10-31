@@ -126,3 +126,9 @@ python3 examples/advanced/runtime_lab.py --scenario budget
 [上一章](09-evaluation-and-feedback.md) · [下一章](11-security-and-governance.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q084、Q085、Q086](../docs/advanced/10-performance-and-serving.md)
+
+## 对照案例：模型路由与模型客户端分工
+
+[NVIDIA NeMo Switchyard](https://github.com/NVIDIA-NeMo/Switchyard)把路由决策与宿主模型客户端的执行职责分开。选择模型之后，消息历史、工具调用ID、供应商原生内容、错误处理与任务预算仍要保持完整；路由器返回一个模型名字，不会替应用完成这些合同。具体接口按采用版本核对，其演示服务也不能直接当作本手册的生产服务保证。
+
+沿同一任务集比较固定模型与路由策略，报告最终成功任务、升级次数、整轮调用费用与延迟。便宜请求如果导致更多失败和重试，不能只凭单次token价格宣布节省。[第13章](13-model-api-and-output-contracts.md)实际拆解协议完整性，[第16章](16-service-deployment-and-operations.md)再绑定运行版本和服务状态。

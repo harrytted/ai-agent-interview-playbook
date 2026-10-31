@@ -1,0 +1,48 @@
+{
+  "normal": {
+    "status": "supported_draft",
+    "city": "海岚",
+    "stale_results": 0,
+    "condition_version": 1,
+    "draft.city": "海岚",
+    "draft.date": "2026-11-12",
+    "draft.amount": 650,
+    "draft.policy_source": "P17-v2#4",
+    "draft.exceeds_limit": false,
+    "draft.policy_limit_cny": 700
+  },
+  "interim": {
+    "status": "waiting_final_transcript",
+    "city": null,
+    "draft": null
+  },
+  "correction": {
+    "status": "supported_draft",
+    "city": "云洲",
+    "stale_results": 1,
+    "condition_version": 2,
+    "draft.city": "云洲",
+    "draft.date": "2026-11-12",
+    "draft.amount": 650,
+    "draft.policy_source": "P19-v1#4",
+    "draft.exceeds_limit": false,
+    "draft.policy_limit_cny": 650
+  },
+  "uncertain": {
+    "status": "needs_confirmation",
+    "draft": null
+  },
+  "interruption": {
+    "status": "supported_draft",
+    "audio.cancelled": true,
+    "audio.played_seconds": 1.25,
+    "audio.history_seconds": 1.25,
+    "audio.ignored_late_chunks": 1,
+    "draft.city": "海岚",
+    "draft.date": "2026-11-12",
+    "draft.amount": 650,
+    "draft.policy_source": "P17-v2#4",
+    "draft.exceeds_limit": false,
+    "draft.policy_limit_cny": 700
+  }
+}

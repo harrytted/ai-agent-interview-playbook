@@ -153,15 +153,17 @@ class QuestionArticleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "escapes"):
             article_pages([self.question(body="[bad](../../../outside.md)")], self.root)
 
-    def test_real_bank_produces_exactly_92_independent_articles_without_new_question_ids(self):
+    def test_real_bank_produces_110_articles_and_keeps_old_and_new_endpoints(self):
         root = Path(__file__).resolve().parents[1]
         bank = questions(root)
         generated = article_pages(bank, root)
         articles = [path for path in generated if path.name != "README.md"]
-        self.assertEqual(len(articles), 92)
-        self.assertEqual({path.stem for path in articles}, {f"Q{i:03}" for i in range(1, 93)})
+        self.assertEqual(len(articles), 110)
+        self.assertEqual({path.stem for path in articles}, {f"Q{i:03}" for i in range(1, 111)})
         self.assertIn("## 简要回答", generated[Path("questions/Q092.md")])
         self.assertNotIn("<summary>展开详细答案", generated[Path("questions/Q092.md")])
+        self.assertIn("## 简要回答", generated[Path("questions/Q110.md")])
+        self.assertIn("(Q093.md)", generated[Path("questions/Q092.md")])
         index = generated[Path("questions/README.md")]
         self.assertEqual(re.findall(r"^## (.+)$", index, re.M), ["基础原理", "工程应用", "进阶系统"])
         self.assertEqual(re.findall(r"^- \[(Q\d{3})", index, re.M), [q.id for q in bank])

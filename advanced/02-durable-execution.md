@@ -120,3 +120,7 @@ Fencing 控制陈旧执行者，幂等控制同一意图重复请求，二者处
 [上一章](01-harness-and-deep-agents.md) · [工程进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
 
 [配套进阶面试题](../docs/advanced/02-durable-execution.md)
+
+## 应用实验延伸
+
+[将恢复机制放入HTTP任务入口，可继续阅读第16章；事件的资格、订阅和通知见第17章。](16-service-deployment-and-operations.md)

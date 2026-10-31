@@ -37,21 +37,21 @@ class StudyTests(unittest.TestCase):
     def question_ids(self, text):
         return re.findall(r"^\s*(Q\d{3}) ", text, re.MULTILINE)
 
-    def test_complete_bank_keeps_original_ids_and_adds_36_advanced_questions(self):
+    def test_complete_bank_keeps_original_ids_and_adds_54_advanced_questions(self):
         bank = study.questions()
-        self.assertEqual([q.id for q in bank], [f"Q{i:03d}" for i in range(1, 93)])
+        self.assertEqual([q.id for q in bank], [f"Q{i:03d}" for i in range(1, 111)])
         self.assertTrue(all(q.title and q.body for q in bank))
         self.assertTrue(all((ROOT / q.path).is_file() for q in bank))
 
     def test_advanced_bank_can_be_selected_and_drawn_without_changing_progress(self):
         code, out, err = self.cli("list", "--topic", "docs/advanced/")
         self.assertEqual((code, err), (0, ""))
-        self.assertEqual(self.question_ids(out), [f"Q{i:03d}" for i in range(57, 93)])
+        self.assertEqual(self.question_ids(out), [f"Q{i:03d}" for i in range(57, 111)])
         code, out, err = self.cli("draw", "--topic", "docs/advanced/", "--count", "3", "--seed", "7")
         self.assertEqual((code, err), (0, ""))
         ids = self.question_ids(out)
         self.assertEqual(len(set(ids)), 3)
-        self.assertTrue(all(57 <= int(qid[1:]) <= 92 for qid in ids))
+        self.assertTrue(all(57 <= int(qid[1:]) <= 110 for qid in ids))
         self.assertFalse(self.progress.exists())
 
     def test_advanced_show_expands_details_and_keeps_followups_and_case(self):
@@ -66,7 +66,7 @@ class StudyTests(unittest.TestCase):
         self.assertFalse(self.progress.exists())
 
     def test_original_bank_show_expands_full_answers_across_all_modules(self):
-        for qid in ("Q001", "Q017", "Q033", "Q049", "Q056"):
+        for qid in ("Q001", "Q017", "Q033", "Q049", "Q056", "Q093", "Q104", "Q110"):
             with self.subTest(qid=qid):
                 code, out, err = self.cli("show", qid)
                 self.assertEqual((code, err), (0, ""))
@@ -227,12 +227,12 @@ class StudyTests(unittest.TestCase):
         due_section, unseen_section = out.split("未学习", 1)
         self.assertEqual(self.question_ids(due_section), ["Q001", "Q003"])
         unseen = self.question_ids(unseen_section)
-        self.assertEqual(len(unseen), 89)
+        self.assertEqual(len(unseen), 107)
         self.assertNotIn("Q002", unseen)
         self.assertNotIn("Q999", out)
         code, stats, err = self.cli("stats")
         self.assertEqual((code, err), (0, ""))
-        self.assertIn("题目 92；已自评 3；未学习 89；到期 2", stats)
+        self.assertIn("题目 110；已自评 3；未学习 107；到期 2", stats)
         self.assertEqual(self.progress.read_bytes(), before)
 
 

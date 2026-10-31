@@ -1,8 +1,10 @@
-# 92 题索引
+# 110 题索引
 
 先找到问题，再回到机制。短答用于口述，详细答案用于理解，追问与案例用于检查能否迁移。
 
-[基础原理](../learning/README.md) · [工程进阶](../advanced/README.md) · [36 道进阶题与章节对照](advanced/README.md)
+<div id="92-题索引"></div>
+
+[基础原理](../learning/README.md) · [工程进阶](../advanced/README.md) · [54 道进阶题与章节对照](advanced/README.md)
 
 ## 基础原理：Q001–Q032
 
@@ -70,7 +72,9 @@
 | Q055 | [Agent 项目怎样做测试，哪些该 mock？](../questions/Q055.md#q055-agent-项目怎样做测试哪些该-mock) | [项目实验](engineering/08-project-lab.md) |
 | Q056 | [线上突然回答变差，你会如何排查？](../questions/Q056.md#q056-线上突然回答变差你会如何排查) | [基础 09 章](../learning/09-evaluation.md) |
 
-## 进阶系统：Q057–Q092
+<div id="进阶系统q057q092"></div>
+
+## 进阶系统：Q057–Q110
 
 | 题号 | 问题 | 学习入口 |
 | --- | --- | --- |
@@ -110,6 +114,24 @@
 | Q090 | [Agent 出错时，怎样选择改运行时、SFT、DPO 或 Agent RL？](../questions/Q090.md#q090-agent-出错时怎样选择改运行时sftdpo-或-agent-rl) | [12 章](../advanced/12-agent-training.md) |
 | Q091 | [GRPO 的组内相对奖励怎样计算，为什么标准化不等于完整训练？](../questions/Q091.md#q091-grpo-的组内相对奖励怎样计算为什么标准化不等于完整训练) | [12 章](../advanced/12-agent-training.md) |
 | Q092 | [Harnessed Agent RL 怎样组织训练数据，如何理解 Agent Lightning 的版本？](../questions/Q092.md#q092-harnessed-agent-rl-怎样组织训练数据如何理解-agent-lightning-的版本) | [12 章](../advanced/12-agent-training.md) |
+| Q093 | [提示要求JSON、JSON模式与Schema约束输出有什么区别？](../questions/Q093.md#q093-提示要求jsonjson模式与schema约束输出有什么区别) | [13 章](../advanced/13-model-api-and-output-contracts.md) |
+| Q094 | [一次响应包含多个工具调用时，怎样按ID完整回填？](../questions/Q094.md#q094-一次响应包含多个工具调用时怎样按id完整回填) | [13 章](../advanced/13-model-api-and-output-contracts.md) |
+| Q095 | [收到半截参数或发生断流后，怎样判断响应是否完整？](../questions/Q095.md#q095-收到半截参数或发生断流后怎样判断响应是否完整) | [13 章](../advanced/13-model-api-and-output-contracts.md) |
+| Q096 | [知识摄取怎样保留文档身份、来源位置和有效版本？](../questions/Q096.md#q096-知识摄取怎样保留文档身份来源位置和有效版本) | [14 章](../advanced/14-ingestion-and-index-lifecycle.md) |
+| Q097 | [增量摄取怎样处理中断重跑，并避免半成品进入查询？](../questions/Q097.md#q097-增量摄取怎样处理中断重跑并避免半成品进入查询) | [14 章](../advanced/14-ingestion-and-index-lifecycle.md) |
+| Q098 | [删除、撤权和索引回退怎样避免旧内容再次被使用？](../questions/Q098.md#q098-删除撤权和索引回退怎样避免旧内容再次被使用) | [14 章](../advanced/14-ingestion-and-index-lifecycle.md) |
+| Q099 | [Text-to-SQL 怎样明确指标、映射 Schema，并避免 JOIN 放大？](../questions/Q099.md#q099-text-to-sql-怎样明确指标映射-schema并避免-join-放大) | [15 章](../advanced/15-text-to-sql-and-data-analysis.md) |
+| Q100 | [模型生成的 SQL 怎样限制表列行、写操作和查询资源？](../questions/Q100.md#q100-模型生成的-sql-怎样限制表列行写操作和查询资源) | [15 章](../advanced/15-text-to-sql-and-data-analysis.md) |
+| Q101 | [SQL 助手怎样有限修复，并用多数据实例核验语义？](../questions/Q101.md#q101-sql-助手怎样有限修复并用多数据实例核验语义) | [15 章](../advanced/15-text-to-sql-and-data-analysis.md) |
+| Q102 | [任务API、会话和后台Worker怎样分工并支持恢复？](../questions/Q102.md#q102-任务api会话和后台worker怎样分工并支持恢复) | [16 章](../advanced/16-service-deployment-and-operations.md) |
+| Q103 | [怎样联合发布模型、提示、工具和索引，并处理在途任务？](../questions/Q103.md#q103-怎样联合发布模型提示工具和索引并处理在途任务) | [16 章](../advanced/16-service-deployment-and-operations.md) |
+| Q104 | [HTTP请求正常但任务失败时，怎样设计服务指标与告警？](../questions/Q104.md#q104-http请求正常但任务失败时怎样设计服务指标与告警) | [16 章](../advanced/16-service-deployment-and-operations.md) |
+| Q105 | [事件ID、业务意图ID和运行ID分别解决什么问题？](../questions/Q105.md#q105-事件id业务意图id和运行id分别解决什么问题) | [17 章](../advanced/17-event-driven-and-proactive-agents.md) |
+| Q106 | [重复、乱序和迟到事件怎样收敛而不覆盖新状态？](../questions/Q106.md#q106-重复乱序和迟到事件怎样收敛而不覆盖新状态) | [17 章](../advanced/17-event-driven-and-proactive-agents.md) |
+| Q107 | [主动任务怎样分离触发条件、执行授权与通知条件？](../questions/Q107.md#q107-主动任务怎样分离触发条件执行授权与通知条件) | [17 章](../advanced/17-event-driven-and-proactive-agents.md) |
+| Q108 | [图片区域、页码与语音片段怎样对应到可核验的事实？](../questions/Q108.md#q108-图片区域页码与语音片段怎样对应到可核验的事实) | [18 章](../advanced/18-multimodal-and-realtime-agents.md) |
+| Q109 | [用户打断后，生成、播放、历史和在途工具怎样保持一致？](../questions/Q109.md#q109-用户打断后生成播放历史和在途工具怎样保持一致) | [18 章](../advanced/18-multimodal-and-realtime-agents.md) |
+| Q110 | [怎样比较两类语音架构，并设计专项评测？](../questions/Q110.md#q110-怎样比较两类语音架构并设计专项评测) | [18 章](../advanced/18-multimodal-and-realtime-agents.md) |
 
 
 [学习路线](00-roadmap.md) · [复习工具](../practice/README.md) · [仓库首页](../README.md)

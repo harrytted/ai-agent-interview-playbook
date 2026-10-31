@@ -1,0 +1,166 @@
+{
+  "normal": {
+    "tasks": 1,
+    "outbox": 1,
+    "version": 2,
+    "budget_used": 1,
+    "task_versions": [
+      2
+    ],
+    "task_contents": [
+      "普通员工住宿上限调整为700元"
+    ],
+    "task_owners": [
+      "learner-a"
+    ],
+    "outbox_states": [
+      "local_pending"
+    ]
+  },
+  "duplicate": {
+    "tasks": 1,
+    "outbox": 1,
+    "version": 2,
+    "budget_used": 1,
+    "task_versions": [
+      2
+    ],
+    "task_contents": [
+      "普通员工住宿上限调整为700元"
+    ],
+    "task_owners": [
+      "learner-a"
+    ],
+    "outbox_states": [
+      "local_pending"
+    ]
+  },
+  "out_of_order": {
+    "tasks": 1,
+    "outbox": 1,
+    "version": 3,
+    "budget_used": 1,
+    "task_versions": [
+      3
+    ],
+    "task_contents": [
+      "上限750元"
+    ],
+    "task_owners": [
+      "learner-a"
+    ],
+    "outbox_states": [
+      "local_pending"
+    ]
+  },
+  "crash_recovery": {
+    "tasks": 1,
+    "outbox": 1,
+    "version": 2,
+    "budget_used": 1,
+    "task_versions": [
+      2
+    ],
+    "task_contents": [
+      "普通员工住宿上限调整为700元"
+    ],
+    "task_owners": [
+      "learner-a"
+    ],
+    "outbox_states": [
+      "local_pending"
+    ]
+  },
+  "receive_recovery": {
+    "tasks": 1,
+    "outbox": 1,
+    "version": 2,
+    "budget_used": 1,
+    "task_versions": [
+      2
+    ],
+    "task_contents": [
+      "普通员工住宿上限调整为700元"
+    ],
+    "task_owners": [
+      "learner-a"
+    ],
+    "outbox_states": [
+      "local_pending"
+    ]
+  },
+  "cancelled": {
+    "tasks": 0,
+    "outbox": 0,
+    "version": 2,
+    "budget_used": 0,
+    "task_versions": [],
+    "task_contents": [],
+    "task_owners": [],
+    "outbox_states": []
+  },
+  "debounce": {
+    "tasks": 1,
+    "outbox": 1,
+    "version": 3,
+    "budget_used": 1,
+    "task_versions": [
+      3
+    ],
+    "task_contents": [
+      "上限750元"
+    ],
+    "task_owners": [
+      "learner-a"
+    ],
+    "outbox_states": [
+      "local_pending"
+    ]
+  },
+  "budget_and_loop": {
+    "tasks": 1,
+    "outbox": 1,
+    "version": 3,
+    "budget_used": 1,
+    "task_versions": [
+      2
+    ],
+    "task_contents": [
+      "普通员工住宿上限调整为700元"
+    ],
+    "task_owners": [
+      "learner-a"
+    ],
+    "outbox_states": [
+      "local_pending"
+    ]
+  },
+  "authorization": {
+    "tasks": 0,
+    "outbox": 0,
+    "version": 2,
+    "budget_used": 0,
+    "task_versions": [],
+    "task_contents": [],
+    "task_owners": [],
+    "outbox_states": []
+  },
+  "conflict_resolution": {
+    "tasks": 1,
+    "outbox": 1,
+    "version": 3,
+    "budget_used": 1,
+    "task_versions": [
+      3
+    ],
+    "task_contents": [
+      "上限700元"
+    ],
+    "task_owners": [
+      "learner-a"
+    ],
+    "outbox_states": [
+      "local_pending"
+    ]
+  }
+}

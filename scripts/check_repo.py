@@ -13,23 +13,9 @@ from urllib.parse import unquote, urlsplit
 
 from study import ROOT, questions
 from question_articles import article_path, check_articles, write_articles
+from curriculum import ADVANCED_CHAPTERS, ADVANCED_QUESTIONS, EXPECTED_QUESTIONS
 
-EXPECTED_QUESTIONS = 92
 EXCLUDED_DIRS = frozenset({".git", ".local", ".venv", ".venv-docs", ".site-src", "site", "node_modules"})
-ADVANCED_CHAPTERS = (
-    "01-harness-and-deep-agents",
-    "02-durable-execution",
-    "03-context-engineering",
-    "04-memory-and-skills",
-    "05-tool-routing-and-mcp",
-    "06-agentic-rag",
-    "07-multi-agent-systems",
-    "08-coding-and-computer-use",
-    "09-evaluation-and-feedback",
-    "10-performance-and-serving",
-    "11-security-and-governance",
-    "12-agent-training",
-)
 BASE_LESSONS = {
     "Q001": "learning/01-system-map.md",
     **{f"Q{i:03}": "learning/02-llm-primer.md" for i in range(2, 8)},
@@ -135,10 +121,13 @@ def write_navigation() -> None:
 def question_index() -> str:
     bank = questions()
     lines = [f"# {len(bank)} 题索引", "", "先找到问题，再回到机制。短答用于口述，详细答案用于理解，追问与案例用于检查能否迁移。", "",
-             "[基础原理](../learning/README.md) · [工程进阶](../advanced/README.md) · [36 道进阶题与章节对照](advanced/README.md)", ""]
+             '<div id="92-题索引"></div>', "",
+             f"[基础原理](../learning/README.md) · [工程进阶](../advanced/README.md) · [{ADVANCED_QUESTIONS} 道进阶题与章节对照](advanced/README.md)", ""]
     for folder, title in (("foundations", "基础原理：Q001–Q032"),
                           ("engineering", "工程与项目：Q033–Q056"),
-                          ("advanced", "进阶系统：Q057–Q092")):
+                          ("advanced", f"进阶系统：Q057–Q{EXPECTED_QUESTIONS:03}")):
+        if folder == "advanced":
+            lines.extend(['<div id="进阶系统q057q092"></div>', ""])
         lines.extend([f"## {title}", "", "| 题号 | 问题 | 学习入口 |", "| --- | --- | --- |"])
         for q in (item for item in bank if item.path.parent.name == folder):
             path = local_url(ROOT / "docs/question-index.md", ROOT / article_path(q.id))

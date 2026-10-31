@@ -1,0 +1,5 @@
+{"type": "media", "id": "receipt", "kind": "image", "width": 640, "height": 360, "path": "assets/receipt.svg"}
+{"type": "media", "id": "audio", "kind": "audio", "duration": 4, "path": "assets/playback-tone.wav", "origin": "synthetic_tone_no_speech"}
+{"type": "evidence", "id": "receipt-amount", "media_id": "receipt", "region": [80, 180, 460, 70], "amount": 650, "confidence": "clear", "origin": "authored_fixture_not_ocr"}
+{"type": "evidence", "id": "turn-1", "media_id": "audio", "time": [0.2, 1.8], "confidence": "clear", "origin": "authored_transcript_fixture_not_asr"}
+{"type": "transcript", "stage": "interim", "text": "6500元", "origin": "authored_fixture_not_asr"}
