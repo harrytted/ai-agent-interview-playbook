@@ -1,20 +1,27 @@
 # AI Agent 系统学习与面试手册
 
-**AI Agent（智能体）在本手册中指围绕目标、根据当前信息选择行动，并利用行动结果继续推进任务的系统。** 模型怎样参与决策，工具怎样执行动作，任务做到一半又靠什么记住进展？这份手册先解释这些概念，再用图解和例子连接上下文、检索、记忆与规划，最后进入评测和工程实现。
+**AI Agent（智能体）** 是围绕目标、根据当前信息选择行动，并利用行动结果继续推进任务的系统。本手册讨论以大语言模型为决策核心的 Agent。
 
-| 你想怎样阅读 | 从这里开始 |
-| --- | --- |
-| 先理解 Agent 的组成和工作方式 | **[01 · Agent 的组成与协作](learning/01-system-map.md)**：在本章阅读概念、图解和完整例子 |
-| 已有基础，深入工程问题 | **[工程进阶（12 章）](advanced/README.md)**：按章节阅读机制、案例、推导与设计 |
-| 按面试问题查漏补缺 | **[92 篇逐题文章](questions/README.md)**：每题独立阅读，包含短答、详细解释、追问与案例 |
+从概念、组成和运行机制开始，理解模型、工具、上下文、检索、记忆与规划怎样协作。图解和同一个政策助手案例把知识串起来，Python 实验与面试追问帮助你检查理解。阅读正文可以直接开始，动手部分需要 Python 基础。
+
+<div class="learning-paths" markdown="1">
+
+- **[从基础概念开始](learning/01-system-map.md)**<br>
+  先认识 Agent 的组成与协作，再按十章主线理解各部分怎样工作。
+
+- **[深入工程进阶](advanced/README.md)**<br>
+  已有基础，可以沿十二章学习长任务、系统设计、恢复与质量优化。
+
+- **[按面试题查漏补缺](questions/README.md)**<br>
+  进入 92 篇独立题解，先口述短答，再看完整解释、追问与案例。
+
+</div>
 
 需要先看全貌，可以查看 [知识主线与阅读顺序](learning/knowledge-map.md)。
 
 ## 从组成看懂协作
 
-![模型负责理解与决策，工具提供外部能力，记忆保留可用信息，规划组织步骤；四类能力围绕目标协作](website/assets/diagrams/concepts/C1-capability-map.png)
-
-[查看原图](website/assets/diagrams/concepts/C1-capability-map.png)
+[![模型负责理解与决策，工具提供外部能力，记忆保留可用信息，规划组织步骤；四类能力围绕目标协作](website/assets/diagrams/concepts/C1-capability-map.png)](website/assets/diagrams/concepts/C1-capability-map.png)
 
 小明问：“2026年11月12日去海岚出差，住宿每晚650元，超过标准吗？”本例的普通员工类别由可信档案提供。模型要读懂问题，工具负责取得适用制度，任务记录保留日期与已查资料，规划决定先查什么、还缺什么。运行时把这些能力组织成连续的过程。[进入章节完整讲解](learning/01-system-map.md)
 
@@ -30,7 +37,7 @@
 
 | 学习阶段 | 章节 | 核心产出 |
 | --- | --- | --- |
-| 模型和输入 | [01 组成与协作](learning/01-system-map.md) · [02 LLM 原理](learning/02-llm-primer.md) · [03 上下文](learning/03-context-and-prompts.md) | 画清职责，复算注意力，组织有效证据 |
+| 模型和输入 | [01 组成与协作](learning/01-system-map.md) · [02 LLM 原理](learning/02-llm-primer.md) · [03 上下文](learning/03-context-and-prompts.md) | 画清职责，组织有效证据；数学选做：复算注意力 |
 | 行动与知识 | [04 工具循环](learning/04-agent-loop.md) · [05 工具/MCP](learning/05-tools-and-mcp.md) · [06 RAG](learning/06-rag-and-retrieval.md) | 读执行轨迹，定义工具合同，检查检索链路 |
 | 状态与协作 | [07 记忆](learning/07-memory-and-state.md) · [08 规划与多 Agent](learning/08-planning-and-multi-agent.md) | 管理状态与版本，解释协作和恢复的边界 |
 | 质量与交付 | [09 评测](learning/09-evaluation.md) · [10 可靠性与安全](learning/10-reliability-and-security.md) | 定义指标与终态，处理失败和越权 |

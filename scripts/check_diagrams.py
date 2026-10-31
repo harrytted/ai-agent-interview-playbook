@@ -34,6 +34,20 @@ CONCEPT_FILES = {
     "C5": "concepts/C5-planning-feedback.svg",
     "C6": "concepts/C6-runtime-boundary.svg",
 }
+ADVANCED_FILES = {
+    "A01": "advanced/A01-harness.svg",
+    "A02": "advanced/A02-recovery.svg",
+    "A03": "advanced/A03-context.svg",
+    "A04": "advanced/A04-memory-time.svg",
+    "A05": "advanced/A05-tool-routing.svg",
+    "A06": "advanced/A06-evidence-loop.svg",
+    "A07": "advanced/A07-control.svg",
+    "A08": "advanced/A08-action-feedback.svg",
+    "A09": "advanced/A09-evaluation.svg",
+    "A10": "advanced/A10-critical-path.svg",
+    "A11": "advanced/A11-trust-boundaries.svg",
+    "A12": "advanced/A12-training.svg",
+}
 
 
 @dataclass
@@ -92,6 +106,9 @@ def check_generated_images(root: Path) -> tuple[list[str], int]:
     if not isinstance(metadata, dict) or not isinstance(metadata.get("assets"), list):
         return ["imagegen manifest must contain an assets list"], 0
     expected = {f"G{number}": filename for number, filename in FILES.items()} | CONCEPT_FILES
+    if any(isinstance(entry, dict) and entry.get("id") in ADVANCED_FILES
+           for entry in metadata["assets"]):
+        expected |= ADVANCED_FILES
     errors = []
     seen = set()
     count = 0
@@ -202,9 +219,12 @@ def check_diagrams(root: Path = ROOT, suite: str = "all") -> Result:
     names = {p.relative_to(directory).as_posix() for directory in (source, published) for p in directory.rglob("*.svg")}
     if names.intersection(CONCEPT_FILES.values()):
         required.update(CONCEPT_FILES.values())
+    if names.intersection(ADVANCED_FILES.values()):
+        required.update(ADVANCED_FILES.values())
     for name in sorted(required - names):
         result.errors.append(f"missing required diagram: {name}")
-    numbers = {name: n for n, name in FILES.items()} | {name: n for n, name in CONCEPT_FILES.items()}
+    numbers = ({name: n for n, name in FILES.items()}
+               | {name: n for n, name in (CONCEPT_FILES | ADVANCED_FILES).items()})
     for name in sorted(names):
         if name not in numbers:
             result.errors.append(f"unexpected diagram filename/number: {name}")

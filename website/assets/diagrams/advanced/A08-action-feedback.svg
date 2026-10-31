@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A08" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="A08-title A08-desc">
+<title id="A08-title">做完动作，还要重新看结果</title><desc id="A08-desc">编码与界面操作都需要观察、操作、新观察与结果核对。页面变化使旧观察失效时应重新读取，核对目标对象和实际结果后才能验收。底部代码与页面结果均为验证示意。</desc>
+<defs><marker id="A08-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A08-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:28px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:20px}.note{font-size:20px;fill:#536D79}</style>
+<rect x="1" y="1" width="758" height="868" rx="20" fill="#FFFFFF" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="30" y="49" class="title" text-anchor="start">做完动作，还要重新看结果</text>
+<text x="30" y="84" class="note" text-anchor="start">编码与界面操作，共用一条反馈链</text>
+<rect x="180" y="117" width="400" height="75" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="380.0" y="148.0" class="label" text-anchor="middle" style="fill:#087F86">1 · 观察当前状态</text>
+<text x="380.0" y="177.0" class="body" text-anchor="middle">确认代码版本或目标页面</text>
+<path d="M380 192 V232" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A08-arrow)"/>
+<rect x="180" y="235" width="400" height="75" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="380.0" y="266.0" class="label" text-anchor="middle" style="fill:#087F86">2 · 执行小步操作</text>
+<text x="380.0" y="295.0" class="body" text-anchor="middle">应用补丁，或修改并保存</text>
+<path d="M380 310 V350" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A08-arrow)"/>
+<rect x="180" y="353" width="400" height="75" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="380.0" y="384.0" class="label" text-anchor="middle" style="fill:#087F86">3 · 取得新的观察</text>
+<text x="380.0" y="413.0" class="body" text-anchor="middle">读测试输出，或重读对象</text>
+<path d="M380 428 V468" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A08-arrow)"/>
+<rect x="180" y="471" width="400" height="92" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="380.0" y="510.5" class="label" text-anchor="middle" style="fill:#087F86">4 · 核对目标与实际结果</text>
+<text x="380.0" y="539.5" class="body" text-anchor="middle">正确对象 ＋ 正确变化</text>
+<path d="M180 516 H70 V154 H179" fill="none" stroke="#B56B26" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A08-orange)" stroke-dasharray="7 6"/>
+<text x="30" y="594" class="note" text-anchor="start" style="fill:#B56B26">状态变化或核对未通过：</text>
+<text x="30" y="625" class="note" text-anchor="start" style="fill:#B56B26">回到第1步，重新观察。</text>
+<path d="M380 563 V640" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="397" y="612" class="note" text-anchor="start">用结果验收</text>
+<rect x="38" y="645" width="324" height="110" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="200.0" y="679.0" class="label" text-anchor="middle" style="fill:#087F86">代码修复的证据</text>
+<text x="200.0" y="708.0" class="body" text-anchor="middle">补丁已实际应用</text>
+<text x="200.0" y="737.0" class="body" text-anchor="middle">相关测试通过</text>
+<rect x="398" y="645" width="324" height="110" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="560.0" y="679.0" class="label" text-anchor="middle" style="fill:#087F86">页面保存的证据</text>
+<text x="560.0" y="708.0" class="body" text-anchor="middle">对象仍是目标草稿</text>
+<text x="560.0" y="737.0" class="body" text-anchor="middle">字段、状态与版本正确</text>
+<path d="M380 640 H200 V644" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A08-arrow)"/>
+<path d="M380 640 H560 V644" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A08-arrow)"/>
+<text x="380" y="812" class="body" text-anchor="middle">“点击成功”或“补丁生成”，还不等于任务完成。</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A02" width="760" height="1060" viewBox="0 0 760 1060" role="img" aria-labelledby="A02-title A02-desc">
+<title id="A02-title">恢复时，先确认外部结果</title><desc id="A02-desc">外部工单服务可能已经成功，但响应丢失使本地结果未知。恢复时使用保存的同一操作意图查询核对。若找到对象则保存既有结果；仍未知时按服务合同幂等重试或继续对账，不能凭未知状态新建第二张工单。</desc>
+<defs><marker id="A02-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A02-warn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:29px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:22px}.note{font-size:20px;fill:#526976}</style>
+<rect width="760" height="1060" rx="18" fill="#FFFFFF"/>
+<text x="30" y="48" class="title">恢复时，先确认外部结果</text>
+<text x="30" y="82" class="note" text-anchor="start">结果未知，不能直接当成“还没创建”</text>
+<rect x="130" y="115" width="500" height="110" rx="14" fill="#EAF5F3" stroke="#087F86" stroke-width="2"/>
+<text x="380" y="153" class="label" text-anchor="middle" style="fill:#087F86">提交前，先保存操作意图</text>
+<text x="380" y="190" class="body" text-anchor="middle">稳定标识、相同参数、对应批准</text>
+<path d="M380 225 V275" fill="none" stroke="#087F86" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A02-arrow)"/>
+<rect x="130" y="285" width="500" height="105" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/>
+<text x="380" y="323" class="label" text-anchor="middle">外部服务可能已经创建工单</text>
+<text x="380" y="360" class="body" text-anchor="middle">响应丢失，或程序尚未记账就退出</text>
+<path d="M380 390 V445" fill="none" stroke="#B56B26" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A02-warn)"/>
+<path d="M380 450 L625 535 L380 620 L135 535 Z" fill="#FFF6EA" stroke="#B56B26" stroke-width="2"/>
+<text x="380" y="528" class="label" text-anchor="middle" style="fill:#B56B26">恢复原意图，查询并核对</text>
+<text x="380" y="563" class="body" text-anchor="middle">能确认工单已存在吗？</text>
+<path d="M135 535 H65 V685" fill="none" stroke="#087F86" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A02-arrow)"/>
+<text x="83" y="629" class="note" text-anchor="start" style="fill:#087F86">已确认</text>
+<path d="M625 535 H695 V685" fill="none" stroke="#B56B26" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A02-warn)"/>
+<text x="675" y="629" class="note" text-anchor="end" style="fill:#B56B26">尚未确认</text>
+<rect x="30" y="700" width="330" height="205" rx="14" fill="#EAF5F3" stroke="#087F86" stroke-width="2"/>
+<text x="195" y="740" class="label" text-anchor="middle" style="fill:#087F86">找到同一对象</text>
+<text x="55" y="785" class="body" text-anchor="start">核对对象与原参数</text>
+<text x="55" y="823" class="body" text-anchor="start">保存已有结果</text>
+<text x="55" y="861" class="body" text-anchor="start">继续后续工作</text>
+<rect x="400" y="700" width="330" height="205" rx="14" fill="#FFF6EA" stroke="#B56B26" stroke-width="2"/>
+<text x="565" y="740" class="label" text-anchor="middle" style="fill:#B56B26">按服务合同处理</text>
+<text x="425" y="781" class="body" text-anchor="start">支持幂等：同一标识</text>
+<text x="425" y="814" class="body" text-anchor="start">与相同参数重试</text>
+<text x="425" y="850" class="body" text-anchor="start">不支持：继续对账</text>
+<text x="425" y="883" class="body" text-anchor="start">或交由人工核对</text>
+<rect x="30" y="940" width="700" height="82" rx="14" fill="#F7FAFB" stroke="#D6E5EA" stroke-width="2"/>
+<text x="380" y="973" class="note" text-anchor="middle">本地检查点保存进度；外部服务确认业务效果</text>
+<text x="380" y="1004" class="note" text-anchor="middle">幂等能力由服务端合同保障，不能只靠客户端备注</text>
+</svg>

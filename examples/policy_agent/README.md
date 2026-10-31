@@ -9,23 +9,21 @@
 在仓库根目录执行。每个run-id对应保留目录，已存在则拒绝覆盖；重新演示时换一个名称。
 
 ```bash
-python3 -m examples.policy_agent run --task T01 --mode offline --run-id intro-t01
-python3 -m examples.policy_agent run --task T01 --variant missing-date --mode offline --run-id intro-missing
+python3 -m examples.policy_agent run --task 住宿金额核对 --mode offline --run-id intro-normal
+python3 -m examples.policy_agent run --task 住宿金额核对 --variant missing-date --mode offline --run-id intro-missing
 ```
 
-正常任务应为answered，引用P17-v2#4，上限700元，650元未超限。第二条应先clarification_required，零检索、零写入。此时先看 `.local/policy_agent/intro-missing/context.json`，再补日期：
+正常查询应得到“已回答”（answered）：依据海岚新版住宿标准，每晚上限700元，650元未超限。第二条会先要求补充日期（clarification_required），还不会检索或写入。此时先看 `.local/policy_agent/intro-missing/context.json`，再补日期：
 
 ```bash
 python3 -m examples.policy_agent resume --run-id intro-missing --reply-json '{"trip_date":"2026-11-12"}'
-python3 -m examples.policy_agent run --task T01 --variant stale-first --mode offline --run-id intro-stale
+python3 -m examples.policy_agent run --task 住宿金额核对 --variant stale-first --mode offline --run-id intro-stale
 python3 -m examples.policy_agent eval --suite pilot --mode offline --output .local/policy_agent/pilot-report.json
 ```
 
-补参从同一状态继续，预算不归零。旧索引变式需追加get_policy核对，不能凭题号直接填700元。pilot包含正常、缺日期及恢复、旧证据三项；eval输出摘要，完整逐项断言保存在指定JSON中。
+补参从同一状态继续，预算不归零。旧索引变式需要补查适用制度，不能预填700元这个答案。pilot包含正常、缺日期及恢复、旧证据三项；eval输出摘要，完整逐项断言保存在指定JSON中。
 
-![一次工具请求、执行、回填与第二次决定](../../website/assets/diagrams/G3-tool-roundtrip.png)
-
-[查看原图](../../website/assets/diagrams/G3-tool-roundtrip.png)
+[![一次工具请求、执行、回填与第二次决定](../../website/assets/diagrams/G3-tool-roundtrip.png)](../../website/assets/diagrams/G3-tool-roundtrip.png)
 
 ## 打开已经运行的样本
 
@@ -38,7 +36,7 @@ python3 -m examples.policy_agent eval --suite pilot --mode offline --output .loc
 | 搜索先得旧版 | [完整JSONL](traces/stale-first/trace.jsonl) | [context](traces/stale-first/context.json)、[result](traces/stale-first/result.json) |
 | 用户更正城市 | [完整JSONL](traces/user-correction/trace.jsonl) | [context](traces/user-correction/context.json)、[result](traces/user-correction/result.json) |
 
-正常路径包含run_started、decision、tool_started、tool_result、decision、stopped六个事件；两次决定、一次读取、零写入。阅读时找出相同call_id，说明P17-v2#4何时进入下一次输入。模型请求工具和宿主执行工具是两件事。
+正常路径依次记录运行开始、首次决定、开始查询、取得结果、再次决定和停止；两次决定、一次读取、零写入。阅读时沿同一次调用，观察查到的住宿标准何时进入下一次输入。模型请求工具和宿主执行工具是两件事。
 
 ## 十二个主任务与受控变式
 
@@ -47,24 +45,24 @@ python3 -m examples.policy_agent list
 python3 -m examples.policy_agent eval --suite all --mode offline --output .local/policy_agent/all-report.json
 ```
 
-| ID | 改变什么 | 应检查什么 |
+| 场景 | 改变什么 | 应检查什么 |
 | --- | --- | --- |
-| T01 | 海岚11月12日650元 | v2上限700，金额未超限 |
-| T02 | 日期改为10月31日 | v1上限600，金额超限 |
-| T03 | 可信身份换为经理 | 适用900元标准，类别不由模型自填 |
-| T04 | 比较两个日期 | 600与700分别对应有效版本 |
-| T05 | 比较海岚与云洲 | 同日期分别700与650 |
-| T06 | 报价800元并问咨询材料 | 上限、材料分别取证，咨询不等于批准 |
-| T07 | 注入同等级有效证据冲突 | 保留真实冲突来源，需人工判断 |
-| T08 | 已记录的可信用户更正城市 | 旧城市证据退出当前结论，待办真正替换 |
-| T09 | 初始缺日期 | 先澄清，再恢复 |
-| T10 | 询问未提供制度的餐补 | 说明证据不足 |
-| T11 | 明确创建咨询工单 | 批准具体草稿后创建一份对象 |
-| T12 | 远端提交后进程崩溃 | 原操作ID恢复，仍只有一份对象 |
+| 住宿金额核对 | 海岚11月12日650元 | 新版上限700，金额未超限 |
+| 历史日期核对 | 日期改为10月31日 | 旧版上限600，金额超限 |
+| 经理住宿标准 | 可信身份换为经理 | 适用900元标准，类别不由模型自填 |
+| 两个日期比较 | 比较两个日期 | 600与700分别对应有效版本 |
+| 两地住宿比较 | 比较海岚与云洲 | 同日期分别700与650 |
+| 超标咨询材料 | 报价800元并问咨询材料 | 上限、材料分别取证，咨询不等于批准 |
+| 冲突证据核对 | 注入同等级有效证据冲突 | 保留真实冲突来源，需人工判断 |
+| 用户更正城市 | 已记录的可信用户更正城市 | 旧城市证据退出当前结论，待办真正替换 |
+| 缺少出差日期 | 初始缺日期 | 先澄清，再恢复 |
+| 餐补资料不足 | 询问未提供制度的餐补 | 说明证据不足 |
+| 批准后创建工单 | 明确创建咨询工单 | 批准具体草稿后创建一份对象 |
+| 工单崩溃恢复 | 远端提交后进程崩溃 | 原操作ID恢复，仍只有一份对象 |
 
-all共22项：12个主任务、T01的9个读取变式，以及T11批准后修改金额。T12自身包含一次崩溃，不重复算一项。T08更正与主任务故障由 [任务夹具](data/tasks.json)定义，额外故障与参数修改由 [变式夹具](data/variants.json)注入，在trace中标明；策略看不到题号、变式名、未来事件或标准答案。
+完整评测共22项：上表12个主场景、住宿金额核对的9个读取变式，以及创建工单获批后又修改金额的场景。崩溃恢复自身包含一次中断，不重复算一项。城市更正等条件由 [任务数据](data/tasks.json)定义，额外故障与参数修改由 [变式数据](data/variants.json)注入，并在执行轨迹中标明；策略看不到任务代号、变式名、未来事件或标准答案。
 
-[政策](data/policies.json)有八份文档，包括两个P17版本。[用户](data/users.json)是可信测试身份源，非生产认证。[任务](data/tasks.json)描述目标与条件。[独立期望](data/expected.json)由评分器在运行后读取，策略不读取。日期使用左闭右开区间，业务日期不取机器当天。
+[政策数据](data/policies.json)有八份文档，包括海岚住宿标准的新旧两版。[用户数据](data/users.json)是可信测试身份源，非生产认证。[任务数据](data/tasks.json)描述目标与条件。[独立期望](data/expected.json)由评分器在运行后读取，策略不读取。日期使用左闭右开区间，业务日期不取机器当天。
 
 ## 工具与状态的边界
 
@@ -79,20 +77,42 @@ PolicyView仅包含目标、可信消息、已知条件、未知项、可见观�
 ## 具体批准与跨进程恢复
 
 ```bash
-python3 -m examples.policy_agent run --task T11 --run-id ticket-11
-python3 -m examples.policy_agent approve --run-id ticket-11 --request-id APR-ticket-11-1
-python3 -m examples.policy_agent resume --run-id ticket-11
+python3 -m examples.policy_agent run --task 批准后创建工单 --run-id ticket-approval
+python3 -m examples.policy_agent approve --run-id ticket-approval --request-id APR-ticket-approval-1
+python3 -m examples.policy_agent resume --run-id ticket-approval
 ```
 
 先看approval_required返回的完整草稿和请求ID。approve只保存受控测试操作者的决定，resume再核对当前权限、版本和完整参数。日期、金额、对象或内容变化使旧批准失效；批准不由模型文本产生。
 
 任务状态与批准保存于 `.local/policy_agent/<run-id>/task.sqlite`，模拟工单在同目录的service.sqlite，两个数据库没有共同事务。服务按tenant_id+operation_id唯一，并比较规范化完整参数；同ID异内容拒绝，相同内容返回已有对象。
 
-![服务已提交但本地尚未确认时，第二进程按原操作ID恢复](../../website/assets/diagrams/G8-write-recovery.png)
+[![服务已提交但本地尚未确认时，第二进程按原操作ID恢复](../../website/assets/diagrams/G8-write-recovery.png)](../../website/assets/diagrams/G8-write-recovery.png)
 
-[查看原图](../../website/assets/diagrams/G8-write-recovery.png)
+下面演示工单已在服务端提交、本地尚未确认时的恢复。四条命令逐条执行；`ticket-recovery`应是本次新用的运行名称。先核对第一条返回的完整草稿和审批请求，示例中的请求标识为`APR-ticket-recovery-1`；如果更改run-id，审批参数也要使用实际返回的值。
 
-T12手动演示使用同样的run→approve→resume命令，将任务与run-id换为T12/ticket-12。第一次resume预期退出码73，模拟进程在服务提交后、本地确认前退出；再运行同一resume命令恢复。不要删运行目录或换操作ID。自动all套件也会启动两个真实Python子进程核对这一过程。该实验验证本地模拟合同，不能推导所有远端服务都支持相同保证。
+```bash
+python3 -m examples.policy_agent run --task 工单崩溃恢复 --mode offline --run-id ticket-recovery
+python3 -m examples.policy_agent approve --run-id ticket-recovery --request-id APR-ticket-recovery-1
+# 首次恢复预期退出73：服务已提交，本地还未确认
+python3 -m examples.policy_agent resume --run-id ticket-recovery
+# 沿同一运行记录再次恢复，预期完成写入确认
+python3 -m examples.policy_agent resume --run-id ticket-recovery
+```
+
+退出码73是这次故障注入的预期现象。保留运行目录与操作ID，第二次resume才能沿原意图核对已有对象。恢复后可运行独立评分，检查终态、对象内容、写入身份与批准顺序：
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+from examples.policy_agent.grade import grade
+
+report = grade(Path(".local/policy_agent/ticket-recovery"))
+print({key: report[key] for key in ("status", "passed", "created_count")})
+assert report["passed"], report["checks"]
+PY
+```
+
+应核对`status=write_succeeded`、`passed=True`和`created_count=1`。自动all套件也会启动两个真实Python子进程检查这一过程。该实验验证本地模拟合同，不能推导所有远端服务都支持相同保证。
 
 正常暂停和结束保存trace/context/result，评分另有grade；崩溃可能没有最终result快照，恢复依据持久意图、服务对象和已flush事件。run退出0表示完成一次合法处理，等待或正确拒绝也可能退出0；eval只有全部断言通过才退出0。
 
@@ -101,7 +121,7 @@ T12手动演示使用同样的run→approve→resume命令，将任务与run-id�
 显式设置ANTHROPIC_API_KEY后才启用网络；密钥不要写入源码或命令历史。可用ANTHROPIC_MODEL覆盖默认模型。
 
 ```bash
-python3 -m examples.policy_agent run --task T01 --mode live --run-id live-t01
+python3 -m examples.policy_agent run --task 住宿金额核对 --mode live --run-id live-normal
 ```
 
 [live.py](live.py)采用标准库HTTP，每次决定一个请求，保存完整assistant块并按tool_use_id回填全部工具结果，再继续。无自动整请求重试；每个活跃段60秒协作式期限，HTTP至多20秒且受剩余时间限制，单次输出最多1024 token。超时不表示远端已取消。

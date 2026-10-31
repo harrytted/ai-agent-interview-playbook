@@ -116,7 +116,7 @@ MCP 增加协议参与者与代理关系，需区分下游客户端、MCP 服务
 
 **实战案例：**
 
-教学案例用户批准报告 v7 到内部目录，等待期间 Worker 把目标换成外部 URL。执行器核对参数摘要后拒绝原批准并生成待重审状态。另一分支在合法写入后丢失响应，恢复沿同一操作 ID 查询既有对象。验收分别检查未发生越权外发、合法对象仅一份、批准记录和后端 ID 可关联，不把审批成功当作上传成功。
+教学案例用户批准将这份报告上传到内部目录，等待期间 Worker 把目标换成外部 URL。执行器核对参数摘要后拒绝原批准并生成待重审状态。另一分支在合法写入后丢失响应，恢复沿同一操作 ID 查询既有对象。验收分别检查未发生越权外发、合法对象仅一份、批准记录和后端 ID 可关联，不把审批成功当作上传成功。
 
 </details>
 
@@ -126,7 +126,7 @@ MCP 增加协议参与者与代理关系，需区分下游客户端、MCP 服务
 
 **微练习：**
 
-为报告 v7 画批准与执行两条状态线，注入过期、改参数、撤权、响应丢失。验收每种情况都有确定恢复分支，并说明哪个状态允许外部写入、哪个状态必须查询结果。
+为这份待上传报告画批准与执行两条状态线，注入过期、改参数、撤权、响应丢失。验收每种情况都有确定恢复分支，并说明哪个状态允许外部写入、哪个状态必须查询结果。
 
 **学习章与参考：** [学习章 11](../../advanced/11-security-and-governance.md) · [OpenAI Guardrails and Approvals](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals) · [LangGraph Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) · [持久执行学习章](../../advanced/02-durable-execution.md)
 

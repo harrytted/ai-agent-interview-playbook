@@ -18,9 +18,7 @@
 
 **RAG（检索增强生成）** 把外部材料取回并用于生成回答；**Agentic RAG**进一步让决策过程根据已有证据，选择后续检索、调用或停止。固定检索可以按预设路径取一次材料，Agentic策略则可能发现缺口后调整下一步。这里的重点是证据驱动的决策，**不以Agent数量或图数据库作为判定标准**。
 
-![入库建立索引，查询筛选日期版本权限适用的证据，再组装上下文生成回答](../../website/assets/diagrams/G5-rag-pipelines.png)
-
-[查看原图](../../website/assets/diagrams/G5-rag-pipelines.png)
+[![入库建立索引，查询筛选日期版本权限适用的证据，再组装上下文生成回答](../../website/assets/diagrams/G5-rag-pipelines.png)](../../website/assets/diagrams/G5-rag-pipelines.png)
 
 图先提供检索与证据筛选的位置，复杂任务还要按下文的证据依赖决定追加哪条查询路径。
 

@@ -22,7 +22,7 @@
       "topic": "工具请求、执行和对应结果的完整往返",
       "width": 1536,
       "height": 1024,
-      "sha256": "6d092611d637bcc7865724c7ea7563841243d603187a7e1bdea8b5abaea77a64",
+      "sha256": "f3f70a95ca14fd942476e36055441a5fb5dc83f3583c376c4b517eaa0097725a",
       "revised_on": "2026-10-31"
     },
     {
@@ -53,7 +53,11 @@
       "id": "G8",
       "path": "website/assets/diagrams/G8-write-recovery.png",
       "semantic_source": "diagrams/source/G8-write-recovery.svg",
-      "topic": "远端提交到本地确认之间的故障恢复"
+      "topic": "远端提交到本地确认之间的故障恢复",
+      "sha256": "e3842764a966a18f78f7daf294f2f5caa20f7e9b52124487675e8e3b9baf0903",
+      "revised_on": "2026-10-31",
+      "width": 1536,
+      "height": 1024
     },
     {
       "id": "C1",
@@ -90,6 +94,138 @@
       "path": "website/assets/diagrams/concepts/C6-runtime-boundary.png",
       "semantic_source": "diagrams/source/concepts/C6-runtime-boundary.svg",
       "topic": "运行时与外部环境的职责边界"
+    },
+    {
+      "id": "A01",
+      "path": "website/assets/diagrams/advanced/A01-harness.png",
+      "semantic_source": "diagrams/source/advanced/A01-harness.svg",
+      "topic": "跨会话工作包与继续前核对",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "328c113b03077302477dd5919ff38f729f3554521ade61896fda31cc45dc57a2",
+      "prompt_record": "diagrams/advanced-imagegen-A01-A04.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A02",
+      "path": "website/assets/diagrams/advanced/A02-recovery.png",
+      "semantic_source": "diagrams/source/advanced/A02-recovery.svg",
+      "topic": "结果未知时查询同一意图与幂等对账",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "22ea35e30933a83d99b17dfffc4252a245fa20c98b126e2cd2c1844dc81262a9",
+      "prompt_record": "diagrams/advanced-imagegen-A01-A04.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A03",
+      "path": "website/assets/diagrams/advanced/A03-context.png",
+      "semantic_source": "diagrams/source/advanced/A03-context.svg",
+      "topic": "上下文筛选、外置原文与按指针回查",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "7ab9f606eb32561e495c41908a42405256c8cec4b3fa6d81d80049597f1ef659",
+      "prompt_record": "diagrams/advanced-imagegen-A01-A04.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A04",
+      "path": "website/assets/diagrams/advanced/A04-memory-time.png",
+      "semantic_source": "diagrams/source/advanced/A04-memory-time.svg",
+      "topic": "业务有效时间与系统得知时间",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "4f5b58b9e5d4637256ca36aa9029c5308e5b5eeb56f0c95de32c8d1ec3f0a38c",
+      "prompt_record": "diagrams/advanced-imagegen-A01-A04.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A05",
+      "path": "website/assets/diagrams/advanced/A05-tool-routing.png",
+      "semantic_source": "diagrams/source/advanced/A05-tool-routing.svg",
+      "topic": "工具发现、加载与执行条件",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "7ffb8ee2aebf4a9551fe8b4f5883c0f30a3439806e78d9fe640d2cfc9708b66d",
+      "prompt_record": "diagrams/advanced-imagegen-A05-A08.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A06",
+      "path": "website/assets/diagrams/advanced/A06-evidence-loop.png",
+      "semantic_source": "diagrams/source/advanced/A06-evidence-loop.svg",
+      "topic": "证据缺口驱动的有界检索",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "22a7cbdf7ecde358199c67cd76b94529a14ab67b2a225bb233155b58858ec81b",
+      "prompt_record": "diagrams/advanced-imagegen-A05-A08.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A07",
+      "path": "website/assets/diagrams/advanced/A07-control.png",
+      "semantic_source": "diagrams/source/advanced/A07-control.svg",
+      "topic": "委派与交接的控制权区别",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "e726e777c0bb94034180fe832f6a0d75c0b61d7b083938cfb3a9a0dd19ce9915",
+      "prompt_record": "diagrams/advanced-imagegen-A05-A08.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A08",
+      "path": "website/assets/diagrams/advanced/A08-action-feedback.png",
+      "semantic_source": "diagrams/source/advanced/A08-action-feedback.svg",
+      "topic": "观察、操作与实际结果核对",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "f76f5a1c34e347325593808bad3cc7bec67a29072eed4624fe67b679b3556b29",
+      "prompt_record": "diagrams/advanced-imagegen-A05-A08.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A09",
+      "path": "website/assets/diagrams/advanced/A09-evaluation.png",
+      "semantic_source": "diagrams/source/advanced/A09-evaluation.svg",
+      "topic": "固定任务下的逐题配对评测",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "c5fefd260cc80c38f01cabc601be88e72d06e2a8e0ec646fb3e981d669d97451",
+      "prompt_record": "diagrams/advanced-imagegen-A09-A12.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A10",
+      "path": "website/assets/diagrams/advanced/A10-critical-path.png",
+      "semantic_source": "diagrams/source/advanced/A10-critical-path.svg",
+      "topic": "并行读取的依赖与关键路径",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "1c33a5d166366e7cd7d2a3e98f2c0075cfe8e79bca6088d8ea51f9fb425171c4",
+      "prompt_record": "diagrams/advanced-imagegen-A09-A12.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A11",
+      "path": "website/assets/diagrams/advanced/A11-trust-boundaries.png",
+      "semantic_source": "diagrams/source/advanced/A11-trust-boundaries.svg",
+      "topic": "外部资料与执行检查的信任边界",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "a8234db954607a04aed6a3695c6b356bec2104671d1df01eccb24e57c97f58d5",
+      "prompt_record": "diagrams/advanced-imagegen-A09-A12.md",
+      "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A12",
+      "path": "website/assets/diagrams/advanced/A12-training.png",
+      "semantic_source": "diagrams/source/advanced/A12-training.svg",
+      "topic": "先诊断原因再选择参数训练",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "b29dfce2c3f9e716d39ad4d5c360dbbefba6477d27e215f39b4faf9d362564e1",
+      "prompt_record": "diagrams/advanced-imagegen-A09-A12.md",
+      "generated_on": "2026-10-31"
     }
   ]
 }

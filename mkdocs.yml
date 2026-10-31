@@ -220,7 +220,6 @@ nav:
               - "Q091 · GRPO 的组内相对奖励怎样计算，为什么标准化不等于完整训练？": questions/Q091.md
               - "Q092 · Harnessed Agent RL 怎样组织训练数据，如何理解 Agent Lightning 的版本？": questions/Q092.md
       - 按模块合订:
-          - 基础与工程总索引: docs/question-index.md
           - 进阶合订目录: docs/advanced/index.md
           - "Agent 与 LLM": docs/foundations/01-agent-and-llm.md
           - "规划与编排": docs/foundations/02-planning-and-orchestration.md

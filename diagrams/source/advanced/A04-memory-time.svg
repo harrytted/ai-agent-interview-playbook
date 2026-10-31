@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A04" width="760" height="880" viewBox="0 0 760 880" role="img" aria-labelledby="A04-title A04-desc">
+<title id="A04-title">一条事实，两种时间</title><desc id="A04-desc">住宿标准在11月1日由600元改为700元，但系统到11月5日才收到通知。业务有效时间与系统记录时间不同：收到通知后回查11月3日的适用规则是700元；还原11月3日系统当时的认知则是600元。示意不表示本地实验已实现双时间索引。</desc>
+<defs><marker id="A04-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A04-warn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:29px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:22px}.note{font-size:20px;fill:#526976}</style>
+<rect width="760" height="880" rx="18" fill="#FFFFFF"/>
+<text x="30" y="48" class="title">一条事实，两种时间</text>
+<text x="30" y="82" class="note" text-anchor="start">示例：新标准已生效，通知却晚到了</text>
+<text x="80" y="150" class="note" text-anchor="middle">10月31日</text>
+<path d="M80 165 V475" fill="none" stroke="#D6E5EA" stroke-width="1.5" stroke-dasharray="5 7"/>
+<text x="280" y="150" class="note" text-anchor="middle">11月1日</text>
+<path d="M280 165 V475" fill="none" stroke="#D6E5EA" stroke-width="1.5" stroke-dasharray="5 7"/>
+<text x="475" y="150" class="note" text-anchor="middle">11月3日</text>
+<path d="M475 165 V475" fill="none" stroke="#D6E5EA" stroke-width="1.5" stroke-dasharray="5 7"/>
+<text x="675" y="150" class="note" text-anchor="middle">11月5日</text>
+<path d="M675 165 V475" fill="none" stroke="#D6E5EA" stroke-width="1.5" stroke-dasharray="5 7"/>
+<text x="30" y="217" class="label" text-anchor="start" style="fill:#087F86">业务有效时间：制度哪天起适用</text>
+<path d="M70 265 H280" stroke="#B56B26" stroke-width="10" stroke-linecap="round"/><path d="M280 265 H695" stroke="#087F86" stroke-width="10" stroke-linecap="round"/>
+<text x="164" y="308" class="body" text-anchor="middle" style="fill:#B56B26">旧标准 600 元</text>
+<text x="488" y="308" class="body" text-anchor="middle" style="fill:#087F86">新标准 700 元</text>
+<text x="30" y="383" class="label" text-anchor="start" style="fill:#B56B26">系统记录时间：系统哪天才得知</text>
+<path d="M70 432 H675" stroke="#B56B26" stroke-width="10" stroke-linecap="round"/><path d="M675 432 H695" stroke="#087F86" stroke-width="10" stroke-linecap="round"/>
+<text x="360" y="477" class="body" text-anchor="middle" style="fill:#B56B26">11月5日前，系统只知道旧标准</text>
+<circle cx="675" cy="432" r="10" fill="#087F86"/>
+<text x="675" y="520" class="note" text-anchor="end" style="fill:#087F86">收到新通知</text>
+<rect x="30" y="565" width="335" height="220" rx="14" fill="#EAF5F3" stroke="#087F86" stroke-width="2"/>
+<text x="52" y="606" class="label" text-anchor="start" style="fill:#087F86">收到通知后，查规则</text>
+<text x="52" y="649" class="body" text-anchor="start">11月3日该用什么标准？</text>
+<text x="52" y="699" class="title" text-anchor="start" style="fill:#087F86">700 元</text>
+<text x="52" y="747" class="note" text-anchor="start">按业务日期选择适用规则</text>
+<rect x="395" y="565" width="335" height="220" rx="14" fill="#FFF6EA" stroke="#B56B26" stroke-width="2"/>
+<text x="417" y="606" class="label" text-anchor="start" style="fill:#B56B26">回到当时，查认知</text>
+<text x="417" y="649" class="body" text-anchor="start">11月3日系统知道什么？</text>
+<text x="417" y="699" class="title" text-anchor="start" style="fill:#B56B26">只知道 600 元</text>
+<text x="417" y="747" class="note" text-anchor="start">按当时保留的记录还原</text>
+<text x="380" y="832" class="note" text-anchor="middle">保留旧认知与更正记录，才能解释当时的回答</text>
+</svg>

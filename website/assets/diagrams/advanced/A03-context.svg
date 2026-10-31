@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A03" width="720" height="850" viewBox="0 0 720 850" role="img" aria-labelledby="A03-title A03-desc">
+<title id="A03-title">资料留在库里，输入按需组织</title><desc id="A03-desc">候选资料先按权限、有效期与当前问题筛选。长原文可以外置保存并保留版本和位置，当前输入保留目标、约束、未知、必要证据与指针。缺少关键条件时按指针重新读取原文，失效材料重新筛选。</desc>
+<defs><marker id="A03-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A03-warn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:29px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:22px}.note{font-size:20px;fill:#526976}</style>
+<rect width="720" height="850" rx="18" fill="#FFFFFF"/>
+<text x="30" y="48" class="title">资料留在库里，输入按需组织</text>
+<text x="30" y="82" class="note" text-anchor="start">外置保留原文，摘要保留必要条件</text>
+<rect x="145" y="115" width="430" height="88" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/>
+<text x="360" y="150" class="label" text-anchor="middle">候选资料</text>
+<text x="360" y="184" class="body" text-anchor="middle">原文、工具结果、历史记录</text>
+<path d="M360 203 V245" fill="none" stroke="#087F86" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A03-arrow)"/>
+<rect x="145" y="255" width="430" height="110" rx="14" fill="#EAF5F3" stroke="#087F86" stroke-width="2"/>
+<text x="360" y="294" class="label" text-anchor="middle" style="fill:#087F86">围绕当前判断先筛选</text>
+<text x="360" y="333" class="body" text-anchor="middle">权限、有效期、相关性与预算</text>
+<path d="M360 365 V398 H180 V438" fill="none" stroke="#087F86" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A03-arrow)"/>
+<path d="M360 398 H540 V438" fill="none" stroke="#087F86" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A03-arrow)"/>
+<rect x="30" y="450" width="300" height="170" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/>
+<text x="180" y="491" class="label" text-anchor="middle">长原文留在外部</text>
+<text x="55" y="535" class="body" text-anchor="start">保存原文和内容版本</text>
+<text x="55" y="574" class="body" text-anchor="start">保留可回查的位置</text>
+<rect x="390" y="450" width="300" height="170" rx="14" fill="#EAF5F3" stroke="#087F86" stroke-width="2"/>
+<text x="540" y="491" class="label" text-anchor="middle" style="fill:#087F86">本轮模型输入</text>
+<text x="415" y="535" class="body" text-anchor="start">目标、约束、未知</text>
+<text x="415" y="574" class="body" text-anchor="start">必要证据与原文指针</text>
+<path d="M330 592 H390" fill="none" stroke="#087F86" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A03-arrow)"/>
+<path d="M540 620 V680 H180 V620" fill="none" stroke="#087F86" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A03-arrow)"/>
+<text x="360" y="719" class="body" text-anchor="middle" style="fill:#087F86">缺关键条件时，沿指针回查原文</text>
+<rect x="30" y="755" width="660" height="65" rx="14" fill="#F7FAFB" stroke="#D6E5EA" stroke-width="2"/>
+<text x="360" y="795" class="note" text-anchor="middle">证据失效或条件改变，重新筛选并组装输入</text>
+</svg>

@@ -22,7 +22,7 @@
 <text x="37" y="468" class="label" style="fill:#087e84">③ 本轮决定与工具观察</text>
 <text x="37" y="495" class="body">新观察更新状态；大资料保留引用</text>
 <text x="37" y="520" class="body">下一轮按任务需要重新选取</text>
-<text x="20" y="587" class="label" style="fill:#a35d18">T08：用户可信更正“改去云洲”</text>
+<text x="20" y="587" class="label" style="fill:#a35d18">用户可信更正“改去云洲”</text>
 <rect x="20" y="609" width="400" height="134" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="622" width="4" height="108" rx="2" fill="#a35d18"/>
 <text x="37" y="637" class="label" style="fill:#a35d18">④ 更新事实，而非抹掉过去</text>
 <text x="37" y="664" class="body">known.city：海岚 → 云洲</text>
@@ -32,7 +32,7 @@
 <rect x="20" y="773" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="786" width="4" height="83" rx="2" fill="#087e84"/>
 <text x="37" y="801" class="label" style="fill:#087e84">⑤ 处理依赖，继续查询</text>
 <text x="37" y="828" class="body">取消依赖海岚的未执行步骤</text>
-<text x="37" y="853" class="body">查询云洲P19-v1：650元</text>
+<text x="37" y="853" class="body">查询云洲标准：650元</text>
 <rect x="20" y="904" width="400" height="118" rx="8" fill="#e7f1f2"/>
 <text x="33" y="929" class="small">日志、任务事实、长期偏好是不同内容。</text>
 <text x="33" y="953" class="small">同一事实可存字段或事件，需明确修订规则。</text>

@@ -22,7 +22,7 @@ class PolicyCLITests(unittest.TestCase):
         return subprocess.run([sys.executable, "-m", "examples.policy_agent", "--root", str(self.run_root), *args], cwd=ROOT, capture_output=True, text=True)
 
     def test_crash_after_service_commit_resumes_in_new_process_with_one_object(self):
-        initial = self.cli("run", "--task", "T12", "--run-id", "crash-demo")
+        initial = self.cli("run", "--task", "工单崩溃恢复", "--run-id", "crash-demo")
         self.assertEqual(initial.returncode, 0, initial.stderr)
         waiting = json.loads(initial.stdout)
         approved = self.cli("approve", "--run-id", "crash-demo", "--request-id", waiting["approval_request"]["request_id"])
@@ -60,6 +60,18 @@ class PolicyCLITests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         report = json.loads(output.read_text())
         self.assertEqual((report["total"], report["passed"]), (3, 3))
+
+    def test_listed_readable_task_names_can_be_run(self):
+        listed = self.cli("list")
+        self.assertEqual(listed.returncode, 0, listed.stderr)
+        tasks = json.loads(listed.stdout)["tasks"]
+        self.assertEqual(len(tasks), 12)
+        self.assertIn("住宿金额核对", {t["task_name"] for t in tasks})
+        for i, task in enumerate(tasks):
+            with self.subTest(name=task["task_name"]):
+                result = self.cli("run", "--task", task["task_name"], "--run-id", f"readable-{i}")
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout)["task_id"], task["task_id"])
 
     def test_invalid_run_path_and_unknown_task_are_configuration_errors(self):
         for args in [("run", "--task", "unknown"), ("run", "--task", "T01", "--run-id", "../escape")]:

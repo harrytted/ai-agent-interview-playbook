@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A01" width="680" height="1000" viewBox="0 0 680 1000" role="img" aria-labelledby="A01-title A01-desc">
+<title id="A01-title">换会话，交接的是工作</title><desc id="A01-desc">跨会话任务在退出前保存目标、进度、证据位置和下一动作。新会话先重新核对产物、证据和当前权限，再继续未完成的工作；交接记录不增加权限。</desc>
+<defs><marker id="A01-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A01-warn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:29px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:22px}.note{font-size:20px;fill:#526976}</style>
+<rect width="680" height="1000" rx="18" fill="#FFFFFF"/>
+<text x="30" y="48" class="title">换会话，交接的是工作</text>
+<text x="30" y="82" class="note" text-anchor="start">跨会话研究任务的设计示意</text>
+<rect x="100" y="115" width="480" height="105" rx="14" fill="#EAF5F3" stroke="#087F86" stroke-width="2"/>
+<text x="340" y="154" class="label" text-anchor="middle" style="fill:#087F86">会话一：查到一半</text>
+<text x="340" y="190" class="body" text-anchor="middle">甲、乙已查；丙地还缺资料</text>
+<path d="M340 220 V275" fill="none" stroke="#087F86" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A01-arrow)"/>
+<text x="365" y="254" class="note" text-anchor="start">退出前保存</text>
+<rect x="30" y="285" width="620" height="340" rx="14" fill="#F7FAFB" stroke="#D6E5EA" stroke-width="2"/>
+<text x="55" y="323" class="label" text-anchor="start">可接手的工作包</text>
+<rect x="55" y="345" width="270" height="115" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/>
+<text x="73" y="378" class="label" text-anchor="start" style="fill:#087F86">目标与范围</text>
+<text x="73" y="413" class="body" text-anchor="start">比较哪些地区</text>
+<text x="73" y="444" class="body" text-anchor="start">只读比较，不发布</text>
+<rect x="355" y="345" width="270" height="115" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/>
+<text x="373" y="378" class="label" text-anchor="start" style="fill:#087F86">已完成与未决项</text>
+<text x="373" y="413" class="body" text-anchor="start">哪些工作有证据</text>
+<text x="373" y="444" class="body" text-anchor="start">哪些仍然阻塞</text>
+<rect x="55" y="480" width="270" height="115" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/>
+<text x="73" y="513" class="label" text-anchor="start" style="fill:#087F86">原文与产物位置</text>
+<text x="73" y="548" class="body" text-anchor="start">来源、版本、有效期</text>
+<text x="73" y="579" class="body" text-anchor="start">指向原文与报告</text>
+<rect x="355" y="480" width="270" height="115" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/>
+<text x="373" y="513" class="label" text-anchor="start" style="fill:#087F86">下一步与余量</text>
+<text x="373" y="548" class="body" text-anchor="start">下一动作和条件</text>
+<text x="373" y="579" class="body" text-anchor="start">剩余时间与预算</text>
+<path d="M340 625 V690" fill="none" stroke="#087F86" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A01-arrow)"/>
+<text x="365" y="667" class="note" text-anchor="start">新会话读取</text>
+<rect x="70" y="705" width="540" height="225" rx="14" fill="#EAF5F3" stroke="#087F86" stroke-width="2"/>
+<text x="340" y="745" class="label" text-anchor="middle" style="fill:#087F86">会话二：先核对，再接着做</text>
+<text x="100" y="787" class="body" text-anchor="start">① 产物仍在，来源和权限仍有效吗？</text>
+<text x="100" y="824" class="body" text-anchor="start">② 失效的证据，重新打开对应工作项</text>
+<text x="100" y="861" class="body" text-anchor="start">③ 条件没变，只补未完成的工作</text>
+<text x="340" y="906" class="note" text-anchor="middle">交接包帮助恢复工作，不会扩大权限</text>
+</svg>

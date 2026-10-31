@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A12" width="760" height="925" viewBox="0 0 760 925" role="img" aria-labelledby="A12-title A12-desc">
+<title id="A12-title">优化路线：先找原因，再决定是否训练</title>
+<desc id="A12-desc">先诊断资料、工具、运行约束与输入问题，先修相应层次。在环境与证据充分但策略仍反复失败时，考虑基于示范的SFT、同输入候选偏好优化或交互轨迹奖励的Agent RL。所有路线通过独立验收与回归；读取记忆或技能不会更新模型参数，仓库未实现参数训练管线。</desc>
+<defs><marker id="A12-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A12-orange" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}</style>
+<rect x="1" y="1" width="758" height="923" rx="20" fill="#F8FBFC" stroke="#D6E5EA" stroke-width="2"/>
+<text x="30" y="50" font-size="30" font-weight="700" text-anchor="start" fill="#253746">优化路线：先找原因，再决定是否训练</text>
+
+<rect x="130" y="88" width="500" height="75" rx="14" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/><text x="380" y="132" font-size="26" font-weight="650" text-anchor="middle" fill="#087F86">先用失败轨迹确定原因</text>
+<path d="M380 163 V200 H205 V230" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A12-arrow)"/><path d="M380 200 H555 V230" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A12-arrow)"/><rect x="35" y="237" width="335" height="130" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/><rect x="390" y="237" width="335" height="130" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/><text x="202" y="274" font-size="23" font-weight="650" text-anchor="middle" fill="#253746">资料缺失 / 工具错误</text>
+<text x="202" y="308" font-size="23" font-weight="650" text-anchor="middle" fill="#253746">运行约束或输入有问题</text>
+<text x="202" y="344" font-size="21" font-weight="400" text-anchor="middle" fill="#087F86">先修资料、工具或运行时</text>
+<text x="558" y="274" font-size="23" font-weight="650" text-anchor="middle" fill="#253746">证据与环境充分</text>
+<text x="558" y="308" font-size="23" font-weight="650" text-anchor="middle" fill="#253746">仍反复不会选对动作</text>
+<text x="558" y="344" font-size="22" font-weight="650" text-anchor="middle" fill="#B56B26">再考虑参数学习</text>
+<path d="M558 367 V403" fill="none" stroke="#B56B26" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A12-orange)"/><rect x="30" y="410" width="700" height="210" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/><text x="55" y="447" font-size="25" font-weight="650" text-anchor="start" fill="#253746">按学习信号选择训练路线</text>
+<rect x="48" y="474" width="215" height="118" rx="14" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/><text x="155" y="511" font-size="24" font-weight="650" text-anchor="middle" fill="#B56B26">SFT</text>
+<text x="155" y="550" font-size="21" font-weight="400" text-anchor="middle" fill="#253746">合格示范</text>
+<rect x="280" y="474" width="215" height="118" rx="14" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/><text x="387" y="511" font-size="24" font-weight="650" text-anchor="middle" fill="#B56B26">偏好优化</text>
+<text x="387" y="550" font-size="21" font-weight="400" text-anchor="middle" fill="#253746">同输入候选对比</text>
+<rect x="512" y="474" width="215" height="118" rx="14" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/><text x="619" y="511" font-size="24" font-weight="650" text-anchor="middle" fill="#B56B26">Agent RL</text>
+<text x="619" y="550" font-size="21" font-weight="400" text-anchor="middle" fill="#253746">交互轨迹与奖励</text>
+<path d="M202 367 V389 H15 V685 H130" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A12-arrow)"/><path d="M558 620 V642" fill="none" stroke="#B56B26" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A12-orange)"/><rect x="136" y="651" width="488" height="100" rx="14" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/><text x="380" y="691" font-size="26" font-weight="650" text-anchor="middle" fill="#087F86">独立验收与回归</text>
+<text x="380" y="727" font-size="22" font-weight="400" text-anchor="middle" fill="#253746">检查质量、关键错误与资源消耗</text>
+<text x="30" y="801" font-size="22" font-weight="400" text-anchor="start" fill="#546C80">读记忆、改提示、升级技能：改变可用信息。</text>
+<text x="30" y="837" font-size="22" font-weight="400" text-anchor="start" fill="#546C80">参数训练：通过优化过程更新模型参数。</text>
+<text x="30" y="895" font-size="21" font-weight="400" text-anchor="start" fill="#546C80">训练路线为设计示意；本仓库未提供参数训练管线。</text>
+
+</svg>

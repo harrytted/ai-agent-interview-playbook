@@ -20,9 +20,7 @@
 
 可以把它理解成一次有检索环节的开卷作答：**检索器找材料，应用把选中的材料放入上下文，生成模型据此作答**。资料库不会自动出现在模型脑中，也不能保证取来的材料就是适用证据。开卷能翻书，翻到去年版本仍然可能答错。
 
-![RAG入库链路保存原文与元数据，查询链路检索筛选证据后生成引用回答](../../website/assets/diagrams/G5-rag-pipelines.png)
-
-[查看原图](../../website/assets/diagrams/G5-rag-pipelines.png)
+[![RAG入库链路保存原文与元数据，查询链路检索筛选证据后生成引用回答](../../website/assets/diagrams/G5-rag-pipelines.png)](../../website/assets/diagrams/G5-rag-pipelines.png)
 
 先分开看入库与查询两条链路，再沿查询链路辨认召回、筛选、装配输入和引用核验的位置。
 
@@ -320,9 +318,7 @@ RR 关注首个相关结果：第一项相关则为 1，第三项为 1/3，评�
 
 **详细答案：**
 
-![原文入库到检索生成之间存在多个阶段，候选未命中与生成误读发生在不同位置](../../website/assets/diagrams/G5-rag-pipelines.png)
-
-[查看原图](../../website/assets/diagrams/G5-rag-pipelines.png)
+[![原文入库到检索生成之间存在多个阶段，候选未命中与生成误读发生在不同位置](../../website/assets/diagrams/G5-rag-pipelines.png)](../../website/assets/diagrams/G5-rag-pipelines.png)
 
 沿原文、索引、候选、实际输入和结论逐段定位，先找最早偏差，再判断该修检索还是生成。
 

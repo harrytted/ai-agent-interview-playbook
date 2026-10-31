@@ -16,27 +16,27 @@
 <text x="37" y="304" class="label" style="fill:#087e84">② 决定 Decision.tool_calls</text>
 <text x="37" y="331" class="body">search_policy(city=&quot;海岚&quot;,</text>
 <text x="37" y="356" class="body">trip_date=&quot;2026-11-12&quot;, …)</text>
-<text x="37" y="381" class="body">call_id = c1；output = null</text>
+<text x="37" y="381" class="body">同一调用；尚未作答</text>
 <path class="line" d="M220 410 V437"/>
 <rect x="20" y="440" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="453" width="4" height="83" rx="2" fill="#a35d18"/>
 <text x="37" y="468" class="label" style="fill:#a35d18">③ 宿主校验，再执行工具</text>
-<text x="37" y="495" class="body">可信身份U001；参数与预算合规</text>
+<text x="37" y="495" class="body">可信员工身份；参数与预算合规</text>
 <text x="37" y="520" class="body">模型提出调用 ≠ 已执行调用</text>
 <path class="line" d="M220 549 V576"/>
 <rect x="20" y="579" width="400" height="134" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="592" width="4" height="108" rx="2" fill="#087e84"/>
 <text x="37" y="607" class="label" style="fill:#087e84">④ ToolResult 回包</text>
-<text x="37" y="634" class="body">call_id = c1，status = ok</text>
-<text x="37" y="659" class="body">P17-v2#4：普通员工上限700元</text>
+<text x="37" y="634" class="body">同一调用；工具执行成功</text>
+<text x="37" y="659" class="body">新版住宿标准：每晚上限700元</text>
 <text x="37" y="684" class="body">回包记录来自本次实际工具执行</text>
 <path class="line" d="M220 713 V740"/>
 <rect x="20" y="743" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="756" width="4" height="83" rx="2" fill="#2667ac"/>
 <text x="37" y="771" class="label" style="fill:#2667ac">⑤ 第2轮输入 context</text>
-<text x="37" y="798" class="body">保留调用 + c1回包 + 当前已知条件</text>
+<text x="37" y="798" class="body">保留原调用、执行结果与当前条件</text>
 <text x="37" y="823" class="body">策略依据新观察继续决定</text>
 <path class="line" d="M220 852 V879"/>
 <rect x="20" y="882" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="895" width="4" height="83" rx="2" fill="#087e84"/>
 <text x="37" y="910" class="label" style="fill:#087e84">⑥ 完成输出，独立核验</text>
-<text x="37" y="937" class="body">answered；700元；P17-v2#4</text>
+<text x="37" y="937" class="body">已回答；700元；引用新版标准</text>
 <text x="37" y="962" class="body">650 ≤ 700，本例金额未超限</text>
 <rect x="20" y="1013" width="400" height="70" rx="8" fill="#e7f1f2"/>
 <text x="33" y="1038" class="small">缺日期：第1轮先澄清，零工具调用。</text>

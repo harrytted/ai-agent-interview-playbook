@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A05" width="760" height="820" viewBox="0 0 760 820" role="img" aria-labelledby="A05-title A05-desc">
+<title id="A05-title">工具找到了，还要过执行关</title><desc id="A05-desc">任务先搜索工具目录、加载所选定义，再在执行边界检查参数、资源权限和必要批准；校验未通过时拒绝或等待，不能因为发现了工具就执行。</desc>
+<defs><marker id="A05-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A05-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:28px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:20px}.note{font-size:20px;fill:#536D79}</style>
+<rect x="1" y="1" width="758" height="818" rx="20" fill="#FFFFFF" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="30" y="49" class="title" text-anchor="start">工具找到了，还要过执行关</text>
+<text x="30" y="84" class="note" text-anchor="start">能力发现与业务授权分开检查</text>
+<rect x="170" y="116" width="420" height="70" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="380.0" y="159.0" class="label" text-anchor="middle" style="fill:#087F86">用户目标：比较住宿标准</text>
+<path d="M380 186 V222" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A05-arrow)"/>
+<rect x="170" y="224" width="420" height="82" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="380.0" y="258.5" class="label" text-anchor="middle" style="fill:#087F86">搜索工具目录</text>
+<text x="380.0" y="287.5" class="body" text-anchor="middle">返回少量相关候选</text>
+<path d="M380 306 V342" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A05-arrow)"/>
+<rect x="170" y="344" width="420" height="82" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="380.0" y="378.5" class="label" text-anchor="middle" style="fill:#087F86">加载所选工具的定义</text>
+<text x="380.0" y="407.5" class="body" text-anchor="middle">确认用途、参数和版本</text>
+<path d="M380 426 V467" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A05-arrow)"/>
+<rect x="95" y="469" width="475" height="139" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="332.5" y="503.0" class="label" text-anchor="middle" style="fill:#087F86">执行前逐项校验</text>
+<text x="332.5" y="532.0" class="body" text-anchor="middle">参数与业务条件</text>
+<text x="332.5" y="561.0" class="body" text-anchor="middle">可信身份的资源权限</text>
+<text x="332.5" y="590.0" class="body" text-anchor="middle">动作需要时，检查有效批准</text>
+<path d="M570 538 H610" fill="none" stroke="#B56B26" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A05-orange)"/>
+<rect x="612" y="486" width="120" height="104" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="672.0" y="517.0" class="label" text-anchor="middle" style="fill:#B56B26">不通过</text>
+<text x="672.0" y="546.0" class="body" text-anchor="middle">拒绝</text>
+<text x="672.0" y="575.0" class="body" text-anchor="middle">或等待</text>
+<text x="610" y="466" class="note" text-anchor="middle" style="fill:#B56B26">执行暂停</text>
+<path d="M332 608 V659" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A05-arrow)"/>
+<text x="346" y="639" class="note" text-anchor="start">全部通过</text>
+<rect x="95" y="662" width="475" height="77" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="332.5" y="708.5" class="label" text-anchor="middle" style="fill:#087F86">调用工具并核对结果</text>
+<text x="30" y="783" class="note" text-anchor="start">搜到“创建申请”工具，不代表用户允许创建申请。</text>
+</svg>

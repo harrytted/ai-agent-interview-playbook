@@ -26,7 +26,8 @@ FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
 HEADING = re.compile(r"^(#{1,6})[ \t]+(.+?)\s*$")
 EXPLICIT_ID = re.compile(r"\{[^{}]*#[^{}\s]+[^{}]*\}\s*$")
 INLINE_LINK = re.compile(
-    r"(?P<open>!?\[[^\]\n]*\]\()"
+    # The second form also rebases the outer target in [![alt](image)](target).
+    r"(?P<open>!?\[[^\]\n]*\]\(|(?<=\))\]\()"
     r"(?P<url><[^>\n]+>|[^ \t\r\n)]+)"
     r"(?P<title>[ \t]+(?:\"[^\"\n]*\"|'[^'\n]*'|\([^\n)]*\)))?\)"
 )
@@ -184,6 +185,22 @@ def transform_markdown(content: str, source: PurePosixPath,
     return "".join(output)
 
 
+def has_question_heading(content: str) -> bool:
+    """Identify grouped answers without mistaking fenced examples for questions."""
+    character, length = "", 0
+    for line in content.splitlines():
+        marker = FENCE.match(line)
+        if character:
+            if marker and marker[1][0] == character and len(marker[1]) >= length and not marker[2].strip():
+                character, length = "", 0
+            continue
+        if marker:
+            character, length = marker[1][0], len(marker[1])
+        elif re.match(r"^###[ \t]+Q\d{3}(?:[ \t]+|$)", line):
+            return True
+    return False
+
+
 def output_directory(root: Path, requested: Path | None) -> Path:
     raw = Path(requested) if requested is not None else Path(".site-src")
     if ".." in raw.parts:
@@ -230,7 +247,7 @@ def prepare_site(root: Path = ROOT, output: Path | None = None, source_ref: str 
         for source, target in mapping.items():
             if (len(source.parts) == 3 and source.parts[0] == "docs"
                     and source.parts[1] in {"foundations", "engineering", "advanced"}
-                    and source.name != "README.md"):
+                    and source.name != "README.md" and has_question_heading(pages[target])):
                 pages[target] = "---\nsearch:\n  exclude: true\n---\n\n" + pages[target]
     asset_contents = {target: (root / source).read_bytes() for source, target in assets.items()}
     if destination.exists():

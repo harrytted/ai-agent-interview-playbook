@@ -112,6 +112,15 @@ class QuestionArticleTests(unittest.TestCase):
         self.assertIn("(Q002.md#q002-问题与解释)", generated)
         self.assertIn("(#当前小节)", generated)
 
+    def test_clickable_images_keep_image_and_link_together_in_generated_articles(self):
+        body = (
+            '[![架构](../../website/assets/diagrams/flow.png)](../../website/assets/diagrams/flow.png)\n'
+            '[![学习](../../website/assets/diagrams/flow.png)](../../learning/README.md)\n'
+        )
+        generated = article_pages([self.question(body=body)], self.root)[Path("questions/Q001.md")]
+        self.assertIn('[![架构](../website/assets/diagrams/flow.png)](../website/assets/diagrams/flow.png)', generated)
+        self.assertIn('[![学习](../website/assets/diagrams/flow.png)](../learning/README.md)', generated)
+
     def test_writer_is_idempotent_and_check_reports_source_edits_and_extra_ids(self):
         bank = [self.question()]
         write_articles(bank, self.root)

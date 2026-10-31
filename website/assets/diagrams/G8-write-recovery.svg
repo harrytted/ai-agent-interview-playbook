@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="G8" width="440" height="1190" viewBox="0 0 440 1190" role="img" aria-labelledby="G8-title G8-desc">
 <title id="G8-title">G8 写入成功，本地为何仍未知？</title>
-<desc id="G8-desc">T12保存操作意图及完整参数后请求模拟服务。服务提交对象，进程在本地保存确认前退出73，形成本地未知远端成功的窗口。第二进程使用原operation_id查询，在同租户范围核对参数并保存结果；唯一约束和参数指纹确保重复恢复仍只有一个对象。task.sqlite与service.sqlite不共享事务。</desc>
+<desc id="G8-desc">工单崩溃恢复实验保存操作意图及完整参数后请求模拟服务。服务提交对象，进程在本地保存确认前退出73，形成本地未知远端成功的窗口。第二进程使用原操作标识查询，在同租户范围核对参数并保存结果；唯一约束和参数指纹确保重复恢复仍只有一个对象。task.sqlite与service.sqlite不共享事务。</desc>
 <defs><marker id="G8-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087e84"/></marker></defs>
 <style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#162c40}.small{font-size:15px;fill:#526879}.body{font-size:17px}.label{font-size:16px;font-weight:600}.title{font-size:25px;font-weight:700}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px}.line{fill:none;stroke:#087e84;stroke-width:2;marker-end:url(#G8-arrow)}.rule{stroke:#b5c5d0;stroke-width:1}</style>
 <rect width="440" height="1190" rx="16" fill="#f6f8fb"/>
@@ -9,12 +9,12 @@
 <text x="20" y="113" class="small">task.sqlite与service.sqlite不共享事务。</text>
 <rect x="20" y="137" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="150" width="4" height="83" rx="2" fill="#2667ac"/>
 <text x="37" y="165" class="label" style="fill:#2667ac">① 本地保存写入意图</text>
-<text x="37" y="192" class="body">operation_id与完整参数指纹持久化</text>
+<text x="37" y="192" class="body">原操作标识与完整参数指纹持久化</text>
 <text x="37" y="217" class="body">批准绑定任务、参数、版本与批准人</text>
 <path class="line" d="M220 246 V273"/>
 <rect x="20" y="276" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="289" width="4" height="83" rx="2" fill="#087e84"/>
 <text x="37" y="304" class="label" style="fill:#087e84">② 模拟服务提交对象</text>
-<text x="37" y="331" class="body">唯一键：(tenant_id, operation_id)</text>
+<text x="37" y="331" class="body">唯一键：租户与原操作标识</text>
 <text x="37" y="356" class="body">相同ID与内容返回同一个object_id</text>
 <path class="line" d="M220 385 V412"/>
 <rect x="20" y="415" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="428" width="4" height="83" rx="2" fill="#a35d18"/>
@@ -23,7 +23,7 @@
 <text x="37" y="495" class="body">本地：尚未记录完成，结果未知</text>
 <text x="20" y="564" class="label" style="fill:#a35d18">恢复从持久状态开始，不另造操作ID。</text>
 <rect x="20" y="586" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="599" width="4" height="83" rx="2" fill="#2667ac"/>
-<text x="37" y="614" class="label" style="fill:#2667ac">④ 进程2：查询原operation_id</text>
+<text x="37" y="614" class="label" style="fill:#2667ac">④ 进程2：查询原操作标识</text>
 <text x="37" y="641" class="body">lookup_ticket在可信租户范围核对</text>
 <text x="37" y="666" class="body">重新校验当前权限、完整内容与状态</text>
 <path class="line" d="M220 695 V722"/>

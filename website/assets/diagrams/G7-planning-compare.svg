@@ -12,7 +12,7 @@
 <text x="37" y="192" class="body">1. 查海岚制度，得到观察</text>
 <text x="37" y="217" class="body">2. 用户更正：改去云洲</text>
 <text x="37" y="242" class="body">3. 更新状态，下一轮查云洲</text>
-<text x="37" y="267" class="body">4. 得P19-v1后再判断金额</text>
+<text x="37" y="267" class="body">4. 查到云洲标准后比较金额</text>
 <path class="line" d="M220 321 V348"/>
 <rect x="20" y="351" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="364" width="4" height="83" rx="2" fill="#2667ac"/>
 <text x="37" y="379" class="label" style="fill:#2667ac">每轮都看新观察与当前条件</text>

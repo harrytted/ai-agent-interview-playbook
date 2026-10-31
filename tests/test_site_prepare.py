@@ -95,6 +95,20 @@ class SitePrepareTests(unittest.TestCase):
         self.assertIn("blob/main/examples/policy_agent/traces/normal.jsonl", lab)
         self.assertEqual((self.output / "assets/diagrams/G1-system-flow.svg").read_text(), svg)
 
+    def test_linked_images_rebase_both_image_and_click_target(self):
+        self.write("README.md", "# Home\n")
+        self.write("learning/chapter.md", (
+            '[![流程](../website/assets/diagrams/flow.png)](../website/assets/diagrams/flow.png)\n'
+            '[![回首页](../website/assets/diagrams/flow.png)](../README.md#home)\n'
+            '[![外部](https://example.com/flow.png)](https://example.com/article)\n'
+        ))
+        self.write("website/assets/diagrams/flow.png", "image fixture")
+        self.prepare()
+        chapter = (self.output / "learning/chapter.md").read_text()
+        self.assertIn('[![流程](../assets/diagrams/flow.png)](../assets/diagrams/flow.png)', chapter)
+        self.assertIn('[![回首页](../assets/diagrams/flow.png)](../index.md#home)', chapter)
+        self.assertIn('[![外部](https://example.com/flow.png)](https://example.com/article)', chapter)
+
     def test_question_articles_publish_and_grouped_versions_stay_out_of_search(self):
         self.write("README.md", "[Read](questions/Q001.md)\n")
         self.write("questions/Q001.md", "# Q001 Topic\n\n## 简要回答\nText\n")
@@ -106,6 +120,16 @@ class SitePrepareTests(unittest.TestCase):
         self.assertTrue(grouped.startswith("---\nsearch:\n  exclude: true\n---"))
         self.assertIn("### Q001 Topic", grouped)
         self.assertNotIn("exclude: true", (self.output / "questions/Q001.md").read_text())
+
+    def test_project_lab_and_fenced_question_examples_remain_searchable(self):
+        self.write("README.md", "# Home\n")
+        self.write("questions/Q001.md", "# Q001 Topic\n\n## 简要回答\nText\n")
+        self.write("docs/engineering/08-project-lab.md", "# 7 天个人项目实验\n\n## 第 1 天：跑通基线\n保存成功运行记录。\n")
+        self.write("docs/engineering/heading-example.md", "# Markdown 示例\n\n```markdown\n### Q001 Example\n```\n")
+        self.prepare()
+        for name in ("08-project-lab.md", "heading-example.md"):
+            with self.subTest(name=name):
+                self.assertNotIn("exclude: true", (self.output / "docs/engineering" / name).read_text())
 
     def test_chinese_encoded_paths_angle_targets_and_titles(self):
         self.write("README.md", '[课](learning/%E4%B8%AD%E6%96%87%20%E7%AC%94%E8%AE%B0.md?x=1#章节)\n[课](<learning/中文 笔记.md#章节> "说明")\n')

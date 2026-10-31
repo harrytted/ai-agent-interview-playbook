@@ -16,9 +16,7 @@
 
 同一句“培训住宿能报销吗”，加上长篇制度后，助手等了更久才开始回答；它又能逐步续写，却仍可能引用错政策。接下来分别看输入如何编码、模型怎样利用前文，以及输出如何一步步产生，才能把“慢”和“答错”拆开分析。
 
-![G2：文本编码成token表示，经过因果注意力与后续变换，得到下一token分布，再逐步生成](../website/assets/diagrams/G2-model-output.png)
-
-[查看原图](../website/assets/diagrams/G2-model-output.png)
+[![G2：文本编码成token表示，经过因果注意力与后续变换，得到下一token分布，再逐步生成](../website/assets/diagrams/G2-model-output.png)](../website/assets/diagrams/G2-model-output.png)
 
 下文算例只对应图中的注意力信息混合。算得7是手工Value的加权结果，不是“答案7元”，也没有完成从词表分布到语言输出的整个模型。用图定位计算的位置，避免把一段公式误当整台模型。
 

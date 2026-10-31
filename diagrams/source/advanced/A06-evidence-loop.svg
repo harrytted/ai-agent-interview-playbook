@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A06" width="800" height="870" viewBox="0 0 800 870" role="img" aria-labelledby="A06-title A06-desc">
+<title id="A06-title">围绕证据缺口决定下一步</title><desc id="A06-desc">研究任务先拆出证据需求，查找材料并核对是否足够。有缺口且仍能查询时定向补查；证据足够则引用作答，预算耗尽或无新信息时说明缺口。</desc>
+<defs><marker id="A06-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A06-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:28px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:20px}.note{font-size:20px;fill:#536D79}</style>
+<rect x="1" y="1" width="798" height="868" rx="20" fill="#FFFFFF" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="30" y="49" class="title" text-anchor="start">围绕证据缺口决定下一步</text>
+<text x="30" y="84" class="note" text-anchor="start">示意：既问住宿上限，也问例外咨询要什么材料</text>
+<rect x="170" y="116" width="460" height="80" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="400.0" y="149.5" class="label" text-anchor="middle" style="fill:#087F86">拆出两项证据需求</text>
+<text x="400.0" y="178.5" class="body" text-anchor="middle">金额标准 ＋ 咨询材料</text>
+<path d="M400 196 V239" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A06-arrow)"/>
+<rect x="245" y="242" width="310" height="80" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="400.0" y="275.5" class="label" text-anchor="middle" style="fill:#087F86">查找对应材料</text>
+<text x="400.0" y="304.5" class="body" text-anchor="middle">保留出处与适用条件</text>
+<path d="M400 322 V374" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A06-arrow)"/>
+<rect x="245" y="377" width="310" height="105" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="400.0" y="423.0" class="label" text-anchor="middle" style="fill:#087F86">核对：证据够了吗？</text>
+<text x="400.0" y="452.0" class="body" text-anchor="middle">同时检查查询预算</text>
+<path d="M245 429 H169 V282 H244" fill="none" stroke="#B56B26" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A06-orange)"/>
+<text x="143" y="347" class="body" text-anchor="end" style="fill:#B56B26">有缺口</text>
+<text x="143" y="377" class="body" text-anchor="end" style="fill:#B56B26">还能查</text>
+<path d="M555 429 H782 V676 H772" fill="none" stroke="#B56B26" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A06-orange)"/>
+<text x="670" y="514" class="body" text-anchor="middle" style="fill:#B56B26">仍有缺口</text>
+<text x="670" y="544" class="body" text-anchor="middle" style="fill:#B56B26">预算耗尽</text>
+<text x="670" y="574" class="body" text-anchor="middle" style="fill:#B56B26">或无新信息</text>
+<path d="M400 482 V623" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A06-arrow)"/>
+<text x="415" y="554" class="note" text-anchor="start">必要证据齐全</text>
+<rect x="245" y="626" width="310" height="100" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="400.0" y="669.5" class="label" text-anchor="middle" style="fill:#087F86">引用依据，完成回答</text>
+<text x="400.0" y="698.5" class="body" text-anchor="middle">逐项核对关键断言</text>
+<rect x="590" y="626" width="180" height="100" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="680.0" y="655.0" class="label" text-anchor="middle" style="fill:#B56B26">说明缺口</text>
+<text x="680.0" y="684.0" class="body" text-anchor="middle">交付部分结果</text>
+<text x="680.0" y="713.0" class="body" text-anchor="middle">或请求人工</text>
+<rect x="30" y="769" width="740" height="68" rx="10" fill="#F7FAFB" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="400" y="811" class="body" text-anchor="middle">每次追加检索，都要说清“还缺哪一项依据”。</text>
+</svg>

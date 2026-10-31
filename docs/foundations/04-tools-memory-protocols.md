@@ -18,9 +18,7 @@
 
 **Function Calling（函数调用）** 让模型用工具名称和结构化参数提出调用请求。模型提供的是“希望调用什么”，真正读取资料、执行函数或访问服务的工作由相应执行程序完成。**工具声明、调用请求和执行结果是三个环节。**
 
-![工具说明告诉模型名称用途和参数，执行器实际调用服务后把资料返回模型](../../website/assets/diagrams/concepts/C3-tool-interface.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C3-tool-interface.png)
+[![工具说明告诉模型名称用途和参数，执行器实际调用服务后把资料返回模型](../../website/assets/diagrams/concepts/C3-tool-interface.png)](../../website/assets/diagrams/concepts/C3-tool-interface.png)
 
 分别找到工具说明、模型请求和实际执行：说明能力与请求调用，都不等于动作已经发生。
 
@@ -64,9 +62,7 @@
 
 **详细答案：**
 
-![模型依据工具名称用途与参数选择接口，执行器检查后调用并返回可用观察](../../website/assets/diagrams/concepts/C3-tool-interface.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C3-tool-interface.png)
+[![模型依据工具名称用途与参数选择接口，执行器检查后调用并返回可用观察](../../website/assets/diagrams/concepts/C3-tool-interface.png)](../../website/assets/diagrams/concepts/C3-tool-interface.png)
 
 从说明书看模型怎样选择，再从往返箭头看参数和结果怎样服务下一步判断；业务权限仍需执行层落实。
 
@@ -152,9 +148,7 @@ MCP 连接 AI 应用与外部能力。以学习助手接文档服务为例，承
 
 **MCP（Model Context Protocol，模型上下文协议）** 规定AI应用与外部能力提供方怎样发现和交换工具、资源等信息。它统一连接与消息的约定，便于应用接入不同服务；具体业务流程、允许的动作及完成标准仍需应用定义。下面的Host、Client、Server是协议中的职责名称。
 
-![一个Host内部的两个MCP Client分别维护与对应Server的连接](../../website/assets/diagrams/G4-mcp-connections.png)
-
-[查看原图](../../website/assets/diagrams/G4-mcp-connections.png)
+[![一个Host内部的两个MCP Client分别维护与对应Server的连接](../../website/assets/diagrams/G4-mcp-connections.png)](../../website/assets/diagrams/G4-mcp-connections.png)
 
 先按连接辨认Host、Client与Server的职责，不把逻辑角色直接等同于三台机器。
 
@@ -198,9 +192,7 @@ Host 是用户正在使用的 AI 应用，负责组织模型、用户交互、�
 
 **详细答案：**
 
-![MCP连接结构中Host管理应用策略，Server暴露能力，连接本身不代表业务对象已获授权](../../website/assets/diagrams/G4-mcp-connections.png)
-
-[查看原图](../../website/assets/diagrams/G4-mcp-connections.png)
+[![MCP连接结构中Host管理应用策略，Server暴露能力，连接本身不代表业务对象已获授权](../../website/assets/diagrams/G4-mcp-connections.png)](../../website/assets/diagrams/G4-mcp-connections.png)
 
 这张图只定位连接与应用职责；连接可用之后，资源权限和不可信内容仍需按下文分别处理。
 
@@ -244,9 +236,7 @@ Prompt injection 发生在数据被当成指令时。例如工具结果要求把
 
 **详细答案：**
 
-![任务记录与跨会话记忆保存在窗口外，经选择读取后成为本轮上下文](../../website/assets/diagrams/concepts/C4-memory-context.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C4-memory-context.png)
+[![任务记录与跨会话记忆保存在窗口外，经选择读取后成为本轮上下文](../../website/assets/diagrams/concepts/C4-memory-context.png)](../../website/assets/diagrams/concepts/C4-memory-context.png)
 
 把保存范围与本轮可见范围分开看，就能解释为什么存储中存在某条信息，模型这次仍可能没有用到。
 
@@ -292,9 +282,7 @@ Context 由本次推理实际收到的指令、问题、工具说明、状态与
 
 **上下文窗口**限制模型一次调用能处理的信息规模，具体输入与输出上限依模型及接口约定。**上下文压缩**通过选择、删减或摘要，让下一轮仍能取得重要信息。这里缩短的是送给模型的输入，不是把聊天记录打成一个zip包；缩短后能否正确继续任务，才是验收重点。
 
-![窗口外保留信息，当前上下文仅装入本轮需要的内容，新信息经程序筛选后再保存](../../website/assets/diagrams/concepts/C4-memory-context.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C4-memory-context.png)
+[![窗口外保留信息，当前上下文仅装入本轮需要的内容，新信息经程序筛选后再保存](../../website/assets/diagrams/concepts/C4-memory-context.png)](../../website/assets/diagrams/concepts/C4-memory-context.png)
 
 先看选择与读取这道边界：控制本轮输入可以减少占用，保留原文与指针则为后续回查留下依据。
 

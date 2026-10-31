@@ -10,6 +10,8 @@
 
 **优先级：P0**
 
+本题导航：[口述短答](../../questions/Q001.md#简要回答) · [概念与机制](../../questions/Q001.md#详细解析) · [三个追问](../../questions/Q001.md#常见追问) · [完整案例](../../questions/Q001.md#实战案例) · [动手练习](../../questions/Q001.md#动手想一想)
+
 **30–60 秒回答：**
 
 **智能体（Agent）是围绕目标，根据当前信息选择行动，再利用结果继续推进的系统。** 本题讨论以大语言模型（Large Language Model，LLM）为决策核心的 Agent。单次模型调用接收一次输入、产生一次响应；固定工作流主要由程序安排步骤和分支；Agent 则让模型根据中间观察动态决定下一步。它常用模型、工具、记忆和规划来完成工作，运行时负责把决定、实际执行和反馈连接起来。是否需要动态选择，要看任务的信息会怎样逐步出现。
@@ -43,9 +45,7 @@
 模型理解信息并提出决定，工具提供查询和操作能力，记忆保留前后步骤需要的信息，规划组织目标、子任务与依赖。下面先逐项解释，再看运行时怎样让它们配合。
 
 
-![Agent的常见能力关系：模型作出选择，工具连接外部能力，记忆提供可用信息，规划组织目标和步骤](../../website/assets/diagrams/concepts/C1-capability-map.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C1-capability-map.png)
+[![Agent的常见能力关系：模型作出选择，工具连接外部能力，记忆提供可用信息，规划组织目标和步骤](../../website/assets/diagrams/concepts/C1-capability-map.png)](../../website/assets/diagrams/concepts/C1-capability-map.png)
 
 图中的四类能力，分别回答四个问题：怎样理解与选择、能做什么、保留什么、步骤怎样组织。它们会互相配合。例如，规划提出先查制度，模型选择查询工具；工具返回材料，应用保存结果；下一次模型调用读取这些信息，决定能否回答。
 
@@ -62,9 +62,7 @@
 
 大语言模型从训练中学习语言与知识，能够解释问题、归纳材料，也能按要求生成结构化内容。在 Agent 中，我们还会让它判断下一步：现在能回答吗？要先问用户一句，还是调用某个工具？这使模型从回答生成器变成了控制过程中的决策者。
 
-![一次模型调用的输入包括任务说明、用户问题、工具说明和选入的状态证据，输出可以是回答或动作请求](../../website/assets/diagrams/concepts/C2-model-context.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C2-model-context.png)
+[![一次模型调用的输入包括任务说明、用户问题、工具说明和选入的状态证据，输出可以是回答或动作请求](../../website/assets/diagrams/concepts/C2-model-context.png)](../../website/assets/diagrams/concepts/C2-model-context.png)
 
 模型作决定时，需要拿到与当前问题有关的信息。小明给出的城市、日期和金额属于任务条件；从制度库取出的条款属于外部证据；可用工具的用途与参数说明告诉模型有哪些行动可以选择。应用把这些信息组织成当前上下文，模型才能据此决定。
 
@@ -78,9 +76,7 @@
 
 工具是应用向 Agent 开放的一项可调用能力。查询制度、读取文件、计算金额和创建工单，都可以封装成工具。工具背后的实现可能是普通函数，也可能访问数据库或远程服务。模型接触的是这项能力的说明和调用结果。
 
-![工具声明说明能力，模型生成调用请求，运行时执行函数并取得真实结果，三个环节彼此分开](../../website/assets/diagrams/concepts/C3-tool-interface.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C3-tool-interface.png)
+[![工具声明说明能力，模型生成调用请求，运行时执行函数并取得真实结果，三个环节彼此分开](../../website/assets/diagrams/concepts/C3-tool-interface.png)](../../website/assets/diagrams/concepts/C3-tool-interface.png)
 
 理解工具调用，要分清声明、请求和执行。声明像一份接口说明：这个工具叫什么，适合做什么，需要哪些参数。模型阅读说明后提出调用请求，例如按海岚和11月12日查询住宿制度。运行时接到请求，才调用相应函数，把返回资料送回来。[工具交互参考](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
 
@@ -96,9 +92,7 @@
 
 假设助手查到了海岚的制度，小明接着问："那我这个650元算超了吗？" 这句话省略了城市、日期和制度。要接着回答，应用得保留前面确认的条件与查询结果，再把必要部分提供给下一次调用。记忆解决的就是信息怎样跨步骤保留和复用的问题。
 
-![当前上下文是模型本次可见的信息，任务状态与跨会话记录在窗口外保存，经选择读取后才能进入上下文](../../website/assets/diagrams/concepts/C4-memory-context.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C4-memory-context.png)
+[![当前上下文是模型本次可见的信息，任务状态与跨会话记录在窗口外保存，经选择读取后才能进入上下文](../../website/assets/diagrams/concepts/C4-memory-context.png)](../../website/assets/diagrams/concepts/C4-memory-context.png)
 
 这里有三个相近概念。Context 是本次模型调用实际可见的输入，相当于这次摊开阅读的材料。任务状态保存当前目标、已知条件、查到的证据和进展，应用可以从中选出下一轮所需内容。跨会话记忆则保留以后任务可能复用的信息，例如用户明确表达的语言偏好。
 
@@ -116,9 +110,7 @@
 
 查询一个城市的金额上限，下一步通常很清楚。现在把目标换成："比较海岚和云洲在同一天的住宿标准。" 回答需要覆盖两个城市，并保证比较条件一致，规划便有了更明显的作用。
 
-![比较两地制度的目标被拆成子任务，先确认共同条件，再分别查询，反馈变化时更新受影响的步骤](../../website/assets/diagrams/concepts/C5-planning-feedback.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C5-planning-feedback.png)
+[![比较两地制度的目标被拆成子任务，先确认共同条件，再分别查询，反馈变化时更新受影响的步骤](../../website/assets/diagrams/concepts/C5-planning-feedback.png)](../../website/assets/diagrams/concepts/C5-planning-feedback.png)
 
 规划首先把目标拆成可处理的子任务：确认出差条件，查询两地标准，最后综合比较。接着还要识别依赖。两地查询都需要共同的出差日期；综合回答则依赖两份查询结果。只列出几个动词，还没有说明工作之间的关系。
 
@@ -132,9 +124,7 @@
 
 前面解释了系统具备哪些能力，现在看它们怎样接在一起。运行时是负责组织执行的程序：准备本轮输入，调用模型，接收动作请求，执行工具，记录返回结果，再安排继续或结束。框架可以封装其中一些步骤，应用也可以自己实现。
 
-![运行时包含输入组织、决策调用、执行与状态更新；文档库、服务和用户是通过工具或消息交互的环境](../../website/assets/diagrams/concepts/C6-runtime-boundary.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C6-runtime-boundary.png)
+[![运行时包含输入组织、决策调用、执行与状态更新；文档库、服务和用户是通过工具或消息交互的环境](../../website/assets/diagrams/concepts/C6-runtime-boundary.png)](../../website/assets/diagrams/concepts/C6-runtime-boundary.png)
 
 环境指系统实际交互的对象。对政策助手来说，制度库提供资料，用户补充条件，工单服务保存申请。环境会返回新信息，也可能发生变化。模型依据输入作出的决定，需要通过工具和消息才能作用到这些对象。
 

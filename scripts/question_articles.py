@@ -15,7 +15,8 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
 FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
 INLINE_LINK = re.compile(
-    r"(?P<open>!?\[[^\]\n]*\]\()"
+    # Rebase the enclosing click target as well as the nested image source.
+    r"(?P<open>!?\[[^\]\n]*\]\(|(?<=\))\]\()"
     r"(?P<url><[^>\n]+>|[^ \t\r\n)]+)"
     r"(?P<title>[ \t]+(?:\"[^\"\n]*\"|'[^'\n]*'|\([^\n)]*\)))?\)"
 )

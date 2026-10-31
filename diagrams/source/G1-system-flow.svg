@@ -28,7 +28,7 @@
 <path class="line" d="M220 638 V665"/>
 <rect x="20" y="668" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="681" width="4" height="83" rx="2" fill="#087e84"/>
 <text x="37" y="696" class="label" style="fill:#087e84">⑤ 返回观察，更新状态</text>
-<text x="37" y="723" class="body">P17-v2#4：适用上限700元</text>
+<text x="37" y="723" class="body">新版住宿标准：每晚上限700元</text>
 <text x="37" y="748" class="body">观察进入下一轮 context，再决定</text>
 <path class="line" d="M420 722 H432 V306 H422"/>
 <rect x="20" y="799" width="400" height="94" rx="8" fill="#e7f1f2"/>

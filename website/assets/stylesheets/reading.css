@@ -33,11 +33,6 @@
   --md-accent-fg-color--transparent: #126e7514;
   --md-code-bg-color: var(--reading-code);
   --md-code-fg-color: var(--reading-ink);
-  --md-footer-bg-color: var(--reading-surface);
-  --md-footer-bg-color--dark: var(--reading-bg);
-  --md-footer-fg-color: var(--reading-ink);
-  --md-footer-fg-color--light: var(--reading-muted);
-  --md-footer-fg-color--lighter: var(--reading-muted);
 }
 
 [data-md-color-scheme="slate"] {
@@ -63,6 +58,15 @@
   --md-accent-fg-color--transparent: #78d6cf18;
   --md-code-bg-color: var(--reading-code);
   --md-code-fg-color: var(--reading-ink);
+}
+
+/* Define these on the palette element so they use its current reading colors. */
+[data-md-color-scheme] {
+  --md-footer-bg-color: var(--reading-surface);
+  --md-footer-bg-color--dark: var(--reading-bg);
+  --md-footer-fg-color: var(--reading-ink);
+  --md-footer-fg-color--light: var(--reading-muted);
+  --md-footer-fg-color--lighter: var(--reading-muted);
 }
 
 body,
@@ -195,6 +199,39 @@ textarea {
   margin-bottom: 0.55em;
 }
 
+/* Reading choices stay complete on small screens instead of using a wide table. */
+.md-typeset .learning-paths {
+  margin: 1.5em 0;
+  padding: 0 1.15em;
+  border: 1px solid var(--reading-line);
+  border-radius: 5px;
+  background: var(--reading-surface);
+}
+
+.md-typeset .learning-paths > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+[dir] .md-typeset .learning-paths > ul > li {
+  margin: 0;
+  padding: 1em 0;
+}
+
+.md-typeset .learning-paths > ul > li + li {
+  border-top: 1px solid var(--reading-line);
+}
+
+.md-typeset .learning-paths li > p {
+  margin: 0;
+}
+
+.md-typeset .learning-paths a {
+  display: inline-block;
+  margin-bottom: 0.25em;
+}
+
 .md-typeset blockquote {
   margin-inline: 0;
   padding-inline-start: 1em;
@@ -215,6 +252,79 @@ textarea {
 
 .md-typeset img {
   height: auto;
+}
+
+.md-typeset a.diagram-zoom {
+  display: inline-block;
+  max-width: 100%;
+  cursor: zoom-in;
+}
+
+.md-typeset a.diagram-zoom:focus-visible {
+  outline: 3px solid var(--reading-link);
+  outline-offset: 4px;
+}
+
+html.image-preview-open {
+  overflow: hidden;
+}
+
+dialog.diagram-lightbox {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 3.5rem 1rem 1rem;
+  border: 0;
+  background: transparent;
+}
+
+dialog.diagram-lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagram-lightbox::backdrop {
+  background: rgb(15 23 42 / 88%);
+}
+
+.diagram-lightbox > img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  cursor: zoom-out;
+}
+
+.diagram-lightbox__close {
+  position: fixed;
+  top: 0.65rem;
+  right: 0.65rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 60%);
+  border-radius: 50%;
+  background: #172938;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.diagram-lightbox__close:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
 }
 
 /* Keep long tables inside their own horizontal viewport. */
@@ -242,7 +352,9 @@ textarea {
 }
 
 .md-typeset table:not([class]) {
+  display: table;
   width: 100%;
+  max-width: 100%;
   margin: 0;
   border: 1px solid var(--reading-line);
   border-radius: 5px;
@@ -268,13 +380,6 @@ textarea {
 
 .md-typeset table:not([class]) td {
   min-width: 8em;
-}
-
-.md-typeset > table:not([class]),
-.md-typeset details > table:not([class]) {
-  display: block;
-  max-width: 100%;
-  overflow-x: auto;
 }
 
 /* Inline code may wrap; executable blocks preserve whitespace and scroll. */

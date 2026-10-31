@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A09" width="760" height="910" viewBox="0 0 760 910" role="img" aria-labelledby="A09-title A09-desc">
+<title id="A09-title">评测闭环：同题比较，再追查差异</title>
+<desc id="A09-desc">固定任务、资料范围和预算，让基线与候选版本在同一题上比较结果和执行轨迹。分别检查修复与退步，稳定修复案例加入回归集合，并保留独立任务。图中不包含模型实测成绩。</desc>
+<defs><marker id="A09-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A09-orange" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}</style>
+<rect x="1" y="1" width="758" height="908" rx="20" fill="#F8FBFC" stroke="#D6E5EA" stroke-width="2"/>
+<text x="30" y="50" font-size="30" font-weight="700" text-anchor="start" fill="#253746">评测闭环：同题比较，再追查差异</text>
+
+<rect x="30" y="82" width="700" height="78" rx="14" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/><text x="380" y="114" font-size="24" font-weight="650" text-anchor="middle" fill="#087F86">先固定比较条件</text>
+<text x="380" y="145" font-size="22" font-weight="400" text-anchor="middle" fill="#253746">同一组任务 · 同一资料范围 · 同一预算</text>
+<path d="M230 160 V200" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A09-arrow)"/><path d="M530 160 V200" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A09-arrow)"/><rect x="95" y="205" width="270" height="80" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/><rect x="395" y="205" width="270" height="80" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/><text x="230" y="239" font-size="25" font-weight="650" text-anchor="middle" fill="#253746">基线版本</text>
+<text x="230" y="269" font-size="20" font-weight="400" text-anchor="middle" fill="#546C80">保留结果与执行轨迹</text>
+<text x="530" y="239" font-size="25" font-weight="650" text-anchor="middle" fill="#087F86">候选版本</text>
+<text x="530" y="269" font-size="20" font-weight="400" text-anchor="middle" fill="#546C80">只改一个主要因素</text>
+<text x="380" y="326" font-size="25" font-weight="650" text-anchor="middle" fill="#253746">逐题配对，不只比较两个总分</text>
+<rect x="50" y="353" width="660" height="58" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/><text x="69" y="391" font-size="22" font-weight="400" text-anchor="start" fill="#253746">正常查询</text>
+<text x="317" y="391" font-size="22" font-weight="400" text-anchor="middle" fill="#546C80">本题记录</text>
+<path d="M385 382 H442" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A09-arrow)"/><text x="551" y="391" font-size="22" font-weight="400" text-anchor="middle" fill="#087F86">同题记录</text>
+<rect x="50" y="425" width="660" height="58" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/><text x="69" y="463" font-size="22" font-weight="400" text-anchor="start" fill="#253746">历史日期</text>
+<text x="317" y="463" font-size="22" font-weight="400" text-anchor="middle" fill="#546C80">本题记录</text>
+<path d="M385 454 H442" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A09-arrow)"/><text x="551" y="463" font-size="22" font-weight="400" text-anchor="middle" fill="#087F86">同题记录</text>
+<rect x="50" y="497" width="660" height="58" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/><text x="69" y="535" font-size="22" font-weight="400" text-anchor="start" fill="#253746">证据缺失</text>
+<text x="317" y="535" font-size="22" font-weight="400" text-anchor="middle" fill="#546C80">本题记录</text>
+<path d="M385 526 H442" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A09-arrow)"/><text x="551" y="535" font-size="22" font-weight="400" text-anchor="middle" fill="#087F86">同题记录</text>
+<path d="M380 555 V578 H205 V592" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A09-arrow)"/><path d="M380 578 H555 V592" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A09-arrow)"/><rect x="50" y="602" width="310" height="97" rx="14" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/><rect x="400" y="602" width="310" height="97" rx="14" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/><text x="205" y="637" font-size="24" font-weight="650" text-anchor="middle" fill="#087F86">哪些错误修复了？</text>
+<text x="205" y="671" font-size="22" font-weight="400" text-anchor="middle" fill="#253746">沿轨迹核对原因</text>
+<text x="555" y="637" font-size="24" font-weight="650" text-anchor="middle" fill="#B56B26">哪些任务退步了？</text>
+<text x="555" y="671" font-size="20" font-weight="400" text-anchor="middle" fill="#253746">单独记录，不能被均值遮住</text>
+<path d="M205 699 V729 H365 V756" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A09-arrow)"/><path d="M555 699 V729 H395 V756" fill="none" stroke="#087F86" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A09-arrow)"/><rect x="140" y="766" width="480" height="80" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/><text x="380" y="799" font-size="25" font-weight="650" text-anchor="middle" fill="#087F86">修复后加入回归集合</text>
+<text x="380" y="829" font-size="21" font-weight="400" text-anchor="middle" fill="#253746">同时保留独立任务检验迁移</text>
+<text x="380" y="883" font-size="20" font-weight="400" text-anchor="middle" fill="#546C80">流程示意：图中未填入或宣称模型实测成绩</text>
+
+</svg>

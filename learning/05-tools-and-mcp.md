@@ -35,10 +35,10 @@ MCP 的工具接口同样包含输入 schema，接入时要核对服务与校验
 小明问：“下周去海岚出差，酒店每晚 650 元，可以报吗？”系统应先确认出差日期、适用员工类别和制度版本。以下伪代码展示调用合同：
 
 ```text
-可信会话：user_id=U001, tenant_id=demo-a
+可信会话：使用当前员工身份和所属组织
 模型建议：search_policy(query="lodging", city="海岚", trip_date="示例日期")
 执行器：校验参数 → 注入可信身份 → 检查读取权限 → 搜索
-工具观察：政策P17，第4条，生效区间，原文片段，来源链接
+工具观察：海岚新版住宿标准、生效日期、金额条款、来源链接
 模型输出：依据该条回答；条件不足时澄清；不得声称已审批
 ```
 
@@ -93,51 +93,25 @@ MCP 的工具接口同样包含输入 schema，接入时要核对服务与校验
 }
 ```
 
-已保存正常运行的实际参数为`{"query":"lodging","city":"海岚","trip_date":"2026-11-12"}`。多加`"user_id":"U002"`或`"approved":true`应拒绝；日期为`"下周"`也不能通过业务校验。调用ID由运行过程关联，身份来自受控会话。下面完整摘录[正常实际trace](../examples/policy_agent/traces/normal/trace.jsonl)中seq4的result，调用ID为call-1。上面的input_schema与[tools.json](../examples/policy_agent/data/tools.json)中的search_policy一致；name和description是调用说明。
+一次正常查询的参数是 `{"query":"lodging","city":"海岚","trip_date":"2026-11-12"}`。如果模型额外填写别人的身份，或自行添加“已批准”，执行器都应拒绝；把日期写成“下周”也不能通过业务校验。身份来自可信会话，不由模型填表决定。
 
-```json
-{
-  "call_id": "call-1",
-  "status": "ok",
-  "data": {
-    "documents": [
-      {
-        "policy_id": "P17",
-        "document_id": "P17-v2",
-        "version": 2,
-        "tenant_id": "demo-a",
-        "topic": "lodging",
-        "city": "海岚",
-        "employee_category": "staff",
-        "valid_from": "2026-11-01",
-        "valid_to": null,
-        "allowed_roles": [
-          "staff",
-          "manager"
-        ],
-        "clauses": [
-          {
-            "clause_id": "P17-v2#4",
-            "text": "本虚构制度下，staff在海岚的住宿金额上限为每晚700元。",
-            "amount_cny": 700
-          }
-        ]
-      }
-    ],
-    "rejected": []
-  },
-  "evidence_refs": [
-    "P17-v2#4"
-  ],
-  "error": null
-}
-```
+查到的资料可以直接这样理解：
+
+| 工具返回的信息 | 本例中的内容 |
+| --- | --- |
+| 资料名称 | 海岚新版住宿标准 |
+| 适用对象 | 海岚出差的普通员工 |
+| 生效日期 | 2026年11月1日起 |
+| 关键条款 | 每晚住宿金额上限700元 |
+| 来源 | 可回查的制度原文与条款位置 |
+
+这份查询结果有了明确的适用条件，模型才能比较650元与700元。实际运行数据保存在[完整记录](../examples/policy_agent/traces/normal/trace.jsonl)中；程序还应让请求与返回结果一一对应，避免把另一项查询的资料接错。
 
 失败回包也要能被程序处理。下面按执行器read-transient夹具的合同给出错误形状；这是错误合同示意，不是上述正常运行的第二个回包：
 
 ```json
 {
-  "call_id": "call-1", "status": "error",
+  "call_id": "本次工具调用", "status": "error",
   "data": {"documents": [], "rejected": []}, "evidence_refs": [],
   "error": {"code": "temporary_read_failure", "message": "injected transient read failure", "retryable": true}
 }
@@ -145,17 +119,13 @@ MCP 的工具接口同样包含输入 schema，接入时要核对服务与校验
 
 同一个call_id关联成功或失败，不用自由文本“failed”替代合同。空结果是`empty`观察，不等于权限拒绝，也不自动等于任务成功。读失败的重试次数和整个任务预算分别计数。
 
-![G3：工具调用、运行时执行、结果关联和下一次输入](../website/assets/diagrams/G3-tool-roundtrip.png)
-
-[查看原图](../website/assets/diagrams/G3-tool-roundtrip.png)
+[![G3：工具调用、运行时执行、结果关联和下一次输入](../website/assets/diagrams/G3-tool-roundtrip.png)](../website/assets/diagrams/G3-tool-roundtrip.png)
 
 该图展示应用侧工具执行后，再请求模型处理结果的常见两轮模式，不是所有工具的固定请求次数。多个调用可共享后续模型输入；供应商托管工具也可在平台内部完成往返，应用只看到一次 API 响应。
 
 模型或策略只有取得结果后才能有新证据。[完整实现与返回合同](../examples/policy_agent/README.md)；新实验实现本地函数工具，下面的MCP图用于协议职责教学，不表示它已运行MCP Server。
 
-![G4：同一个Host中的两个Client分别连接政策与工单Server](../website/assets/diagrams/G4-mcp-connections.png)
-
-[查看原图](../website/assets/diagrams/G4-mcp-connections.png)
+[![G4：同一个Host中的两个Client分别连接政策与工单Server](../website/assets/diagrams/G4-mcp-connections.png)](../website/assets/diagrams/G4-mcp-connections.png)
 
 ## MCP 把哪些连接方式统一起来
 

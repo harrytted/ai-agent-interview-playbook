@@ -56,14 +56,63 @@
     }
     if (opened) requestAnimationFrame(() => target.scrollIntoView());
   };
+
+  const bindImagePreview = () => {
+    const dialog = document.createElement("dialog");
+    if (typeof dialog.showModal !== "function") return;
+    dialog.className = "diagram-lightbox";
+    dialog.setAttribute("aria-label", "图片放大预览");
+
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.className = "diagram-lightbox__close";
+    closeButton.setAttribute("aria-label", "关闭图片");
+    closeButton.autofocus = true;
+    closeButton.textContent = "×";
+
+    const preview = document.createElement("img");
+    dialog.append(closeButton, preview);
+    document.body.append(dialog);
+    let trigger;
+
+    closeButton.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", event => {
+      if (event.target === dialog || event.target === preview) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      document.documentElement.classList.remove("image-preview-open");
+      preview.removeAttribute("src");
+      trigger?.focus({ preventScroll: true });
+    });
+
+    document.querySelectorAll(".md-typeset a > img").forEach(image => {
+      const link = image.parentElement;
+      // Preserve ordinary linked images that lead somewhere other than the image.
+      if (link.href !== image.src) return;
+      link.classList.add("diagram-zoom");
+      link.setAttribute("aria-haspopup", "dialog");
+      link.setAttribute("aria-label", `放大图片：${image.alt || "插图"}`);
+      link.addEventListener("click", event => {
+        if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        trigger = link;
+        preview.src = image.currentSrc || image.src;
+        preview.alt = image.alt;
+        document.documentElement.classList.add("image-preview-open");
+        dialog.showModal();
+      });
+    });
+  };
   window.addEventListener("hashchange", revealTarget);
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
       revealTarget();
       bindHeaderControls();
+      bindImagePreview();
     });
   } else {
     revealTarget();
     bindHeaderControls();
+    bindImagePreview();
   }
 })();

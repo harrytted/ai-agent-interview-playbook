@@ -9,7 +9,7 @@
 <text x="20" y="113" class="small">索引找到候选，不替代适用性判断。</text>
 <rect x="20" y="137" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="150" width="4" height="83" rx="2" fill="#2667ac"/>
 <text x="37" y="165" class="label" style="fill:#2667ac">A1 入库：原文与元数据</text>
-<text x="37" y="192" class="body">P17-v1：600元；v2：700元</text>
+<text x="37" y="192" class="body">旧标准600元；新标准700元</text>
 <text x="37" y="217" class="body">保存租户、类别、生效区间与条款ID</text>
 <path class="line" d="M220 246 V273"/>
 <rect x="20" y="276" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="289" width="4" height="83" rx="2" fill="#2667ac"/>
@@ -26,12 +26,12 @@
 <text x="37" y="611" class="label" style="fill:#a35d18">B2 核对与筛选</text>
 <text x="37" y="638" class="body">权限 → 日期 → 适用类别 → 覆盖</text>
 <text x="37" y="663" class="body">v1过期不能支撑当日结论</text>
-<text x="37" y="688" class="body">缺少材料条款？追加查P20</text>
+<text x="37" y="688" class="body">缺少材料条款？补查咨询要求</text>
 <path class="line" d="M220 717 V744"/>
 <rect x="20" y="747" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="760" width="4" height="83" rx="2" fill="#087e84"/>
 <text x="37" y="775" class="label" style="fill:#087e84">B3 装配输入，生成引用回答</text>
 <text x="37" y="802" class="body">只选足够且适用的证据进入context</text>
-<text x="37" y="827" class="body">金额700元；引用P17-v2#4</text>
+<text x="37" y="827" class="body">上限700元；引用新版标准</text>
 <path class="line" d="M220 856 V883"/>
 <rect x="20" y="886" width="400" height="109" rx="10" fill="white" stroke="#b5c5d0"/><rect x="20" y="899" width="4" height="83" rx="2" fill="#087e84"/>
 <text x="37" y="914" class="label" style="fill:#087e84">B4 核验，不足就保留缺口</text>

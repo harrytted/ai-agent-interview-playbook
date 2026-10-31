@@ -12,6 +12,22 @@ import time
 from . import core
 from .grade import grade
 
+TASK_NAMES = {
+    "T01": "住宿金额核对",
+    "T02": "历史日期核对",
+    "T03": "经理住宿标准",
+    "T04": "两个日期比较",
+    "T05": "两地住宿比较",
+    "T06": "超标咨询材料",
+    "T07": "冲突证据核对",
+    "T08": "用户更正城市",
+    "T09": "缺少出差日期",
+    "T10": "餐补资料不足",
+    "T11": "批准后创建工单",
+    "T12": "工单崩溃恢复",
+}
+TASK_ALIASES = {name: task_id for task_id, name in TASK_NAMES.items()}
+
 
 def evaluate(suite="all", *, root=core.DEFAULT_ROOT, mode="offline"):
     if mode != "offline":
@@ -50,7 +66,7 @@ def main(argv=None):
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("list")
     run = commands.add_parser("run")
-    run.add_argument("--task", required=True)
+    run.add_argument("--task", required=True, help="任务名称，使用 list 查看可运行场景")
     run.add_argument("--variant", default="default")
     run.add_argument("--mode", choices=("offline", "live"), default="offline")
     run.add_argument("--run-id")
@@ -67,9 +83,9 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         if args.command == "list":
-            result = {"tasks": [{"task_id": t["task_id"], "goal": t["goal"]} for t in core.read_json(core.DATA / "tasks.json")], "variants": list(core.read_json(core.DATA / "variants.json")), "offline_default": True}
+            result = {"tasks": [{"task_id": t["task_id"], "task_name": TASK_NAMES[t["task_id"]], "goal": t["goal"]} for t in core.read_json(core.DATA / "tasks.json")], "variants": list(core.read_json(core.DATA / "variants.json")), "offline_default": True}
         elif args.command == "run":
-            result = core.run_task(args.task, args.variant, args.mode, args.run_id, args.root)
+            result = core.run_task(TASK_ALIASES.get(args.task, args.task), args.variant, args.mode, args.run_id, args.root)
         elif args.command == "resume":
             result = core.resume_task(args.run_id, args.root, json.loads(args.reply_json) if args.reply_json else None, crash_after_remote=True)
         elif args.command == "approve":

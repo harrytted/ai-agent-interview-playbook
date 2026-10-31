@@ -18,9 +18,7 @@
 
 **详细答案：**
 
-![上下文进入模型，动作经执行器执行，观察更新任务状态后开始下一轮](../../website/assets/diagrams/concepts/C6-runtime-boundary.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C6-runtime-boundary.png)
+[![上下文进入模型，动作经执行器执行，观察更新任务状态后开始下一轮](../../website/assets/diagrams/concepts/C6-runtime-boundary.png)](../../website/assets/diagrams/concepts/C6-runtime-boundary.png)
 
 沿闭环看本轮输入、动作请求、实际执行与状态更新，循环还需要由运行时决定继续、等待或停止。
 
@@ -64,9 +62,7 @@ ReAct 将推理与环境动作交替组织，根据新观察调整下一步。�
 
 **详细答案：**
 
-![同一政策任务分别按逐轮决定和显式计划推进，用户更正后更新待执行步骤](../../website/assets/diagrams/G7-planning-compare.png)
-
-[查看原图](../../website/assets/diagrams/G7-planning-compare.png)
+[![同一政策任务分别按逐轮决定和显式计划推进，用户更正后更新待执行步骤](../../website/assets/diagrams/G7-planning-compare.png)](../../website/assets/diagrams/G7-planning-compare.png)
 
 对照两侧的决定时机，再看更正条件后哪些待办被替换；两种方式都需要利用反馈更新后续工作。
 
@@ -110,9 +106,7 @@ ReAct 将推理与环境动作交替组织，根据新观察调整下一步。�
 
 **详细答案：**
 
-![窗口外保存任务记录与跨会话信息，选择后的内容才进入当前上下文](../../website/assets/diagrams/concepts/C4-memory-context.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C4-memory-context.png)
+[![窗口外保存任务记录与跨会话信息，选择后的内容才进入当前上下文](../../website/assets/diagrams/concepts/C4-memory-context.png)](../../website/assets/diagrams/concepts/C4-memory-context.png)
 
 图中的任务记录可以保存工作进度，但只有被选择的部分进入模型输入，工作流状态不等于完整上下文。
 
@@ -196,9 +190,7 @@ ReAct 将推理与环境动作交替组织，根据新观察调整下一步。�
 
 **详细答案：**
 
-![两地制度可以独立读取，比较回答依赖两份资料均已取得](../../website/assets/diagrams/concepts/C5-planning-feedback.png)
-
-[查看原图](../../website/assets/diagrams/concepts/C5-planning-feedback.png)
+[![两地制度可以独立读取，比较回答依赖两份资料均已取得](../../website/assets/diagrams/concepts/C5-planning-feedback.png)](../../website/assets/diagrams/concepts/C5-planning-feedback.png)
 
 先找两条独立查询，再找汇合点；能否并发由数据依赖决定，比较步骤仍须等待必要结果。
 
@@ -244,9 +236,7 @@ ReAct 将推理与环境动作交替组织，根据新观察调整下一步。�
 
 先区分两份事实：本地记录执行进度，外部服务记录业务对象。Checkpoint 可以保存已知条件、下一节点、批准和工具结果；恢复可能重新进入某段代码，不表示另一个系统也回到旧状态。
 
-![本地保存意图、远端提交、本地确认之间的故障窗口](../../website/assets/diagrams/G8-write-recovery.png)
-
-[查看原图](../../website/assets/diagrams/G8-write-recovery.png)
+[![本地保存意图、远端提交、本地确认之间的故障窗口](../../website/assets/diagrams/G8-write-recovery.png)](../../website/assets/diagrams/G8-write-recovery.png)
 
 关键窗口是“远端提交之后、本地确认之前”。提高 checkpoint 频率能减少一部分重做，却不能自行消除两边没有共同事务的窗口。幂等键也需要服务端原子去重、同键异参冲突和可说明的保留期；只在请求里添加一个 ID 没有保护作用。
 
@@ -260,7 +250,7 @@ ReAct 将推理与环境动作交替组织，根据新观察调整下一步。�
 
 **实战案例：**
 
-T12 的 task.sqlite 保存意图，service.sqlite 保存模拟工单，两者没有共同事务。第一进程在服务提交后退出；第二进程用原 operation_id 恢复，核对对象内容。这个实验验证特定本地模拟合同，不承诺所有外部系统 exactly-once。
+工单崩溃恢复实验用任务数据库保存意图，用服务数据库保存模拟工单，两者没有共同事务。第一进程在服务提交后退出；第二进程用原 operation_id 恢复，核对对象内容。这个实验验证特定本地模拟合同，不承诺所有外部系统 exactly-once。
 
 </details>
 

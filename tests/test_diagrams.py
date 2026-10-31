@@ -6,7 +6,7 @@ import tempfile
 import unittest
 import zlib
 
-from scripts.check_diagrams import (CONCEPT_FILES, FILES, check_diagrams,
+from scripts.check_diagrams import (ADVANCED_FILES, CONCEPT_FILES, FILES, check_diagrams,
                                     check_generated_images, validate_png, validate_svg)
 
 
@@ -38,7 +38,7 @@ class DiagramTests(unittest.TestCase):
 
     def write(self, number, content=None, pair=True):
         for dirname in ("diagrams/source", "website/assets/diagrams") if pair else ("diagrams/source",):
-            filename = FILES[number] if isinstance(number, int) else CONCEPT_FILES[number]
+            filename = FILES[number] if isinstance(number, int) else (CONCEPT_FILES | ADVANCED_FILES)[number]
             target = self.root / dirname / filename
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(content if content is not None else sample(number))
@@ -106,8 +106,8 @@ class DiagramTests(unittest.TestCase):
     def test_complete_real_repository_contract(self):
         result = check_diagrams(Path(__file__).resolve().parents[1], "all")
         self.assertEqual(result.errors, [])
-        self.assertEqual(result.diagrams, 8 + len(CONCEPT_FILES))
-        self.assertEqual(result.generated_images, 14)
+        self.assertEqual(result.diagrams, 8 + len(CONCEPT_FILES) + len(ADVANCED_FILES))
+        self.assertEqual(result.generated_images, 14 + len(ADVANCED_FILES))
 
     def test_concept_group_is_checked_recursively_and_requires_complete_pairs(self):
         self.write(1)
@@ -122,6 +122,20 @@ class DiagramTests(unittest.TestCase):
         result = check_diagrams(self.root, "pilot")
         self.assertEqual(result.errors, [])
         self.assertEqual(result.diagrams, 8)
+
+    def test_advanced_collection_requires_complete_static_publication_pairs(self):
+        self.write(1)
+        self.write(3)
+        self.write("A01", pair=False)
+        errors = "\n".join(check_diagrams(self.root, "pilot").errors)
+        self.assertIn("missing source/published pair: advanced/A01-harness.svg", errors)
+        self.assertIn("missing required diagram: advanced/A02-recovery.svg", errors)
+        for label in ADVANCED_FILES:
+            self.write(label)
+        result = check_diagrams(self.root, "pilot")
+        self.assertEqual(result.errors, [])
+        self.assertEqual(result.diagrams, 2 + len(ADVANCED_FILES))
+        self.assertEqual(result.generated_images, 0)
 
 
 class GeneratedImageTests(unittest.TestCase):
@@ -175,6 +189,20 @@ class GeneratedImageTests(unittest.TestCase):
         self.assertIn("incorrect imagegen publication/source path", "\n".join(errors))
         self.assertIn("duplicate imagegen manifest id", "\n".join(errors))
         self.assertIn("missing imagegen manifest entry: G3", "\n".join(errors))
+
+    def test_advanced_generated_collection_cannot_be_partially_registered(self):
+        metadata = self.manifest()
+        filename = ADVANCED_FILES["A01"]
+        path = f"website/assets/diagrams/{Path(filename).with_suffix('.png')}"
+        metadata["assets"].append({"id": "A01", "path": path,
+                                   "semantic_source": f"diagrams/source/{filename}"})
+        image = self.root / path
+        image.parent.mkdir(parents=True, exist_ok=True)
+        image.write_bytes(png())
+        self.save(metadata)
+        errors, count = check_generated_images(self.root)
+        self.assertEqual(count, 15)
+        self.assertIn("missing imagegen manifest entry: A02", "\n".join(errors))
 
 
 if __name__ == "__main__":

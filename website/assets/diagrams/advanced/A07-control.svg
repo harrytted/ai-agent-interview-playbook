@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A07" width="800" height="777" viewBox="0 0 800 777" role="img" aria-labelledby="A07-title A07-desc">
+<title id="A07-title">委派子任务，还是交出控制权？</title><desc id="A07-desc">左侧主管编排中，主Agent委派子任务，子Agent返回后主Agent汇总答复。右侧交接模式切换当前处理角色，专员继续与用户交互。角色变化不会增加授权。</desc>
+<defs><marker id="A07-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker><marker id="A07-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker></defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:28px;font-weight:700}.label{font-size:24px;font-weight:650}.body{font-size:20px}.note{font-size:20px;fill:#536D79}</style>
+<rect x="1" y="1" width="798" height="775" rx="20" fill="#FFFFFF" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="30" y="49" class="title" text-anchor="start">委派子任务，还是交出控制权？</text>
+<text x="30" y="84" class="note" text-anchor="start">两种模式的差别：下一步由谁继续处理</text>
+<rect x="24" y="111" width="364" height="565" rx="16" fill="#F8FBFC" stroke="#D6E5EA" stroke-width="1.6"/>
+<rect x="412" y="111" width="364" height="565" rx="16" fill="#F8FBFC" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="206" y="151" class="label" text-anchor="middle" style="fill:#087F86">Manager：主流程汇总</text>
+<text x="594" y="151" class="label" text-anchor="middle" style="fill:#B56B26">Handoff：切换处理角色</text>
+<rect x="64" y="188" width="284" height="82" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="206.0" y="222.5" class="label" text-anchor="middle" style="fill:#087F86">主 Agent</text>
+<text x="206.0" y="251.5" class="body" text-anchor="middle">安排一次子研究</text>
+<path d="M206 270 V333" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A07-arrow)"/>
+<text x="223" y="311" class="note" text-anchor="start">委派子任务</text>
+<rect x="64" y="336" width="284" height="82" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="206.0" y="370.5" class="label" text-anchor="middle" style="fill:#087F86">子 Agent</text>
+<text x="206.0" y="399.5" class="body" text-anchor="middle">读取资料，返回结果</text>
+<path d="M206 418 V481" fill="none" stroke="#087F86" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A07-arrow)"/>
+<text x="223" y="459" class="note" text-anchor="start">控制回到主流程</text>
+<rect x="64" y="484" width="284" height="82" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="206.0" y="518.5" class="label" text-anchor="middle" style="fill:#087F86">主 Agent</text>
+<text x="206.0" y="547.5" class="body" text-anchor="middle">核对并汇总给用户</text>
+<text x="206" y="622" class="body" text-anchor="middle">子任务结束后，主流程继续</text>
+<rect x="452" y="188" width="284" height="82" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="594.0" y="222.5" class="label" text-anchor="middle" style="fill:#B56B26">通用 Agent</text>
+<text x="594.0" y="251.5" class="body" text-anchor="middle">发现需要申请专员</text>
+<path d="M594 270 V333" fill="none" stroke="#B56B26" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A07-orange)"/>
+<text x="611" y="311" class="note" text-anchor="start" style="fill:#B56B26">交接目标与状态</text>
+<rect x="452" y="336" width="284" height="82" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="594.0" y="370.5" class="label" text-anchor="middle" style="fill:#B56B26">申请专员</text>
+<text x="594.0" y="399.5" class="body" text-anchor="middle">成为当前处理角色</text>
+<path d="M594 418 V481" fill="none" stroke="#B56B26" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#A07-orange)"/>
+<text x="611" y="459" class="note" text-anchor="start" style="fill:#B56B26">继续当前对话</text>
+<rect x="452" y="484" width="284" height="82" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="594.0" y="518.5" class="label" text-anchor="middle" style="fill:#B56B26">申请专员</text>
+<text x="594.0" y="547.5" class="body" text-anchor="middle">向用户补问必要信息</text>
+<text x="594" y="622" class="body" text-anchor="middle">按约定条件交回或结束</text>
+<rect x="24" y="704" width="752" height="47" rx="10" fill="#F0F8F7" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="400" y="735" class="body" text-anchor="middle">两种模式都要传递权限范围；交接不会带来新权限。</text>
+</svg>

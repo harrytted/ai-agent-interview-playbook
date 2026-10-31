@@ -136,6 +136,21 @@ class SiteCheckTests(unittest.TestCase):
         self.assertIn("missing fragment", errors)
         self.assertIn("q093-题目", errors)
 
+    def test_duplicate_element_ids_fail_with_both_source_lines(self):
+        self.write("index.html", '<input id="__toc" type="checkbox">\n'
+                   '<label for="__toc">目录</label>\n'
+                   '<input id="__toc" type="checkbox">')
+        self.assertIn("index.html:3: duplicate element id '__toc' (first at line 1)", self.errors())
+
+    def test_ids_are_scoped_to_pages_and_named_anchors_are_not_element_ids(self):
+        self.write("index.html", '<h1 id="shared">首页</h1>'
+                   '<a id="legacy" name="legacy"></a><a name="legacy"></a>'
+                   '<a href="#legacy">旧式锚点</a>')
+        self.write("learning/index.html", '<h1 id="shared">学习</h1>'
+                   '<a name="named-only"></a><a name="named-only"></a>'
+                   '<a href="#named-only">旧式锚点</a>')
+        self.assertEqual(self.errors(), "")
+
     def test_encoded_path_traversal_and_other_project_roots_are_rejected(self):
         (self.work / "outside.txt").write_text("outside", encoding="utf-8")
         self.write("index.html", """

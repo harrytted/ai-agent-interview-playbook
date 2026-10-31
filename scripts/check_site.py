@@ -38,6 +38,8 @@ class SiteHTML(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.ids: set[str] = set()
+        self.element_id_lines: dict[str, int] = {}
+        self.duplicate_ids: list[tuple[str, int, int]] = []
         self.references: list[tuple[str, str, str, int]] = []
         self.questions: list[Question] = []
         self.heading_errors: list[str] = []
@@ -56,7 +58,13 @@ class SiteHTML(HTMLParser):
     def handle_starttag(self, tag: str, attrs):
         values = dict(attrs)
         if values.get("id"):
-            self.ids.add(values["id"])
+            identity = values["id"]
+            line = self.getpos()[0]
+            if identity in self.element_id_lines:
+                self.duplicate_ids.append((identity, line, self.element_id_lines[identity]))
+            else:
+                self.element_id_lines[identity] = line
+            self.ids.add(identity)
         if tag == "a" and values.get("name"):
             self.ids.add(values["name"])
         attr = REFERENCE_ATTRIBUTES.get(tag)
@@ -199,6 +207,10 @@ def check_site(site_dir: Path) -> CheckResult:
         result.errors.append("No built HTML pages found")
 
     for page, parser in pages.items():
+        for identity, line, first_line in parser.duplicate_ids:
+            result.errors.append(
+                f"{page.relative_to(root)}:{line}: duplicate element id {identity!r} (first at line {first_line})"
+            )
         seen: set[tuple[str, str, str]] = set()
         for tag, attr, value, line in parser.references:
             key = (tag, attr, value)
