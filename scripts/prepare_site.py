@@ -15,7 +15,7 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_URL = "https://github.com/harrytted/ai-agent-interview-playbook"
-ROOT_PAGES = ("README.md", "CONTRIBUTING.md", "CHANGELOG.md")
+ROOT_PAGES = ("README.md", "CONTRIBUTING.md")
 PAGE_FOLDERS = ("questions", "learning", "advanced", "docs", "practice", "research")
 ASSET_EXTENSIONS = {".css", ".js", ".svg", ".png", ".ico", ".woff2"}
 PRIVATE_NAMES = {".git", ".local", "env", "venv", ".venv", "__pycache__",

@@ -140,5 +140,3 @@ python3 examples/advanced/runtime_lab.py --scenario all
 想查原论文、官方文档，或继续挑选外部项目与教程，可以打开 [资料索引](research/README.md)，按当前问题选读。
 
 本文档与代码为本仓库原创整理，采用 [MIT License](LICENSE)。引用的资料、外部项目和商标归各自权利人所有；其内容适用原项目许可。这里只链接外部资料，不搬运其题库、插图或模板。
-
-[变更记录](CHANGELOG.md)

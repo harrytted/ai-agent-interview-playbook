@@ -152,13 +152,15 @@ class SitePrepareTests(unittest.TestCase):
         self.assertIn("\n**Answer**\n", text)
 
     def test_allowlist_excludes_credentials_private_trees_and_extra_examples(self):
-        for name in ("README.md", "CONTRIBUTING.md", "CHANGELOG.md", "docs/guide.md", "research/note.md", "examples/a/README.md"):
+        for name in ("README.md", "CONTRIBUTING.md", "docs/guide.md", "research/note.md", "examples/a/README.md"):
             self.write(name, "# Public\n")
-        for name in (".git/private.md", ".local/note.md", "credentials/password.md", "docs/.git/key.md", "docs/env/key.md", "docs/credentials/key.md", "docs/credentials.md", "docs/__pycache__/cache.md", "examples/a/extra.md", "scripts/private.md", "mkdocs.yml", ".env"):
+        for name in ("CHANGELOG.md", ".local/CHANGELOG.md", ".git/private.md", ".local/note.md", "credentials/password.md", "docs/.git/key.md", "docs/env/key.md", "docs/credentials/key.md", "docs/credentials.md", "docs/__pycache__/cache.md", "examples/a/extra.md", "scripts/private.md", "mkdocs.yml", ".env"):
             self.write(name)
-        self.assertEqual(self.prepare(), 6)
+        self.assertEqual(self.prepare(), 5)
         pages = {p.relative_to(self.output).as_posix() for p in self.output.rglob("*.md")}
-        self.assertEqual(pages, {"index.md", "CONTRIBUTING.md", "CHANGELOG.md", "docs/guide.md", "research/note.md", "examples/a/index.md"})
+        self.assertEqual(pages, {"index.md", "CONTRIBUTING.md", "docs/guide.md", "research/note.md", "examples/a/index.md"})
+        self.assertFalse((self.output / "CHANGELOG.md").exists())
+        self.assertFalse((self.output / ".local/CHANGELOG.md").exists())
 
     def test_sources_remain_identical_and_only_owned_output_is_replaced(self):
         source = self.write("README.md", "# Home\n")
