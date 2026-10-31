@@ -53,6 +53,18 @@ ADVANCED_FILES = {
     "A16": "advanced/A16-task-service.svg",
     "A17": "advanced/A17-event-dispatch.svg",
     "A18": "advanced/A18-media-interruption.svg",
+    "A13B": "advanced/A13B-stream-assembly.svg",
+    "A13C": "advanced/A13C-output-validation.svg",
+    "A14B": "advanced/A14B-effective-date-selection.svg",
+    "A14C": "advanced/A14C-staging-recovery.svg",
+    "A15B": "advanced/A15B-comparable-denominator.svg",
+    "A15C": "advanced/A15C-scoped-sql-execution.svg",
+    "A16B": "advanced/A16B-task-clarification.svg",
+    "A16C": "advanced/A16C-release-binding.svg",
+    "A17B": "advanced/A17B-debounce-window.svg",
+    "A17C": "advanced/A17C-ack-replay.svg",
+    "A18B": "advanced/A18B-evidence-confirmation.svg",
+    "A18C": "advanced/A18C-generation-routing.svg",
 }
 
 

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A16C" viewBox="0 0 1400 1000" role="img" aria-labelledby="A16C-title A16C-desc">
+<title id="A16C-title">发布切换新入口，任务保留原版本</title>
+<desc id="A16C-desc">已有任务固定使用原v1清单；候选v2先验收并不可变登记，激活后仅新任务采用v2，回退v1也只影响后续新任务，验收失败不切换。</desc>
+<defs>
+<marker id="A16C-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="A16C-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="A16C-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#657987"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#253746}.title{font-size:39px;font-weight:700}.label{font-size:25px;font-weight:650}.body{font-size:23px}.note{font-size:22px;fill:#536D79}.arrow-label{font-size:19px;paint-order:stroke;stroke:#fff;stroke-width:7px;stroke-linejoin:round}</style>
+<rect width="1400" height="1000" fill="#fff"/>
+<text x="50" y="80" class="title">发布切换新入口，任务保留原版本</text>
+<path d="M 350.0 275 H 550.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A16C-teal)"/>
+<path d="M 850.0 275 H 1050.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A16C-teal)"/>
+<path d="M 270.0 575 H 320.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A16C-teal)"/>
+<path d="M 540.0 575 H 590.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A16C-teal)"/>
+<path d="M 810.0 575 H 860.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A16C-teal)"/>
+<path d="M 1080.0 575 H 1130.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A16C-teal)"/>
+<rect x="50.0" y="225" width="300" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="200.0" y="283" text-anchor="middle" class="body">任务绑定v1</text>
+<rect x="550.0" y="225" width="300" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="700.0" y="283" text-anchor="middle" class="body">原清单v1</text>
+<rect x="1050.0" y="225" width="300" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1200.0" y="283" text-anchor="middle" class="body">继续使用v1</text>
+<rect x="50.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="160.0" y="583" text-anchor="middle" class="body">候选v2</text>
+<rect x="320.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="430.0" y="583" text-anchor="middle" class="body">固定验收</text>
+<rect x="590.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="700.0" y="569" text-anchor="middle" class="body">登记v2</text>
+<text x="700.0" y="597" text-anchor="middle" class="body">不可覆盖</text>
+<rect x="860.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="970.0" y="583" text-anchor="middle" class="body">激活v2</text>
+<rect x="1130.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1240.0" y="583" text-anchor="middle" class="body">新任务用v2</text>
+<rect x="100" y="780" width="550" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="375.0" y="838" text-anchor="middle" class="body">验收失败：不登记、不切换</text>
+<rect x="750" y="780" width="550" height="100" rx="12" fill="#F2F5F8" stroke="#657987" stroke-width="2"/>
+<text x="1025.0" y="838" text-anchor="middle" class="body">回退v1：只影响后续新任务</text>
+<text x="50" y="190" class="label">已有任务</text>
+<text x="50" y="490" class="label">新任务入口</text>
+<text x="50" y="955" class="note">发布或回退不改写在途manifest；固定验收不等于全面质量保证</text>
+</svg>

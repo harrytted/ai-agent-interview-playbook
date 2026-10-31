@@ -60,6 +60,10 @@ SQL 的 `COUNT(*)` 计算行数，`COUNT(column)` 忽略该列为 NULL 的行，
 
 需要同时输出 `application_count` 与 `comparable_count`，让读者知道覆盖范围。若没有一笔可比较，比例返回 NULL，解释为数据不足以计算该比例；不能用 0% 暗示都合规。申请和撤销记录的去重、有效状态与分母必须使用同一合同，否则两个时间窗口的数字看似可比，实际上对象集合不同。
 
+[![三笔申请中，650元且上限500元的一笔可比较并超标；金额未知和上限未知的两笔另报，分母为1，超标比例为100%，已知金额合计750元。](../website/assets/diagrams/advanced/A15B-comparable-denominator.png)](../website/assets/diagrams/advanced/A15B-comparable-denominator.png)
+
+先数范围内共有三笔申请，再筛出金额和上限都已知的一笔。未知项仍计入申请总数，但不能被当作未超标放进可比较分母。
+
 ## 让数据库执行层约束候选
 
 参数化查询把日期、对象 ID 等值交给数据库绑定，能够避免把值拼成 SQL 语法；它不会自动限制模型生成的表名、列名、JOIN 或扫描规模。因此真实执行路径要决定候选能够接触哪个连接、哪些数据，以及能够执行什么操作。
@@ -80,6 +84,10 @@ SQL 的 `COUNT(*)` 计算行数，`COUNT(column)` 忽略该列为 NULL 的行，
 4. 进度回调按约 100 个虚拟机指令检查步数及期限；结果超过行预算时作为超限，不能用截断结果冒充完整统计。
 
 authorizer 是编译期授权回调，不会替宿主自动选行。它也会对 COUNT(*) 触发表读取，列名可能为空，回调必须按允许表的实际语义处理。[SQLite authorizer](https://www.sqlite.org/c3ref/set_authorizer.html) 进度回调只能提供 SQLite 执行过程中的中断点，不能声称精确 CPU/内存硬限制；本地运行时若支持 `setlimit`，实验还会降低长度、列数与表达式深度上限。[进度回调](https://www.sqlite.org/c3ref/progress_handler.html)
+
+[![可信宿主按身份从只读源库复制允许行到独立SQLite快照，候选SQL还需通过表列函数操作校验及步数时间行数预算；去掉WHERE也不能读取快照之外的数据。](../website/assets/diagrams/advanced/A15C-scoped-sql-execution.png)](../website/assets/diagrams/advanced/A15C-scoped-sql-execution.png)
+
+身份由可信宿主预先提供，宿主据此读取源库并复制允许行；下排才执行候选SQL。行范围、列与动作授权、资源预算分别生效，不能只靠query_only承担全部边界。
 
 ## 修复要有反馈，也要有终点
 

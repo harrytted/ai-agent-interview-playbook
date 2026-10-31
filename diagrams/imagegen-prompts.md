@@ -20,6 +20,7 @@
 - [A05–A08：工具、检索、协作与操作反馈](advanced-imagegen-A05-A08.md)
 - [A09–A12：评测、性能、安全与训练](advanced-imagegen-A09-A12.md)
 - [A13–A18：模型协议、知识摄取、SQL、服务、事件与媒体](advanced-imagegen-A13-A18.md)
+- [A13B–A18C：六章各两张补充机制图](advanced-imagegen-A13-A18-details.md)
 
 ## C1
 

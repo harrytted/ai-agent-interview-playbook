@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A18C" viewBox="0 0 1400 1000" role="img" aria-labelledby="A18C-title A18C-desc">
+<title id="A18C-title">先核对输出代次，再检查播放位置</title>
+<desc id="A18C-desc">播放事件先按输出代次和取消状态过滤，再验证当前代次的位置与时钟单调性；g2长2秒时，旧g1的3.8秒事件被忽略，不能按g2时长误报越界。</desc>
+<defs>
+<marker id="A18C-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="A18C-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="A18C-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#657987"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#253746}.title{font-size:39px;font-weight:700}.label{font-size:25px;font-weight:650}.body{font-size:23px}.note{font-size:22px;fill:#536D79}.arrow-label{font-size:19px;paint-order:stroke;stroke:#fff;stroke-width:7px;stroke-linejoin:round}</style>
+<rect width="1400" height="1000" fill="#fff"/>
+<text x="50" y="80" class="title">先核对输出代次，再检查播放位置</text>
+<path d="M 345.0 290 H 385.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A18C-teal)"/>
+<path d="M 680.0 290 H 720.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A18C-teal)"/>
+<path d="M 1015.0 290 H 1055.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A18C-teal)"/>
+<path d="M 532.5 340 L 205.0 540" fill="none" stroke="#657987" stroke-width="3" marker-end="url(#A18C-gray)"/>
+<text x="368.75" y="432.0" text-anchor="middle" class="arrow-label">否 / 异常</text>
+<path d="M 867.5 340 L 555.0 540" fill="none" stroke="#B56B26" stroke-width="3" marker-end="url(#A18C-orange)"/>
+<text x="711.25" y="432.0" text-anchor="middle" class="arrow-label">否 / 异常</text>
+<rect x="50.0" y="240" width="295.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="197.5" y="298" text-anchor="middle" class="body">播放事件</text>
+<rect x="385.0" y="240" width="295.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="532.5" y="298" text-anchor="middle" class="body">当前代次且未取消？</text>
+<rect x="720.0" y="240" width="295.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="867.5" y="298" text-anchor="middle" class="body">位置合法且未倒退？</text>
+<rect x="1055.0" y="240" width="295.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1202.5" y="298" text-anchor="middle" class="body">更新播放时钟</text>
+<rect x="50" y="540" width="310" height="100" rx="12" fill="#F2F5F8" stroke="#657987" stroke-width="2"/>
+<text x="205.0" y="584" text-anchor="middle" class="body">旧代次 / 已取消</text>
+<text x="205.0" y="612" text-anchor="middle" class="body">忽略迟到事件</text>
+<rect x="400" y="540" width="310" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="555.0" y="584" text-anchor="middle" class="body">越界 / 倒退</text>
+<text x="555.0" y="612" text-anchor="middle" class="body">拒绝更新</text>
+<rect x="50.0" y="780" width="406.6666666666667" height="100" rx="12" fill="#F2F5F8" stroke="#657987" stroke-width="2"/>
+<text x="253.33333333333334" y="838" text-anchor="middle" class="body">当前g2时长2秒</text>
+<rect x="496.6666666666667" y="780" width="406.6666666666667" height="100" rx="12" fill="#F2F5F8" stroke="#657987" stroke-width="2"/>
+<text x="700.0" y="838" text-anchor="middle" class="body">旧g1位置3.8秒：先忽略</text>
+<rect x="943.3333333333334" y="780" width="406.6666666666667" height="100" rx="12" fill="#F2F5F8" stroke="#657987" stroke-width="2"/>
+<text x="1146.6666666666667" y="838" text-anchor="middle" class="body">当前g2位置0.5秒：再验位置</text>
+<text x="50" y="955" class="note">代次过滤先于位置校验；旧g1不会按g2时长误报，也不污染g2</text>
+</svg>

@@ -57,6 +57,10 @@ SDK 能减少协议代码，却不能替业务决定“这份制度适用于哪�
 
 本例故意将海岚写成 7000 元：它仍是合法整数，结构也完整，却与实际取得的 700 元条款矛盾。`validate_answer` 会检查城市、金额、引用及覆盖，不能因为文本流畅而放行。更一般的授权与执行检查见 [Q027](../questions/Q027.md)，本章不把这些责任交给输出格式。
 
+[![输出依次核对JSON语法、字段类型、实际证据和问题覆盖，任一失败都不能交付；7000与实际条款700不一致，即使格式合法也拒绝。](../website/assets/diagrams/advanced/A13C-output-validation.png)](../website/assets/diagrams/advanced/A13C-output-validation.png)
+
+沿主线逐关验收，橙色支路是不同类型的失败。7000仍是合法整数，只有拿它与实际条款比较，才能发现这一处业务错误。
+
 供应商的结构化输出也有异常分支。Claude 当前文档分别说明拒答和 token 上限可能导致输出不符合预期；HTTP 成功不能抹去这些情况。使用前重新核对[结构化输出文档](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)中的支持范围与异常，而不是假设所有版本、所有供应商都提供相同合同。
 
 ## 从网络字节逐层重组成工具参数
@@ -73,6 +77,10 @@ SSE行：event: ... / data: ... / 空行 → 一条协议事件
 工具增量：{"city":"海 | 岚",...}   → 一个完整参数对象
 消息结束：stop_reason + message_stop → 决定是否允许调度
 ```
+
+[![网络字节经UTF-8解码、SSE事件划分和按块索引拼接后，检查整条消息；正常工具结束还需宿主校验，截断、拒答或断流停止记录。](../website/assets/diagrams/advanced/A13B-stream-assembly.png)](../website/assets/diagrams/advanced/A13B-stream-assembly.png)
+
+从左向右分别对应字节、事件、内容块与整条消息四种边界。参数拼完还不能立即执行，必须等结束原因与宿主校验都通过。
 
 本例只支持 text 与 client tool_use 两种内容块，不实现 thinking、服务端工具或全部未来事件。遇到未支持的有意义事件会停止并报告协议不支持；`ping` 可以忽略。完整 SDK 一般覆盖更多事件，因此本实验是用来观察边界的教学解析器，不应直接替换完整供应商 SDK。
 

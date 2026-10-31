@@ -67,6 +67,10 @@ curl -s -X POST http://127.0.0.1:8765/tasks/TASK_ID/reply \
 
 `reply` 只补当前缺失日期。`correct` 可以更正城市、日期、金额和事由，递增revision、清掉旧证据与草稿，并重新排队；不会重置累计预算。不能把缺参补全、修改业务目标与批准混成一条含糊的“继续”消息。
 
+[![可靠接收后返回202和任务ID，Worker缺日期时持久等待；收到日期回复后沿原任务重新排队、读取制度并回答，任务ID和累计预算不重置。](../website/assets/diagrams/advanced/A16B-task-clarification.png)](../website/assets/diagrams/advanced/A16B-task-clarification.png)
+
+等待补参会释放执行位置，但保留任务身份和状态。回复日期重新推进的是原任务，重启和补参都不能成为清零预算的理由。
+
 ### API与Worker如何避免覆盖彼此的更新
 
 只设一名Worker，API线程仍可能与它同时改同一任务。若两者各自读取旧JSON再覆盖保存，刚保存的取消可能被旧Worker状态覆盖。实验用 `BEGIN IMMEDIATE` 串行化“读当前任务→验证允许转换→写状态与事件”，所有修改入口都遵守同一个事务边界。
@@ -123,6 +127,10 @@ curl -s -X POST http://127.0.0.1:8765/tasks/TASK_ID/reply \
 每项任务在接收时固定manifest：运行状态schema、离线策略模型标识、提示hash、工具合同hash、索引内容hash及release ID。已发布的release保存完整政策快照且不可覆盖；现有任务继续使用它绑定的版本。`runtime_schema`不兼容时进入 `blocked_version`，不会静默重置或把旧动作当新任务执行。
 
 `POST /releases`只允许单独的公开测试操作员 `demo-operator`，它不能读取用户任务。新版本先验证所有条目的必要元数据、日期和条款结构，再用Alice的可信身份沿实际 `core.applicable` 路径运行三条独立固定金额门槛；失败返回422，不切换active。仅保留正确金额却移除Alice权限，也不能通过这组预期成功任务。合法撤权发布应另建明确预期拒绝的验收集，本例不在发布时静默修改成功预期。正常版本可以先登记而不activate，再切换；回退只把新任务入口指回已验证的旧release，在途任务保持原manifest。
+
+[![已有任务固定使用原v1清单；候选v2先验收并不可变登记，激活后仅新任务采用v2，回退v1也只影响后续新任务，验收失败不切换。](../website/assets/diagrams/advanced/A16C-release-binding.png)](../website/assets/diagrams/advanced/A16C-release-binding.png)
+
+两行分别表示已有运行与新任务入口。切换或回退入口不会改写在途任务的manifest；不兼容状态仍需显式迁移。
 
 本例的固定门槛能拦住海岚700被改成7000，以及缺元数据的条目，**不能证明所有新资料的语义正确或检索质量**。影子与灰度的完整方法仍见[评测闭环](09-evaluation-and-feedback.md)；实验实际完成候选检查、版本固定、切换与回退，不宣称模拟了生产流量灰度。
 

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A13C" viewBox="0 0 1400 1000" role="img" aria-labelledby="A13C-title A13C-desc">
+<title id="A13C-title">输出验收：格式通过只是第一关</title>
+<desc id="A13C-desc">输出依次核对JSON语法、字段类型、实际证据和问题覆盖，任一失败都不能交付；7000与实际条款700不一致，即使格式合法也拒绝。</desc>
+<defs>
+<marker id="A13C-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="A13C-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="A13C-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#657987"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#253746}.title{font-size:39px;font-weight:700}.label{font-size:25px;font-weight:650}.body{font-size:23px}.note{font-size:22px;fill:#536D79}.arrow-label{font-size:19px;paint-order:stroke;stroke:#fff;stroke-width:7px;stroke-linejoin:round}</style>
+<rect width="1400" height="1000" fill="#fff"/>
+<text x="50" y="80" class="title">输出验收：格式通过只是第一关</text>
+<path d="M 278.0 290 H 318.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A13C-teal)"/>
+<path d="M 546.0 290 H 586.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A13C-teal)"/>
+<path d="M 814.0 290 H 854.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A13C-teal)"/>
+<path d="M 1082.0 290 H 1122.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A13C-teal)"/>
+<path d="M 164.0 340 L 197.5 540" fill="none" stroke="#B56B26" stroke-width="3" marker-end="url(#A13C-orange)"/>
+<text x="180.75" y="432.0" text-anchor="middle" class="arrow-label">否 / 异常</text>
+<path d="M 432.0 340 L 532.5 540" fill="none" stroke="#B56B26" stroke-width="3" marker-end="url(#A13C-orange)"/>
+<text x="482.25" y="432.0" text-anchor="middle" class="arrow-label">否 / 异常</text>
+<path d="M 700.0 340 L 867.5 540" fill="none" stroke="#B56B26" stroke-width="3" marker-end="url(#A13C-orange)"/>
+<text x="783.75" y="432.0" text-anchor="middle" class="arrow-label">否 / 异常</text>
+<path d="M 968.0 340 L 1202.5 540" fill="none" stroke="#B56B26" stroke-width="3" marker-end="url(#A13C-orange)"/>
+<text x="1085.25" y="432.0" text-anchor="middle" class="arrow-label">否 / 异常</text>
+<rect x="50.0" y="240" width="228.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="164.0" y="298" text-anchor="middle" class="body">JSON 语法</text>
+<rect x="318.0" y="240" width="228.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="432.0" y="298" text-anchor="middle" class="body">字段与类型</text>
+<rect x="586.0" y="240" width="228.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="700.0" y="298" text-anchor="middle" class="body">证据一致</text>
+<rect x="854.0" y="240" width="228.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="968.0" y="298" text-anchor="middle" class="body">目标覆盖</text>
+<rect x="1122.0" y="240" width="228.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1236.0" y="298" text-anchor="middle" class="body">交付结果</text>
+<rect x="50.0" y="540" width="295.0" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="197.5" y="598" text-anchor="middle" class="body">无法解析</text>
+<rect x="385.0" y="540" width="295.0" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="532.5" y="598" text-anchor="middle" class="body">结构不符</text>
+<rect x="720.0" y="540" width="295.0" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="867.5" y="584" text-anchor="middle" class="body">主张不符</text>
+<text x="867.5" y="612" text-anchor="middle" class="body">7000 ≠ 条款700</text>
+<rect x="1055.0" y="540" width="295.0" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="1202.5" y="598" text-anchor="middle" class="body">缺少回答</text>
+<text x="50" y="955" class="note">每一关通过后才能继续；格式合法不能代替事实核对</text>
+</svg>

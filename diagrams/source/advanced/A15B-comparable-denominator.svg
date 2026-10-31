@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A15B" viewBox="0 0 1400 1000" role="img" aria-labelledby="A15B-title A15B-desc">
+<title id="A15B-title">超标比例：先筛可比较的申请</title>
+<desc id="A15B-desc">三笔申请中，650元且上限500元的一笔可比较并超标；金额未知和上限未知的两笔另报，分母为1，超标比例为100%，已知金额合计750元。</desc>
+<defs>
+<marker id="A15B-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="A15B-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="A15B-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#657987"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#253746}.title{font-size:39px;font-weight:700}.label{font-size:25px;font-weight:650}.body{font-size:23px}.note{font-size:22px;fill:#536D79}.arrow-label{font-size:19px;paint-order:stroke;stroke:#fff;stroke-width:7px;stroke-linejoin:round}</style>
+<rect width="1400" height="1000" fill="#fff"/>
+<text x="50" y="80" class="title">超标比例：先筛可比较的申请</text>
+<path d="M 235.0 280 L 700.0 400" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A15B-teal)"/>
+<path d="M 700.0 280 L 700.0 400" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A15B-teal)"/>
+<path d="M 1165.0 280 L 700.0 400" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A15B-teal)"/>
+<path d="M 700.0 500 L 285.0 630" fill="none" stroke="#657987" stroke-width="3" marker-end="url(#A15B-gray)"/>
+<text x="492.5" y="557.0" text-anchor="middle" class="arrow-label">否</text>
+<path d="M 700.0 500 L 1015.0 630" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A15B-teal)"/>
+<text x="857.5" y="557.0" text-anchor="middle" class="arrow-label">是</text>
+<rect x="60" y="180" width="350" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="235.0" y="238" text-anchor="middle" class="body">a1：金额650 / 上限500</text>
+<rect x="525" y="180" width="350" height="100" rx="12" fill="#F2F5F8" stroke="#657987" stroke-width="2"/>
+<text x="700.0" y="238" text-anchor="middle" class="body">a4：金额未知 / 上限700</text>
+<rect x="990" y="180" width="350" height="100" rx="12" fill="#F2F5F8" stroke="#657987" stroke-width="2"/>
+<text x="1165.0" y="238" text-anchor="middle" class="body">a5：金额100 / 上限未知</text>
+<rect x="500" y="400" width="400" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="700.0" y="458" text-anchor="middle" class="body">金额与上限都已知？</text>
+<rect x="80" y="630" width="410" height="100" rx="12" fill="#F2F5F8" stroke="#657987" stroke-width="2"/>
+<text x="285.0" y="688" text-anchor="middle" class="body">未知2笔：不进可比较分母</text>
+<rect x="810" y="630" width="410" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1015.0" y="674" text-anchor="middle" class="body">可比较1笔</text>
+<text x="1015.0" y="702" text-anchor="middle" class="body">超标1笔 / 100%</text>
+<text x="50" y="955" class="note">申请3笔；已知金额750元；可比较1笔；超标1笔；1÷1=100%</text>
+</svg>

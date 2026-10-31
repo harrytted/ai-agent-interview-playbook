@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A14B" viewBox="0 0 1400 1000" role="img" aria-labelledby="A14B-title A14B-desc">
+<title id="A14B-title">业务日期决定适用版本</title>
+<desc id="A14B-desc">同为住宿650元，出差日2026-10-31匹配上限600元的v1而超标，2026-11-12匹配上限700元的v2而未超标；按业务日期选版。</desc>
+<defs>
+<marker id="A14B-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="A14B-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="A14B-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#657987"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#253746}.title{font-size:39px;font-weight:700}.label{font-size:25px;font-weight:650}.body{font-size:23px}.note{font-size:22px;fill:#536D79}.arrow-label{font-size:19px;paint-order:stroke;stroke:#fff;stroke-width:7px;stroke-linejoin:round}</style>
+<rect width="1400" height="1000" fill="#fff"/>
+<text x="50" y="80" class="title">业务日期决定适用版本</text>
+<path d="M 270.0 275 H 320.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14B-teal)"/>
+<path d="M 540.0 275 H 590.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14B-teal)"/>
+<path d="M 810.0 275 H 860.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14B-teal)"/>
+<path d="M 1080.0 275 H 1130.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14B-teal)"/>
+<path d="M 270.0 575 H 320.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14B-teal)"/>
+<path d="M 540.0 575 H 590.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14B-teal)"/>
+<path d="M 810.0 575 H 860.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14B-teal)"/>
+<path d="M 1080.0 575 H 1130.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14B-teal)"/>
+<rect x="50.0" y="225" width="220.0" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="160.0" y="283" text-anchor="middle" class="body">2026-10-31</text>
+<rect x="320.0" y="225" width="220.0" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="430.0" y="283" text-anchor="middle" class="body">匹配 v1</text>
+<rect x="590.0" y="225" width="220.0" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="700.0" y="283" text-anchor="middle" class="body">上限600元</text>
+<rect x="860.0" y="225" width="220.0" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="970.0" y="283" text-anchor="middle" class="body">650 &gt; 600</text>
+<rect x="1130.0" y="225" width="220.0" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="1240.0" y="283" text-anchor="middle" class="body">超标</text>
+<rect x="50.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="160.0" y="583" text-anchor="middle" class="body">2026-11-12</text>
+<rect x="320.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="430.0" y="583" text-anchor="middle" class="body">匹配 v2</text>
+<rect x="590.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="700.0" y="583" text-anchor="middle" class="body">上限700元</text>
+<rect x="860.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="970.0" y="583" text-anchor="middle" class="body">650 ≤ 700</text>
+<rect x="1130.0" y="525" width="220.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1240.0" y="583" text-anchor="middle" class="body">未超标</text>
+<text x="50" y="190" class="label">同一住宿金额650元，按出差日期查询</text>
+<text x="50" y="955" class="note">v1：[2026-01-01, 2026-11-01)；v2：2026-11-01起；日期须为YYYY-MM-DD</text>
+</svg>

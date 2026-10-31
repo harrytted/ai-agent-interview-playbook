@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A13B" viewBox="0 0 1400 1000" role="img" aria-labelledby="A13B-title A13B-desc">
+<title id="A13B-title">流式输入：先组装，再决定</title>
+<desc id="A13B-desc">网络字节经UTF-8解码、SSE事件划分和按块索引拼接后，检查整条消息；正常工具结束还需宿主校验，截断、拒答或断流停止记录。</desc>
+<defs>
+<marker id="A13B-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="A13B-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="A13B-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#657987"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#253746}.title{font-size:39px;font-weight:700}.label{font-size:25px;font-weight:650}.body{font-size:23px}.note{font-size:22px;fill:#536D79}.arrow-label{font-size:19px;paint-order:stroke;stroke:#fff;stroke-width:7px;stroke-linejoin:round}</style>
+<rect width="1400" height="1000" fill="#fff"/>
+<text x="50" y="80" class="title">流式输入：先组装，再决定</text>
+<path d="M 233.33333333333334 290 H 273.33333333333337" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A13B-teal)"/>
+<path d="M 456.66666666666674 290 H 496.6666666666667" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A13B-teal)"/>
+<path d="M 680.0 290 H 720.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A13B-teal)"/>
+<path d="M 903.3333333333334 290 H 943.3333333333334" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A13B-teal)"/>
+<path d="M 1126.6666666666667 290 H 1166.6666666666667" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A13B-teal)"/>
+<path d="M 1035.0 340 L 205.0 540" fill="none" stroke="#B56B26" stroke-width="3" marker-end="url(#A13B-orange)"/>
+<text x="620.0" y="432.0" text-anchor="middle" class="arrow-label">否 / 异常</text>
+<rect x="50.0" y="240" width="183.33333333333334" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="141.66666666666669" y="284" text-anchor="middle" class="body">网络字节</text>
+<text x="141.66666666666669" y="312" text-anchor="middle" class="body">跨读边界</text>
+<rect x="273.33333333333337" y="240" width="183.33333333333334" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="365.00000000000006" y="284" text-anchor="middle" class="body">UTF-8 解码</text>
+<text x="365.00000000000006" y="312" text-anchor="middle" class="body">保留残字节</text>
+<rect x="496.6666666666667" y="240" width="183.33333333333334" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="588.3333333333334" y="284" text-anchor="middle" class="body">SSE 事件</text>
+<text x="588.3333333333334" y="312" text-anchor="middle" class="body">空行分隔</text>
+<rect x="720.0" y="240" width="183.33333333333334" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="811.6666666666666" y="284" text-anchor="middle" class="body">内容块</text>
+<text x="811.6666666666666" y="312" text-anchor="middle" class="body">按索引拼接</text>
+<rect x="943.3333333333334" y="240" width="183.33333333333334" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1035.0" y="284" text-anchor="middle" class="body">完整消息</text>
+<text x="1035.0" y="312" text-anchor="middle" class="body">检查结束原因</text>
+<rect x="1166.6666666666667" y="240" width="183.33333333333334" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1258.3333333333335" y="284" text-anchor="middle" class="body">宿主校验</text>
+<text x="1258.3333333333335" y="312" text-anchor="middle" class="body">参数权限预算</text>
+<rect x="50" y="540" width="310" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="205.0" y="584" text-anchor="middle" class="body">截断 / 拒答 / 断流</text>
+<text x="205.0" y="612" text-anchor="middle" class="body">停止并记录</text>
+<text x="50" y="955" class="note">只有完整消息正常结束且宿主校验通过，才允许调度</text>
+</svg>

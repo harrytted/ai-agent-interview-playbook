@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A14C" viewBox="0 0 1400 1000" role="img" aria-labelledby="A14C-title A14C-desc">
+<title id="A14C-title">中断恢复：复用暂存，完整后发布</title>
+<desc id="A14C-desc">解析结果先写持久暂存；中断后新实例读取暂存，只处理剩余资料，形成完整候选并校验后才切换可见索引，中断期间旧索引继续查询。</desc>
+<defs>
+<marker id="A14C-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="A14C-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+<marker id="A14C-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#657987"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif;fill:#253746}.title{font-size:39px;font-weight:700}.label{font-size:25px;font-weight:650}.body{font-size:23px}.note{font-size:22px;fill:#536D79}.arrow-label{font-size:19px;paint-order:stroke;stroke:#fff;stroke-width:7px;stroke-linejoin:round}</style>
+<rect width="1400" height="1000" fill="#fff"/>
+<text x="50" y="80" class="title">中断恢复：复用暂存，完整后发布</text>
+<path d="M 320 260 H 410" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14C-teal)"/>
+<path d="M 670 260 H 760" fill="none" stroke="#B56B26" stroke-width="3" marker-end="url(#A14C-orange)"/>
+<path d="M 1020 260 H 1110" fill="none" stroke="#B56B26" stroke-width="3" marker-end="url(#A14C-orange)"/>
+<path d="M 1240 310 V 350 H 30 V 520 H 60" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14C-teal)"/>
+<text x="715.0" y="382.0" text-anchor="middle" class="arrow-label">重新加载</text>
+<path d="M 320 520 H 410" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14C-teal)"/>
+<path d="M 670 520 H 760" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14C-teal)"/>
+<path d="M 1020 520 H 1110" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A14C-teal)"/>
+<rect x="60" y="210" width="260" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="190.0" y="268" text-anchor="middle" class="body">解析变化源</text>
+<rect x="410" y="210" width="260" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="540.0" y="268" text-anchor="middle" class="body">持久暂存</text>
+<rect x="760" y="210" width="260" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="890.0" y="268" text-anchor="middle" class="body">进程中断</text>
+<rect x="1110" y="210" width="260" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1240.0" y="268" text-anchor="middle" class="body">新实例重启</text>
+<rect x="60" y="470" width="260" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="190.0" y="528" text-anchor="middle" class="body">读取暂存</text>
+<rect x="410" y="470" width="260" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="540.0" y="528" text-anchor="middle" class="body">只处理剩余资料</text>
+<rect x="760" y="470" width="260" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="890.0" y="528" text-anchor="middle" class="body">完整候选</text>
+<rect x="1110" y="470" width="260" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
+<text x="1240.0" y="528" text-anchor="middle" class="body">校验后发布</text>
+<rect x="50" y="780" width="500" height="100" rx="12" fill="#F2F5F8" stroke="#657987" stroke-width="2"/>
+<text x="300.0" y="824" text-anchor="middle" class="body">旧索引</text>
+<text x="300.0" y="852" text-anchor="middle" class="body">中断期间继续查询</text>
+<text x="50" y="955" class="note">暂存只用于恢复；完整候选通过校验后才切换可见索引</text>
+</svg>

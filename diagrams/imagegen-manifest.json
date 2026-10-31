@@ -292,6 +292,138 @@
       "sha256": "e6a9de8558cfc1a6db3984c794d998e1f7a2c8cd7f3fecfddfe94da8efb88df7",
       "prompt_record": "diagrams/advanced-imagegen-A13-A18.md",
       "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A13B",
+      "path": "website/assets/diagrams/advanced/A13B-stream-assembly.png",
+      "semantic_source": "diagrams/source/advanced/A13B-stream-assembly.svg",
+      "topic": "网络字节、UTF-8、SSE、内容块与整条消息结束的分层重组",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "e058913280927a70a9fd0069d3ef7745985776f4940caf882674fda381b226da",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A13C",
+      "path": "website/assets/diagrams/advanced/A13C-output-validation.png",
+      "semantic_source": "diagrams/source/advanced/A13C-output-validation.svg",
+      "topic": "JSON语法、结构合同、证据一致性与目标覆盖的分层验收",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "b17168a71c7d7fe59c7636ddc75c9ec87f1d3262dc513c20f95ec9d0b3e23224",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A14B",
+      "path": "website/assets/diagrams/advanced/A14B-effective-date-selection.png",
+      "semantic_source": "diagrams/source/advanced/A14B-effective-date-selection.svg",
+      "topic": "规范业务日期、左闭右开版本区间与650元的不同判断",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "10d588eaabc323c8cf303b859d8110b4605d3a474aef80ced674e87e8fd9d8f2",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A14C",
+      "path": "website/assets/diagrams/advanced/A14C-staging-recovery.png",
+      "semantic_source": "diagrams/source/advanced/A14C-staging-recovery.svg",
+      "topic": "磁盘暂存跨实例复用、旧索引可读及校验后的发布点",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "c2a6b069fa00f05a9ee7624119eb16f3526ce036583d5d4d5b177832851ec3de",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A15B",
+      "path": "website/assets/diagrams/advanced/A15B-comparable-denominator.png",
+      "semantic_source": "diagrams/source/advanced/A15B-comparable-denominator.svg",
+      "topic": "未知金额或上限不进入分母，三笔申请仅一笔可比较",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "6a94852b994a4b97f96f33d4e5eb4a3a70546616da64fea658dd0c16b4bb8ab2",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A15C",
+      "path": "website/assets/diagrams/advanced/A15C-scoped-sql-execution.png",
+      "semantic_source": "diagrams/source/advanced/A15C-scoped-sql-execution.svg",
+      "topic": "可信身份限定行范围、独立SQLite快照及列操作资源约束",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "4bf26eaa9e87fe29a16d9b9fc2743d1e6f29c6c4fbad0d7cb7a95e433249b4f6",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A16B",
+      "path": "website/assets/diagrams/advanced/A16B-task-clarification.png",
+      "semantic_source": "diagrams/source/advanced/A16B-task-clarification.svg",
+      "topic": "接收、持久等待、补日期、重新排队与累计预算延续",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "e8ef34c6bf9c9f8308f2318a03271aa7f39d2773a11cf61e6780e456b9b8cfce",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A16C",
+      "path": "website/assets/diagrams/advanced/A16C-release-binding.png",
+      "semantic_source": "diagrams/source/advanced/A16C-release-binding.svg",
+      "topic": "固定验收、不可变版本登记、激活与回退只影响新任务",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "6e6977c6b33b0d24ac005c4219bd0067676bacdbaa0c2aaf9bbae70d0e465654",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A17B",
+      "path": "website/assets/diagrams/advanced/A17B-debounce-window.png",
+      "semantic_source": "diagrams/source/advanced/A17B-debounce-window.svg",
+      "topic": "5个逻辑秒去抖、持久合并与显式flush的到期派发",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "0a527540df7c368abbb1ca65d4d8803c37e8c8ddede2f712351a112ace0a0cbe",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A17C",
+      "path": "website/assets/diagrams/advanced/A17C-ack-replay.png",
+      "semantic_source": "diagrams/source/advanced/A17C-ack-replay.svg",
+      "topic": "任务预算Outbox事务提交后的确认丢失、重开账本与幂等重投",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "5718ee209d422d41eba17bbdfea1c23824bde44eb2888f7aec2b4ce6b97c23fb",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A18B",
+      "path": "website/assets/diagrams/advanced/A18B-evidence-confirmation.png",
+      "semantic_source": "diagrams/source/advanced/A18B-evidence-confirmation.svg",
+      "topic": "媒体定位、临时转写不落业务事实以及金额冲突的澄清分支",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "a27d316df30b762e952118439f8d59ea7fe68fa94b10bbcfba91398ad20fa813",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A18C",
+      "path": "website/assets/diagrams/advanced/A18C-generation-routing.png",
+      "semantic_source": "diagrams/source/advanced/A18C-generation-routing.svg",
+      "topic": "旧音频代次先过滤、当前代次时长与单调播放时钟校验",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "456c3f28b224ebf361bf9e1dfa0706f16a5f7d73d6ba9e58d80e15bee414a4ff",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
+      "generated_on": "2026-11-01"
     }
   ]
 }
