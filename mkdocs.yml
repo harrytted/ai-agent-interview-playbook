@@ -86,27 +86,25 @@ nav:
       - 10 · 可靠性与安全: learning/10-reliability-and-security.md
       - 术语回查: learning/glossary.md
   - 工程进阶:
-      - advanced/index.md
-      - 系统机制 01–12:
-          - 01 · Harness 与深度 Agent: advanced/01-harness-and-deep-agents.md
-          - 02 · 持久执行: advanced/02-durable-execution.md
-          - 03 · 上下文工程: advanced/03-context-engineering.md
-          - 04 · 记忆与技能: advanced/04-memory-and-skills.md
-          - 05 · 工具路由与 MCP: advanced/05-tool-routing-and-mcp.md
-          - 06 · Agentic RAG: advanced/06-agentic-rag.md
-          - 07 · 多 Agent 系统: advanced/07-multi-agent-systems.md
-          - 08 · 编码与计算机操作: advanced/08-coding-and-computer-use.md
-          - 09 · 评测与反馈: advanced/09-evaluation-and-feedback.md
-          - 10 · 性能与推理: advanced/10-performance-and-serving.md
-          - 11 · 安全与治理: advanced/11-security-and-governance.md
-          - 12 · Agent 训练: advanced/12-agent-training.md
-      - 应用专题 13–18:
-          - 13 · 模型 API 与输出合同: advanced/13-model-api-and-output-contracts.md
-          - 14 · 知识摄取与索引生命周期: advanced/14-ingestion-and-index-lifecycle.md
-          - 15 · Text-to-SQL 与数据分析: advanced/15-text-to-sql-and-data-analysis.md
-          - 16 · 服务交付与运维: advanced/16-service-deployment-and-operations.md
-          - 17 · 事件驱动与主动任务: advanced/17-event-driven-and-proactive-agents.md
-          - 18 · 多模态与实时语音: advanced/18-multimodal-and-realtime-agents.md
+      - 学习路线与章节总览: advanced/index.md
+      - 01 · Harness 与深度 Agent: advanced/01-harness-and-deep-agents.md
+      - 02 · 持久执行: advanced/02-durable-execution.md
+      - 03 · 上下文工程: advanced/03-context-engineering.md
+      - 04 · 记忆与技能: advanced/04-memory-and-skills.md
+      - 05 · 工具路由与 MCP: advanced/05-tool-routing-and-mcp.md
+      - 06 · Agentic RAG: advanced/06-agentic-rag.md
+      - 07 · 多 Agent 系统: advanced/07-multi-agent-systems.md
+      - 08 · 编码与计算机操作: advanced/08-coding-and-computer-use.md
+      - 09 · 评测与反馈: advanced/09-evaluation-and-feedback.md
+      - 10 · 性能与推理: advanced/10-performance-and-serving.md
+      - 11 · 安全与治理: advanced/11-security-and-governance.md
+      - 12 · Agent 训练: advanced/12-agent-training.md
+      - 13 · 模型 API 与输出合同: advanced/13-model-api-and-output-contracts.md
+      - 14 · 知识摄取与索引生命周期: advanced/14-ingestion-and-index-lifecycle.md
+      - 15 · Text-to-SQL 与数据分析: advanced/15-text-to-sql-and-data-analysis.md
+      - 16 · 服务交付与运维: advanced/16-service-deployment-and-operations.md
+      - 17 · 事件驱动与主动任务: advanced/17-event-driven-and-proactive-agents.md
+      - 18 · 多模态与实时语音: advanced/18-multimodal-and-realtime-agents.md
       - 贯穿项目工作坊: advanced/project-workshop.md
       - 官方知识体系: advanced/official-learning-map.md
   - 面试题库:
