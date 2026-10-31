@@ -226,6 +226,72 @@
       "sha256": "b29dfce2c3f9e716d39ad4d5c360dbbefba6477d27e215f39b4faf9d362564e1",
       "prompt_record": "diagrams/advanced-imagegen-A09-A12.md",
       "generated_on": "2026-10-31"
+    },
+    {
+      "id": "A13",
+      "path": "website/assets/diagrams/advanced/A13-model-protocol.png",
+      "semantic_source": "diagrams/source/advanced/A13-model-protocol.svg",
+      "topic": "模型请求、工具执行、按调用ID完整回填与独立结果核验",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "3ff338a79a7959484bbddd8474d584f045927db0f0612e3b23835c4a2bb9ca81",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A14",
+      "path": "website/assets/diagrams/advanced/A14-ingestion-lifecycle.png",
+      "semantic_source": "diagrams/source/advanced/A14-ingestion-lifecycle.svg",
+      "topic": "解析、血缘、暂存、完整索引发布与当前权限过滤",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "ea397ab705b643ed316e20a8417d3b30d704940741e9ac862315cdfc7916a119",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A15",
+      "path": "website/assets/diagrams/advanced/A15-sql-validation.png",
+      "semantic_source": "diagrams/source/advanced/A15-sql-validation.svg",
+      "topic": "统计口径、受控SQL执行、有限修复与独立语义核验",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "4d987ae5a0cbbcdf96d187e8f6f0f434ca21b79925f517bd3b8c2cbd78599313",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A16",
+      "path": "website/assets/diagrams/advanced/A16-task-service.png",
+      "semantic_source": "diagrams/source/advanced/A16-task-service.svg",
+      "topic": "持久接收、写准备、派发边界、业务确认与原意图恢复",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "d891d568fdde15e6008ed1ebb3e8ea35cd1feecf69571621f0df0dd1c6212622",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A17",
+      "path": "website/assets/diagrams/advanced/A17-event-dispatch.png",
+      "semantic_source": "diagrams/source/advanced/A17-event-dispatch.svg",
+      "topic": "事件去重、版本冲突隔离、派发资格与本地通知意图",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "606e1a85125ceb4831dbbbc3d6cab37d3262726bb03bfdee12b99b3047c6760c",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18.md",
+      "generated_on": "2026-11-01"
+    },
+    {
+      "id": "A18",
+      "path": "website/assets/diagrams/advanced/A18-media-interruption.png",
+      "semantic_source": "diagrams/source/advanced/A18-media-interruption.svg",
+      "topic": "媒体证据与条件版本、迟到结果过滤、播放代次和打断历史",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "e6a9de8558cfc1a6db3984c794d998e1f7a2c8cd7f3fecfddfe94da8efb88df7",
+      "prompt_record": "diagrams/advanced-imagegen-A13-A18.md",
+      "generated_on": "2026-11-01"
     }
   ]
 }

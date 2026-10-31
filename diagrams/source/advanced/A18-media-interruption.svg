@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A18" width="1280" height="960" viewBox="0 0 1280 960" role="img" aria-labelledby="A18-title A18-desc">
+<title id="A18-title">媒体事实与播放打断：条件版本和输出代次分别核对</title>
+<desc id="A18-desc">上行将图片区域、音频时间与转写关联到确认后的云洲条件v2，工具请求绑定该条件版本。当前结果支持650元票据与650元上限相比较的不超标草稿；旧v1结果仅留日志。下行将输出代次g1的4秒生成音频区分为待播和实际播放，1.25秒媒体时钟处打断停播，仅保留0到1.25秒媒体历史。旧g1事件不能复活或扩展历史，新输出必须用g2。数值用于教学，不证明人听见，也未验证ASR或TTS。</desc>
+<defs>
+  <marker id="A18-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+  <marker id="A18-hold-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}.title{font-size:31px;font-weight:700;fill:#253746}.label{font-size:24px;font-weight:650;fill:#087F86}.body{font-size:21px;fill:#253746}.small{font-size:19px;fill:#546C80}.hold{fill:#B56B26}.flow{fill:none;stroke:#087F86;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A18-arrow)}.warning{fill:none;stroke:#B56B26;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A18-hold-arrow)}</style>
+<rect x="1" y="1" width="1278" height="958" rx="20" fill="#F8FBFC" stroke="#D6E5EA" stroke-width="2"/>
+<text x="30" y="52" class="title">媒体事实与播放打断：两类版本，分别核对</text>
+<text x="30" y="92" class="body">上行防止旧条件污染结论；下行防止未播放内容进入历史。</text>
+
+<text x="36" y="145" class="label">18A · 媒体事实与条件版本</text>
+<g text-anchor="middle">
+  <rect x="36" y="175" width="210" height="120" rx="13" fill="white" stroke="#087F86" stroke-width="2"/>
+  <text x="141" y="211" class="label">证据定位</text><text x="141" y="245" class="body">图片区域</text><text x="141" y="276" class="small">音频时间 + 转写</text>
+  <rect x="280" y="175" width="210" height="120" rx="13" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/>
+  <text x="385" y="211" class="label">确认条件 v2</text><text x="385" y="245" class="body">城市更正为云洲</text><text x="385" y="276" class="small">旧结论失效</text>
+  <rect x="524" y="175" width="210" height="120" rx="13" fill="white" stroke="#087F86" stroke-width="2"/>
+  <text x="629" y="220" class="label">工具请求</text><text x="629" y="257" class="body">绑定条件 v2</text>
+  <rect x="768" y="175" width="210" height="120" rx="13" fill="white" stroke="#087F86" stroke-width="2"/>
+  <text x="873" y="220" class="label">核对结果版本</text><text x="873" y="257" class="body">当前 v2 才继续</text>
+  <rect x="1012" y="175" width="232" height="120" rx="13" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/>
+  <text x="1128" y="211" class="label">有依据的草稿</text><text x="1128" y="246" class="body">票据650 / 上限650</text><text x="1128" y="277" class="small">本例不超标</text>
+</g>
+<path d="M246 235 H272" class="flow"/><path d="M490 235 H516" class="flow"/><path d="M734 235 H760" class="flow"/><path d="M978 235 H1004" class="flow"/>
+<path d="M873 295 V331" class="warning"/>
+<rect x="728" y="339" width="290" height="83" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="873" y="373" text-anchor="middle" class="label hold">旧 v1 结果只留日志</text><text x="873" y="405" text-anchor="middle" class="small">不能支撑当前云洲结论</text>
+<text x="36" y="381" class="body">位置合法 ≠ 内容已识别正确</text>
+<text x="36" y="415" class="small">临时转写与冲突候选仍需核对或澄清。</text>
+
+<path d="M30 466 H1250" fill="none" stroke="#D6E5EA" stroke-width="2"/>
+<text x="36" y="520" class="label">18B · 输出代次与播放进度</text>
+<g text-anchor="middle">
+  <rect x="36" y="551" width="180" height="132" rx="13" fill="white" stroke="#087F86" stroke-width="2"/>
+  <text x="126" y="596" class="label">输出代次 g1</text><text x="126" y="636" class="small">会话内 ID 唯一</text>
+  <rect x="250" y="551" width="210" height="132" rx="13" fill="white" stroke="#087F86" stroke-width="2"/>
+  <text x="355" y="596" class="label">已生成 4 秒</text><text x="355" y="636" class="small">不等于全部已播放</text>
+  <rect x="494" y="551" width="260" height="132" rx="13" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/>
+  <text x="624" y="588" class="label">待播缓冲 → 实播</text><text x="624" y="624" class="body">媒体时钟 1.25 秒</text><text x="624" y="655" class="small">以播放器位置为证据</text>
+  <rect x="788" y="551" width="190" height="132" rx="13" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+  <text x="883" y="596" class="label hold">用户打断</text><text x="883" y="636" class="body">立即停止播放</text>
+  <rect x="1012" y="551" width="232" height="132" rx="13" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/>
+  <text x="1128" y="590" class="label">保留媒体范围</text><text x="1128" y="629" class="body">0–1.25 秒</text><text x="1128" y="660" class="small">不保留未播完的4秒</text>
+</g>
+<path d="M216 617 H242" class="flow"/><path d="M460 617 H486" class="flow"/><path d="M754 617 H780" class="flow"/><path d="M978 617 H1004" class="flow"/>
+<path d="M883 683 V726" class="warning"/>
+<rect x="725" y="734" width="519" height="100" rx="12" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="984" y="773" text-anchor="middle" class="label hold">迟到 g1 事件：忽略，不能复活</text>
+<text x="984" y="810" text-anchor="middle" class="body">同 ID 不可重开；新输出使用 g2</text>
+<text x="36" y="774" class="body">先核对代次，再检查播放位置。</text><text x="36" y="812" class="small">工具取消与业务撤销按任务合同另行处理。</text>
+<rect x="30" y="867" width="1220" height="66" rx="12" fill="white" stroke="#D6E5EA" stroke-width="2"/>
+<text x="50" y="908" class="small">4秒与1.25秒为教学数值；媒体时钟不证明用户听见，提示音与人工转写不证明 ASR / TTS 效果。</text>
+</svg>

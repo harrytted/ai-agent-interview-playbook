@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A14" width="1100" height="1370" viewBox="0 0 1100 1370" role="img" aria-labelledby="A14-title A14-desc">
+<title id="A14-title">知识索引：完整发布，当前权限</title>
+<desc id="A14-desc">资料携带稳定身份、业务有效日期和访问范围，经保留表头的解析、块与来源血缘、变化检测和持久暂存，生成完整索引候选，校验后原子发布。处理中断时旧索引继续可读。更新和删除影响新索引，查询同时核对业务日期及当前访问目录；即使回退到旧索引，也不能恢复已撤回权限。</desc>
+<defs>
+<marker id="A14-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="A14-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:31px;font-weight:700}.label{font-size:25px;font-weight:650}.body{font-size:22px}.note{font-size:20px;fill:#536D79}.flow{fill:none;stroke:#087F86;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A14-arrow)}.change{fill:none;stroke:#B56B26;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A14-orange)}</style>
+<rect x="1" y="1" width="1098" height="1368" rx="22" fill="#FFFFFF" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="38" y="55" class="title">知识索引：完整发布，当前权限</text>
+<text x="38" y="92" class="note">本地单写者示意 · 半成品不进入查询 · 回退不能恢复旧权限</text>
+
+<rect x="300" y="125" width="500" height="95" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="550" y="162" class="label" text-anchor="middle">原始资料与清单</text>
+<text x="550" y="197" class="body" text-anchor="middle">稳定身份 · 业务有效日期 · 访问范围</text>
+<path d="M550 220 V249" class="flow"/>
+
+<rect x="300" y="255" width="500" height="85" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="550" y="290" class="label" text-anchor="middle">解析：保留条件与结构</text>
+<text x="550" y="321" class="body" text-anchor="middle">表头、城市、金额与单位一起留下</text>
+<path d="M550 340 V369" class="flow"/>
+
+<rect x="300" y="375" width="500" height="85" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="550" y="410" class="label" text-anchor="middle">块与来源血缘</text>
+<text x="550" y="441" class="body" text-anchor="middle">稳定块 ID · 内容哈希 · 原文位置</text>
+<path d="M550 460 V489" class="flow"/>
+
+<rect x="300" y="495" width="500" height="95" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="550" y="533" class="label" text-anchor="middle">变化检测与持久暂存</text>
+<text x="550" y="567" class="body" text-anchor="middle">未变则复用 · 中断后按指纹重跑</text>
+<path d="M550 590 V619" class="flow"/>
+
+<rect x="300" y="625" width="500" height="85" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="550" y="660" class="label" text-anchor="middle">完整索引候选</text>
+<text x="550" y="691" class="body" text-anchor="middle">清单、块与倒排表属于同一版本</text>
+<path d="M550 710 V739" class="flow"/>
+
+<rect x="300" y="745" width="500" height="100" rx="12" fill="#E8F2EE" stroke="#315B49" stroke-width="2.1"/>
+<text x="550" y="784" class="label" text-anchor="middle" fill="#315B49">校验通过，再原子发布</text>
+<text x="550" y="819" class="body" text-anchor="middle">最后替换可见指针，切换完整版本</text>
+<path d="M550 845 V874" class="flow"/>
+
+<rect x="300" y="880" width="500" height="90" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="550" y="916" class="label" text-anchor="middle">当前完整索引</text>
+<text x="550" y="950" class="body" text-anchor="middle">回退可换索引，不回退访问资格</text>
+<path d="M550 970 V1009" class="flow"/>
+
+<rect x="300" y="1015" width="500" height="110" rx="12" fill="#E8F2EE" stroke="#315B49" stroke-width="2.1"/>
+<text x="550" y="1056" class="label" text-anchor="middle">查询时再核对</text>
+<text x="550" y="1094" class="body" text-anchor="middle">业务日期适用 ＋ 当前仍允许使用</text>
+<path d="M550 1125 V1154" class="flow"/>
+
+<rect x="300" y="1160" width="500" height="85" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="550" y="1195" class="label" text-anchor="middle">返回适用证据与来源</text>
+<text x="550" y="1226" class="body" text-anchor="middle">更新、删除、撤权影响后续查询</text>
+
+<rect x="35" y="285" width="220" height="130" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="145" y="324" class="label" text-anchor="middle">更新 / 删除</text>
+<text x="145" y="361" class="body" text-anchor="middle">定位受影响资料</text>
+<text x="145" y="391" class="body" text-anchor="middle">重建完整候选</text>
+<path d="M145 415 V542 H294" class="change"/>
+
+<path d="M300 565 H95 V644" class="change"/>
+<text x="120" y="614" class="note" fill="#B56B26">处理中断</text>
+<rect x="35" y="650" width="220" height="140" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="145" y="691" class="label" text-anchor="middle">旧索引仍可读</text>
+<text x="145" y="729" class="body" text-anchor="middle">暂存不等于发布</text>
+<text x="145" y="762" class="body" text-anchor="middle">查询不读半成品</text>
+<path d="M145 790 V1070 H294" class="change"/>
+<text x="160" y="966" class="note">继续提供查询</text>
+
+<rect x="845" y="495" width="220" height="115" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="955" y="535" class="label" text-anchor="middle">撤回使用资格</text>
+<text x="955" y="575" class="body" text-anchor="middle">可信宿主管理</text>
+<path d="M955 610 V874" class="change"/>
+<rect x="845" y="880" width="220" height="130" rx="12" fill="#F7FAFB" stroke="#536D79" stroke-width="1.6"/>
+<text x="955" y="919" class="label" text-anchor="middle">当前访问目录</text>
+<text x="955" y="957" class="body" text-anchor="middle">删除与权限状态</text>
+<text x="955" y="990" class="body" text-anchor="middle">旧索引也要核对</text>
+<path d="M955 1010 V1070 H806" class="flow"/>
+
+<rect x="35" y="1280" width="1030" height="57" rx="10" fill="#F7FAFB" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="550" y="1316" class="body" text-anchor="middle">业务有效日期选版本；当前访问资格决定能否使用。二者都不能省。</text>
+</svg>

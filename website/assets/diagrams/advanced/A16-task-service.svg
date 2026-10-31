@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A16" width="1220" height="1380" viewBox="0 0 1220 1380" role="img" aria-labelledby="A16-title A16-desc">
+<title id="A16-title">任务服务：持久接收、准备与派发边界，以及未知结果对账</title>
+<desc id="A16-desc">HTTP请求先写持久接收账本，再返回202和任务ID；202只说明已接收。单Worker处理任务，缺参保存等待状态，待批准保存具体草稿；补参或获批后继续。write_prepared阶段仍可取消或更正。dispatch_committed事务提交后，执行器取得派发权，独立业务对象的实际提交与本地确认是两个边界。派发后失联或崩溃进入结果未知，沿原operation ID核对；取消后只查询，未查到仍未知，不新建对象，也不假称对象已撤销。</desc>
+<defs>
+  <marker id="A16-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+  <marker id="A16-warning" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+</defs>
+<style>
+text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}
+.node{fill:#FFFFFF;stroke:#D6E5EA;stroke-width:2}.teal{fill:#E8F5F3;stroke:#087F86;stroke-width:2}.warn{fill:#FFF6EC;stroke:#B56B26;stroke-width:2}
+.heading{font-size:25px;font-weight:650;text-anchor:middle}.detail{font-size:19px;text-anchor:middle;fill:#546C80}.flow{fill:none;stroke:#087F86;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A16-arrow)}.branch{fill:none;stroke:#B56B26;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A16-warning)}.label{font-size:18px;fill:#546C80}
+</style>
+<rect x="1" y="1" width="1218" height="1378" rx="20" fill="#F8FBFC" stroke="#D6E5EA" stroke-width="2"/>
+<text x="40" y="50" font-size="30" font-weight="700">A16 · 任务服务：接收、派发与业务成功分别记账</text>
+<text x="40" y="82" font-size="20" fill="#546C80">主线展示咨询写任务；只读任务取证核验后可直接回答。</text>
+
+<g id="A16-request"><rect class="node" x="50" y="120" width="240" height="90" rx="14"/><text class="heading" x="170" y="156">HTTP 请求</text><text class="detail" x="170" y="188">可信身份 + 幂等键</text></g>
+<path class="flow" d="M290 165 H350"/>
+<g id="A16-acceptance"><rect class="teal" x="360" y="120" width="300" height="90" rx="14"/><text class="heading" x="510" y="156">持久接收账本</text><text class="detail" x="510" y="188">先提交 task ID 与初始内容</text></g>
+<path class="flow" d="M660 165 H750"/>
+<g id="A16-receipt"><rect class="node" x="760" y="120" width="410" height="90" rx="14"/><text class="heading" x="965" y="156">返回 202 + task ID</text><text class="detail" x="965" y="188">只说明已接收，不代表业务成功</text></g>
+<path class="flow" d="M510 210 V270"/>
+<g id="A16-worker"><rect class="teal" x="360" y="280" width="300" height="90" rx="14"/><text class="heading" x="510" y="316">单 Worker</text><text class="detail" x="510" y="348">从持久状态恢复与推进</text></g>
+
+<path class="flow" d="M360 325 H175 V430"/>
+<g id="A16-clarification"><rect class="node" x="50" y="440" width="250" height="95" rx="14"/><text class="heading" x="175" y="476">缺少参数</text><text class="detail" x="175" y="510">保存等待，释放执行资源</text></g>
+<path class="flow" d="M50 487 H22 V245 H510 V270"/>
+<text class="label" x="55" y="238">可信补参后继续</text>
+
+<path class="flow" d="M510 370 V430"/>
+<g id="A16-approval"><rect class="node" x="360" y="440" width="300" height="95" rx="14"/><text class="heading" x="510" y="476">等待具体批准</text><text class="detail" x="510" y="510">草稿、参数 hash 与 revision</text></g>
+<path class="flow" d="M510 535 V600"/>
+<text class="label" x="532" y="575">当前草稿获批</text>
+<g id="A16-prepared"><rect class="teal" x="360" y="610" width="300" height="95" rx="14"/><text class="heading" x="510" y="647">准备派发</text><text class="detail" x="510" y="681">write_prepared：尚未派发</text></g>
+<path class="flow" d="M660 657 H710 V325 H670"/>
+<text class="label" x="725" y="470">更正条件</text><text class="label" x="725" y="500">旧证据与批准失效</text>
+<path class="branch" d="M360 657 H300"/>
+<g id="A16-cancel-before"><rect class="warn" x="50" y="610" width="240" height="110" rx="14"/><text class="heading" x="170" y="650">取消先提交</text><text class="detail" x="170" y="683">不派发、不新建对象</text></g>
+
+<path class="flow" d="M510 705 V780"/>
+<g id="A16-dispatch"><rect class="warn" x="330" y="790" width="360" height="105" rx="14"/><text class="heading" x="510" y="830">派发提交点</text><text class="detail" x="510" y="862">dispatch_committed → writing</text></g>
+<text class="label" x="50" y="810">提交后由执行器接管</text><text class="label" x="50" y="842">不等于远端已提交</text>
+<path class="flow" d="M510 895 V960"/>
+<g id="A16-business"><rect class="node" x="360" y="970" width="300" height="105" rx="14"/><text class="heading" x="510" y="1011">独立业务对象</text><text class="detail" x="510" y="1046">工单服务按原操作 ID 去重</text></g>
+<path class="flow" d="M510 1075 V1150"/>
+<g id="A16-confirmation"><rect class="teal" x="360" y="1160" width="300" height="105" rx="14"/><text class="heading" x="510" y="1201">保存本地确认</text><text class="detail" x="510" y="1235">成功需核对真实对象及内容</text></g>
+
+<path class="branch" d="M690 842 H840"/>
+<text class="label" x="735" y="820">失联 / 崩溃</text>
+<g id="A16-unknown"><rect class="warn" x="850" y="790" width="300" height="110" rx="14"/><text class="heading" x="1000" y="830">结果未知</text><text class="detail" x="1000" y="866">保留原 operation ID 与参数</text></g>
+<path class="flow" d="M1000 900 V960"/>
+<g id="A16-reconciliation"><rect class="node" x="850" y="970" width="300" height="130" rx="14"/><text class="heading" x="1000" y="1007">沿原意图对账</text><text class="detail" x="1000" y="1041">先查对象，核对完整参数</text><text class="detail" x="1000" y="1074">未取消时按合同幂等恢复</text></g>
+<path class="flow" d="M850 1040 H790 V1212 H670"/>
+<text class="label" x="690" y="1145">对象已确认</text>
+<path class="branch" d="M1000 1100 V1150"/>
+<g id="A16-cancel-after"><rect class="warn" x="850" y="1160" width="300" height="130" rx="14"/><text class="heading" x="1000" y="1197">取消后只查询</text><text class="detail" x="1000" y="1231">未查到仍未知，不新建</text><text class="detail" x="1000" y="1264">不宣称已有对象已撤销</text></g>
+<path class="branch" d="M1150 1225 H1185 V845 H1160"/>
+<text x="610" y="1340" font-size="20" text-anchor="middle" fill="#546C80">语义草图：任务库与业务库没有共同事务；取消与恢复不能抹去已发生的事实。</text>
+</svg>

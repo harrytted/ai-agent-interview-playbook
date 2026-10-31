@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A13" width="1040" height="1260" viewBox="0 0 1040 1260" role="img" aria-labelledby="A13-title A13-desc">
+<title id="A13-title">模型协议：完整工具往返后，独立核验再交付</title>
+<desc id="A13-desc">可信输入进入第一次模型响应，工具请求经宿主校验后执行；成功或失败观察按原调用ID完整回填，保留assistant消息，再取得第二次模型响应。两轮模型都先检查响应完整性；截断、拒答或断流停止并记录，不标成功。最后独立校验结构、金额、引用和覆盖，通过后才交付。工具执行与模型请求是不同阶段，图只表达教学协议。</desc>
+<defs>
+  <marker id="A13-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+  <marker id="A13-warning" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+</defs>
+<style>
+text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}
+.node{fill:#FFFFFF;stroke:#D6E5EA;stroke-width:2}.teal{fill:#E8F5F3;stroke:#087F86;stroke-width:2}.warn{fill:#FFF6EC;stroke:#B56B26;stroke-width:2}
+.heading{font-size:25px;font-weight:650;text-anchor:middle}.detail{font-size:20px;text-anchor:middle;fill:#546C80}.flow{fill:none;stroke:#087F86;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A13-arrow)}.branch{fill:none;stroke:#B56B26;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A13-warning)}
+</style>
+<rect x="1" y="1" width="1038" height="1258" rx="20" fill="#F8FBFC" stroke="#D6E5EA" stroke-width="2"/>
+<text x="40" y="50" font-size="30" font-weight="700">A13 · 模型协议：完整往返之后再验收</text>
+<text x="40" y="80" font-size="19" fill="#546C80">client tools 教学流程 · 主线从上向下阅读</text>
+
+<g id="A13-input"><rect class="teal" x="60" y="110" width="520" height="84" rx="14"/><text class="heading" x="320" y="144">1 · 可信任务输入</text><text class="detail" x="320" y="176">问题、日期、身份与工具合同</text></g>
+<path class="flow" d="M320 194 V222"/>
+<g id="A13-model-first"><rect class="node" x="60" y="230" width="520" height="84" rx="14"/><text class="heading" x="320" y="264">2 · 第一次模型响应</text><text class="detail" x="320" y="296">先核对完整事件与结束原因</text></g>
+<path class="flow" d="M320 314 V342"/>
+<g id="A13-tool-request"><rect class="node" x="60" y="350" width="520" height="84" rx="14"/><text class="heading" x="320" y="384">3 · 工具请求</text><text class="detail" x="320" y="416">call-1 / call-2：只是待执行的意图</text></g>
+<path class="flow" d="M320 434 V462"/>
+<g id="A13-host-validation"><rect class="teal" x="60" y="470" width="520" height="84" rx="14"/><text class="heading" x="320" y="504">4 · 宿主校验</text><text class="detail" x="320" y="536">完整参数、允许工具、权限与预算</text></g>
+<path class="flow" d="M320 554 V582"/>
+<g id="A13-tool-execution"><rect class="node" x="60" y="590" width="520" height="84" rx="14"/><text class="heading" x="320" y="624">5 · 工具实际执行</text><text class="detail" x="320" y="656">成功或失败观察，均保留原调用 ID</text></g>
+<path class="flow" d="M320 674 V702"/>
+<g id="A13-match-results"><rect class="teal" x="60" y="710" width="520" height="84" rx="14"/><text class="heading" x="320" y="744">6 · 按 ID 完整回填</text><text class="detail" x="320" y="776">保留 assistant 块及全部 tool_result</text></g>
+<path class="flow" d="M320 794 V822"/>
+<g id="A13-model-second"><rect class="node" x="60" y="830" width="520" height="84" rx="14"/><text class="heading" x="320" y="864">7 · 再次模型响应</text><text class="detail" x="320" y="896">带引用的结构化主张，仍先判终态</text></g>
+<path class="flow" d="M320 914 V942"/>
+<g id="A13-independent-check"><rect class="teal" x="60" y="950" width="520" height="84" rx="14"/><text class="heading" x="320" y="984">8 · 独立结果校验</text><text class="detail" x="320" y="1016">结构、城市、金额、真实引用与覆盖</text></g>
+<path class="flow" d="M320 1034 V1062"/>
+<g id="A13-delivery"><rect class="teal" x="60" y="1070" width="520" height="84" rx="14"/><text class="heading" x="320" y="1104">9 · 通过后交付</text><text class="detail" x="320" y="1136">模型结束生成，不自动等于任务完成</text></g>
+
+<path class="branch" d="M580 272 H670"/>
+<path class="branch" d="M580 872 H1008 V390 H1000"/>
+<g id="A13-incomplete"><rect class="warn" x="680" y="230" width="310" height="190" rx="14"/><text class="heading" x="835" y="268" fill="#B56B26">每轮异常分支</text><text class="detail" x="835" y="306">截断 / 拒答 / 断流</text><text class="detail" x="835" y="342">停止并保留证据</text><text class="detail" x="835" y="380">不标成功，不执行半截参数</text></g>
+
+<path class="branch" d="M580 512 H670"/>
+<g id="A13-denied"><rect class="warn" x="680" y="470" width="310" height="108" rx="14"/><text class="heading" x="835" y="511">校验不通过</text><text class="detail" x="835" y="548">不派发，记录具体错误</text></g>
+
+<g id="A13-id-contract"><rect class="node" x="680" y="670" width="310" height="174" rx="14"/><text class="heading" x="835" y="708">调用对应表</text><text class="detail" x="835" y="745">call-1 ↔ 海岚读取结果</text><text class="detail" x="835" y="779">call-2 ↔ 云洲读取结果</text><text class="detail" x="835" y="813">缺失、重复、陌生 ID 均停止</text></g>
+
+<path class="branch" d="M580 992 H670"/>
+<g id="A13-unsupported-answer"><rect class="warn" x="680" y="950" width="310" height="120" rx="14"/><text class="heading" x="835" y="989">证据或业务不符</text><text class="detail" x="835" y="1027">不交付为成功答案</text><text class="detail" x="835" y="1055">合法 JSON 也要核验事实</text></g>
+<text x="520" y="1216" font-size="20" text-anchor="middle" fill="#546C80">语义草图：箭头表达处理次序；图中不包含真实模型成绩。</text>
+</svg>

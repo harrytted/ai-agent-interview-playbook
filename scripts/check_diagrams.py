@@ -47,6 +47,12 @@ ADVANCED_FILES = {
     "A10": "advanced/A10-critical-path.svg",
     "A11": "advanced/A11-trust-boundaries.svg",
     "A12": "advanced/A12-training.svg",
+    "A13": "advanced/A13-model-protocol.svg",
+    "A14": "advanced/A14-ingestion-lifecycle.svg",
+    "A15": "advanced/A15-sql-validation.svg",
+    "A16": "advanced/A16-task-service.svg",
+    "A17": "advanced/A17-event-dispatch.svg",
+    "A18": "advanced/A18-media-interruption.svg",
 }
 
 

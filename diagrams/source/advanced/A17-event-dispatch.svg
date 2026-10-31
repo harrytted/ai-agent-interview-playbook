@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A17" width="1280" height="800" viewBox="0 0 1280 800" role="img" aria-labelledby="A17-title A17-desc">
+<title id="A17-title">事件派发：先去重与归并，再接受有界任务</title>
+<desc id="A17-desc">事件先进入接收账本按ID和指纹去重，再按对象版本归并。旧版忽略，同版异文持久隔离并清除该版本待派发项，只有可信更高版本才能恢复候选。通过有效订阅、业务授权、预算与去抖复查后，保存唯一业务意图的任务，再按通知条件保存本地Outbox。重投不重复派发；取消只阻止后续任务，不自动撤回已接受任务；本地Outbox不表示外部送达。</desc>
+<defs>
+  <marker id="A17-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+  <marker id="A17-hold-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}.title{font-size:31px;font-weight:700;fill:#253746}.body{font-size:21px;fill:#253746}.small{font-size:19px;fill:#546C80}.label{font-size:23px;font-weight:650;fill:#087F86}.hold{fill:#B56B26}.flow{fill:none;stroke:#087F86;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A17-arrow)}.warning{fill:none;stroke:#B56B26;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A17-hold-arrow)}</style>
+<rect x="1" y="1" width="1278" height="798" rx="20" fill="#F8FBFC" stroke="#D6E5EA" stroke-width="2"/>
+<text x="30" y="52" class="title">事件派发：先去重与归并，再接受有界任务</text>
+<text x="30" y="91" class="body">有事件，只产生候选；能否执行、是否通知分别判断。</text>
+
+<g text-anchor="middle">
+  <rect x="25" y="145" width="120" height="128" rx="13" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/>
+  <text x="85" y="189" class="label">事件</text><text x="85" y="224" class="small">来源 + 版本</text>
+  <rect x="165" y="145" width="190" height="128" rx="13" fill="white" stroke="#087F86" stroke-width="2"/>
+  <text x="260" y="181" class="label">接收账本</text><text x="260" y="215" class="body">ID + 内容指纹</text><text x="260" y="246" class="small">先识别重投</text>
+  <rect x="375" y="145" width="210" height="128" rx="13" fill="white" stroke="#087F86" stroke-width="2"/>
+  <text x="480" y="181" class="label">对象版本归并</text><text x="480" y="215" class="body">旧版忽略</text><text x="480" y="246" class="small">同版异文先隔离</text>
+  <rect x="605" y="145" width="240" height="128" rx="13" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/>
+  <text x="725" y="181" class="label">有效订阅</text><text x="725" y="215" class="body">业务授权 + 预算</text><text x="725" y="246" class="small">去抖到期后再次核对</text>
+  <rect x="865" y="145" width="170" height="128" rx="13" fill="white" stroke="#087F86" stroke-width="2"/>
+  <text x="950" y="189" class="label">持久任务</text><text x="950" y="226" class="small">唯一业务意图</text>
+  <rect x="1055" y="145" width="200" height="128" rx="13" fill="#E8F5F3" stroke="#087F86" stroke-width="2"/>
+  <text x="1155" y="181" class="label">通知条件成立</text><text x="1155" y="215" class="body">本地 Outbox</text><text x="1155" y="246" class="small">仍需外部发送与回执</text>
+</g>
+<path d="M145 209 H159" class="flow"/><path d="M355 209 H369" class="flow"/><path d="M585 209 H599" class="flow"/><path d="M845 209 H859" class="flow"/><path d="M1035 209 H1049" class="flow"/>
+
+<path d="M260 273 V327" class="flow"/>
+<rect x="165" y="335" width="190" height="110" rx="13" fill="#F0F4F7" stroke="#D6E5EA" stroke-width="2"/>
+<text x="260" y="371" text-anchor="middle" class="body">重复 / 确认丢失</text><text x="260" y="405" text-anchor="middle" class="label">查原记录</text><text x="260" y="432" text-anchor="middle" class="small">不再重复派发</text>
+
+<path d="M480 273 V327" class="warning"/>
+<rect x="395" y="335" width="225" height="110" rx="13" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="508" y="370" text-anchor="middle" class="label hold">冲突版本隔离</text><text x="508" y="404" text-anchor="middle" class="body">清除该版待派发项</text><text x="508" y="431" text-anchor="middle" class="small">同版重投不能解隔离</text>
+<path d="M395 389 H377 V296 H450 V280" class="warning"/>
+<text x="362" y="481" text-anchor="middle" class="small hold">可信更高版 → 回到版本归并</text>
+
+<path d="M725 273 V327" class="warning"/>
+<rect x="660" y="335" width="270" height="110" rx="13" fill="#FFF6EC" stroke="#B56B26" stroke-width="2"/>
+<text x="795" y="370" text-anchor="middle" class="body">取消 / 撤权 / 预算耗尽</text><text x="795" y="405" text-anchor="middle" class="label hold">停止后续派发</text><text x="795" y="432" text-anchor="middle" class="small">已接受任务另按服务合同处理</text>
+
+<rect x="30" y="523" width="1220" height="219" rx="14" fill="white" stroke="#D6E5EA" stroke-width="2"/>
+<text x="55" y="565" class="label">三个终点不要混用</text>
+<text x="55" y="608" class="body">接收确认：事件已有可靠记录，不等于业务任务完成。</text>
+<text x="55" y="650" class="body">任务接受：意图、输入与预算已持久保存，不等于复核已执行。</text>
+<text x="55" y="692" class="body">本地通知：Outbox 有记录，不等于邮件或消息已经送达。</text>
+<text x="30" y="777" class="small">语义草图对应本地 SQLite 实验；不表示已经接入外部消息队列或通知服务。</text>
+</svg>

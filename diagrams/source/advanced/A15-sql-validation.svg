@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="A15" width="1100" height="1400" viewBox="0 0 1100 1400" role="img" aria-labelledby="A15-title A15-desc">
+<title id="A15-title">SQL 可执行，不等于统计正确</title>
+<desc id="A15-desc">自然语言问题先澄清日期、单位、状态、分母和粒度，再映射表列，生成受约束 SQL，在租户受限 SQLite 快照执行，得到结果表。语法和字段错误可在预算内反馈修复，越权或资源超限则停止。独立期望只进入语义校验，不提供给候选生成器，校验通过才形成带依据结论。一对多连接将650加700错误放大为2000；两个650的反例说明SUM DISTINCT也不是按申请粒度统计的通用修复。</desc>
+<defs>
+<marker id="A15-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#087F86"/></marker>
+<marker id="A15-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B56B26"/></marker>
+</defs>
+<style>text{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#253746}.title{font-size:31px;font-weight:700}.label{font-size:25px;font-weight:650}.body{font-size:22px}.note{font-size:20px;fill:#536D79}.flow{fill:none;stroke:#087F86;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A15-arrow)}.feedback{fill:none;stroke:#B56B26;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#A15-orange)}</style>
+<rect x="1" y="1" width="1098" height="1398" rx="22" fill="#FFFFFF" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="38" y="55" class="title">SQL 可执行，不等于统计正确</text>
+<text x="38" y="92" class="note">先定口径，再查数据；独立标准答案不进入候选生成过程</text>
+
+<rect x="400" y="125" width="470" height="80" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="635" y="160" class="label" text-anchor="middle">自然语言问题</text>
+<text x="635" y="190" class="body" text-anchor="middle">10 月申请了多少，超标占多少？</text>
+<path d="M635 205 V234" class="flow"/>
+
+<rect x="400" y="240" width="470" height="90" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="635" y="277" class="label" text-anchor="middle">口径澄清</text>
+<text x="635" y="310" class="body" text-anchor="middle">日期、单位、状态、分母与粒度</text>
+<path d="M635 330 V359" class="flow"/>
+
+<rect x="400" y="365" width="470" height="90" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="635" y="402" class="label" text-anchor="middle">结构映射</text>
+<text x="635" y="435" class="body" text-anchor="middle">真实表列、单位与申请关联键</text>
+<path d="M635 455 V484" class="flow"/>
+
+<rect x="400" y="490" width="470" height="90" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="635" y="527" class="label" text-anchor="middle">受约束的 SQL 候选</text>
+<text x="635" y="560" class="body" text-anchor="middle">值参数化，宿主决定允许范围</text>
+<path d="M635 580 V609" class="flow"/>
+
+<rect x="400" y="615" width="470" height="90" rx="12" fill="#E8F2EE" stroke="#315B49" stroke-width="2.1"/>
+<text x="635" y="652" class="label" text-anchor="middle">真实 SQLite 执行</text>
+<text x="635" y="685" class="body" text-anchor="middle">租户快照、表列、只读与资源限制</text>
+<path d="M635 705 V734" class="flow"/>
+<text x="652" y="730" class="note">执行成功</text>
+
+<rect x="400" y="740" width="470" height="85" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="635" y="775" class="label" text-anchor="middle">结果表与实际 SQL</text>
+<text x="635" y="806" class="body" text-anchor="middle">保留金额、数量和可比较分母</text>
+<path d="M635 825 V859" class="flow"/>
+
+<rect x="400" y="865" width="470" height="100" rx="12" fill="#E8F2EE" stroke="#315B49" stroke-width="2.1"/>
+<text x="635" y="904" class="label" text-anchor="middle">独立语义校验</text>
+<text x="635" y="939" class="body" text-anchor="middle">多份数据验证指标，不只比 SQL 文本</text>
+<path d="M635 965 V994" class="flow"/>
+<text x="652" y="990" class="note">核验通过</text>
+
+<rect x="400" y="1000" width="470" height="85" rx="12" fill="#F0F8F7" stroke="#087F86" stroke-width="1.6"/>
+<text x="635" y="1035" class="label" text-anchor="middle">带依据的结论</text>
+<text x="635" y="1066" class="body" text-anchor="middle">每个数字回到返回表与统计口径</text>
+
+<rect x="40" y="590" width="270" height="125" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="175" y="627" class="label" text-anchor="middle">语法 / 字段反馈</text>
+<text x="175" y="664" class="body" text-anchor="middle">预算内有限修复</text>
+<text x="175" y="695" class="note" text-anchor="middle">本地实验最多两次候选</text>
+<path d="M400 640 H316" class="feedback"/>
+<path d="M175 590 V535 H394" class="feedback"/>
+
+<rect x="40" y="765" width="270" height="100" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="175" y="805" class="label" text-anchor="middle">越权 / 资源超限</text>
+<text x="175" y="840" class="body" text-anchor="middle">停止，不靠变形绕过</text>
+<path d="M400 680 H350 V815 H316" class="feedback"/>
+
+<rect x="40" y="905" width="270" height="130" rx="12" fill="#FFF7ED" stroke="#B56B26" stroke-width="1.6"/>
+<text x="175" y="944" class="label" text-anchor="middle">语义核验不通过</text>
+<text x="175" y="981" class="body" text-anchor="middle">日期、粒度或分母错</text>
+<text x="175" y="1013" class="note" text-anchor="middle">不一定触发 SQL 报错</text>
+<path d="M400 925 H316" class="feedback"/>
+
+<rect x="905" y="855" width="160" height="125" rx="12" fill="#F7FAFB" stroke="#536D79" stroke-width="1.6"/>
+<text x="985" y="892" class="label" text-anchor="middle">独立期望</text>
+<text x="985" y="929" class="body" text-anchor="middle">仅评估侧可见</text>
+<text x="985" y="960" class="note" text-anchor="middle">不喂给生成器</text>
+<path d="M905 915 H876" class="flow"/>
+
+<rect x="40" y="1130" width="1025" height="220" rx="12" fill="#F7FAFB" stroke="#D6E5EA" stroke-width="1.6"/>
+<path d="M552 1160 V1320" fill="none" stroke="#D6E5EA" stroke-width="1.6"/>
+<text x="65" y="1170" class="label">反例一：一对多 JOIN 放大</text>
+<text x="65" y="1210" class="body">a1 650 元有两条明细，a2 700 元有一条</text>
+<text x="65" y="1254" class="body" fill="#B56B26">错误：650 ＋ 650 ＋ 700 ＝ 2000</text>
+<text x="65" y="1298" class="body" fill="#315B49">正确：按申请粒度，650 ＋ 700 ＝ 1350</text>
+<text x="580" y="1170" class="label">反例二：两笔申请都是 650 元</text>
+<text x="580" y="1210" class="body">不同申请，金额相同，仍须各算一次</text>
+<text x="580" y="1254" class="body" fill="#315B49">正确：650 ＋ 650 ＝ 1300</text>
+<text x="580" y="1298" class="body" fill="#B56B26">SUM DISTINCT 只剩 650：不是通用修复</text>
+</svg>
