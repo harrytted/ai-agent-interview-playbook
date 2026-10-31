@@ -53,6 +53,13 @@ def terms(text):
     return re.findall(r"[a-z0-9_]+|[\u4e00-\u9fff]", text.lower())
 
 
+def validate_date(value):
+    """Require the canonical representation used by lexical date comparisons."""
+    if not isinstance(value, str) or date.fromisoformat(value).isoformat() != value:
+        raise ValueError("business date must use YYYY-MM-DD")
+    return value
+
+
 def parse_markdown(text, doc_key, source_uri):
     """Parse a documented subset: headings, marked paragraphs, simple tables.
 
@@ -180,9 +187,9 @@ class Pipeline:
                 raise ValueError("source missing identity, date, location or access")
             if not re.fullmatch(r"[a-zA-Z0-9_-]+", source["doc_id"]) or not re.fullmatch(r"[a-zA-Z0-9_-]+", source["version"]):
                 raise ValueError("invalid source identity")
-            date.fromisoformat(source["valid_from"])
-            if source.get("valid_to"):
-                date.fromisoformat(source["valid_to"])
+            validate_date(source["valid_from"])
+            if source.get("valid_to") is not None:
+                validate_date(source["valid_to"])
                 if source["valid_to"] <= source["valid_from"]:
                     raise ValueError("empty or reversed validity interval")
             if not isinstance(source["access"], list) or not all(isinstance(p, str) for p in source["access"]):
@@ -264,7 +271,7 @@ class Pipeline:
         self.events.append({"event": "activated", "generation": generation, "policy_revision": state["policy_revision"]})
 
     def query(self, text, at, principal, generation=None):
-        date.fromisoformat(at)
+        validate_date(at)
         state = self.state()  # read once for one consistent policy snapshot
         index = self.generation(generation or state["generation"])
         wanted = set(terms(text))

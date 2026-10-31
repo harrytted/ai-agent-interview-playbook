@@ -203,6 +203,27 @@ class ServiceLabTests(unittest.TestCase):
                 candidate.append({**deepcopy(original[0]), "document_id": "malformed-extra", field: value})
                 self.assertEqual(operator.call("POST", "/releases", {"version": "v2", "policies": candidate})[0], 422)
 
+    def test_release_activation_requires_boolean_before_registering_or_switching(self):
+        with running(self.root) as (engine, base):
+            operator = Client(base, "demo-operator")
+            policies = core.read_json(core.DATA / "policies.json")
+            for value in ("false", "true", 0, 1, [], {}, None):
+                with self.subTest(value=value):
+                    code, _ = operator.call("POST", "/releases", {
+                        "version": "v2", "policies": policies, "activate": value})
+                    self.assertEqual(code, 400)
+                    with engine.db() as db:
+                        self.assertEqual(db.execute("SELECT value FROM settings WHERE key='active'").fetchone()[0], "v1")
+                        self.assertEqual(db.execute("SELECT COUNT(*) FROM releases WHERE version='v2'").fetchone()[0], 0)
+            self.assertEqual(operator.call("POST", "/releases", {
+                "version": "v2", "policies": policies, "activate": False})[0], 200)
+            client = Client(base)
+            staged = client.call("POST", "/tasks", BODY, "before-activation")[1]["task"]
+            self.assertEqual(staged["manifest"]["release"], "v1")
+            self.assertEqual(operator.call("POST", "/releases", {"version": "v2", "activate": True})[0], 200)
+            activated = client.call("POST", "/tasks", BODY, "after-activation")[1]["task"]
+            self.assertEqual(activated["manifest"]["release"], "v2")
+
     def test_release_gate_uses_actual_alice_authorization_not_raw_amount_match(self):
         with running(self.root) as (_, base):
             operator = Client(base, "demo-operator")

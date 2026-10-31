@@ -63,7 +63,7 @@ SDK 能减少协议代码，却不能替业务决定“这份制度适用于哪�
 
 **UTF-8**以一到多个字节编码字符，中文字符可能被拆在两次网络读取之间。**SSE（服务端发送事件）**则在文本上用行字段和空行组织事件。一次 `read()` 既不保证给出完整字符，也不保证给出完整 SSE 事件，更不保证给出完整工具参数。
 
-实验先用增量 UTF-8 解码器保留未完成字节，再识别 CR、LF 或 CRLF 行结束符。`data:` 多行用换行连接，空行才派发一条事件；注释不成为内容。没有结束空行的残留事件不会在 EOF 时被当作完整对象。该传输规则来自 [WHATWG SSE 标准](https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream)。
+实验先用增量 UTF-8 解码器保留未完成字节，并忽略流开头可选的一个BOM（字节顺序标记），再识别 CR、LF 或 CRLF 行结束符。`data:` 多行用换行连接，空行才派发一条事件；注释不成为内容。没有结束空行的残留事件不会在 EOF 时被当作完整对象。该传输规则来自 [WHATWG SSE 标准](https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream)。
 
 接着，供应商事件状态机检查 `message_start → 内容块 → message_delta → message_stop`。工具块的 `input_json_delta.partial_json` 只是 JSON 字符串片段，需要按内容块索引拼接；块结束后仍要检查整条消息的结束原因。工具索引负责组装块，工具 ID 负责往返对应，不能把这两个标识混用。[Claude 流式事件](https://platform.claude.com/docs/en/build-with-claude/streaming)给出具体事件形式；它不是跨供应商统一标准。
 

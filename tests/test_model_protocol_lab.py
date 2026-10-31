@@ -22,6 +22,14 @@ class ProtocolLabTests(unittest.TestCase):
         raw = b': comment\revent: ping\rdata: {"type":\rdata: "ping"}\r\r'
         self.assertEqual(list(parse_sse([raw])), [{"type": "ping"}])
 
+    def test_sse_ignores_one_leading_bom_across_network_boundaries(self):
+        raw = (FIXTURES / "two-tools.sse").read_bytes()
+        expected = assemble(parse_sse([raw]))
+        prefixed = b'\xef\xbb\xbf' + raw
+        for boundary in range(5):
+            with self.subTest(boundary=boundary):
+                self.assertEqual(assemble(parse_sse([prefixed[:boundary], prefixed[boundary:]])), expected)
+
     def test_incomplete_event_and_utf8_never_produce_completed_message(self):
         for raw in (b'event: ping\ndata: {"type":"ping"}', b'\xe6\xb5'):
             with self.assertRaises(TransportError):
@@ -35,6 +43,22 @@ class ProtocolLabTests(unittest.TestCase):
             assemble(events[1:])
         with self.assertRaises(ProtocolError):
             assemble(events + [{"type": "ping"}])
+
+    def test_message_termination_cannot_precede_blocks_or_allow_more_content(self):
+        original = list(parse_sse([(FIXTURES / "two-tools.sse").read_bytes()]))
+        for position in (1, 2, 6):
+            events = deepcopy(original)
+            ending = next(event for event in events if event["type"] == "message_delta")
+            events.remove(ending)
+            events.insert(position, ending)
+            with self.subTest(position=position), self.assertRaises(ProtocolError):
+                assemble(events)
+        events = deepcopy(original)
+        for event in events:
+            if "index" in event:
+                event["index"] += 1
+        with self.assertRaises(ProtocolError):
+            assemble(events)
 
     def test_malformed_indices_and_message_delta_raise_classified_protocol_error(self):
         original = list(parse_sse([(FIXTURES / "two-tools.sse").read_bytes()]))
@@ -100,6 +124,26 @@ class ProtocolLabTests(unittest.TestCase):
                 self.assertEqual(result["status"], status)
                 self.assertNotIn("answer", result)
                 self.assertIn("matched_results", result)
+
+    def test_saved_failure_bytes_reproduce_the_reported_provider_response(self):
+        with tempfile.TemporaryDirectory() as folder:
+            for name in ("duplicate-id", "truncated", "refusal", "semantic-error"):
+                with self.subTest(name=name):
+                    run_scenario(name, folder)
+                    path = Path(folder) / name
+                    events = list(parse_sse([(path / "raw.sse").read_bytes()]))
+                    if name == "duplicate-id":
+                        with self.assertRaises(ProtocolError):
+                            assemble(events)
+                    elif name in ("truncated", "refusal"):
+                        self.assertEqual(assemble(events)["status"], "truncated" if name == "truncated" else "refused")
+                    else:
+                        final = assemble(parse_sse([(path / "answer.sse").read_bytes()]))
+                        answer = json.loads("".join(block["text"] for block in final["content"]))
+                        observed = json.loads((FIXTURES / "observations.json").read_text())
+                        evidence = {value["reference"]: value for value in observed.values()}
+                        with self.assertRaises(ProtocolError):
+                            validate_answer(answer, evidence)
 
 
 if __name__ == "__main__":

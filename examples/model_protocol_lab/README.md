@@ -19,7 +19,7 @@ python3 -m unittest discover -s tests -p 'test_model_protocol_lab.py' -v
 | final-truncated | 工具全部返回后，最终回答max_tokens | 不读取不存在的完整答案，报告截断 |
 | final-refusal | 工具全部返回后，最终回答refusal | 保留已有读取证据，任务记录拒答 |
 
-产物在 `<output>/<scenario>/`：`raw.sse`、`answer.sse`、`trace.jsonl`、`result.json`、`grade.json`。正常结果包含 `next_request.messages`，保留完整 assistant 块与按 ID 对应的全部结果。`expected.json` 是评分预期，不传给工具执行器或答案校验器。
+产物在 `<output>/<scenario>/`：`raw.sse`、`answer.sse`、`trace.jsonl`、`result.json`、`grade.json`。故障变式先修改输入字节，再解析与保存；因此可直接重放这两份SSE文件，复现重复ID、截断、拒答或错误金额。正常结果包含 `next_request.messages`，保留完整 assistant 块与按 ID 对应的全部结果。`expected.json` 是评分预期，不传给工具执行器或答案校验器。
 
 工具只支持固定教学日2026-11-12及海岚/云洲。解析器支持UTF-8跨读、CR/LF/CRLF、多行data和注释；不支持thinking、server tools或任意未来事件，遇到不支持内容会停止。它从真实原始字节解析，未将预制终态当作解析结果。
 

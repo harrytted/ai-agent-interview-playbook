@@ -60,8 +60,10 @@ def metric_card(specification):
     if specification["date_basis"] != "submitted_at" or specification["amount_unit"] != "cents" or specification["over_denominator"] != "known_amount_and_limit" or specification["statuses"] != ["submitted", "approved"]:
         return {"status": "unsupported_metric", "reason": "this lab supports one explicitly declared metric contract"}
     from datetime import date
-    date.fromisoformat(specification["start"])
-    date.fromisoformat(specification["end"])
+    for key in ("start", "end"):
+        value = specification[key]
+        if not isinstance(value, str) or date.fromisoformat(value).isoformat() != value:
+            raise ValueError("metric dates must use YYYY-MM-DD")
     if specification["start"] >= specification["end"]:
         raise ValueError("invalid metric interval")
     return {"status": "ready", **specification, "grain": "one row per application", "null_amount_total": "SUM ignores NULL; report comparable_count separately", "schema_links": {"申请金额": "applications.amount_cents", "申请日期": "applications.submitted_at", "审批日期": "applications.approved_at", "明细归属": "expenses.application_id -> applications.id"}}

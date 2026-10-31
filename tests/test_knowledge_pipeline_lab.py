@@ -96,6 +96,23 @@ class KnowledgePipelineTests(unittest.TestCase):
             self.pipeline.publish(bad)
         self.assertEqual(self.pipeline.state()["generation"], first["generation"])
 
+    def test_noncanonical_query_dates_cannot_select_the_wrong_business_version(self):
+        self.pipeline.publish(self.sources)
+        for value in ("20261031", "2026-W44-6", "2026-1-01", "2026-02-30", None):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                self.query(value)
+        self.assertIn("金额上限：600", self.query("2026-10-31")[0]["text"])
+
+    def test_invalid_source_date_formats_cannot_replace_the_visible_generation(self):
+        first = self.pipeline.publish(self.sources)
+        for field, value in (("valid_from", "20260101"), ("valid_from", "2026-W01-4"),
+                             ("valid_to", "20261101"), ("valid_to", ""), ("valid_from", None)):
+            bad = [dict(source) for source in self.sources]
+            bad[0][field] = value
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                self.pipeline.publish(bad)
+            self.assertEqual(self.pipeline.state()["generation"], first["generation"])
+
     def test_conflicting_duplicate_and_duplicate_block_keys_rejected(self):
         changed = dict(self.sources[0], access=["other"])
         with self.assertRaisesRegex(ValueError, "conflicting"):

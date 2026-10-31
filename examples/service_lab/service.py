@@ -349,6 +349,8 @@ class Engine:
     def release(self, value):
         if not isinstance(value, dict) or set(value) - {"version", "policies", "activate"} or not isinstance(value.get("version"), str) or not re.fullmatch(r"v[0-9]+", value["version"]):
             raise APIError(400, "release version must be v<number>")
+        if "activate" in value and type(value["activate"]) is not bool:
+            raise APIError(400, "activate must be a JSON boolean")
         version = value["version"]
         with self.db() as db:
             db.execute("BEGIN IMMEDIATE")

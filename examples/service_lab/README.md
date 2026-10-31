@@ -32,6 +32,8 @@ python3 -m examples.service_lab.lab serve --root .local/service_lab/server --por
 
 `POST /releases`只允许 `demo-operator`，body为 `{version:"v2",policies:[...],activate:false}`（实际发送合法JSON）。所有条目的必要结构和三个固定Alice政策查询通过后方可登记，查询使用实际授权与适用逻辑，空权限或异租户也会阻断；`{version:"v2"}`激活，`{version:"v1"}`回退。合法撤权应另有预期拒绝的发布验收，不能静默改掉本固定成功集。门槛是固定smoke，不证明全部政策语义、Embedding或模型质量。Operator不能读取用户任务。
 
+`activate`只接受JSON布尔值 `true` / `false`；字符串 `"false"`、数字及空值会在候选登记和版本切换前被拒绝，避免把非空字符串误当作激活指令。
+
 故障注入必须显式 `--allow-faults` 后，提交 `fault:"after_remote_commit"`；默认Worker记录故障并停止。仅在临时实验目录显式加 `--crash-once` 时，服务会在该窗口真实退出73。保留root，用相同root重新启动，查询得到 `write_outcome_unknown`；`resume`确认原对象。自动测试已覆盖这条真实跨进程路径。
 
 容量与边界：一Worker、每任务最多8次决策/12次工具派发；固定日期和城市政策读取，等待人工不占Worker。数据库事务串行化API/Worker状态更新；业务库与任务库没有共同事务。没有生产认证、HTTP TLS、完整浏览器UI、外部消息通知、远程上下文删除、多实例调度、自动补偿或真实模型质量证明。

@@ -29,7 +29,7 @@ python3 -m unittest discover -s tests -p 'test_sql_agent_lab.py' -v
 
 `employees.id` 唯一标识员工，`applications.employee_id` 指向员工，`expenses.application_id` 指向申请。一笔申请可有多条费用明细，申请表的金额属于申请粒度，不能随连接结果重复累计。源员工表含 `salary_cents`，它从不复制进候选查询快照；示例并不需要薪资信息。
 
-所有金额用整数分。日期是已经规范化的业务日期字符串 `YYYY-MM-DD`，不是 UTC 时间戳；本实验没有实现时区转换。统计区间为 `[2026-10-01, 2026-11-01)`，按 `submitted_at`，状态只含 `submitted`、`approved`。`cancelled` 不进入本次金额及分母。
+所有金额用整数分。日期须为规范的业务日期字符串 `YYYY-MM-DD`，口径卡会拒绝紧凑日期、ISO周日期及非字符串，保证它们能与数据库日期按相同格式比较。它不是UTC时间戳，本实验没有实现时区转换。统计区间为 `[2026-10-01, 2026-11-01)`，按 `submitted_at`，状态只含 `submitted`、`approved`。`cancelled` 不进入本次金额及分母。
 
 | 返回字段 | 含义 |
 | --- | --- |

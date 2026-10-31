@@ -29,7 +29,7 @@ def parse_sse(chunks):
     Only a blank line dispatches an event. Incomplete EOF is not dispatched.
     CR, LF and CRLF line endings and multiple data lines are supported.
     """
-    decoder = codecs.getincrementaldecoder("utf-8")("strict")
+    decoder = codecs.getincrementaldecoder("utf-8-sig")("strict")
     buffer, fields, total = "", [], 0
 
     def dispatch(lines):
@@ -100,6 +100,7 @@ def assemble(events):
     blocks, opened, seen_ids = {}, set(), set()
     started = stopped = False
     stop_reason = None
+    ending = False
     usage = {}
     for event in events:
         kind = event.get("type")
@@ -119,9 +120,11 @@ def assemble(events):
             continue
         if not started:
             raise ProtocolError("content before message_start")
+        if ending and kind in {"content_block_start", "content_block_delta", "content_block_stop"}:
+            raise ProtocolError("content after message_delta")
         if kind == "content_block_start":
             index, block = event.get("index"), deepcopy(event.get("content_block"))
-            if type(index) is not int or index < 0 or index in blocks or not isinstance(block, dict):
+            if type(index) is not int or index != len(blocks) or opened or not isinstance(block, dict):
                 raise ProtocolError("invalid or repeated block index")
             if block.get("type") not in {"text", "tool_use"}:
                 raise ProtocolError("unsupported block; do not silently discard it")
@@ -154,8 +157,11 @@ def assemble(events):
                 raise ProtocolError("stop outside an open block")
             opened.remove(index)
         elif kind == "message_delta":
+            if opened:
+                raise ProtocolError("message_delta before content blocks finished")
             if not isinstance(event.get("delta"), dict) or not isinstance(event.get("usage", {}), dict):
                 raise ProtocolError("invalid message delta or usage")
+            ending = True
             reason = event.get("delta", {}).get("stop_reason")
             if reason is not None:
                 if stop_reason is not None:
@@ -246,6 +252,15 @@ def run_scenario(name, output):
     expected = json.loads((FIXTURES / "expected.json").read_text())[name]
     raw = (FIXTURES / "two-tools.sse").read_bytes()
     raw_final = (FIXTURES / "answer.sse").read_bytes()
+    # Inject faults into the saved input bytes so a reader can replay exactly
+    # the response that produced the trace and final status.
+    if name == "duplicate-id":
+        raw = raw.replace(b'"id":"call-2"', b'"id":"call-1"')
+    if name in {"truncated", "refusal"}:
+        raw = raw.replace(b'"stop_reason":"tool_use"',
+                          b'"stop_reason":"max_tokens"' if name == "truncated" else b'"stop_reason":"refusal"')
+    if name == "semantic-error":
+        raw_final = raw_final.replace(b"700", b"7000", 1)
     if name in {"final-truncated", "final-refusal"}:
         raw_final = raw_final.replace(b'"end_turn"', b'"max_tokens"' if name == "final-truncated" else b'"refusal"')
     if name == "disconnect":
@@ -254,11 +269,6 @@ def run_scenario(name, output):
     try:
         for event in parse_sse(raw[i:i + 1] for i in range(len(raw))):
             events.append(event)
-        if name == "duplicate-id":
-            starts = [e for e in events if e["type"] == "content_block_start" and e["content_block"]["type"] == "tool_use"]
-            starts[1]["content_block"]["id"] = starts[0]["content_block"]["id"]
-        if name in {"truncated", "refusal"}:
-            next(e for e in events if e["type"] == "message_delta")["delta"]["stop_reason"] = "max_tokens" if name == "truncated" else "refusal"
         result = assemble(events)
         trace.extend({"event": "provider_event", "data": e} for e in events)
         if result["status"] == "tool_calls":
@@ -280,8 +290,6 @@ def run_scenario(name, output):
                     value = json.loads("".join(b["text"] for b in final["content"]))
                 except ValueError as exc:
                     raise ProtocolError("final answer is not JSON") from exc
-                if name == "semantic-error":
-                    value["claims"][0]["limit_cny"] = 7000
                 evidence = {v["reference"]: v for v in observations.values()}
                 result["answer"] = validate_answer(value, evidence)
                 result["status"] = "answered"

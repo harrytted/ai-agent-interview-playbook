@@ -82,6 +82,15 @@ class SQLAgentLabTests(unittest.TestCase):
         self.assertIn("date_basis", card["missing"])
         self.assertIn("over_denominator", card["missing"])
 
+    def test_metric_dates_require_the_same_canonical_format_as_database_rows(self):
+        specification = {**PARAMETERS, "date_basis": "submitted_at", "amount_unit": "cents",
+                         "statuses": ["submitted", "approved"], "over_denominator": "known_amount_and_limit"}
+        for start, end in (("20261001", "20261101"), ("2026-W40-4", "2026-11-01"),
+                           ("2026-10-01", "20261101"), (True, "2026-11-01")):
+            with self.subTest(start=start, end=end), self.assertRaises(ValueError):
+                metric_card({**specification, "start": start, "end": end})
+        self.assertEqual(metric_card(specification)["status"], "ready")
+
     def test_equivalent_query_is_accepted_but_wrong_date_fails(self):
         # Aliases and an equivalent predicate order should not require exact SQL.
         equivalent = {"sql": CORRECT_SQL.replace("FROM applications", "FROM applications AS a").replace("status IN ('submitted', 'approved')", "status IN ('approved', 'submitted')")}
