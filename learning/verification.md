@@ -21,7 +21,7 @@
 | K13 | 余弦为归一化点积；RRF 可以融合排名 | [cosine 官方定义](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)、[Elastic RRF](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion) | 关注同语义空间、零向量处理与排名融合；算例常数为 60。 |
 | K14 | 重排只处理已召回的候选 | [Sentence Transformers retrieve/rerank](https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html) | 检查候选集合覆盖范围和最终 top-k 的证据完整性。 |
 | K15 | 存储记忆、检索和读入当前上下文是不同步骤 | [LangGraph Persistence](https://docs.langchain.com/oss/python/langgraph/persistence)、[上下文与窗口外笔记](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents) | 区分应用状态、窗口外存储与模型参数。 |
-| K16 | ReAct 是推理与行动的交替；文本反思未必更新权重 | [ReAct](https://arxiv.org/abs/2210.03629)、[Reflexion](https://arxiv.org/abs/2303.11366) | 理解反馈、情节记忆与参数更新的机制区别。 |
+| K16 | ReAct 是推理与行动的交替；文本反思未必更新权重 | [ReAct](https://arxiv.org/abs/2210.03629)、[Reflexion](https://arxiv.org/abs/2303.11366) | 理解反馈、情景记忆与参数更新的机制区别。 |
 | K17 | Agent 评测要区分任务、尝试、轨迹与环境终态 | [Anthropic agent evals](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | 用后端终态和执行轨迹共同判断任务结果。 |
 | K18 | 二值 gain 的 nDCG 用相应理想排序归一化 | [scikit-learn nDCG](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html) | 声明 gain、截断位置、空相关集合与汇总口径；算例约为 0.530721。 |
 | K19 | Judge 存在任务相关偏差，需人工校准 | [MT-Bench 原研究](https://arxiv.org/abs/2306.05685) | 检查位置、冗长与自我偏好，并用人工样本校准。 |

@@ -69,7 +69,7 @@
 | Generation（代际标识） | 在索引或媒体处理中区分一批版本或一轮输出的标识 | 具体含义由子系统规定；切换后仍需拒绝不适用的旧数据 | [进阶 14](../advanced/14-ingestion-and-index-lifecycle.md)、[18](../advanced/18-multimodal-and-realtime-agents.md) |
 | 双时间 | 同时记录事实何时有效，以及系统何时获知它 | 用今天的认知回答历史问题，可能与还原当时认知不同 | [进阶 04](../advanced/04-memory-and-skills.md)、[14](../advanced/14-ingestion-and-index-lifecycle.md) |
 | Grain（数据粒度） | 一行数据代表的业务单位，如申请或费用明细 | 不同粒度直接连接和聚合可能重复计数 | [进阶 15](../advanced/15-text-to-sql-and-data-analysis.md) |
-| Schema Linking（结构关联） | 把业务表述映射到真实的表、列与关联关系 | 找到字段还不足以确定指标分母与业务口径 | [进阶 15](../advanced/15-text-to-sql-and-data-analysis.md) |
+| Schema Linking（结构映射） | 把业务表述映射到真实的表、列与关联关系 | 找到字段还不足以确定指标分母与业务口径 | [进阶 15](../advanced/15-text-to-sql-and-data-analysis.md) |
 | Inbox / Outbox | 用持久记录管理已接收输入与待派发输出的模式 | 本地事务不能独自保证外部消息恰好送达一次 | [进阶 17](../advanced/17-event-driven-and-proactive-agents.md) |
 | Debounce（去抖） | 在声明的时间窗口内合并同一对象的密集变化 | 去抖窗口与事件去重、对象版本有不同职责 | [进阶 17](../advanced/17-event-driven-and-proactive-agents.md) |
 | OCR（光学字符识别） | 从图像中识别文字及其位置 | 识别结果可能有误，不能直接当作已核实业务事实 | [进阶 18](../advanced/18-multimodal-and-realtime-agents.md) |

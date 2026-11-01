@@ -109,7 +109,7 @@ python3 -m examples.policy_agent run --task 住宿金额核对 --variant stale-f
 
 ## 保存进度与核对终态
 
-本政策实验用`pending_calls`（待执行调用）和下一待执行索引保存调用队列位置。暂停后恢复，应复用已确认的结果；结果未知的写入先查询或对账，不能仅凭队列位置判断是否重做。累计六次决策预算也不能重置。其他运行时可以采用不同状态结构，可恢复不等于允许无限重试。
+本政策实验用`pending_calls`（待执行调用）和下一个待执行调用的索引保存队列位置。暂停后恢复，应复用已确认的结果；结果未知的写入先查询或对账，不能仅凭队列位置判断是否重做。累计六次决策预算也不能重置。其他运行时可以采用不同状态结构，可恢复不等于允许无限重试。
 
 查询任务看条款与比较结果，写入任务还要看后端对象。更完整的批准、结果未知与跨进程恢复在[政策实验](../examples/policy_agent/README.md)和[持久执行](../advanced/02-durable-execution.md)展开；这里先把每次决定怎样接到执行和下一轮输入讲清。
 
@@ -155,7 +155,7 @@ python3 -m examples.policy_agent run --task 住宿金额核对 --variant stale-f
 
 ### worked example：沿一次真实 trace 走到底
 
-以下回到旧执行器实验 `agent_lab/lab.py`，与前面的政策实验使用不同的事件名和计数。在仓库根目录执行：
+在仓库根目录运行旧执行器的正常场景：
 
 ```bash
 python3 examples/agent_lab/lab.py --scenario happy
