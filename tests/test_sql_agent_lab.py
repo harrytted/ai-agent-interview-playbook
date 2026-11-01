@@ -1,6 +1,8 @@
 from pathlib import Path
+import sqlite3
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from examples.sql_agent_lab.lab import (
     BROKEN_JOIN, CORRECT_SQL, DISTINCT_JOIN, Limits, PARAMETERS, SCENARIOS,
@@ -56,6 +58,23 @@ class SQLAgentLabTests(unittest.TestCase):
         before = self.source.read_bytes()
         with SQLSandbox(self.source) as db:
             self.assertNotEqual(db.execute("SELECT 1; DELETE FROM applications")["status"], "ok")
+            self.assertEqual(db.execute("SELECT COUNT(*) FROM applications")["rows"], [[3]])
+        self.assertEqual(self.source.read_bytes(), before)
+
+    def test_multiple_statement_errors_across_python_versions_leave_connection_usable(self):
+        message = "You can only execute one statement at a time."
+        before = self.source.read_bytes()
+        with SQLSandbox(self.source) as sandbox:
+            connection = sandbox.db
+            for error_type in (sqlite3.Warning, sqlite3.ProgrammingError):
+                with self.subTest(error_type=error_type.__name__):
+                    with patch.object(sandbox, "db", wraps=connection) as database:
+                        database.execute.side_effect = error_type(message)
+                        result = sandbox.execute("SELECT 1; DELETE FROM applications")
+                        self.assertEqual(result["status"], "invalid_sql")
+                        self.assertEqual(result["reason"], message)
+                        database.set_progress_handler.assert_called_with(None, 0)
+                    self.assertEqual(sandbox.execute("SELECT COUNT(*) FROM applications")["rows"], [[3]])
         self.assertEqual(self.source.read_bytes(), before)
 
     def test_step_row_and_text_limits_leave_connection_usable(self):

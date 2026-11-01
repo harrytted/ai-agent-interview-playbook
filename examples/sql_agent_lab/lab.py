@@ -176,7 +176,8 @@ class SQLSandbox:
             if len(rows) > limits.max_rows:
                 return {"status": "resource_limit", "reason": "result row limit", "steps_approximately": steps}
             return {"status": "ok", "columns": [column[0] for column in cursor.description], "rows": [list(row) for row in rows], "steps_approximately": steps, "scope": {"user": self.user, "tenant": self.tenant}}
-        except sqlite3.Error as error:
+        except (sqlite3.Error, sqlite3.Warning) as error:
+            # Python 3.10 reports multiple statements as Warning, not Error.
             message = str(error)
             status = "rejected" if self.denial else "resource_limit" if "interrupted" in message else "invalid_sql"
             return {"status": status, "reason": self.denial or message, "steps_approximately": steps}
