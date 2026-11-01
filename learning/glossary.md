@@ -4,6 +4,8 @@
 
 想查中英术语，或看看概念之间怎样连接，可以打开作者的 [AI 编程字典](https://agent.harrylab.cn/dictionary/)。查完一个词，再回到下表对应的学习章，把它放进实际执行过程里理解。
 
+## 基础概念
+
 | 术语 | 在本手册里指什么 | 关键边界 | 阅读 |
 | --- | --- | --- | --- |
 | LLM（大语言模型） | 处理上下文、生成输出的语言模型 | 生成文字不等于外部动作已执行 | [01](01-system-map.md) |
@@ -53,5 +55,27 @@
 | 身份认证 / 授权 / 批准 | 确认是谁 / 能做什么 / 是否同意本次具体动作 | 三者不能相互替代 | [10](10-reliability-and-security.md) |
 | Idempotency（幂等） | 同一操作重复执行的约定效果与执行一次相同 | 不要求响应相同；创建接口仍需规定作用域、期限与一致性 | [10](10-reliability-and-security.md) |
 | Prompt Injection（提示注入） | 不可信内容试图改变系统指令或行动的攻击 | 仅靠提示不形成完整执行边界 | [10](10-reliability-and-security.md) |
+
+## 工程与应用
+
+这些术语用于模型接入、数据处理、任务服务与媒体交互；阅读链接中的“进阶”指工程进阶章节。
+
+| 术语 | 在本手册里指什么 | 关键边界 | 阅读 |
+| --- | --- | --- | --- |
+| SDK（软件开发工具包） | 对某类接口的请求、响应和错误提供封装的代码库 | 封装不会替应用判断任务是否完成 | [进阶 13](../advanced/13-model-api-and-output-contracts.md) |
+| SSE（服务器发送事件） | 通过 HTTP 响应流传输文本事件的格式 | 网络分块、完整事件和完整工具参数不是同一个单位 | [进阶 13](../advanced/13-model-api-and-output-contracts.md) |
+| Stop Reason（结束原因） | 接口声明的本次模型输出停止原因 | 正常结束、截断、拒答与连接中断需分别处理 | [进阶 13](../advanced/13-model-api-and-output-contracts.md) |
+| Lineage（数据血缘） | 记录派生内容来自哪份原文、版本和处理过程的关系 | 文本相同不代表来源、权限或适用时间相同 | [进阶 14](../advanced/14-ingestion-and-index-lifecycle.md) |
+| Generation（代际标识） | 在索引或媒体处理中区分一批版本或一轮输出的标识 | 具体含义由子系统规定；切换后仍需拒绝不适用的旧数据 | [进阶 14](../advanced/14-ingestion-and-index-lifecycle.md)、[18](../advanced/18-multimodal-and-realtime-agents.md) |
+| 双时间 | 同时记录事实何时有效，以及系统何时获知它 | 用今天的认知回答历史问题，可能与还原当时认知不同 | [进阶 04](../advanced/04-memory-and-skills.md)、[14](../advanced/14-ingestion-and-index-lifecycle.md) |
+| Grain（数据粒度） | 一行数据代表的业务单位，如申请或费用明细 | 不同粒度直接连接和聚合可能重复计数 | [进阶 15](../advanced/15-text-to-sql-and-data-analysis.md) |
+| Schema Linking（结构关联） | 把业务表述映射到真实的表、列与关联关系 | 找到字段还不足以确定指标分母与业务口径 | [进阶 15](../advanced/15-text-to-sql-and-data-analysis.md) |
+| Inbox / Outbox | 用持久记录管理已接收输入与待派发输出的模式 | 本地事务不能独自保证外部消息恰好送达一次 | [进阶 17](../advanced/17-event-driven-and-proactive-agents.md) |
+| Debounce（去抖） | 在声明的时间窗口内合并同一对象的密集变化 | 去抖窗口与事件去重、对象版本有不同职责 | [进阶 17](../advanced/17-event-driven-and-proactive-agents.md) |
+| OCR（光学字符识别） | 从图像中识别文字及其位置 | 识别结果可能有误，不能直接当作已核实业务事实 | [进阶 18](../advanced/18-multimodal-and-realtime-agents.md) |
+| ASR / TTS | 将语音转为文字 / 将文字合成为语音 | 识别正确、内容正确与播放成功需分别核验 | [进阶 18](../advanced/18-multimodal-and-realtime-agents.md) |
+| Partial / Final Transcript（临时 / 最终转写） | 仍可能修订 / 已按当前识别协议定稿的转写 | 定稿不证明事实正确，也不等于用户批准写入 | [进阶 18](../advanced/18-multimodal-and-realtime-agents.md) |
+| VAD（语音活动检测） | 判断一段音频中是否存在语音活动的机制 | 检出语音不等于理解了用户意图 | [进阶 18](../advanced/18-multimodal-and-realtime-agents.md) |
+| Barge-in（插话打断） | 用户说话时中断助手当前语音输出的交互 | 取消生成之外，还需处理播放队列中的旧音频 | [进阶 18](../advanced/18-multimodal-and-realtime-agents.md) |
 
 [阅读目录](README.md) · [参考资料](verification.md)

@@ -279,7 +279,7 @@ dialog.diagram-lightbox {
   max-width: none;
   max-height: none;
   margin: 0;
-  padding: 3.5rem 1rem 1rem;
+  padding: calc(3.5rem + env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
   border: 0;
   background: transparent;
 }
@@ -294,35 +294,76 @@ dialog.diagram-lightbox[open] {
   background: rgb(15 23 42 / 88%);
 }
 
-.diagram-lightbox > img {
+.diagram-lightbox__viewport {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.diagram-lightbox__viewport > img {
   display: block;
   width: auto;
   height: auto;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  cursor: zoom-in;
+}
+
+.diagram-lightbox.is-zoomed .diagram-lightbox__viewport {
+  display: block;
+}
+
+.diagram-lightbox__viewport:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+}
+
+.diagram-lightbox.is-zoomed img {
+  max-width: none;
+  max-height: none;
+  margin-inline: auto;
   cursor: zoom-out;
 }
 
-.diagram-lightbox__close {
+.diagram-lightbox__close,
+.diagram-lightbox__zoom {
   position: fixed;
-  top: 0.65rem;
-  right: 0.65rem;
+  top: calc(0.65rem + env(safe-area-inset-top));
   display: grid;
   place-items: center;
-  width: 2.5rem;
   height: 2.5rem;
   padding: 0;
   border: 1px solid rgb(255 255 255 / 60%);
-  border-radius: 50%;
   background: #172938;
   color: #fff;
-  font-size: 2rem;
   line-height: 1;
   cursor: pointer;
 }
 
-.diagram-lightbox__close:focus-visible {
+.diagram-lightbox__close {
+  right: max(0.65rem, env(safe-area-inset-right));
+  width: 2.5rem;
+  border-radius: 50%;
+  font-size: 2rem;
+}
+
+.diagram-lightbox__zoom {
+  left: max(0.65rem, env(safe-area-inset-left));
+  padding-inline: 0.8rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.diagram-lightbox__close:focus-visible,
+.diagram-lightbox__zoom:focus-visible {
   outline: 3px solid #fff;
   outline-offset: 3px;
 }
@@ -596,10 +637,6 @@ dialog.diagram-lightbox[open] {
   .md-typeset {
     font-size: 16px;
     line-height: 1.8;
-  }
-
-  .md-typeset table:not([class]) {
-    min-width: 600px;
   }
 
   .md-typeset h1 {

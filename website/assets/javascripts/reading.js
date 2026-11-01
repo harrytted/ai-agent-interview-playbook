@@ -70,18 +70,41 @@
     closeButton.autofocus = true;
     closeButton.textContent = "×";
 
+    const zoomButton = document.createElement("button");
+    zoomButton.type = "button";
+    zoomButton.className = "diagram-lightbox__zoom";
+    zoomButton.title = "切换原图大小，可横向、纵向滚动查看";
+
+    const viewport = document.createElement("div");
+    viewport.className = "diagram-lightbox__viewport";
+    viewport.setAttribute("role", "region");
+    viewport.setAttribute("aria-label", "图片预览，原图模式可滚动查看");
     const preview = document.createElement("img");
-    dialog.append(closeButton, preview);
+    viewport.append(preview);
+    dialog.append(closeButton, zoomButton, viewport);
     document.body.append(dialog);
     let trigger;
 
+    const setZoom = zoomed => {
+      dialog.classList.toggle("is-zoomed", zoomed);
+      zoomButton.setAttribute("aria-pressed", String(zoomed));
+      zoomButton.textContent = zoomed ? "适应屏幕" : "原图大小";
+      viewport.tabIndex = zoomed ? 0 : -1;
+      viewport.scrollTo(0, 0);
+    };
+    const toggleZoom = () => setZoom(!dialog.classList.contains("is-zoomed"));
+    setZoom(false);
+
     closeButton.addEventListener("click", () => dialog.close());
+    zoomButton.addEventListener("click", toggleZoom);
+    preview.addEventListener("click", toggleZoom);
     dialog.addEventListener("click", event => {
-      if (event.target === dialog || event.target === preview) dialog.close();
+      if (event.target === dialog || event.target === viewport) dialog.close();
     });
     dialog.addEventListener("close", () => {
       document.documentElement.classList.remove("image-preview-open");
       preview.removeAttribute("src");
+      setZoom(false);
       trigger?.focus({ preventScroll: true });
     });
 
