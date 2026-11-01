@@ -8,7 +8,7 @@
 
 建议先读[模型接入](13-model-api-and-output-contracts.md)、[持久执行](02-durable-execution.md)和[安全治理](11-security-and-governance.md)。本章先完成16A只读服务，再完成16B批准、恢复与发布。学完后应能用真实 HTTP 提交任务、跨进程补参、解释结果未知，且不会把程序退出0或HTTP 202误报成“工单已创建”。
 
-本地实验使用 Python 标准库、SQLite 和一名后台 Worker，模型决策使用有限规则。它复用政策助手的虚构资料、适用日期与授权函数；工单是独立 SQLite 服务对象。Python 官方明确[http.server 不用于生产部署](https://docs.python.org/3.10/library/http.server.html)，本章用它暴露机制，生产认证、多实例、高可用与公网部署需要额外设计。
+本地实验使用 Python 标准库和 SQLite，由一个后台工作线程（Worker）推进任务；模型决策使用有限规则。它复用政策助手的虚构资料、适用日期与授权函数；工单是独立 SQLite 服务对象。Python 官方明确[http.server 不用于生产部署](https://docs.python.org/3.10/library/http.server.html)，本章用它暴露机制，生产认证、多实例、高可用与公网部署需要额外设计。
 
 ## 16A：先交付最小只读任务服务
 
@@ -73,7 +73,7 @@ curl -s -X POST http://127.0.0.1:8765/tasks/TASK_ID/reply \
 
 ### API与Worker如何避免覆盖彼此的更新
 
-只设一名Worker，API线程仍可能与它同时改同一任务。若两者各自读取旧JSON再覆盖保存，刚保存的取消可能被旧Worker状态覆盖。实验用 `BEGIN IMMEDIATE` 串行化“读当前任务→验证允许转换→写状态与事件”，所有修改入口都遵守同一个事务边界。
+即使只有一个后台工作线程，API 线程仍可能与它同时修改同一任务。若两者各自读取旧JSON再覆盖保存，刚保存的取消可能被旧Worker状态覆盖。实验用 `BEGIN IMMEDIATE` 串行化“读当前任务→验证允许转换→写状态与事件”，所有修改入口都遵守同一个事务边界。
 
 [SQLite事务文档](https://www.sqlite.org/lang_transaction.html)说明同时只能有一个写事务，IMMEDIATE会尝试先取得写事务。它能保护本地状态转换，不能把另一个数据库或远程API并进事务。本例还用POSIX文件锁限制同一数据目录只有一个服务进程；不提供多副本Worker抢占与分布式租约。
 
