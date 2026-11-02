@@ -254,6 +254,33 @@ textarea {
   height: auto;
 }
 
+/* Keep the diagram and its scroll hint together without widening the page. */
+.md-typeset .diagram-figure {
+  display: block;
+  max-width: 100%;
+  margin: 1.4em 0;
+}
+
+.diagram-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.md-typeset .diagram-scroll:focus-visible {
+  outline-offset: -3px;
+}
+
+.md-typeset .diagram-hint {
+  display: none;
+  margin-top: 0.55em;
+  color: var(--reading-muted);
+  font-size: 0.82em;
+  font-style: normal;
+  text-align: start;
+}
+
 .md-typeset a.diagram-zoom {
   display: inline-block;
   max-width: 100%;
@@ -420,7 +447,16 @@ dialog.diagram-lightbox[open] {
 }
 
 .md-typeset table:not([class]) td {
-  min-width: 8em;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Keep endpoint names intact; wide API tables use the existing local scroller. */
+.md-typeset table:not([class]) :not(pre) > code {
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 /* Inline code may wrap; executable blocks preserve whitespace and scroll. */
@@ -637,6 +673,20 @@ dialog.diagram-lightbox[open] {
   .md-typeset {
     font-size: 16px;
     line-height: 1.8;
+  }
+
+  .md-typeset .diagram-scroll > a {
+    display: block;
+    width: var(--diagram-mobile-width);
+    max-width: none;
+  }
+
+  .diagram-scroll img {
+    width: 100%;
+  }
+
+  .md-typeset .diagram-hint {
+    display: block;
   }
 
   .md-typeset h1 {

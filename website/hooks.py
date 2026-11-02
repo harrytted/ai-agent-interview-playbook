@@ -1,4 +1,4 @@
-"""Reserve diagram space and defer below-fold PNGs without modifying their pixels."""
+"""Size local PNGs and keep linked diagrams readable in a scrollable figure."""
 from html.parser import HTMLParser
 from pathlib import Path
 import re
@@ -13,6 +13,7 @@ class _Image(HTMLParser):
 
 def on_page_content(html, *, page, config, files):
     first_image = True
+    local_pngs = {}
     docs = Path(config["docs_dir"]).resolve()
 
     def enrich(match):
@@ -32,10 +33,36 @@ def on_page_content(html, *, page, config, files):
         if len(header) != 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
             return match[0]
         width, height = struct.unpack(">II", header[16:24])
+        local_pngs[attrs["src"]] = width
         defaults = {"width": str(width), "height": str(height),
                     "loading": "eager" if first_image else "lazy", "decoding": "async"}
         first_image = False
         additions = "".join(f' {name}="{value}"' for name, value in defaults.items() if name not in attrs)
         return re.sub(r"\s*/?>$", lambda ending: additions + ending[0], match[0])
 
-    return re.sub(r"<img\b[^>]*>", enrich, html, flags=re.I)
+    html = re.sub(r"<img\b[^>]*>", enrich, html, flags=re.I)
+
+    def readable_diagram(match):
+        image = _Image()
+        image.feed(match["image"])
+        link = _Image()
+        link.feed(match["open"])
+        src = image.attrs.get("src", "")
+        if src not in local_pngs or link.attrs.get("href") != src:
+            return match[0]
+        # Only standalone links to their own local PNG become figures. Inline
+        # illustrations and images that navigate elsewhere retain their meaning.
+        width = min(720, local_pngs[src])
+        return (
+            f'<figure class="diagram-figure" style="--diagram-mobile-width: {width}px">'
+            '<div class="diagram-scroll" tabindex="0" role="region" '
+            'aria-label="图表，可左右滚动查看">'
+            + match["link"] + '</div>'
+            '<figcaption class="diagram-hint">左右滑动查看全图，也可点击图片放大。</figcaption>'
+            '</figure>'
+        )
+
+    return re.sub(
+        r'<p>\s*(?P<link>(?P<open><a\b[^>]*>)\s*(?P<image><img\b[^>]*>)\s*</a>)\s*</p>',
+        readable_diagram, html, flags=re.I,
+    )

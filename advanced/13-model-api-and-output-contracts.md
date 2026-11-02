@@ -78,7 +78,7 @@ SSE行：event: ... / data: ... / 空行 → 一条协议事件
 消息结束：stop_reason + message_stop → 决定是否允许调度
 ```
 
-[![网络字节经UTF-8解码、SSE事件划分和按块索引拼接后，检查整条消息；正常工具结束还需宿主校验，截断、拒答或断流停止记录。](../website/assets/diagrams/advanced/A13B-stream-assembly.png)](../website/assets/diagrams/advanced/A13B-stream-assembly.png)
+[![网络字节经UTF-8解码、SSE事件划分和按块索引拼接后，检查整条消息；完整tool_use工具请求仍需宿主校验，截断、拒答或断流停止记录。](../website/assets/diagrams/advanced/A13B-stream-assembly.png)](../website/assets/diagrams/advanced/A13B-stream-assembly.png)
 
 从左向右分别对应字节、事件、内容块与整条消息四种边界。参数拼完还不能立即执行，必须等结束原因与宿主校验都通过。
 

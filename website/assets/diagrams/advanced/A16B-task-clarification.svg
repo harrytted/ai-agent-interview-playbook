@@ -15,8 +15,8 @@
 <path d="M 1082.0 290 H 1122.0" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A16B-teal)"/>
 <path d="M 700.0 340 L 205.0 540" fill="none" stroke="#B56B26" stroke-width="3" marker-end="url(#A16B-orange)"/>
 <text x="452.5" y="432.0" text-anchor="middle" class="arrow-label">否 / 异常</text>
-<path d="M 205.0 640 V 730 H 432.0 V 340" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A16B-teal)"/>
-<text x="318.5" y="432.0" text-anchor="middle" class="arrow-label">收到日期回复，沿用原任务</text>
+<path d="M 50 590 H 20 V 190 H 432 V 232" fill="none" stroke="#087F86" stroke-width="3" marker-end="url(#A16B-teal)"/>
+<text x="226" y="178" text-anchor="middle" class="arrow-label">收到日期回复，沿用原任务</text>
 <rect x="50.0" y="240" width="228.0" height="100" rx="12" fill="#EAF8F7" stroke="#087F86" stroke-width="2"/>
 <text x="164.0" y="284" text-anchor="middle" class="body">可靠接收</text>
 <text x="164.0" y="312" text-anchor="middle" class="body">202 + 任务ID</text>

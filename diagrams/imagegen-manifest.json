@@ -267,9 +267,10 @@
       "topic": "持久接收、写准备、派发边界、业务确认与原意图恢复",
       "width": 1536,
       "height": 1024,
-      "sha256": "d891d568fdde15e6008ed1ebb3e8ea35cd1feecf69571621f0df0dd1c6212622",
-      "prompt_record": "diagrams/advanced-imagegen-A13-A18.md",
-      "generated_on": "2026-11-01"
+      "sha256": "6472ae7e548f7104a14d24b83d21e2b5da0acfbb024a58f860dc25921f53c174",
+      "prompt_record": "diagrams/reading-layout-image-edits.md",
+      "generated_on": "2026-11-01",
+      "revised_on": "2026-11-02"
     },
     {
       "id": "A17",
@@ -300,9 +301,10 @@
       "topic": "网络字节、UTF-8、SSE、内容块与整条消息结束的分层重组",
       "width": 1536,
       "height": 1024,
-      "sha256": "e058913280927a70a9fd0069d3ef7745985776f4940caf882674fda381b226da",
-      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
-      "generated_on": "2026-11-01"
+      "sha256": "48a9069476bb791c5f3a863fba184c72f21d7b6664a32ae55b070c6e9f5969d4",
+      "prompt_record": "diagrams/reading-layout-image-edits.md",
+      "generated_on": "2026-11-01",
+      "revised_on": "2026-11-02"
     },
     {
       "id": "A13C",
@@ -366,9 +368,10 @@
       "topic": "接收、持久等待、补日期、重新排队与累计预算延续",
       "width": 1536,
       "height": 1024,
-      "sha256": "e8ef34c6bf9c9f8308f2318a03271aa7f39d2773a11cf61e6780e456b9b8cfce",
-      "prompt_record": "diagrams/advanced-imagegen-A13-A18-details.md",
-      "generated_on": "2026-11-01"
+      "sha256": "01f126d72d433dbdba87c9c1326231f830d71ed6d9e6f8f6054e35016998b3b2",
+      "prompt_record": "diagrams/reading-layout-image-edits.md",
+      "generated_on": "2026-11-01",
+      "revised_on": "2026-11-02"
     },
     {
       "id": "A16C",
