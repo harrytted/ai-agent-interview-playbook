@@ -1,5 +1,5 @@
 site_name: Agent 学习手册
-site_description: 从基础原理到工程进阶，配合 110 道详解面试题与 Python 实验，系统学习 AI Agent。
+site_description: AI Agent 中文学习与面试手册：10 章基础、18 章进阶、110 道详解题，配合图解、Python 实验与三题试读。
 site_url: https://harrytted.github.io/ai-agent-interview-playbook/
 repo_url: https://github.com/harrytted/ai-agent-interview-playbook
 repo_name: GitHub 仓库
@@ -109,6 +109,7 @@ nav:
       - 官方知识体系: advanced/official-learning-map.md
   - 面试题库:
       - questions/index.md
+      - 三题试读: practice/three-question-preview.md
       - 题目与章节对照: docs/question-index.md
       - 学习路线与冲刺: docs/00-roadmap.md
       - 基础原理:
