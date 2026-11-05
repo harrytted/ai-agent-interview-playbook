@@ -17,6 +17,7 @@ python3 -m unittest discover -s tests -p 'test_service_lab.py' -v
 | approval-correction | 获批后改城市，旧批准失效、旧证据清除、取消不创建对象 |
 | crash-recovery | 独立业务库已提交，本地未确认；重启按原意图只确认一个对象 |
 | release-rollback | 坏候选不激活、已发任务绑定版本、新入口切换/回退 |
+| authorization-revocation | 旧任务等待后撤权、旧草稿遮蔽、批准拒绝、回退旧release仍拒绝 |
 
 服务演示：
 
@@ -28,14 +29,20 @@ python3 -m examples.service_lab.lab serve --root .local/service_lab/server --por
 
 `POST /tasks`需 `Idempotency-Key`，JSON字段仅 `city`（海岚/云洲）、可选 `trip_date`、`amount_cny`、`reason`、`mode`（query/ticket）。服务拒绝客户端自填身份。`GET /tasks/{id}` 与 `/events`仅本人可读；`/metrics`仅本人聚合。POST后不保证Worker已经完成。
 
-后续动作：`reply`只补缺日期；`correct`改city/trip_date/amount_cny/reason，递增revision并重新取证；`approve`提交当前草稿的request_id和payload_hash；`cancel`、`resume`提交空JSON对象。批准核对后先进入 `write_prepared`，此时取消/更正能阻止派发；Worker下一事务提交 `dispatch_committed`并进入writing后才接管派发，这次事务提交是本地线性化边界。在途写不允许直接更正；结果未知必须用原操作ID核对。取消后只查询已有对象，查无结果仍未知、不新建；未取消的恢复可按原操作ID幂等重试。取消不等于对象被删除。
+后续动作：`reply`只补缺日期；`correct`改city/trip_date/amount_cny/reason，递增revision并重新取证；`approve`提交当前草稿的request_id和payload_hash；`cancel`、`resume`提交空JSON对象。批准核对后先进入 `write_prepared`，此时取消/更正能阻止派发；Worker下一事务提交 `dispatch_committed`并进入writing后才接管派发，这次事务提交是本地线性化边界。在途写不允许直接更正；结果未知必须用原操作ID核对。取消或撤权后只查询已有对象，查无结果仍未知、不新建；只有未取消、当前授权仍有效且符合服务幂等合同时，才按原操作ID重试。取消或撤权不等于对象被删除。
 
 `POST /releases`只允许 `demo-operator`，body为 `{version:"v2",policies:[...],activate:false}`（实际发送合法JSON）。所有条目的必要结构和三个固定Alice政策查询通过后方可登记，查询使用实际授权与适用逻辑，空权限或异租户也会阻断；`{version:"v2"}`激活，`{version:"v1"}`回退。合法撤权应另有预期拒绝的发布验收，不能静默改掉本固定成功集。门槛是固定smoke，不证明全部政策语义、Embedding或模型质量。Operator不能读取用户任务。
 
 `activate`只接受JSON布尔值 `true` / `false`；字符串 `"false"`、数字及空值会在候选登记和版本切换前被拒绝，避免把非空字符串误当作激活指令。
 
+内容与当前授权独立保存：`document_access`以跨版本的`policy_id`（如P17）记录允许角色，`access_revision`为当前修订。可信宿主在运行中的Engine上调用`set_document_access("P17", [])`撤权；调用`set_document_access("P17", ["staff", "manager"])`才是显式重新授权。此入口未暴露为HTTP API，不能让普通请求决定身份或目录。首次初始化只从教材数据建目录；重启、登记release和回退均不会复活旧资格，新policy_id需另行配置。
+
+`GET`、重复提交与动作响应返回当前过滤视图；`access_status=blocked`时隐藏证据、待批草稿、批准与政策派生结果。历史事件只保留状态、时间和对象身份等允许字段。已确认的业务对象仍保留object_id/operation_id/tenant_id及真实执行终态，`content_redacted=true`说明正文被遮蔽，不代表对象被删除。受信磁盘账本及导出审计副本仍可含历史内容，本实验不做安全擦除或已返回文本的回收。
+
+权限更新和派发提交在同一任务库串行化：撤权先提交可阻止新派发；派发先提交的请求仍可能完成，之后只按真实结果记账。恢复查到已有对象可对账，撤权后查不到则保持未知，不发起新建。`access_blocked`在显式重授后可用resume继续原任务，累计预算不重置。此处未连接14章Pipeline，但已把“固定内容与当前授权分离”的合同接到任务返回、批准与恢复。
+
 故障注入必须显式 `--allow-faults` 后，提交 `fault:"after_remote_commit"`；默认Worker记录故障并停止。仅在临时实验目录显式加 `--crash-once` 时，服务会在该窗口真实退出73。保留root，用相同root重新启动，查询得到 `write_outcome_unknown`；`resume`确认原对象。自动测试已覆盖这条真实跨进程路径。
 
-容量与边界：一Worker、每任务最多8次决策/12次工具派发；固定日期和城市政策读取，等待人工不占Worker。数据库事务串行化API/Worker状态更新；业务库与任务库没有共同事务。没有生产认证、HTTP TLS、完整浏览器UI、外部消息通知、远程上下文删除、多实例调度、自动补偿或真实模型质量证明。
+容量与边界：一Worker、每任务最多8次决策/12次工具派发；固定日期和城市政策读取，等待人工不占Worker。数据库事务串行化API/Worker状态更新；业务库与任务库没有共同事务。当前文档目录是受信本地源，没有远程ACL同步、生产认证、HTTP TLS、完整浏览器UI、外部消息通知、远程上下文删除、多实例调度、自动补偿或真实模型质量证明。
 
 [学习章16](../../advanced/16-service-deployment-and-operations.md) · [题源Q102–Q104](../../docs/advanced/16-service-deployment-and-operations.md) · [原政策助手](../policy_agent/README.md)

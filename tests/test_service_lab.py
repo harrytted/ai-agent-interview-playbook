@@ -13,7 +13,7 @@ from unittest.mock import patch
 from examples.policy_agent import core
 from examples.policy_agent.storage import Stores, canonical
 from examples.service_lab.lab import Client, run_scenario, running
-from examples.service_lab.service import Engine
+from examples.service_lab.service import Engine, InjectedCrash, APIError
 
 ROOT = Path(__file__).resolve().parents[1]
 BODY = {"city": "海岚", "trip_date": "2026-11-12"}
@@ -28,8 +28,143 @@ class ServiceLabTests(unittest.TestCase):
         self.temp.cleanup()
 
     def test_all_bounded_real_http_scenarios(self):
-        for name in ("normal", "duplicate-isolation", "clarification-restart", "approval-correction", "crash-recovery", "release-rollback"):
+        for name in ("normal", "duplicate-isolation", "clarification-restart", "approval-correction", "crash-recovery", "release-rollback", "authorization-revocation"):
             self.assertTrue(run_scenario(name, self.root)["passed"], name)
+
+    def test_revoked_policy_family_survives_restart_and_old_release_rollback(self):
+        engine = Engine(self.root)
+        task, _ = engine.submit("alice", "U001", "waiting-acl", {"city": "海岚"})
+        engine.step()
+        engine.release({"version": "v2", "policies": core.read_json(core.DATA / "policies.json")})
+        revision = engine.set_document_access("P17", [])
+        engine.release({"version": "v1"})
+        engine.close()
+        engine = Engine(self.root)
+        try:
+            engine.action("alice", task["id"], "reply", {"trip_date": "2026-11-12"})
+            engine.step()
+            blocked = engine.get("alice", task["id"])
+            self.assertEqual(blocked["status"], "access_blocked")
+            self.assertEqual(blocked["manifest"]["release"], "v1")
+            self.assertEqual(blocked["access_revision"], revision)
+            self.assertIsNone(blocked["result"])
+            # Explicit host re-grant, rather than activation, permits continuation.
+            engine.set_document_access("P17", ["staff", "manager"])
+            engine.action("alice", task["id"], "resume", {})
+            engine.step()
+            self.assertEqual(engine.get("alice", task["id"])["result"]["limit_cny"], 700)
+        finally:
+            engine.close()
+
+    def test_revocation_redacts_old_answer_draft_events_and_idempotent_replay(self):
+        engine = Engine(self.root)
+        try:
+            task_id = engine.submit("alice", "U001", "answer-before-revoke", BODY)[0]["id"]
+            engine.step()
+            draft_id = engine.submit("alice", "U001", "draft-before-revoke", {**BODY, "mode": "ticket"})[0]["id"]
+            engine.step()
+            draft = engine.get("alice", draft_id)["draft"]
+            with engine.db() as db:
+                task = engine._owned(db, task_id, "alice")
+                engine._save(db, task, "test_sensitive_event", policy_text="restricted clause 700")
+            engine.set_document_access("P17", [])
+            for identifier in (task_id, draft_id):
+                visible = engine.get("alice", identifier)
+                self.assertEqual(visible["access_status"], "blocked")
+                self.assertIsNone(visible["result"])
+                self.assertIsNone(visible["draft"])
+                self.assertEqual(visible["evidence"], [])
+            events = engine.get("alice", task_id, events=True)
+            self.assertNotIn("restricted clause", json.dumps(events))
+            replay = engine.submit("alice", "U001", "answer-before-revoke", BODY)[0]
+            self.assertIsNone(replay["result"])
+            with self.assertRaises(APIError) as caught:
+                engine.action("alice", draft_id, "approve", {k: draft[k] for k in ("request_id", "payload_hash")})
+            self.assertEqual(caught.exception.code, 403)
+            self.assertEqual(Stores(self.root / "business").snapshot(), [])
+        finally:
+            engine.close()
+
+    def test_revocation_between_prepare_and_dispatch_stops_new_write(self):
+        engine = Engine(self.root)
+        try:
+            task, _ = engine.submit("alice", "U001", "prepared-acl", {**BODY, "mode": "ticket"})
+            engine.step()
+            draft = engine.get("alice", task["id"])["draft"]
+            engine.action("alice", task["id"], "approve", {k: draft[k] for k in ("request_id", "payload_hash")})
+            engine.step()
+            self.assertEqual(engine.get("alice", task["id"])["status"], "write_prepared")
+            engine.set_document_access("P17", [])
+            engine.step()
+            self.assertEqual(engine.get("alice", task["id"])["status"], "access_blocked")
+            self.assertEqual(Stores(self.root / "business").snapshot(), [])
+        finally:
+            engine.close()
+
+    def test_unverifiable_release_never_exposes_saved_answer_or_draft(self):
+        engine = Engine(self.root)
+        try:
+            for mode in ("query", "ticket"):
+                task, _ = engine.submit("alice", "U001", "invalid-release-" + mode, {**BODY, "mode": mode})
+                engine.step()
+                with engine.db() as db:
+                    state = engine._owned(db, task["id"], "alice")
+                    state["manifest"]["index_hash"] = "not-the-recorded-release"
+                    engine._save(db, state, "test_manifest_mismatch")
+                visible = engine.get("alice", task["id"])
+                self.assertEqual(visible["access_status"], "blocked")
+                self.assertIsNone(visible["result"])
+                self.assertIsNone(visible["draft"])
+            with engine.db() as db:
+                db.execute("DELETE FROM releases WHERE version='v1'")
+            self.assertEqual(engine.get("alice", task["id"])["access_status"], "blocked")
+        finally:
+            engine.close()
+
+    def test_revoked_unknown_write_reconciles_actual_object_without_disclosing_policy(self):
+        engine = Engine(self.root, allow_faults=True)
+        task, _ = engine.submit("alice", "U001", "unknown-acl", {**BODY, "mode": "ticket", "fault": "after_remote_commit"})
+        engine.step()
+        draft = engine.get("alice", task["id"])["draft"]
+        engine.action("alice", task["id"], "approve", {k: draft[k] for k in ("request_id", "payload_hash")})
+        engine.step()
+        with self.assertRaises(InjectedCrash):
+            engine.step()
+        engine.set_document_access("P17", [])
+        engine.close()
+        engine = Engine(self.root)
+        try:
+            engine.action("alice", task["id"], "resume", {})
+            engine.step()
+            visible = engine.get("alice", task["id"])
+            self.assertEqual(visible["status"], "write_succeeded")
+            self.assertEqual(visible["access_status"], "blocked")
+            self.assertTrue(visible["result"]["content_redacted"])
+            self.assertEqual(set(visible["result"]["object"]), {"object_id", "operation_id", "tenant_id"})
+            self.assertIsNone(visible["draft"])
+            self.assertEqual(len(Stores(self.root / "business").snapshot()), 1)
+        finally:
+            engine.close()
+
+    def test_revoked_unknown_absence_never_dispatches_a_fresh_retry(self):
+        engine = Engine(self.root)
+        try:
+            task, _ = engine.submit("alice", "U001", "absent-acl", {**BODY, "mode": "ticket"})
+            engine.step()
+            draft = engine.get("alice", task["id"])["draft"]
+            engine.action("alice", task["id"], "approve", {k: draft[k] for k in ("request_id", "payload_hash")})
+            engine.step()
+            with engine.db() as db:
+                state = engine._owned(db, task["id"], "alice")
+                state["status"] = "write_outcome_unknown"
+                engine._save(db, state, "test_unknown_before_observation")
+            engine.set_document_access("P17", [])
+            engine.action("alice", task["id"], "resume", {})
+            engine.step()
+            self.assertEqual(engine.get("alice", task["id"])["status"], "write_outcome_unknown")
+            self.assertEqual(Stores(self.root / "business").snapshot(), [])
+        finally:
+            engine.close()
 
     def test_concurrent_duplicate_acceptance_is_atomic_and_owner_scoped(self):
         with running(self.root) as (engine, base):

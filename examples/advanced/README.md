@@ -20,6 +20,26 @@ python3 examples/advanced/runtime_lab.py --scenario all
 
 `relative_advantages` 使用组均值和总体标准差，奖励 `[0,0,1,1]` 对应 `[-1,-1,1,1]`；同分组返回全 0。这里展示奖励的相对化步骤，完整 GRPO 还包括策略概率、裁剪、正则项与参数更新。
 
+## 配对改进与不确定性
+
+```bash
+python3 examples/advanced/evaluation_lab.py
+python3 -m unittest discover -s tests -p 'test_evaluation_lab.py' -v
+```
+
+默认12对标签由作者手工编写，基线成功6题、候选8题，其中修复3题、退步1题。脚本实际复算约16.7个百分点的配对差、McNemar双侧精确p值0.625，以及按整对任务重采样的百分位区间。默认2000次、种子7时区间约为[-16.7,50.0]个百分点；这是教学结果，不是模型实测提升。
+
+结果包含修复/退步ID及采样配置。可用`--input .local/paired-outcomes.json`读取自己已判定的任务对，每项须有唯一`task_id`与布尔字段`baseline`、`candidate`。缺失或未判定不能隐式变成False；任务独立性、近重复分组及多次尝试协议需要由评测者先明确。小样本百分位区间不保证稳定覆盖；全同分的退化区间也不证明总体等价。完整手算与解释见[评测章](../../advanced/09-evaluation-and-feedback.md#成功率提高后还要看配对差异与不确定性)。
+
+## 训练目标与一次参数更新
+
+```bash
+python3 examples/advanced/training_objectives.py --section all
+python3 -m unittest discover -s tests -p 'test_training_objectives.py' -v
+```
+
+新的[训练目标实验](training-objectives.md)把两轮模型动作与工具观察分开，计算带掩码的SFT损失，再检查正/负优势、概率比裁剪与明确方向的KL正则。独立二值状态上的解析梯度与有限差分对照，随后做一次小步参数更新。它验证教学目标的计算，不是完整GRPO或语言模型训练；输入概率、标签与优势均为教学设定。
+
 ## 预算与调度算例
 
 台账中的单位是预留额度，不是自动读取的模型 token 或账单；同一个预留 ID 重放不重复扣额，更换预留量会拒绝。台账顺序执行；多 Worker 服务应使用具备并发一致性的共享存储。

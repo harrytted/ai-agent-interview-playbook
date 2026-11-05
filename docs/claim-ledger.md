@@ -22,5 +22,11 @@
 | 固定策略的离线循环只能演示其实际控制逻辑 | [本仓库实验边界](engineering/08-project-lab.md)、[项目表达与测试](engineering/07-system-design-and-projects.md) | 脚本策略、关键词检索、执行器合同与可扩展实现。 |
 | 系统设计与项目实验 | [基础编排练习](foundations/02-planning-and-orchestration.md)、[系统设计练习](engineering/07-system-design-and-projects.md)、[7 天实验](engineering/08-project-lab.md) | 结合任务约束设计状态、容量、期限和验收条件。 |
 | GitHub 项目统计与版本信息 | [调研口径](../research/github-survey.md)、[机器可读来源快照](../research/sources.json) | 页面 Star 快照、分支和来源元数据见调研报告。 |
+| SFT 动作目标需与环境观察区分 | [TRL SFT Trainer](https://huggingface.co/docs/trl/sft_trainer)、[本手册小实验](../examples/advanced/training-objectives.md) | Q090；目标 mask 与标签预测位置对齐，观察仍作条件输入；assistant-only loss 需要模板支持，不把本例合同当成所有 SFT 默认行为。 |
+| 概率比与正负优势共同决定裁剪，完整目标还需声明正则和均值单位 | [DeepSeekMath v3 §4.1](https://arxiv.org/html/2402.03300v3#S4.SS1)、[TRL Loss Types](https://huggingface.co/docs/trl/grpo_trainer#loss-types) | Q091；小策略使用已给定优势、一动作状态等权与精确二元 KL；一次目标下降不等于复现完整 GRPO，更不能证明真实 LLM 变好。 |
+| Agent Lightning v1 的样本选择与一般保留建议是不同来源 | [技术报告 v1 §3.2](https://arxiv.org/html/2608.17528v1#S3.SS2)、[官方 README](https://raw.githubusercontent.com/microsoft/agent-lightning/main/README.md) | Q092；报告对同 rollout 相同 prompt 只留最后一个 `model_request`；本手册另提审计保留建议。旧版（legacy）的实际分支名是 `v0.x`。 |
+| 配对版本比较需检查不一致对、区间与独立样本单位 | [statsmodels McNemar](https://www.statsmodels.org/stable/generated/statsmodels.stats.contingency_tables.mcnemar.html)、[SciPy bootstrap](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html) | 评测进阶；exact 条件二项检验与相同索引配对重采样。教学手写夹具不是模型实测，percentile 不是优于 BCa 的结论。 |
+
+新增训练与配对统计条目的实现文档、README 于 2026-11-05 核对，仍是可变入口；方法论文分别固定为 DeepSeekMath v3 与 Agent Lightning v1.0 技术报告 v1。规范支持版本行为，原论文支持方法，代码实验支持本例计算；这些证据不替代真实任务效果或读者学习效果的验证。
 
 [仓库首页](../README.md) · [GitHub 调研](../research/github-survey.md)
