@@ -25,7 +25,7 @@ from examples.policy_agent.storage import Stores, canonical, fingerprint
 TOKENS = {"demo-alice": ("alice", "U001"), "demo-bob": ("bob", "U002")}
 PROMPT = "Read applicable authorized lodging policy; never infer reimbursement approval."
 TOOL_CONTRACT = {"read": "authorized policy by business date", "write": "approved consultation draft v1"}
-TERMINAL = {"answered", "write_succeeded", "cancelled", "insufficient_evidence", "budget_exhausted", "blocked_version"}
+TERMINAL = {"answered", "write_succeeded", "cancelled", "insufficient_evidence", "budget_exhausted", "blocked_version", "access_blocked"}
 
 
 class APIError(ValueError):
@@ -86,11 +86,20 @@ class Engine:
                 CREATE TABLE IF NOT EXISTS releases (
                     version TEXT PRIMARY KEY, manifest TEXT NOT NULL, policies TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS document_access (
+                    policy_id TEXT PRIMARY KEY, allowed_roles TEXT NOT NULL);
             """)
             if not db.execute("SELECT 1 FROM releases LIMIT 1").fetchone():
                 policies = core.read_json(core.DATA / "policies.json")
                 self._insert_release(db, "v1", policies)
                 db.execute("INSERT INTO settings VALUES ('active','v1')")
+            # Bootstrap once, including upgrades of an existing teaching root.
+            # A restart or release rollback must never re-grant revoked access.
+            if not db.execute("SELECT 1 FROM settings WHERE key='access_revision'").fetchone():
+                for document in core.read_json(core.DATA / "policies.json"):
+                    db.execute("INSERT OR IGNORE INTO document_access VALUES (?,?)",
+                               (document["policy_id"], canonical(document["allowed_roles"])))
+                db.execute("INSERT INTO settings VALUES ('access_revision','1')")
             for row in db.execute("SELECT id,body FROM tasks").fetchall():
                 task = json.loads(row["body"])
                 if task["status"] in {"writing", "reconciling"}:
@@ -127,6 +136,72 @@ class Engine:
             raise APIError(404, "task not found")
         return json.loads(row["body"])
 
+    def _access_revision(self, db):
+        return int(db.execute("SELECT value FROM settings WHERE key='access_revision'").fetchone()[0])
+
+    def set_document_access(self, policy_id, allowed_roles):
+        """Trusted local host control, deliberately not a public HTTP endpoint.
+
+        policy_id spans content versions. Release registration/activation cannot
+        change this directory; re-granting requires another explicit host call.
+        """
+        if (not isinstance(policy_id, str) or not policy_id
+                or not isinstance(allowed_roles, list)
+                or any(not isinstance(role, str) or not role or len(role) > 64 for role in allowed_roles)):
+            raise ValueError("policy identity and explicit role list required")
+        with self.db() as db:
+            db.execute("BEGIN IMMEDIATE")
+            db.execute("INSERT INTO document_access VALUES (?,?) ON CONFLICT(policy_id) "
+                       "DO UPDATE SET allowed_roles=excluded.allowed_roles",
+                       (policy_id, canonical(sorted(set(allowed_roles)))))
+            revision = self._access_revision(db) + 1
+            db.execute("UPDATE settings SET value=? WHERE key='access_revision'", (str(revision),))
+        self.wake.set()
+        return revision
+
+    def _release_documents(self, db, task):
+        row = db.execute("SELECT policies,manifest FROM releases WHERE version=?", (task["manifest"]["release"],)).fetchone()
+        if not row or json.loads(row["manifest"]) != task["manifest"]:
+            return None
+        return json.loads(row["policies"])
+
+    def _document_allowed(self, db, document, user):
+        access = db.execute("SELECT allowed_roles FROM document_access WHERE policy_id=?", (document["policy_id"],)).fetchone()
+        return bool(access and core.is_authorized(document, user) and user["role"] in json.loads(access[0]))
+
+    def _task_access_allowed(self, db, task):
+        user = core.read_json(core.USER_FILE).get(task["user_id"])
+        if not user or user["tenant_id"] != "demo-a" or user["role"] not in {"staff", "manager"}:
+            return False
+        documents = self._release_documents(db, task)
+        if documents is None:
+            return False  # Unknown provenance cannot authorize saved content.
+        ids = {e["document_id"] for e in task["evidence"]}
+        if ids:
+            related = [d for d in documents if d["document_id"] in ids]
+            return len(related) == len(ids) and all(self._document_allowed(db, d, user)
+                and (d["topic"] != "lodging" or d["employee_category"] == user["employee_category"]) for d in related)
+        related = [d for d in documents if d["topic"] == "lodging" and d["city"] == task["spec"]["city"]
+                   and d["employee_category"] == user["employee_category"]]
+        # Before evidence exists (including a missing-date wait), access to the
+        # relevant policy family is still current, never inherited from release.
+        return all(self._document_allowed(db, d, user) for d in related)
+
+    def _public_task(self, db, task):
+        visible = deepcopy(task)
+        allowed = self._task_access_allowed(db, task)
+        visible.update(access_revision=self._access_revision(db), access_status="allowed" if allowed else "blocked")
+        if not allowed:
+            visible.update(evidence=[], draft=None, approval=None, result=None)
+            # Retain the fact and identity of an actual side effect, while hiding
+            # policy-derived content. A revoked document does not erase a ticket.
+            result = task.get("result") or {}
+            ticket = result.get("object")
+            if ticket:
+                visible["result"] = {"object": {key: ticket[key] for key in ("object_id", "operation_id", "tenant_id")},
+                                     "cancel_requested": task["cancel_requested"], "content_redacted": True}
+        return visible
+
     def submit(self, owner, user_id, idem, value):
         spec = validate_spec(value)
         if "fault" in spec and not self.allow_faults:
@@ -141,7 +216,7 @@ class Engine:
             if row:
                 if row["request_hash"] != digest:
                     raise APIError(409, "same key with different initial request")
-                return json.loads(row["body"]), True
+                return self._public_task(db, json.loads(row["body"])), True
             release = db.execute("SELECT value FROM settings WHERE key='active'").fetchone()[0]
             manifest = json.loads(db.execute("SELECT manifest FROM releases WHERE version=?", (release,)).fetchone()[0])
             task_id = uuid.uuid4().hex
@@ -153,14 +228,21 @@ class Engine:
             self._save(db, task, "accepted", initial_request_hash=digest)
         # No run directory or execution exists before the acceptance transaction commits.
         self.wake.set()
-        return task, False
+        with self.db() as db:
+            db.execute("BEGIN")
+            return self._public_task(db, task), False
 
     def get(self, owner, task_id, events=False):
         with self.db() as db:
+            db.execute("BEGIN")  # Task and current ACL share one read snapshot.
             task = self._owned(db, task_id, owner)
             if events:
-                return [{"seq": row["seq"], **json.loads(row["body"])} for row in db.execute("SELECT seq,body FROM events WHERE task_id=? ORDER BY seq", (task_id,))]
-            return task
+                result = [{"seq": row["seq"], **json.loads(row["body"])} for row in db.execute("SELECT seq,body FROM events WHERE task_id=? ORDER BY seq", (task_id,))]
+                if not self._task_access_allowed(db, task):
+                    result = [{**{k: v for k, v in event.items() if k in {"seq", "event", "revision", "status", "at", "object_id"}},
+                               "content_redacted": True, "access_revision": self._access_revision(db)} for event in result]
+                return result
+            return self._public_task(db, task)
 
     def action(self, owner, task_id, action, value):
         if not isinstance(value, dict):
@@ -168,6 +250,8 @@ class Engine:
         with self.db() as db:
             db.execute("BEGIN IMMEDIATE")
             task = self._owned(db, task_id, owner)
+            if action == "approve" and not self._task_access_allowed(db, task):
+                raise APIError(403, "current document access does not permit this approval")
             if action in {"reply", "correct"}:
                 if task["status"] in {"writing", "reconciling", "write_outcome_unknown", "write_succeeded", "cancelled", "blocked_version"}:
                     raise APIError(409, "cannot revise a submitted write or closed task")
@@ -197,7 +281,7 @@ class Engine:
                     elif task["status"] == "write_outcome_unknown":
                         task["status"] = "reconciling"  # Lookup only after cancellation.
             elif action == "resume":
-                if value or task["status"] not in {"write_outcome_unknown", "queued"}:
+                if value or task["status"] not in {"write_outcome_unknown", "queued", "access_blocked"}:
                     raise APIError(409, "nothing resumable without new input")
                 if task["manifest"]["runtime_schema"] != 1:
                     raise APIError(409, "runtime schema requires explicit migration")
@@ -206,15 +290,18 @@ class Engine:
                 raise APIError(404, "unknown task action")
             self._save(db, task, "user_" + action)
         self.wake.set()
-        return task
+        with self.db() as db:
+            db.execute("BEGIN")
+            return self._public_task(db, task)
 
     def _evidence(self, db, task):
-        row = db.execute("SELECT policies,manifest FROM releases WHERE version=?", (task["manifest"]["release"],)).fetchone()
-        if not row or json.loads(row["manifest"]) != task["manifest"]:
+        documents = self._release_documents(db, task)
+        if documents is None:
             return None
         user = {"user_id": task["user_id"], **core.read_json(core.USER_FILE)[task["user_id"]]}
         state = {"known": {"trip_date": task["spec"]["trip_date"]}}
-        return [d for d in json.loads(row["policies"]) if d["topic"] == "lodging" and d["city"] == task["spec"]["city"] and core.applicable(d, state, user)]
+        return [d for d in documents if d["topic"] == "lodging" and d["city"] == task["spec"]["city"]
+                and core.applicable(d, state, user) and self._document_allowed(db, d, user)]
 
     def step(self):
         writing = None
@@ -233,6 +320,10 @@ class Engine:
             elif task["status"] == "write_prepared":
                 # The transaction commit below is the local dispatch boundary.
                 # Cancellation/correction that commits before it prevents dispatch.
+                if not self._task_access_allowed(db, task):
+                    task["status"] = "access_blocked"
+                    self._save(db, task, "current_document_access_denied", access_revision=self._access_revision(db))
+                    return True
                 if task["budget"]["tools"] >= 12:
                     task["status"] = "budget_exhausted"
                     self._save(db, task, "dispatch_budget_stopped")
@@ -258,6 +349,8 @@ class Engine:
                     evidence = self._evidence(db, task)
                     if evidence is None:
                         task["status"] = "blocked_version"
+                    elif not self._task_access_allowed(db, task):
+                        task["status"] = "access_blocked"
                     elif len(evidence) != 1:
                         task["status"] = "insufficient_evidence"
                     elif task["approval"]:
@@ -304,6 +397,11 @@ class Engine:
                         current["status"] = "write_outcome_unknown"
                         current["result"] = {"object": None, "cancel_requested": True, "detail": "lookup absent; dispatched outcome remains unknown"}
                         self._save(db, current, "reconciliation_still_unknown")
+                        return True
+                    if not self._task_access_allowed(db, current):
+                        current["status"] = "write_outcome_unknown"
+                        current["result"] = {"object": None, "detail": "current document access blocks a new retry; original outcome remains unknown"}
+                        self._save(db, current, "retry_access_denied", access_revision=self._access_revision(db))
                         return True
                     # An uncancelled idempotent retry has its own serialized
                     # dispatch boundary, without a fresh logical tool budget.

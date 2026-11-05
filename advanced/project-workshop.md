@@ -54,9 +54,11 @@
 
 ## 第四轮：从机制走到应用入口
 
-先学 [13模型协议](13-model-api-and-output-contracts.md)，用原始响应和工具回填对应表定位模型与执行器的边界。再学 [16任务服务](16-service-deployment-and-operations.md)，先提交只读任务，缺日期时补参，重启后沿同一任务继续；进阶实验再验证具体草稿批准、取消和错误版本回退。默认服务使用确定性规则，真实模型的决策能力沿政策实验live入口单独测量。
+先学 [13模型协议](13-model-api-and-output-contracts.md)，用原始响应和工具回填对应表定位模型与执行器的边界。接着做 [16A只读服务](16-service-deployment-and-operations.md#16a先交付最小只读任务服务)，提交、补日期并跨重启继续。再读02持久执行与11安全治理，进入 [16B批准与恢复](16-service-deployment-and-operations.md#16b加入批准写入与恢复)，验证具体批准、取消和版本回退。默认服务使用确定性规则，真实模型决策能力沿政策实验live入口单独测量。
 
 [14摄取](14-ingestion-and-index-lifecycle.md)为原文建立真实词项索引，在更新、删除、撤权后重新查询。[15 SQL](15-text-to-sql-and-data-analysis.md)用另一组明确定义的虚构统计数据比较JOIN粒度；它是方向分支，不必阻塞服务学习。
+
+补一项跨章验收：在16中留下等待补参任务和待批草稿，由可信宿主撤回P17文档资格，再补参、读取旧草稿并回退release。预期等待任务进入`access_blocked`、旧内容被遮蔽，且`access_revision`没有随release回退。已经创建的工单只返回可核对的对象身份，不伪装成从未存在。`authorization-revocation`场景实际运行HTTP与SQLite验证这条合同；14索引本身尚未接入16读取器。
 
 最后用 [17事件订阅](17-event-driven-and-proactive-agents.md)的任务意图和Outbox解释政策变更如何形成有界通知，再用 [18媒体](18-multimodal-and-realtime-agents.md)关联票据区域、转写、当前城市和播放位置。六组实验共用业务背景与证据口径，实际数据、存储和运行目录按各自README说明；跨组件适配需要明确转换合同，不能仅因文件名相近就声称自动接入。
 

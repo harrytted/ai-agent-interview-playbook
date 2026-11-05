@@ -30,6 +30,9 @@
 | K22 | 恢复执行可能重放外部副作用 | [LangGraph re-execution and idempotency](https://docs.langchain.com/oss/python/langgraph/graph-api#re-execution-and-idempotency) | 恢复节点时结合外部事务、幂等合同与查询对账。 |
 | K23 | 访问控制须由可信系统落实；不可信资料不能自行授权 | [OWASP authorization](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)、[injection](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html) | 在可信执行边界落实权限、参数与资源限制。 |
 | K24 | 多 Agent、缓存、阈值和具体框架选型需任务内验证 | [本手册第 08 章](08-planning-and-multi-agent.md)、[第 09 章](09-evaluation.md) | 以目标任务的质量、延迟和成本比较架构与参数。 |
+| K25 | SFT 的输入内容与监督目标可以用 mask 分开 | [TRL SFT Trainer](https://huggingface.co/docs/trl/sft_trainer)、[训练目标实验](../examples/advanced/training-objectives.md) | 本例只监督模型动作，工具观察保留作后续条件；目标 mask 不等于注意力 mask。assistant-only loss 需聊天模板支持，不是所有 SFT 的默认目标。 |
+| K26 | 裁剪代理项需同时看优势正负、概率比、KL 与归一化 | [DeepSeekMath v3 §4.1、式(3)(4)](https://arxiv.org/html/2402.03300v3#S4.SS1)、[TRL Loss Types](https://huggingface.co/docs/trl/grpo_trainer#loss-types) | 旧策略与参考策略职责不同；本例用固定优势、独立二元状态均值、精确 `KL(当前\|\|参考)`，不把它当作完整 GRPO 或所有实现的唯一公式。 |
+| K27 | 版本比较应保留同题配对与统计假设 | [statsmodels McNemar](https://www.statsmodels.org/stable/generated/statsmodels.stats.contingency_tables.mcnemar.html)、[SciPy bootstrap](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html) | exact McNemar 使用不一致对的条件二项检验；paired bootstrap 用相同索引重采样。教学 percentile 区间不宣称优于 BCa，小样本或同源相关任务限制泛化。 |
 
 ## 新案例的证据边界
 
@@ -37,16 +40,22 @@
 
 正文中“协议样本”“设计样本”“教学耗时”是可手工核对的示范，不表示供应商实测。已保存的运行记录来自政策实验；模型路径只有实际调用并保留证据后才能标为已验证。手册的学习效果需要试读记录，程序测试通过不能替代。
 
+训练章新增的二元小策略实验能复算损失、解析梯度与一次参数更新；它没有真实 tokenizer、LLM、GPU 或新 rollout，固定目标下降不代表真实 Agent 能力提升。评测章的配对统计实验使用手写结果夹具，统计结果也不能替代模型实测。两类实验的公式、样本单位与范围分别见[训练目标合同](../examples/advanced/training-objectives.md)与[评测进阶](../advanced/09-evaluation-and-feedback.md)。
+
+K25、K27 的官方文档于 2026-11-05 核对，为可变实现入口；K26 的原方法固定为 DeepSeekMath v3。Agent Lightning 的版本归因以[技术报告 v1 §3.2](https://arxiv.org/html/2608.17528v1#S3.SS2)为准：相同 prompt 仅保留最后一次 `model_request` 是该报告的训练样本选择；本手册“保留独立新推理尝试以供审计，再按合同选择入训”的建议另行标注，二者不混写。
+
 ## 配套实验
 
 - [政策实验](../examples/policy_agent/README.md)：同案例查询、补参、证据变式、持久恢复与独立评分；默认有限规则策略。
 - [基础数学实验](../examples/foundations/README.md)：Attention、余弦、RRF 与检索指标。
 - [工具循环实验](../examples/agent_lab/README.md)：工具校验、重试、审批、幂等和循环终止。
+- [训练目标小实验](../examples/advanced/training-objectives.md)：两轮动作的 SFT 目标掩码、正负优势裁剪、精确二元 KL 与解析梯度；仅标准库教学小策略。
 
 ```bash
 python3 -m examples.policy_agent eval --suite pilot --mode offline --output .local/policy_agent/pilot-report.json
 python3 examples/foundations/math_lab.py --section all
 python3 examples/agent_lab/lab.py --scenario all
+python3 examples/advanced/training_objectives.py --section all
 ```
 
 [阅读目录](README.md) · [资源深度调研](../research/learning-resources.md) · [来源数据](../research/learning-sources.json) · [面试知识参考资料](../docs/claim-ledger.md)

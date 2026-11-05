@@ -48,6 +48,8 @@ jobs:
 
       - name: Check application labs
         run: |
+          python examples/advanced/evaluation_lab.py
+          python examples/advanced/training_objectives.py --section all
           python -m examples.model_protocol_lab.lab --scenario all --output .local/model_protocol
           python -m examples.service_lab.lab --scenario all --output .local/service_lab/checks
           python -m examples.knowledge_pipeline_lab --scenario all --output .local/knowledge_pipeline_lab

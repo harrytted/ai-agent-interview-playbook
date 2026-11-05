@@ -73,10 +73,12 @@ def run_scenario(name, output):
     folder = Path(output) / name
     folder.mkdir(parents=True, exist_ok=True)
     root, records, checks = folder / "data", [], {}
-    with running(root, allow_faults=True, start_worker=name != "approval-correction") as (engine, base):
+    with running(root, allow_faults=True, start_worker=name not in {"approval-correction", "authorization-revocation"}) as (engine, base):
         alice, bob = Client(base, log=records), Client(base, "demo-bob", records)
         body = {"city": "海岚", "trip_date": "2026-11-12"}
         if name == "clarification-restart":
+            body.pop("trip_date")
+        if name == "authorization-revocation":
             body.pop("trip_date")
         if name in {"crash-recovery", "approval-correction"}:
             body.update(mode="ticket", amount_cny=800, reason="教学咨询")
@@ -85,7 +87,37 @@ def run_scenario(name, output):
         code, accepted = alice.call("POST", "/tasks", body, "request-1")
         task_id = accepted["task"]["id"]
         checks["accepted_before_run"] = code == 202
-        if name == "duplicate-isolation":
+        if name == "authorization-revocation":
+            engine.step()
+            checks["waiting_before_revocation"] = alice.call("GET", "/tasks/" + task_id)[1]["status"] == "clarification_required"
+            answer_body = {"city": "海岚", "trip_date": "2026-11-12"}
+            _, answer_task = alice.call("POST", "/tasks", answer_body, "answer-before-revoke")
+            answer_id = answer_task["task"]["id"]
+            engine.step()
+            _, ticket_task = alice.call("POST", "/tasks", {"city": "海岚", "trip_date": "2026-11-12", "mode": "ticket"}, "draft-before-revoke")
+            engine.step()
+            draft_id = ticket_task["task"]["id"]
+            draft = alice.call("GET", "/tasks/" + draft_id)[1]["draft"]
+            operator = Client(base, "demo-operator", records)
+            policies = core.read_json(core.DATA / "policies.json")
+            operator.call("POST", "/releases", {"version": "v2", "policies": policies})
+            revision = engine.set_document_access("P17", [])
+            checks["rollback"] = operator.call("POST", "/releases", {"version": "v1"})[0] == 200
+            hidden = alice.call("GET", "/tasks/" + draft_id)[1]
+            checks["draft_redacted"] = hidden["draft"] is None and hidden["evidence"] == [] and hidden["access_revision"] == revision
+            checks["old_answer_redacted"] = alice.call("GET", "/tasks/" + answer_id)[1]["result"] is None
+            checks["replay_redacted"] = alice.call("POST", "/tasks", answer_body, "answer-before-revoke")[1]["task"]["result"] is None
+            checks["events_redacted"] = all(e["content_redacted"] for e in alice.call("GET", "/tasks/" + answer_id + "/events")[1])
+            checks["approval_rejected"] = alice.call("POST", "/tasks/" + draft_id + "/approve", {k: draft[k] for k in ("request_id", "payload_hash")})[0] == 403
+            alice.call("POST", "/tasks/" + task_id + "/reply", {"trip_date": "2026-11-12"})
+            engine.step()
+            waiting = alice.call("GET", "/tasks/" + task_id)[1]
+            checks["old_wait_stopped"] = waiting["status"] == "access_blocked" and waiting["manifest"]["release"] == "v1"
+            _, fresh = alice.call("POST", "/tasks", {"city": "海岚", "trip_date": "2026-11-12"}, "after-rollback")
+            engine.step()
+            checks["rollback_does_not_grant"] = alice.call("GET", "/tasks/" + fresh["task"]["id"])[1]["status"] == "access_blocked"
+            checks["no_business_object"] = not Stores(root / "business").snapshot()
+        elif name == "duplicate-isolation":
             second, replay = alice.call("POST", "/tasks", body, "request-1")
             conflict, _ = alice.call("POST", "/tasks", {**body, "city": "云洲"}, "request-1")
             hidden, _ = bob.call("GET", "/tasks/" + task_id)
@@ -163,7 +195,7 @@ def main(argv=None):
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--allow-faults", action="store_true")
     parser.add_argument("--crash-once", action="store_true", help="fault injection exits this process 73")
-    names = ["normal", "duplicate-isolation", "clarification-restart", "approval-correction", "crash-recovery", "release-rollback"]
+    names = ["normal", "duplicate-isolation", "clarification-restart", "approval-correction", "crash-recovery", "release-rollback", "authorization-revocation"]
     parser.add_argument("--scenario", choices=["all"] + names, default="all")
     parser.add_argument("--output", type=Path, default=Path(".local/service_lab/checks"))
     args = parser.parse_args(argv)
