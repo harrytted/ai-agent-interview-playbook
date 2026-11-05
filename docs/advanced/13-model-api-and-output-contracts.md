@@ -20,6 +20,8 @@ JSON规定数据表示的语法，Schema描述接收方期望的数据结构与�
 
 约束输出也要处理终止分支。当前Claude结构化输出文档说明拒答和token上限可能改变预期输出；HTTP 200与收到文本不构成成功证明。不要先盲目解析业务对象，再把所有异常混成“格式错了再试”；先读取终止原因，按合同决定是否可解析、重试或转交。
 
+还应将错误归到正确的修复层：JSON无法解析检查语法和完整性；字段缺失检查结构；未知Schema关键字检查供应商支持范围；引用存在但不支持断言检查证据。改变采样或重复请求并不能补上缺失的业务资料。本题诊断的是“哪项保证失败、应由谁修复”，完整解析状态另见[学习章的状态表](../../advanced/13-model-api-and-output-contracts.md#一次响应要保存哪些解析状态)。
+
 执行工具还有另一层边界。参数满足Schema后仍须验证可信身份、对象权限与业务状态；写入完成后读取真实对象。原理可回查Q027；本题新增的是模型输出能力与响应生命周期，不能只重复“Schema不够”一句话。
 
 **常见追问：**
@@ -70,6 +72,8 @@ JSON规定数据表示的语法，Schema描述接收方期望的数据结构与�
 检查要同时覆盖完整性与唯一性，而不只比较集合。宿主验证工具、参数和读取资格后执行，合法工具错误按协议返回明确错误观察；资料为空、读取失败和结果未到不能混成一个空字符串。正常完整往返见[学习章13](../../advanced/13-model-api-and-output-contracts.md#先读完两地住宿查询的完整往返)，这里重点是从异常回包反推哪项合同被破坏。
 
 保留完整assistant块和对应工具结果，可以解释模型为什么接着回答。只保存最终文本，会丢失工具请求和执行之间的证据。恢复前还应核对当前可见性；原政策live适配器在历史证据被撤回时停止旧会话回放，避免保留的assistant文字再次带回受限内容。
+
+调用对应的作用域也要明确：消息index定位块，响应/运行身份加call ID定位一次往返，业务意图定位受保护动作。模型重试后以call-9提出与先前call-1相同的写入，不代表另一项已授权业务；反之，两次金额不同也不能因工具名相同而静默去重。需要独立的业务键和参数指纹核对，不从call ID推断业务幂等。[对应边界](../../advanced/13-model-api-and-output-contracts.md#先读完两地住宿查询的完整往返)
 
 **常见追问：**
 
@@ -131,6 +135,6 @@ SSE用字段行和空行分隔事件，多条data行拼成事件数据；事件�
 
 **微练习：**
 
-分别运行truncated、refusal、disconnect，写出每项已知事实与禁止推断。再把最后一个工具参数故意截坏：max_tokens时应报告截断而不派发，正常tool_use结束时则应报告参数协议错误。
+先判断三份事件序列：①尚未start块1就收到其delta；②块0已stop后又收到其delta；③所有块结束，先收到带stop_reason的message_delta，再收到仅更新usage的message_delta，最后message_stop。在本地子集里前两项拒绝，第三项可完成；若第二次重复给出非空stop_reason则拒绝。再运行truncated、refusal、disconnect，核对“非法转移”和“合法前缀但未完整结束”的区别。状态图见[学习章](../../advanced/13-model-api-and-output-contracts.md#一次响应要保存哪些解析状态)，这些手写序列是诊断题，不冒充新增实验场景。
 
 **学习与参考：** [学习章13](../../advanced/13-model-api-and-output-contracts.md) · [协议实验](../../examples/model_protocol_lab/README.md) · [WHATWG SSE解析](https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream) · [Claude流式消息](https://platform.claude.com/docs/en/build-with-claude/streaming)。

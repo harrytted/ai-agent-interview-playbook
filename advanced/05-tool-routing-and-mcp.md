@@ -60,6 +60,44 @@ MCP 2025-11-25 的工具定义使用 JSON Schema；未设置 `$schema` 时默认
 
 合同升级应有兼容策略。例如旧字段 `region` 改成 `region_ids`，不能靠模型临场猜测。为旧版本保留适配器，或拒绝过期定义并重新加载；记录最终实际执行的版本。结构校验通过后，仍要验证地区是否属于当前租户、日期是否可查询、动作是否获准，不能把类型正确当成业务有效。
 
+## MCP 从连接到可调用目录经历什么
+
+以下按 **MCP 2025-11-25** 解释，不假定所有已安装 SDK 都支持该版的全部可选功能。Client 先发 `initialize`，携带支持的协议版本、能力和客户端信息；Server 回应协议版本、服务信息与能力，Client 核对支持后再发 `notifications/initialized`。随后按协商结果运行；不支持服务端返回的版本时应断开，不能继续猜字段。[初始化与能力协商](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle)
+
+协商解决的是“双方会哪些协议动作”，例如能否列工具、接收目录变更、使用任务扩展；它不表示当前用户有权操作每个业务对象。声明 `tools.listChanged` 也不表示目录永远不变，而是服务能通知客户端重新获取目录。宿主仍需将连接身份与每次业务授权分开处理。
+
+```text
+initialize → 核对版本/能力 → notifications/initialized
+tools/list → 收集本页定义 → 有 nextCursor 则继续 tools/list(cursor)
+按可信主体建可发现目录，记录本地目录代次及合同摘要
+路由命中 → 装载完整定义 → 检查当前合同/权限/参数 → tools/call
+响应 → 按请求身份归并 → 检查错误、结构和业务结果
+```
+
+分页游标是服务端给的不透明位置标记，不是页码，客户端不能解析、修改或跨会话复用；页大小也由服务端决定。只读第一页就得出“没有此工具”，会把未加载误当成不存在。[MCP 分页](https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/pagination)没有承诺跨页获得同一时刻的完整目录快照；需要这种一致性时，由服务提供版本合同，或由宿主在发现变更后废弃本轮结果并重载。
+
+收到 `notifications/tools/list_changed` 时，可使相关路由缓存和已加载定义失效，再获取目录；若服务没有通知能力，宿主要定义刷新或执行前核对策略。MCP 标准工具定义没有统一的业务版本字段，本章的“目录代次/合同摘要”是宿主或服务自行维护的元数据。合同已变时应重校验或明确拒绝，不把旧参数偷偷用于新含义；在途调用按已经提交的身份核对结果，不能因换了目录就重新派发一次。[工具列表与变更通知](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
+
+## 并发、超时和取消怎样保持调用身份
+
+并发返回不一定遵循发送顺序。MCP 使用 JSON-RPC 请求 ID 对应响应，不能把“第二个到达的结果”填进“第二个发出的工具调用”。请求 ID 在同一会话中不得由同一请求方复用；宿主可以用 `(连接代次, 请求ID)` 查找等待表，另存模型调用 ID、工具合同、业务操作 ID、期限和应用状态。[MCP 消息身份](https://modelcontextprotocol.io/specification/2025-11-25/basic)
+
+三种 ID 含义不同：模型调用 ID 对应模型提出的调用；协议 ID 对应一次消息往返；稳定业务操作 ID 对应允许重复核对的同一业务意图。重连或重试有新的协议往返，业务意图却不应因此变新。并发上限与共享预算在派发处预留，不能让每个请求各自读取一次旧余额；进度通知也不等于最终工具结果。
+
+应用可将请求保存为 `pending→completed`，或 `pending→cancel_requested/timeout`。普通在途请求的取消使用 `notifications/cancelled`；接收方可能已完成或无法取消，发送方应忽略取消后到达的响应，不再靠它推进正常流程，因此取消不是远端未执行的证明。该版 task-augmented requests（可返回独立任务状态的扩展请求）必须用 `tasks/cancel`，不能混用普通取消通知；初始化也不能这样取消。[2025-11-25 取消合同](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation)
+
+协议层不再消费迟到响应，与业务层核对副作用是两件事。超时写请求应保留 `outcome_unknown` 及业务操作 ID，通过允许的查询/幂等合同对账；不得把它当作“零写入”后换 ID 重试。已经取消的任务不能因迟到成功响应重新启动下一步，但已创建对象仍要如实记录。重连后，旧连接的结果也不能只凭同一整数 ID 匹配新调用。
+
+可以用固定消息序列验收宿主：请求10和11逆序返回，仍各归原调用；10超时后收到成功，不能启动其后继；取消通知与响应交换顺序，业务对象身份不能消失；目录在参数生成后变化，调用应重校验或拒绝。这些是协议适配器应做的故障测试，本地四函数实验没有实现 MCP 传输或并发连接。
+
+## 工具失败应在哪一层解释
+
+MCP 区分 JSON-RPC 协议错误和工具执行结果中的 `isError=true`。未知工具、非法请求形状等可以是协议错误；API 失败、参数值不合法或业务执行失败可由工具错误返回。收到 JSON-RPC `result` 只表示协议响应成功，不能据此判断业务动作成功。[MCP 错误报告](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#error-handling)
+
+工具可以返回 `structuredContent`，并可声明 `outputSchema`；该版规范要求服务在声明后给出匹配的结构化结果，客户端也应验证。结构正确仍可能指向错误租户、过期记录或不完整集合，宿主还需检查业务合同，保留拒绝、空结果、截断、超时未知等不同状态。返回一个资源链接也不等于内容已读取，更不替代随后读取资源的权限检查。[结构化内容与输出合同](https://modelcontextprotocol.io/specification/2025-11-25/server/tools#structured-content)
+
+恢复动作据失败原因选择：缺字段先补信息，权限拒绝停止该动作，目录不匹配先重载，结果未知先核对；临时故障只有在操作可安全重试且预算允许时才重试。把所有错误原样扔给模型“再想一次”，既可能无效循环，也会把未确认副作用变成重复请求。
+
 ## PTC 将中间处理交给代码，权限仍逐次检查
 
 **程序化工具调用（PTC，Programmatic Tool Calling）** 让模型编写代码，代码在受控环境中循环、筛选和聚合工具结果，再把必要结果交回模型。Claude 的实现会在代码调用应用工具时暂停，等待应用返回结果后继续执行；中间数据不必逐条进入模型上下文。[Programmatic tool calling](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling)

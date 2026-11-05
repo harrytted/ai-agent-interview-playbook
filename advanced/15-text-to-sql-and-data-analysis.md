@@ -6,7 +6,7 @@
 
 **Text-to-SQL** 是把自然语言问题转换成结构化查询语言 SQL。应用中的完整任务还包括澄清指标、选择允许访问的表列、执行查询、检查结果，再把结果写成可追溯结论。SQL 语法正确只是其中一步。
 
-小明问：“10 月申请了多少差旅费，有多少超标？”助手连接申请表和费用明细表，得到 2000 元；但两笔申请分别只有 650 元和 700 元，总额应为 1350 元。数据库没有报错，错误发生在“每行代表什么”被连接操作改变以后。
+本章把查询看作对行集合的一系列变换。输入是指标合同、允许的结构与数据快照；输出是具有明确粒度、单位和覆盖的结果表。错误可能来自任一变换：筛错对象、连接复制行、未知值进入错误分母，最后仍能返回合法数字。
 
 建议先了解 SELECT、WHERE、JOIN 和 GROUP BY 的基本作用，再读 [Agentic RAG 的结构化数据段](06-agentic-rag.md)。完成本章后，应能把一句问题写成明确口径，识别一对多连接放大，给候选 SQL 设实际访问与资源限制，并用独立结果判断业务语义。配套实验真实执行 SQLite；默认使用预制候选验证流程，不报告自然语言模型准确率。
 
@@ -37,6 +37,26 @@
 
 结构映射正确也不等于口径正确。`approved_at` 是真实存在的列，但把“申请于 10 月”写成“审批于 10 月”仍会得到错误集合。权限控制与统计解释要分开记录，不能用“Schema 校验通过”盖掉后续问题。
 
+## 按逻辑执行顺序推导结果表
+
+关系代数用选择、投影、连接和分组等运算描述查询：**选择**筛行，**投影**取列或计算表达式，**连接**按条件配对行，**分组聚合**把同组多行缩成统计结果。常见 SQL 默认保留重复行，属于**多重集**语义；不能把它想成自动按业务主键去重的数学集合。
+
+可以按以下逻辑顺序检查普通聚合查询：
+
+```text
+FROM/JOIN：先形成候选行及配对关系
+WHERE：保留条件为真的行
+GROUP BY / 聚合：按键分组计算
+HAVING：筛选分组
+SELECT：计算输出列
+DISTINCT：按输出值消除重复结果行（若指定）
+ORDER BY / LIMIT：排序并选取结果
+```
+
+这是推导查询含义的顺序，不承诺数据库按此顺序物理执行。优化器可以在不改变语义的条件下下推筛选、改变连接次序或选用索引；CTE（WITH 定义的命名子查询）也不自动等于一次物化或安全隔离。实际性能需要执行计划与测量，不能从 SQL 书写顺序推出。[PostgreSQL 17 SELECT 的处理说明](https://www.postgresql.org/docs/17/sql-select.html#SQL-SELECT-DESCRIPTION)，核查于 2026-11-05；本章执行仍使用 SQLite，方言细节按相应实现核对。
+
+每一步都可写出**键、行数、金额属于哪种对象**。例如申请表主键是申请 ID；JOIN 明细后唯一身份通常变成申请与明细的组合；GROUP BY 员工后又变成一名员工一行。若只核对最终列名，很容易把中间粒度变化藏起来。
+
 ## 用两笔申请看清 JOIN 放大
 
 **粒度（grain）** 表示一行记录对应哪个业务对象。申请表的两行分别为 a1、a2：
@@ -52,6 +72,28 @@
 
 `SUM(DISTINCT amount_cents)` 也不是通用修复。DISTINCT 去掉的是相同数值：把 a2 改为 650 元，两笔真实申请应合计 1300 元，DISTINCT 却只剩 650 元。[SQLite 聚合语义](https://www.sqlite.org/lang_aggfunc.html) 配套 `duplicate-amounts` 数据集正是为了让这种在第一份数据上碰巧正确的修复失败。
 
+用公式可以看出条件：设申请 a 的金额为 `x(a)`，匹配明细数为 `m(a)`，INNER JOIN 后申请金额的总和是 `Σ m(a)·x(a)`，目标总和是 `Σ x(a)`。只要 m 不全为 1，就不能普遍保证相等；没有明细的申请还会因 m=0 消失。再连接一个独立的一对多表，匹配数可能乘成 `m(a)·n(a)`，进一步放大。先聚合只有在输出对连接键确实唯一时才修复了粒度；声明 `GROUP BY` 后还要核对分组键是否包含了多余维度。
+
+### 外连接的条件放在哪里会改变对象集合
+
+若要“保留所有申请，同时附上状态为 accepted 的明细”，下面两种位置有不同含义：
+
+```sql
+-- 保留没有 accepted 明细的申请，它们的 e 列为 NULL。
+SELECT a.id, e.id
+FROM applications AS a
+LEFT JOIN expenses AS e
+  ON e.application_id = a.id AND e.status = 'accepted';
+
+-- 后置筛选会删掉 e.status 为 NULL 的补齐行。
+SELECT a.id, e.id
+FROM applications AS a
+LEFT JOIN expenses AS e ON e.application_id = a.id
+WHERE e.status = 'accepted';
+```
+
+LEFT JOIN 先按 ON 配对，再为未匹配的左行补 NULL；WHERE 发生在这之后。第二条因此无法保留没有合格明细的申请。业务若只想筛选“至少有一条合格明细的申请”，用 EXISTS 更直接，也不会复制申请金额。这里是语义诊断片段，需在含上述列的数据库中运行；它不属于默认实验候选的现成替代 SQL。[SQLite SELECT 的连接与 WHERE 说明](https://www.sqlite.org/lang_select.html#whereclause)
+
 ## 空值、撤销和比例怎样共同影响结果
 
 SQL 的 `COUNT(*)` 计算行数，`COUNT(column)` 忽略该列为 NULL 的行，SUM 也忽略 NULL。[SQLite 聚合函数](https://www.sqlite.org/lang_aggfunc.html) **NULL** 表示缺失或未知，不能简单解释为金额为零或已经未超标。
@@ -59,6 +101,34 @@ SQL 的 `COUNT(*)` 计算行数，`COUNT(column)` 忽略该列为 NULL 的行，
 第三份实验数据中，范围内有三笔非撤销申请：650 元且上限 500 元、一笔金额未知、一笔 100 元但上限未知。已知金额合计 750 元，申请数 3，可比较申请数 1，超标数 1，按本次合同超标比例为 100%。如果把所有三笔塞进分母，33.3% 是另一个指标，不能无说明替换。
 
 需要同时输出 `application_count` 与 `comparable_count`，让读者知道覆盖范围。若没有一笔可比较，比例返回 NULL，解释为数据不足以计算该比例；不能用 0% 暗示都合规。申请和撤销记录的去重、有效状态与分母必须使用同一合同，否则两个时间窗口的数字看似可比，实际上对象集合不同。
+
+### 用三值逻辑写出可复算聚合
+
+SQL 条件除了真和假，还可能是 **UNKNOWN（未知，表现为 NULL）**。`NULL > 500` 和 `NULL = NULL` 都不会得到真；WHERE 只保留真，不能用 `= NULL` 寻找缺失值，应使用 `IS NULL`。`COALESCE(limit, 0)` 则是把未知上限改成零，会改变业务定义，不能作为无说明的“空值修复”。[SQLite 表达式与 NULL](https://www.sqlite.org/lang_expr.html)
+
+下面是一条可独立在 SQLite 执行的算例，金额单位为分。先逐行产生可比较标记，再在同一对象集合中聚合：
+
+```sql
+WITH scoped(id, amount_cents, limit_cents) AS (
+  VALUES ('a', 65000, 50000), ('b', NULL, 70000), ('c', 10000, NULL)
+), flags AS (
+  SELECT *,
+    CASE WHEN amount_cents IS NOT NULL AND limit_cents IS NOT NULL
+         THEN 1 ELSE 0 END AS comparable,
+    CASE WHEN amount_cents > limit_cents THEN 1 ELSE 0 END AS over_limit
+  FROM scoped
+), totals AS (
+  SELECT COUNT(*) AS application_count, COUNT(amount_cents) AS known_amount_count,
+         SUM(amount_cents) AS total_cents,
+         COALESCE(SUM(comparable), 0) AS comparable_count,
+         COALESCE(SUM(over_limit), 0) AS over_count
+  FROM flags
+)
+SELECT *, 1.0 * over_count / NULLIF(comparable_count, 0) AS over_rate
+FROM totals;
+```
+
+结果依次是 `3, 2, 75000, 1, 1, 1.0`。`1.0` 让比例使用浮点除法，`NULLIF` 在分母为零时产生 NULL；SUM 在没有已知金额时仍为 NULL，不伪装成已知零金额。flags 中未知比较落入 ELSE 0 只表示“没有已证实超标”，同时由 comparable=0 排除在比例分母外，不能将该申请对外宣告为合规。若 scoped 为空，计数为 0、金额和比例为 NULL；这是与“有两笔零元申请”的重要区别。[SQLite 聚合函数](https://www.sqlite.org/lang_aggfunc.html)
 
 [![三笔申请中，650元且上限500元的一笔可比较并超标；金额未知和上限未知的两笔另报，分母为1，超标比例为100%，已知金额合计750元。](../website/assets/diagrams/advanced/A15B-comparable-denominator.png)](../website/assets/diagrams/advanced/A15B-comparable-denominator.png)
 
@@ -84,6 +154,8 @@ SQL 的 `COUNT(*)` 计算行数，`COUNT(column)` 忽略该列为 NULL 的行，
 4. 进度回调按约 100 个虚拟机指令检查步数及期限；结果超过行预算时作为超限，不能用截断结果冒充完整统计。
 
 authorizer 是编译期授权回调，不会替宿主自动选行。它也会对 COUNT(*) 触发表读取，列名可能为空，回调必须按允许表的实际语义处理。[SQLite authorizer](https://www.sqlite.org/c3ref/set_authorizer.html) 进度回调只能提供 SQLite 执行过程中的中断点，不能声称精确 CPU/内存硬限制；本地运行时若支持 `setlimit`，实验还会降低长度、列数与表达式深度上限。[进度回调](https://www.sqlite.org/c3ref/progress_handler.html)
+
+安全检查、性能检查与语义核验应保留各自结果：授权通过说明可访问，计划或执行预算说明计算是否受控，独立期望说明已测任务是否符合口径。可增加不依赖固定金额的**变形检查**：只添加明细不应改变申请总额；添加撤销申请不应改变有效申请指标；添加金额未知的有效申请应增加申请数，但不自动增加可比较数。它们能暴露某些错误转换，仍不能证明任意新任务语义正确。
 
 [![可信宿主按身份从只读源库复制允许行到独立SQLite快照，候选SQL还需通过表列函数操作校验及步数时间行数预算；去掉WHERE也不能读取快照之外的数据。](../website/assets/diagrams/advanced/A15C-scoped-sql-execution.png)](../website/assets/diagrams/advanced/A15C-scoped-sql-execution.png)
 
