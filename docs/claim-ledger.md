@@ -26,6 +26,9 @@
 | 概率比与正负优势共同决定裁剪，完整目标还需声明正则和均值单位 | [DeepSeekMath v3 §4.1](https://arxiv.org/html/2402.03300v3#S4.SS1)、[TRL Loss Types](https://huggingface.co/docs/trl/grpo_trainer#loss-types) | Q091；小策略使用已给定优势、一动作状态等权与精确二元 KL；一次目标下降不等于复现完整 GRPO，更不能证明真实 LLM 变好。 |
 | Agent Lightning v1 的样本选择与一般保留建议是不同来源 | [技术报告 v1 §3.2](https://arxiv.org/html/2608.17528v1#S3.SS2)、[官方 README](https://raw.githubusercontent.com/microsoft/agent-lightning/main/README.md) | Q092；报告对同 rollout 相同 prompt 只留最后一个 `model_request`；本手册另提审计保留建议。旧版（legacy）的实际分支名是 `v0.x`。 |
 | 配对版本比较需检查不一致对、区间与独立样本单位 | [statsmodels McNemar](https://www.statsmodels.org/stable/generated/statsmodels.stats.contingency_tables.mcnemar.html)、[SciPy bootstrap](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html) | 评测进阶；exact 条件二项检验与相同索引配对重采样。教学手写夹具不是模型实测，percentile 不是优于 BCa 的结论。 |
+| BM25、双编码检索与ANN分别有不同的误差来源 | [Lucene BM25](https://lucene.apache.org/core/10_5_2/core/org/apache/lucene/search/similarities/BM25Similarity.html)、[DPR](https://arxiv.org/abs/2004.04906)、[Faiss索引](https://github.com/facebookresearch/faiss/wiki/Faiss-indexes) | Q019–Q021、Q072–Q074；表示、近似搜索、资格过滤和排序误差分开评价。 |
+| 重排上限由固定候选中的相关证据数量约束 | [检索—重排](https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html)、[本手册实验](../examples/advanced/retrieval-mechanisms.md) | 没有新增读取或展开时，排序不能产生缺失候选；RR改善不代表必要证据齐全。 |
+| 冲突裁决不能由相关性分数或转载数量推导 | [本手册冲突合同](../advanced/06-agentic-rag.md#知识冲突先确定身份与适用域再检查权威关系)、[可复算实现](../examples/advanced/retrieval_lab.py) | 先统一事实键、适用域和有效时间，再应用可信偏序；无裁决依据时保留分歧，属于明确的业务设计。 |
 
 新增训练与配对统计条目的实现文档、README 于 2026-11-05 核对，仍是可变入口；方法论文分别固定为 DeepSeekMath v3 与 Agent Lightning v1.0 技术报告 v1。规范支持版本行为，原论文支持方法，代码实验支持本例计算；这些证据不替代真实任务效果或读者学习效果的验证。
 

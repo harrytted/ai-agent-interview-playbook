@@ -23,7 +23,7 @@ python3 -m examples.policy_agent eval --suite pilot --mode offline --output .loc
 
 补参从同一状态继续，预算不归零。旧索引变式需要补查适用制度，不能预填700元这个答案。pilot包含正常、缺日期及恢复、旧证据三项；eval输出摘要，完整逐项断言保存在指定JSON中。
 
-[![一次工具请求、执行、回填与第二次决定](../../website/assets/diagrams/G3-tool-roundtrip.png)](../../website/assets/diagrams/G3-tool-roundtrip.png)
+工具往返的原理图见[基础04：观察参与下一步决定](../../learning/04-agent-loop.md#新实验观察真正参与下一步决定)；本页以实际文件和命令为准核对执行。
 
 ## 打开已经运行的样本
 
@@ -86,7 +86,7 @@ python3 -m examples.policy_agent resume --run-id ticket-approval
 
 任务状态与批准保存于 `.local/policy_agent/<run-id>/task.sqlite`，模拟工单在同目录的service.sqlite，两个数据库没有共同事务。服务按tenant_id+operation_id唯一，并比较规范化完整参数；同ID异内容拒绝，相同内容返回已有对象。
 
-[![服务已提交但本地尚未确认时，第二进程按原操作ID恢复](../../website/assets/diagrams/G8-write-recovery.png)](../../website/assets/diagrams/G8-write-recovery.png)
+提交与确认之间的故障窗口见[基础10的恢复图解](../../learning/10-reliability-and-security.md#两个进程验证一次真实的故障窗口)；下面用两个数据库和原操作ID验证该合同。
 
 下面演示工单已在服务端提交、本地尚未确认时的恢复。四条命令逐条执行；`ticket-recovery`应是本次新用的运行名称。先核对第一条返回的完整草稿和审批请求，示例中的请求标识为`APR-ticket-recovery-1`；如果更改run-id，审批参数也要使用实际返回的值。
 

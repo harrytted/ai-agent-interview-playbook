@@ -25,7 +25,7 @@
 
 ## 从组成看懂协作
 
-[![模型负责理解与决策，工具提供外部能力，记忆保留可用信息，规划组织步骤；四类能力围绕目标协作](website/assets/diagrams/concepts/C1-capability-map.png)](website/assets/diagrams/concepts/C1-capability-map.png)
+四类能力的组成图与完整解释集中在[基础01：用一张图认识四类能力](learning/01-system-map.md#用一张图认识四类能力)。
 
 小明问：“2026年11月12日去海岚出差，住宿每晚650元，超过标准吗？”本例的普通员工类别由可信档案提供。模型要读懂问题，工具负责取得适用制度，任务记录保留日期与已查资料，规划决定先查什么、还缺什么。运行时把这些能力组织成连续的过程。[进入章节完整讲解](learning/01-system-map.md)
 

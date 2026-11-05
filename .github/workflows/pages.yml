@@ -31,7 +31,9 @@ jobs:
         run: python -m pip install -r requirements-docs.txt
 
       - name: Check repository content
-        run: python scripts/check_repo.py
+        run: |
+          python scripts/check_repo.py
+          python scripts/audit_content.py --check
 
       - name: Run tests
         run: python -m unittest discover -s tests -v
@@ -50,6 +52,7 @@ jobs:
         run: |
           python examples/advanced/evaluation_lab.py
           python examples/advanced/training_objectives.py --section all
+          python examples/advanced/retrieval_lab.py --section all
           python -m examples.model_protocol_lab.lab --scenario all --output .local/model_protocol
           python -m examples.service_lab.lab --scenario all --output .local/service_lab/checks
           python -m examples.knowledge_pipeline_lab --scenario all --output .local/knowledge_pipeline_lab
