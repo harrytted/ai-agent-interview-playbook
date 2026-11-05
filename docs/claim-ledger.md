@@ -35,6 +35,7 @@
 | DPO在固定参考策略下比较偏好响应的相对log概率 | [DPO原论文§4](https://arxiv.org/html/2305.18290v2#S4) | 12；原始目标对响应动作token的log概率求和，参考策略与采样旧策略职责不同；手算二元策略不代表真实语言模型训练。 |
 | 原始LLaVA以视觉编码器和投影连接语言模型 | [Visual Instruction Tuning v2 §4.1](https://arxiv.org/html/2304.08485v2#S4.SS1) | 18；矩阵形状按特征行约定解释，连接后的视觉表示不是已核实事实，也不能推广为所有VLM的架构。 |
 | HTTP 202不自带持久接收或最终执行保证 | [RFC 9110 §15.3.3](https://www.rfc-editor.org/rfc/rfc9110.html#name-202-accepted)、[本地服务接收实现](../examples/service_lab/service.py) | 16；本服务先提交接收账本再返回202，这是实现合同；状态码本身不证明执行已完成或必然发生。 |
+| 单调时钟计量本机经过时间，原始读数不构成可移植截止时刻 | [Python monotonic](https://docs.python.org/3/library/time.html#time.monotonic)、[asyncio loop.time](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.time) | 基础10、进阶10、Q048；日期时间与耗时分开，重试沿用余额。跨机器/系统重启的截止或累计耗时恢复需另定持久合同，不从本机计时接口推导全局期限保证。 |
 
 新增训练与配对统计条目的实现文档、README 于 2026-11-05 核对，仍是可变入口；方法论文分别固定为 DeepSeekMath v3 与 Agent Lightning v1.0 技术报告 v1。规范支持版本行为，原论文支持方法，代码实验支持本例计算；这些证据不替代真实任务效果或读者学习效果的验证。
 

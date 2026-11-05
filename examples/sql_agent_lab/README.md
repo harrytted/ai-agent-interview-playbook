@@ -33,13 +33,15 @@ python3 -m unittest discover -s tests -p 'test_sql_agent_lab.py' -v
 
 | 返回字段 | 含义 |
 | --- | --- |
-| `total_cents` | 合同范围内已知申请金额之和；SUM 忽略 NULL |
+| `total_cents` | 合同范围内已知申请金额之和；SUM 忽略 NULL，无已知金额或空集合时保留 NULL，只有已知合计为零才返回 0 |
 | `application_count` | 合同范围内全部申请数，包含金额或上限未知的申请 |
 | `comparable_count` | 金额和适用上限均已知的申请数 |
 | `over_count` | 金额大于上限的申请数 |
 | `over_rate` | over_count / comparable_count；无可比较申请时为 NULL |
 
 “上限未知”不能按未超标塞进分母。fixture 的 `limit_cents` 是已给定的适用上限；本实验不重新推断政策，也不假称已经连接第 14 章。金额与日期选择属于公开的任务合同，模型或候选 SQL 不应取得 `expected.json` 中的隐藏预期。
+
+金额全未知时，总额与超标率都不可计算；空集合的申请数为 0，总额仍为 NULL。候选报告保留原结果中的 NULL，显示“无已知金额，无法合计”，不会写成零元。单元测试另建全未知、空集合和已知零额三种边界数据，与已有三份实例分别核对。[SQLite SUM 的空值语义](https://www.sqlite.org/lang_aggfunc.html#sumunc)
 
 ## SQLite 实际控制边界
 

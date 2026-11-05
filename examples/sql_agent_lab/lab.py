@@ -25,7 +25,7 @@ ALLOWED = {
     "expenses": {"id", "application_id", "category", "amount_cents"},
 }
 FUNCTIONS = {"sum", "count", "coalesce", "round", "abs", "min", "max", "nullif", "avg", "date", "substr", "lower", "upper"}
-CORRECT_SQL = """SELECT COALESCE(SUM(amount_cents), 0) AS total_cents,
+CORRECT_SQL = """SELECT SUM(amount_cents) AS total_cents,
 COUNT(*) AS application_count,
 COALESCE(SUM(CASE WHEN amount_cents IS NOT NULL AND limit_cents IS NOT NULL THEN 1 ELSE 0 END), 0) AS comparable_count,
 COALESCE(SUM(CASE WHEN amount_cents > limit_cents THEN 1 ELSE 0 END), 0) AS over_count,
@@ -233,10 +233,11 @@ def conclusion_evidence(result):
         return {"status": "unavailable", "reason": "candidate did not return the metric columns"}
     amount = row["total_cents"]
     rate = row["over_rate"]
-    if not isinstance(amount, (int, float)) or not (rate is None or isinstance(rate, (int, float))):
+    if not (amount is None or isinstance(amount, (int, float))) or not (rate is None or isinstance(rate, (int, float))):
         return {"status": "unavailable", "reason": "candidate metric types are not numeric"}
     rate_text = "无法计算" if rate is None else f"{rate * 100:g}%"
-    return {"status": "candidate_report; requires independent grade", "text": f"候选查询报告：当前可见范围内，已知申请金额 {amount / 100:g} 元；申请 {row['application_count']} 笔，可比较 {row['comparable_count']} 笔，超标 {row['over_count']} 笔，占可比较申请的 {rate_text}。", "evidence": {field: {"result_row": 0, "column": field, "value": row[field]} for field in required}}
+    amount_text = "无已知金额，无法合计" if amount is None else f"已知申请金额 {amount / 100:g} 元"
+    return {"status": "candidate_report; requires independent grade", "text": f"候选查询报告：当前可见范围内，{amount_text}；申请 {row['application_count']} 笔，可比较 {row['comparable_count']} 笔，超标 {row['over_count']} 笔，占可比较申请的 {rate_text}。", "evidence": {field: {"result_row": 0, "column": field, "value": row[field]} for field in required}}
 
 
 def exercise(scenario, output, candidate=None):

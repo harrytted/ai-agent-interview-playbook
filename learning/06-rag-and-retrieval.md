@@ -1,6 +1,5 @@
 # 06 · RAG 与检索：从资料入库走到有依据的回答
 
-[上一章：工具与 MCP](05-tools-and-mcp.md) · [学习目录](README.md) · [下一章：记忆与状态](07-memory-and-state.md)
 
 ## RAG 到底是什么
 
@@ -175,3 +174,5 @@ D = 1/63        ≈ 0.01587302
 
 </details>
 <!-- question-links:end -->
+
+[上一章：05 · 工具与 MCP](05-tools-and-mcp.md) · [基础原理目录](README.md) · [下一章：07 · 记忆与状态](07-memory-and-state.md)

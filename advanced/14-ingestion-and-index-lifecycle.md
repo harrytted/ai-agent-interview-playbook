@@ -1,28 +1,11 @@
 # 14 · 知识摄取与索引生命周期：让变化真正进入查询
 
-[上一章：模型 API 与输出合同](13-model-api-and-output-contracts.md) · [工程进阶目录](README.md) · [下一章：Text-to-SQL 与数据分析](15-text-to-sql-and-data-analysis.md)
 
 ## 从“能搜到”走到“搜到适用版本”
 
 **知识摄取（ingestion）** 是把原始资料读取、解析、分块、附上元数据并建立查询索引的过程。**索引生命周期** 继续处理资料修改、删除、撤权、处理失败和索引切换；它决定昨天建好的资料库在今天是否仍可使用。
 
 摄取链路的输入是可信源清单、原文与处理规则，输出是一份内部一致的索引发布；修改、撤回和失败必须产生可解释的后续状态。
-
-## 先看一份已完成的查询结果
-
-配套实验实际读取 Markdown 和简单表格，返回的条款包含以下信息。下表省略哈希的完整字符串，具体值以运行结果为准。
-
-| 字段 | 示例含义 |
-| --- | --- |
-| `doc_id` / `version` | `lodging-hailan` / `v2`，业务文档与版本身份 |
-| `block_id` | 根据文档版本、块标识和条款行 ID 派生，改金额不换身份 |
-| `text` | 城市：海岚；类别：普通员工住宿；金额上限：700；单位：元/晚 |
-| `valid_from` / `valid_to` | 2026-11-01 起有效，截止为空 |
-| `source_location` | `fixture://policies/hailan/v2#L7-L9`，指向样例文件表头与条款行 |
-| `generation` | 本次使用的完整索引版本 |
-| `policy_revision` | 本次查询采用的访问目录修订号 |
-
-据此可以回答：650 元低于该日期适用的 700 元每晚上限；若询问 10 月 31 日，则 650 元高于 600 元。这里的 `fixture://` 是本地教学来源标识，不是可打开的官方政策网址。实际业务回答还需要可访问的来源入口、真实身份与适用条件，本实验没有创建咨询工单或替用户取得批准。
 
 ## 一份资料需要几种身份
 
@@ -143,6 +126,24 @@ generation 完成并校验后，才用 `os.replace` 原子替换同一文件系�
 
 LlamaIndex 的摄取管线把转换步骤、缓存和文档管理组合起来，可以作为可选实现对照；它不会代替本手册定义来源、权限和业务时间合同。[官方摄取管线](https://developers.llamaindex.ai/python/framework/module_guides/loading/ingestion_pipeline/) LightRAG 的选择性删除还涉及受影响实体和关系重建，可用于观察更复杂派生血缘的维护代价。[LightRAG 源码说明](https://github.com/HKUDS/LightRAG) 这些入口核查于 2026-10-31，配套实验没有安装外部框架；选做时固定包版本和源码提交再验证。
 
+<div id="先看一份已完成的查询结果"></div>
+
+## 应用结果：从命中块回查来源与发布
+
+配套实验实际读取 Markdown 和简单表格，返回的条款包含以下信息。下表省略哈希的完整字符串，具体值以运行结果为准。
+
+| 字段 | 示例含义 |
+| --- | --- |
+| `doc_id` / `version` | `lodging-hailan` / `v2`，业务文档与版本身份 |
+| `block_id` | 根据文档版本、块标识和条款行 ID 派生，改金额不换身份 |
+| `text` | 城市：海岚；类别：普通员工住宿；金额上限：700；单位：元/晚 |
+| `valid_from` / `valid_to` | 2026-11-01 起有效，截止为空 |
+| `source_location` | `fixture://policies/hailan/v2#L7-L9`，指向样例文件表头与条款行 |
+| `generation` | 本次使用的完整索引版本 |
+| `policy_revision` | 本次查询采用的访问目录修订号 |
+
+核对结果时，沿`generation`找到完整索引发布，再由`block_id`回到具体文档版本和原文位置；查询资格另按当前`policy_revision`验证。`fixture://`是本地教学来源标识，真实应用需要可访问的来源入口、可信身份与适用条件。本实验不创建咨询工单或授予批准，返回一个条款也不意味着完整业务任务已经完成。
+
 ## 动手：先预测，再查看轨迹
 
 在仓库根目录执行：
@@ -183,3 +184,5 @@ python3 -m unittest discover -s tests -p 'test_knowledge_pipeline_lab.py' -v
 - [本地知识摄取实验](../examples/knowledge_pipeline_lab/README.md)：已实现合同、CLI、来源格式与限制。
 
 [配套进阶面试题：Q096–Q098](../docs/advanced/14-ingestion-and-index-lifecycle.md)
+
+[上一章：13 · 模型 API 与输出合同](13-model-api-and-output-contracts.md) · [工程进阶目录](README.md) · [下一章：15 · Text-to-SQL 与数据分析](15-text-to-sql-and-data-analysis.md)

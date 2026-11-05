@@ -229,13 +229,30 @@ def execute_calls(calls, observations):
     return results
 
 
-def validate_answer(value, evidence):
+def observed_evidence(results):
+    """Only matched results delivered in this round can support a claim."""
+    evidence = {}
+    for result in results:
+        try:
+            item = json.loads(result["content"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ProtocolError("tool evidence must be a JSON observation") from exc
+        if (not isinstance(item, dict) or not isinstance(item.get("reference"), str)
+                or not item["reference"] or not isinstance(item.get("city"), str)
+                or type(item.get("limit_cny")) is not int):
+            raise ProtocolError("tool evidence fields invalid")
+        ref = item["reference"]
+        if ref in evidence and evidence[ref] != item:
+            raise ProtocolError("conflicting observations share a reference")
+        evidence[ref] = item
+    return evidence
+
+
+def validate_answer(value, evidence, *, required_cities=None):
     """Minimal explicit output contract, then independent business checks."""
     if not isinstance(value, dict) or set(value) != {"claims"} or not isinstance(value["claims"], list):
         raise ProtocolError("answer must contain only a claims list")
-    if len(value["claims"]) != len(evidence):
-        raise ProtocolError("answer omits evidence")
-    seen = set()
+    seen, cities = set(), []
     for claim in value["claims"]:
         if not isinstance(claim, dict) or set(claim) != {"city", "limit_cny", "reference"}:
             raise ProtocolError("claim shape invalid")
@@ -245,6 +262,10 @@ def validate_answer(value, evidence):
         seen.add(ref)
         if claim["city"] != evidence[ref]["city"] or type(claim["limit_cny"]) is not int or claim["limit_cny"] != evidence[ref]["limit_cny"]:
             raise ProtocolError("JSON parsed but claim disagrees with observed evidence")
+        cities.append(claim["city"])
+    required = set(required_cities) if required_cities is not None else {item["city"] for item in evidence.values()}
+    if len(cities) != len(required) or set(cities) != required:
+        raise ProtocolError("answer must cover each requested city exactly once")
     return value
 
 
@@ -290,8 +311,10 @@ def run_scenario(name, output):
                     value = json.loads("".join(b["text"] for b in final["content"]))
                 except ValueError as exc:
                     raise ProtocolError("final answer is not JSON") from exc
-                evidence = {v["reference"]: v for v in observations.values()}
-                result["answer"] = validate_answer(value, evidence)
+                evidence = observed_evidence(result["matched_results"])
+                # Coverage comes from the public task, independently of which
+                # cities the model happened to query or the hidden grade.
+                result["answer"] = validate_answer(value, evidence, required_cities={"海岚", "云洲"})
                 result["status"] = "answered"
             elif final["status"] == "tool_calls":
                 raise ProtocolError("this bounded fixture expects a final answer after one tool round")

@@ -244,6 +244,74 @@ textarea {
   border-color: var(--reading-line);
 }
 
+/* One chapter switcher at the end of the reading column. */
+.md-typeset .chapter-pagination {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(7rem, 0.55fr) minmax(0, 1fr);
+  gap: 0.5rem;
+  margin-top: 3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--reading-line);
+}
+
+.md-typeset .chapter-pagination a:not(.headerlink) {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  min-height: 76px;
+  padding: 0.65rem;
+  border-radius: 4px;
+  color: var(--reading-ink);
+  text-decoration: none;
+}
+
+.md-typeset .chapter-pagination a:hover {
+  background: var(--reading-soft);
+  color: var(--reading-link);
+}
+
+.chapter-pagination__prev {
+  grid-column: 1;
+}
+
+.md-typeset .chapter-pagination__index {
+  grid-column: 2;
+  justify-content: center;
+  text-align: center;
+}
+
+.md-typeset .chapter-pagination__next {
+  grid-column: 3;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.chapter-pagination__text {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.chapter-pagination__label {
+  color: var(--reading-muted);
+  font-size: 0.75em;
+  line-height: 1.5;
+}
+
+.chapter-pagination__title {
+  font-size: 0.94em;
+  font-weight: 600;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.chapter-pagination__arrow {
+  flex-shrink: 0;
+  color: var(--reading-link);
+  font-size: 1.25em;
+}
+
 .md-typeset img,
 .md-typeset video,
 .md-typeset svg {
@@ -673,6 +741,27 @@ dialog.diagram-lightbox[open] {
   .md-typeset {
     font-size: 16px;
     line-height: 1.8;
+  }
+
+  .md-typeset .chapter-pagination {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md-typeset .chapter-pagination__prev {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .md-typeset .chapter-pagination__next {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .md-typeset .chapter-pagination__index {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-height: 56px;
+    border-top: 1px solid var(--reading-line);
   }
 
   .md-typeset .diagram-scroll > a {

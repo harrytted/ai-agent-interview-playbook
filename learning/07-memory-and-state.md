@@ -1,6 +1,5 @@
 # 07 · 记忆与状态：保存什么，何时再相信它
 
-[上一章：RAG 与检索](06-rag-and-retrieval.md) · [学习目录](README.md) · [下一章：规划与多 Agent](08-planning-and-multi-agent.md)
 
 ## 记忆：让信息跨步骤与会话复用
 
@@ -115,3 +114,5 @@
 
 </details>
 <!-- question-links:end -->
+
+[上一章：06 · RAG 与检索](06-rag-and-retrieval.md) · [基础原理目录](README.md) · [下一章：08 · 规划与多 Agent](08-planning-and-multi-agent.md)

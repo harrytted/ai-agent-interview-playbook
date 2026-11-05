@@ -219,7 +219,7 @@ python3 examples/agent_lab/lab.py --scenario loop
 
 </details>
 
-关联复习：[Q009–Q016](../docs/foundations/02-planning-and-orchestration.md)、[Q055](../docs/engineering/07-system-design-and-projects.md)。[阅读目录](README.md) · 上一章：[03 上下文](03-context-and-prompts.md) · 下一章：[05 工具与 MCP](05-tools-and-mcp.md)
+关联复习：[Q009–Q016](../docs/foundations/02-planning-and-orchestration.md)、[Q055](../docs/engineering/07-system-design-and-projects.md)。
 
 <!-- question-links:start -->
 ## 配套面试练习
@@ -235,3 +235,5 @@ python3 examples/agent_lab/lab.py --scenario loop
 
 </details>
 <!-- question-links:end -->
+
+[上一章：03 · 提示与上下文](03-context-and-prompts.md) · [基础原理目录](README.md) · [下一章：05 · 工具与 MCP](05-tools-and-mcp.md)

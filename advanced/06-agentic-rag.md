@@ -1,6 +1,5 @@
 # 06 · Agentic RAG：从召回算法到证据决策
 
-[上一章：工具路由与 MCP](05-tool-routing-and-mcp.md) · [工程进阶目录](README.md) · [下一章：多 Agent 系统](07-multi-agent-systems.md)
 
 ## 先分清检索器、排序器和决策策略
 
@@ -41,7 +40,7 @@ score(q,d) = sum over distinct matched t in q, tf(t,d)>0:
              IDF(t) * tf(t,d) * (k1 + 1) / (tf(t,d) + K(d))
 ```
 
-`N`是索引对象数，`df(t)`是含该词的对象数，`tf(t,d)`是词在对象中的出现次数，`len(d)`和`avgdl`是同一分词口径下的长度与平均长度。这里要求`k1>=0`、`0<=b<=1`且`avgdl>0`，空库直接返回空候选，不代入除零公式。文档分块后，索引对象变成块，这些统计量也随之改变，不能把全文索引的参数效果直接照搬过来。
+`N`是索引对象数，`df(t)`是含该词的对象数，`tf(t,d)`是词在对象中的出现次数，`len(d)`和`avgdl`是同一分词口径下的长度与平均长度。这里要求`k1>=0`、`0<=b<=1`且`avgdl>0`。检索服务应先处理空库并返回空候选，不代入除零公式；配套实验的`bm25_scores`是计分函数，要求语料非空且至少有一个词，不满足时抛出`ValueError`。文档分块后，索引对象变成块，这些统计量也随之改变，不能把全文索引的参数效果直接照搬过来。
 
 ### 为什么重复关键词不会线性加分
 
@@ -290,3 +289,5 @@ python3 examples/advanced/retrieval_lab.py --section all
 未实现的部分包括真实编码/重排模型、ANN基准、自主查询改写、完整Agentic状态机和GraphRAG。它们已有算法与验证合同，接入后仍要分别测量；不从算例通过推导真实模型质量。外部算法与官方接口核查于2026-11-05，采用其他版本时重新核对配置和输出含义。
 
 [配套进阶面试题：Q072–Q074](../docs/advanced/06-agentic-rag.md) · [知识摄取与索引生命周期](14-ingestion-and-index-lifecycle.md) · [SQL与数据分析](15-text-to-sql-and-data-analysis.md)
+
+[上一章：05 · 工具路由与 MCP](05-tool-routing-and-mcp.md) · [工程进阶目录](README.md) · [下一章：07 · 多 Agent 系统](07-multi-agent-systems.md)

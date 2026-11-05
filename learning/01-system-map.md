@@ -195,7 +195,7 @@ print(type(arguments).__name__, arguments["top_k"])
 
 </details>
 
-本章建立系统的整体认识。[下一章：02 大模型最小原理](02-llm-primer.md)继续解释模型如何生成输出。学完后可以用章末关联题检查口述和迁移能力；[阅读目录](README.md)保留连续阅读顺序。
+本章建立系统的整体认识，章末关联题用于检查口述和迁移能力。
 
 <!-- question-links:start -->
 ## 配套面试练习
@@ -218,3 +218,5 @@ print(type(arguments).__name__, arguments["top_k"])
 
 </details>
 <!-- question-links:end -->
+
+[基础原理目录](README.md) · [下一章：02 · LLM 基础原理](02-llm-primer.md)

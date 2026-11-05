@@ -6,13 +6,15 @@
 
 **执行轨迹（trace）** 保留行动与观察的过程，帮助定位错误；固定任务集上的重复评测则帮助比较不同版本。**反馈闭环**把二者连起来：观察失败、定位原因、提出改动，再在可比条件下复测。一次好看的演示提供一个样本，还需要更多任务检验适用范围。
 
-## 策略变好了，还是多试了几次
+<div id="策略变好了还是多试了几次"></div>
 
-新版本助手多查了两次资料，演示时答得更完整，费用也更高。到底是检索策略改善了，还是只给它多试了几次？如果评分器又偏爱长答案，分数上涨可能只是尺子跟着变长。
+## 区分策略、执行预算与评分器的影响
+
+版本比较至少涉及策略、任务输入、允许尝试次数和评分规则。若新版本同时增加调用额度，就应报告质量与成本的共同变化；要隔离策略差异，还需要固定预算的对照。评分器偏好也可能改变观察到的分数，应独立校准，不能把分数上涨直接等同于任务能力提高。
 
 ## 先读失败轨迹，再决定优化对象
 
-研究助手需要检索两地政策、比较适用条件并形成申请草稿。一次任务失败可能来自旧索引、工具选错、权限拒绝、错误汇总或用户根本不需要这份报告。把这些情况都算成“模型答错”，下一次更换模型就无法针对问题。
+失败定位要沿实际依赖追踪：资料或索引、工具发现与选择、执行授权、结果汇总及目标验收都可能出现错误。先找到首次偏离合同的位置，再检查它是否引发后续错误；只给整个任务贴上“模型答错”标签，无法决定应修哪一环。
 
 可以先逐条记录观察：“第二次检索仍只查旧版本”“引用存在但金额不适用于该员工”“工具失败后仍输出成功”。再将相似问题归成失效类别，检查首次错误出现的位置，以及其他独立错误。Hamel Husain 的评测实践强调从真实轨迹的错误分析形成评价标准，而不是先选一批通用指标再寻找用途。[AI Evals FAQ](https://hamel.dev/blog/posts/evals-faq/)
 
@@ -211,10 +213,11 @@ python3 examples/advanced/runtime_lab.py --scenario evaluation
 
 [Hamel：AI Evals FAQ](https://hamel.dev/blog/posts/evals-faq/) · [OpenAI：Agent evals](https://developers.openai.com/api/docs/guides/agent-evals) · [HumanEval](https://arxiv.org/abs/2107.03374) · [MT-Bench](https://arxiv.org/abs/2306.05685)
 
-[上一章](08-coding-and-computer-use.md) · [下一章](10-performance-and-serving.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q081、Q082、Q083](../docs/advanced/09-evaluation-and-feedback.md)
 
 ## 应用实验延伸
 
 [任务服务的发布与回退实验](16-service-deployment-and-operations.md)
+
+[上一章：08 · 编码与计算机操作](08-coding-and-computer-use.md) · [工程进阶目录](README.md) · [下一章：10 · 性能与推理](10-performance-and-serving.md)

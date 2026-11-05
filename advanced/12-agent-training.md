@@ -10,13 +10,11 @@
 
 **能够改变行为，不等于已经发生训练。**
 
-## 反思让答案变好，是否已经训练
-
-助手上次引用了旧政策，读完一段反思后改对了。有人说它已经“自我训练”，另一个人提议马上上 RL。先别急着申请显卡：这次究竟改了输入、文件、工具，还是模型参数？
+<div id="反思让答案变好是否已经训练"></div>
 
 ## 先确认你在优化哪一层
 
-政策研究助手总把旧版本当有效规则。可能是索引未更新、上下文没带日期、工具描述含糊，也可能是模型在充分证据下仍不会比较适用条件。只有先区分原因，才能决定改数据、运行时、提示还是参数。
+先固定输入和任务要求，检查实际改变的对象：资料是否可用、工具合同是否正确、运行时是否传入必要条件，以及参数是否确实更新。环境或证据缺失时，应先修对应环节；在条件充分时仍反复出现稳定行为错误，才有依据评估参数训练。
 
 | 改动 | 改变的对象 | 需要的证据 |
 | --- | --- | --- |
@@ -255,6 +253,7 @@ python3 -m unittest discover -s tests -p 'test_training_objectives.py' -v
 
 [TRL SFT 的目标掩码](https://huggingface.co/docs/trl/sft_trainer) · [DPO](https://arxiv.org/abs/2305.18290) · [DeepSeekMath v3 / GRPO §4.1](https://arxiv.org/html/2402.03300v3#S4.SS1) · [TRL GRPO 的 Loss Types](https://huggingface.co/docs/trl/grpo_trainer#loss-types) · [Agent Lightning 原论文](https://arxiv.org/abs/2508.03680) · [Agent Lightning v1.0 v1](https://arxiv.org/html/2608.17528v1) · [项目仓库](https://github.com/microsoft/agent-lightning)
 
-[上一章](11-security-and-governance.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q090、Q091、Q092](../docs/advanced/12-agent-training.md)
+
+[上一章：11 · 安全与治理](11-security-and-governance.md) · [工程进阶目录](README.md) · [下一章：13 · 模型 API 与输出合同](13-model-api-and-output-contracts.md)

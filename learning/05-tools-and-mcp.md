@@ -1,6 +1,5 @@
 # 05 · 工具调用与 MCP：把动作交给可检查的执行器
 
-[上一章：Agent 循环](04-agent-loop.md) · [学习目录](README.md) · [下一章：RAG 与检索](06-rag-and-retrieval.md)
 
 ## 工具调用：从模型请求到程序执行
 
@@ -183,3 +182,5 @@ MCP 与 **A2A（Agent2Agent）** 也不宜画成两个互斥阵营。MCP 围绕�
 
 </details>
 <!-- question-links:end -->
+
+[上一章：04 · Agent 工具循环](04-agent-loop.md) · [基础原理目录](README.md) · [下一章：06 · RAG 与检索](06-rag-and-retrieval.md)

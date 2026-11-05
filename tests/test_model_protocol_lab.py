@@ -3,6 +3,7 @@ from copy import deepcopy
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from examples.model_protocol_lab.lab import (
     FIXTURES, ProtocolError, TransportError, assemble, match_results,
@@ -108,6 +109,84 @@ class ProtocolLabTests(unittest.TestCase):
         good["claims"][0]["limit_cny"] = 700
         with self.assertRaises(ProtocolError):
             validate_answer(good, evidence)
+
+    def test_actual_tool_reads_and_task_coverage_are_checked_independently(self):
+        original = Path.read_bytes
+        first = FIXTURES / "two-tools.sse"
+        final = FIXTURES / "answer.sse"
+        # Distinct call IDs can still query the same city. The host must not
+        # borrow the unqueried city's evidence from the backend fixture store.
+        repeated = original(first).replace("云".encode(), "海".encode()).replace("洲".encode(), "岚".encode())
+        answer_events = list(parse_sse([original(final)]))
+        for event in answer_events:
+            if event["type"] == "content_block_delta":
+                answer = json.loads(event["delta"]["text"])
+                answer["claims"] = answer["claims"][:1]
+                event["delta"]["text"] = json.dumps(answer, ensure_ascii=False)
+        partial = "".join("event: " + e["type"] + "\ndata: " + json.dumps(e, ensure_ascii=False) + "\n\n" for e in answer_events).encode()
+        # Make the malformed business answer a valid, complete SSE response,
+        # so an unrelated transport failure cannot satisfy this regression.
+        self.assertEqual(assemble(parse_sse([partial]))["status"], "model_finished")
+        with tempfile.TemporaryDirectory() as folder:
+            for duplicate_reads, partial_answer in ((True, False), (False, True), (True, True)):
+                def fixture_bytes(path):
+                    if duplicate_reads and path == first:
+                        return repeated
+                    if partial_answer and path == final:
+                        return partial
+                    return original(path)
+                with self.subTest(duplicate_reads=duplicate_reads, partial_answer=partial_answer):
+                    with patch.object(Path, "read_bytes", fixture_bytes):
+                        grade = run_scenario("normal", folder)
+                    result = json.loads((Path(folder) / "normal/result.json").read_text())
+                    self.assertEqual(result["status"], "protocol_error", result)
+                    self.assertIn("cover each requested city" if partial_answer else "unobserved or repeated reference", result["detail"])
+                    self.assertFalse(grade["passed"])
+
+    def test_run_uses_returned_observations_and_accepts_reordered_results(self):
+        from examples.model_protocol_lab import lab
+        execute = lab.execute_calls
+        def changed_results(calls, observations):
+            results = execute(calls, observations)
+            for result in results:
+                data = json.loads(result["content"])
+                data["limit_cny"] += 1
+                result["content"] = json.dumps(data)
+            return results
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(lab, "execute_calls", changed_results):
+                run_scenario("normal", folder)
+            result = json.loads((Path(folder) / "normal/result.json").read_text())
+            self.assertEqual(result["status"], "protocol_error")
+            original = Path.read_bytes
+            def updated_answer(path):
+                raw = original(path)
+                return raw.replace(b"700", b"701").replace(b"650", b"651") if path == FIXTURES / "answer.sse" else raw
+            with patch.object(lab, "execute_calls", changed_results), patch.object(Path, "read_bytes", updated_answer):
+                # The hidden normal grade still expects 700/650, but the
+                # validator must accept claims matching new actual evidence.
+                grade = run_scenario("normal", folder)
+            result = json.loads((Path(folder) / "normal/result.json").read_text())
+            self.assertEqual(result["status"], "answered")
+            self.assertEqual([c["limit_cny"] for c in result["answer"]["claims"]], [701, 651])
+            self.assertFalse(grade["passed"])
+            with patch.object(lab, "execute_calls", lambda calls, observations: list(reversed(execute(calls, observations)))):
+                self.assertTrue(run_scenario("normal", folder)["passed"])
+
+    def test_conflicting_contents_cannot_share_an_evidence_reference(self):
+        from examples.model_protocol_lab import lab
+        execute = lab.execute_calls
+        def conflicting_results(calls, observations):
+            results = execute(calls, observations)
+            first = json.loads(results[0]["content"])
+            second = json.loads(results[1]["content"])
+            second["reference"] = first["reference"]
+            results[1]["content"] = json.dumps(second)
+            return results
+        with tempfile.TemporaryDirectory() as folder, patch.object(lab, "execute_calls", conflicting_results):
+            run_scenario("normal", folder)
+            result = json.loads((Path(folder) / "normal/result.json").read_text())
+            self.assertEqual(result["status"], "protocol_error")
 
     def test_all_cli_scenarios_write_independent_grades(self):
         names = json.loads((FIXTURES / "expected.json").read_text())

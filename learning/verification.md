@@ -36,6 +36,7 @@
 | K28 | 词项匹配的统计评分与向量近邻是不同检索机制 | [Lucene BM25](https://lucene.apache.org/core/10_5_2/core/org/apache/lucene/search/similarities/BM25Similarity.html)、[DPR原论文](https://arxiv.org/abs/2004.04906)、[Faiss度量](https://github.com/facebookresearch/faiss/wiki/MetricType-and-distances) | 基础06；分词、兼容表示空间、距离与归一化分别影响排序。教学BM25只实现声明的单字段公式，不复现完整搜索引擎。 |
 | K29 | 融合与纯重排的结果受原候选池约束 | [Elastic RRF](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion)、[检索机制实验](../examples/advanced/retrieval-mechanisms.md) | 固定粒度、没有新增检索或parent展开时，最终证据为候选子集；oracle标签只用于离线上限诊断。 |
 | K30 | 相同条件的矛盾资料需要可信裁决规则 | [进阶RAG冲突合同](../advanced/06-agentic-rag.md#知识冲突先确定身份与适用域再检查权威关系)、[实验实现](../examples/advanced/retrieval_lab.py) | 本手册采用显式业务偏序；不声称存在按相似度、上传时间或多数票决定真假的通用规则，也不自动抽取自然语言矛盾。 |
+| K31 | 本机耗时与日志日期时间需要不同计时语义 | [Python monotonic](https://docs.python.org/3/library/time.html#time.monotonic)、[asyncio loop.time](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.time) | 基础10、进阶10；重试复用剩余期限，跨机器或系统重启不能直接搬用原始单调读数。持久截止与累计活跃耗时为本手册设计合同，不是计时API自动提供的保证。 |
 
 ## 新案例的证据边界
 

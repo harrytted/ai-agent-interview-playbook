@@ -1,6 +1,5 @@
 # 02 · 持久执行：恢复进度与控制外部副作用
 
-[上一章：Harness](01-harness-and-deep-agents.md) · [工程进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
 
 ## 持久执行为何要分别处理进度与副作用
 
@@ -8,9 +7,7 @@
 
 **检查点（checkpoint）** 保存某个边界的应用状态；**重放（replay）** 依据记录重新推进代码。它们帮助恢复本地计算，而创建工单、发送消息等**外部副作用**发生在另一个系统中，是否完成需要另外确认。**幂等**关心重复执行同一操作能否保持与执行一次相同的业务效果；具体响应与幂等键保留期仍以服务合同为准。它与保存进度解决不同的问题。
 
-## 工单建好了，恢复时该怎么办
-
-政策助手刚把研究报告的发布工单创建好，程序却在显示“成功”前退出了。几小时后点击继续，应该再创建一次，还是先找回那张工单？如果连原来的批准也找不到，恢复就会同时遇到进度和副作用两个难题。
+<div id="工单建好了恢复时该怎么办"></div>
 
 ## 恢复的是已记录的计算，不是原来的调用栈
 
@@ -156,10 +153,11 @@ Fencing 控制陈旧执行者，幂等控制同一意图重复请求，二者处
 - [AWS：幂等 API](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)、[Transactional outbox](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html)
 - [Martin Kleppmann：How to do distributed locking](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)
 
-[上一章](01-harness-and-deep-agents.md) · [工程进阶目录](README.md) · [下一章：上下文工程](03-context-engineering.md)
 
 [配套进阶面试题](../docs/advanced/02-durable-execution.md)
 
 ## 应用实验延伸
 
 [HTTP任务服务](16-service-deployment-and-operations.md) · [事件驱动任务](17-event-driven-and-proactive-agents.md)
+
+[上一章：01 · Harness 与深度 Agent](01-harness-and-deep-agents.md) · [工程进阶目录](README.md) · [下一章：03 · 上下文工程](03-context-engineering.md)

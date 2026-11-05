@@ -1,6 +1,8 @@
 # 17 · 事件驱动与主动任务：没有新消息，也有明确的工作边界
 
-## 订阅的不是“永远替我做决定”
+<div id="订阅的不是永远替我做决定"></div>
+
+## 事件、订阅与主动任务
 
 事件入口不断到来，任务系统却只能有界地工作。重投、乱序和迟到的输入需要归并为可靠状态，不能每收到一次通知就重做一项业务。
 
@@ -142,6 +144,7 @@ python3 -m unittest discover -s tests -p 'test_event_agent_lab.py' -v
 
 [Cloudflare主动调度](https://developers.cloudflare.com/agents/api-reference/schedule-tasks/) · [SQLite事务](https://www.sqlite.org/lang_transaction.html) · [AWS Outbox](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html)。动态文档核查日期：2026-10-31；本文机制以仓库本地实现为准，厂商调度只作为对照。
 
-[上一章](16-service-deployment-and-operations.md) · [下一章](18-multimodal-and-realtime-agents.md) · [工程进阶目录](README.md)
 
 [对应面试题：Q105、Q106、Q107](../docs/advanced/17-event-driven-and-proactive-agents.md)
+
+[上一章：16 · 服务交付与运维](16-service-deployment-and-operations.md) · [工程进阶目录](README.md) · [下一章：18 · 多模态与实时语音](18-multimodal-and-realtime-agents.md)

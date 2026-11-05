@@ -50,6 +50,22 @@ class MultimodalLabTests(unittest.TestCase):
         self.assertEqual(state.result()["status"], "needs_confirmation")
         self.assertIsNone(state.result()["draft"])
 
+    def test_single_receipt_contract_rejects_ambiguous_amount_observations(self):
+        for amount in (650, 6500):
+            state = self.session()
+            receipt = next(e for e in state.evidence.values() if "amount" in e)
+            with self.subTest(amount=amount), self.assertRaises(ValueError):
+                state.apply({**receipt, "id": "second-amount", "amount": amount})
+            self.assertNotIn("second-amount", state.evidence)
+
+    def test_evidence_id_replay_is_idempotent_and_cannot_overwrite_source(self):
+        state = self.session()
+        receipt = next(e for e in state.evidence.values() if "amount" in e)
+        state.apply(dict(receipt))
+        with self.assertRaises(ValueError):
+            state.apply({**receipt, "amount": 6500})
+        self.assertEqual(state.evidence[receipt["id"]], receipt)
+
     def test_grading_rejects_wrong_amount_source_or_limit_conclusion(self):
         result = self.session("correction").result()
         expected = json.loads((ROOT / "expected.json").read_text())["correction"]

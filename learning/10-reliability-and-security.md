@@ -88,6 +88,8 @@
 
 重试层也会叠加：三个调用层若各最多尝试 3 次（含首次），最坏可触发 `3×3×3=27` 次底层尝试。每层单看都很克制，合起来却可能把一次请求放大，所以要协调由哪层重试，并共同服从总期限。[AWS 超时、重试与抖动说明](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/)
 
+本机计算经过时间应使用**单调时钟**，它不随系统日期时间校正而倒退；日志中的日期时间则来自墙钟。第一次派发建立期限，重试只使用剩余时间，不能每次重新计满。保存期限、实际中断工具与跨重启恢复是不同问题，具体合同见[进阶计时机制](../advanced/10-performance-and-serving.md#耗时预算使用哪一种时钟)。[Python计时定义](https://docs.python.org/3/library/time.html#time.monotonic)
+
 `agent_lab` 只实现立即、有次数上限的合成读重试；没有真实网络、等待退避、执行中取消或按实际经过时间计算的总期限。
 
 ## 检索资料也是攻击入口
@@ -140,7 +142,7 @@ python3 -m unittest discover -s tests -p 'test_agent_lab.py' -v
 不能。模型之间达成一致不产生用户身份、资源权限或业务批准。授权仍须由可信系统落实。
 </details>
 
-[上一章](09-evaluation.md) · [参考资料](verification.md) · [阅读目录](README.md)
+[参考资料](verification.md)
 
 <!-- question-links:start -->
 ## 配套面试练习
@@ -165,3 +167,5 @@ python3 -m unittest discover -s tests -p 'test_agent_lab.py' -v
 
 </details>
 <!-- question-links:end -->
+
+[上一章：09 · 评测](09-evaluation.md) · [基础原理目录](README.md)

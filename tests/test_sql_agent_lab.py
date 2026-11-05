@@ -125,6 +125,27 @@ class SQLAgentLabTests(unittest.TestCase):
         self.assertEqual(report["evidence"]["total_cents"]["value"], 135000)
         self.assertEqual(report["evidence"]["over_rate"]["column"], "over_rate")
 
+    def test_unknown_and_absent_amounts_are_distinct_from_known_zero(self):
+        for case, mutation, expected in (
+            ("all-unknown", "UPDATE applications SET amount_cents=NULL", [None, 2, 0, 0, None]),
+            ("empty", "DELETE FROM applications", [None, 0, 0, 0, None]),
+            ("known-zero", "UPDATE applications SET amount_cents=0", [0, 2, 2, 0, 0.0]),
+        ):
+            with self.subTest(case=case):
+                source = create_source(self.root / (case + ".sqlite"))
+                with sqlite3.connect(source) as db:
+                    db.execute(mutation)
+                with SQLSandbox(source) as sandbox:
+                    result = sandbox.execute(CORRECT_SQL, PARAMETERS)
+                self.assertEqual(result["rows"], [expected])
+                report = conclusion_evidence(result)
+                self.assertEqual(report["evidence"]["total_cents"]["value"], expected[0])
+                if expected[0] is None:
+                    self.assertIn("无已知金额", report["text"])
+                    self.assertNotIn("金额 0 元", report["text"])
+                else:
+                    self.assertIn("金额 0 元", report["text"])
+
     def test_all_scenarios_write_real_databases_and_evidence(self):
         for scenario in SCENARIOS:
             with self.subTest(scenario=scenario):

@@ -47,20 +47,9 @@ python3 -m examples.policy_agent run --task 住宿金额核对 --mode offline --
 
 ## 对照一份实际离线记录
 
-一次正常查询可以按下面六步读：
+打开仓库保存的[完整运行记录](../examples/policy_agent/traces/normal/trace.jsonl)，数出两条`decision`：先决定查询，再决定回答。六条事件记录中，工具实际读取一次，真实模型请求和新建工单均为零。事件条数、决定次数和工具调用数表达的是不同事情；逐条事件的职责见[基础04的轨迹解析](04-agent-loop.md#沿一条政策查询轨迹读完一次循环)。
 
-| 顺序 | 发生了什么 |
-| --- | --- |
-| 1 | 建立任务，记录当前目标与条件 |
-| 2 | 策略决定先查住宿标准 |
-| 3 | 运行时检查参数与权限，开始查询 |
-| 4 | 工具返回适用的新版住宿标准，每晚上限700元 |
-| 5 | 策略依据查到的资料比较金额 |
-| 6 | 核对回答与证据，记录任务结束 |
-
-其中两次是策略决定：先决定查询，再决定回答。工具实际读取一次，没有调用真实模型，也没有创建工单。事件条数、决定次数和工具调用数表达的是不同事情。
-
-这份提纲对应仓库保存的[完整运行记录](../examples/policy_agent/traces/normal/trace.jsonl)、[输入快照](../examples/policy_agent/traces/normal/context.json)与[结果](../examples/policy_agent/traces/normal/result.json)。这些产物来自离线教学运行；输入只包含本次实际取得的观察与有效证据，任务编号和标准答案不参与下一步判断。
+再用[输入快照](../examples/policy_agent/traces/normal/context.json)与[结果](../examples/policy_agent/traces/normal/result.json)交叉核对：取得的观察是否进入输入，输出是否引用实际取得的资料。任务编号和标准答案不参与下一步判断。
 
 ## 改变条件一：删掉日期
 

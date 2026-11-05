@@ -33,7 +33,7 @@
 | MCP（模型上下文协议） | 连接应用与能力提供方的标准协议 | 不自动实现业务资源授权 | [05](05-tools-and-mcp.md) |
 | A2A | Agent 之间协作的协议体系 | 与 MCP 有不同侧重，可组合 | [05](05-tools-and-mcp.md) |
 | RAG（检索增强生成） | 生成时使用检索到的外部证据 | 不保证正确，也不强制使用向量库 | [06](06-rag-and-retrieval.md) |
-| Chunk（分块） | 按一定策略切分出的检索单位 | 要保留来源、版本与上下文关系 | [06](06-rag-and-retrieval.md) |
+| Chunk（片段） | 按一定策略切分出的检索单位；分块是产生片段的过程 | 要保留来源、版本与上下文关系 | [06](06-rag-and-retrieval.md) |
 | Sparse / Dense Retrieval | 稀疏词项表示 / 稠密向量表示的检索 | 对精确编号与语义改写的表现需实测 | [06](06-rag-and-retrieval.md) |
 | RRF | 按多份排名的倒数位置融合候选 | 不直接把不同检索器分数相加 | [06](06-rag-and-retrieval.md) |
 | Rerank（重排） | 对已经召回的候选重新排序 | 不能凭空补回候选外的证据 | [06](06-rag-and-retrieval.md) |
@@ -53,6 +53,7 @@
 | MRR@k | 在声明查询集合上对首个命中的倒数排名取平均 | 单题是 RR，不是均值 MRR | [09](09-evaluation.md) |
 | nDCG@k | 折扣累积收益相对于理想排名的归一化值 | 必须声明 gain 与无相关项口径 | [09](09-evaluation.md) |
 | p95 | 一批观测的第95百分位耗时 | 不是平均数，也不是单次期限保证 | [09](09-evaluation.md) |
+| 墙钟 / 单调时钟 | 日期时间 / 同一时钟域内计量经过时间的时钟 | 墙钟可能校正；单调读数不能直接当成跨机器、跨系统重启的时间戳 | [基础10](10-reliability-and-security.md)、[进阶10](../advanced/10-performance-and-serving.md#耗时预算使用哪一种时钟) |
 | SLO（服务水平目标） | 服务希望达到的质量或性能水平 | 需说明指标与统计窗口并实际验证 | [09](09-evaluation.md) |
 | 身份认证 / 授权 / 批准 | 确认是谁 / 能做什么 / 是否同意本次具体动作 | 三者不能相互替代 | [10](10-reliability-and-security.md) |
 | Idempotency（幂等） | 同一操作重复执行的约定效果与执行一次相同 | 不要求响应相同；创建接口仍需规定作用域、期限与一致性 | [10](10-reliability-and-security.md) |

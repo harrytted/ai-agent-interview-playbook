@@ -61,6 +61,10 @@ class Session:
                 raise ValueError("confidence must be explicit")
             if "amount" in event and not number(event["amount"]):
                 raise ValueError("observed amount must be nonnegative")
+            if event["id"] in self.evidence and self.evidence[event["id"]] != event:
+                raise ValueError("evidence ID conflict; observations cannot be overwritten")
+            if "amount" in event and any("amount" in prior for key, prior in self.evidence.items() if key != event["id"]):
+                raise ValueError("this single-receipt lab accepts one amount evidence; resolve observations before input")
             self.evidence[event["id"]] = dict(event)
         elif kind == "transcript":
             if event["stage"] not in ("interim", "final"):

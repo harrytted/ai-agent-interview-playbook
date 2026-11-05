@@ -1,6 +1,5 @@
 # 08 · 规划与多 Agent：把依赖、证据和责任写清楚
 
-[上一章：记忆与状态](07-memory-and-state.md) · [学习目录](README.md) · [下一章：评测](09-evaluation.md)
 
 ## 规划、依赖与多 Agent 分工
 
@@ -114,3 +113,5 @@
 
 </details>
 <!-- question-links:end -->
+
+[上一章：07 · 记忆与状态](07-memory-and-state.md) · [基础原理目录](README.md) · [下一章：09 · 评测](09-evaluation.md)
