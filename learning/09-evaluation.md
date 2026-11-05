@@ -140,6 +140,7 @@ python3 examples/foundations/math_lab.py --section metrics
 <details><summary>展开本章相关面试题</summary>
 
 - [Q008 如何为 Agent 选择模型而不只看排行榜？](../questions/Q008.md#q008-如何为-agent-选择模型而不只看排行榜)
+- [Q023 RAG 如何评测，Recall@k、MRR 和答案质量有何区别？](../questions/Q023.md#q023-rag-如何评测recallkmrr-和答案质量有何区别)
 - [Q033 怎样判断一个 Agent 真正完成了任务？](../questions/Q033.md#q033-怎样判断一个-agent-真正完成了任务)
 - [Q034 成功率的分母怎么定义，拒答算成功还是失败？](../questions/Q034.md#q034-成功率的分母怎么定义拒答算成功还是失败)
 - [Q035 怎样构建评测集，避免越调越像“背答案”？](../questions/Q035.md#q035-怎样构建评测集避免越调越像背答案)

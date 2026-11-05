@@ -205,6 +205,13 @@ print(type(arguments).__name__, arguments["top_k"])
 <details><summary>展开本章相关面试题</summary>
 
 - [Q001 什么是 Agent，和普通 LLM 调用有何区别？](../questions/Q001.md#q001-什么是-agent和普通-llm-调用有何区别)
+- [Q009 最小 Agent Loop 应包含哪些环节？](../questions/Q009.md#q009-最小-agent-loop-应包含哪些环节)
+- [Q011 为什么用状态图组织 Agent？](../questions/Q011.md#q011-为什么用状态图组织-agent)
+- [Q013 多个分支何时可以并发？](../questions/Q013.md#q013-多个分支何时可以并发)
+- [Q025 Function Calling 的真正执行者是谁？](../questions/Q025.md#q025-function-calling-的真正执行者是谁)
+- [Q026 怎样设计易用且可控的工具接口？](../questions/Q026.md#q026-怎样设计易用且可控的工具接口)
+- [Q030 Context、短期记忆和长期记忆如何区分？](../questions/Q030.md#q030-context短期记忆和长期记忆如何区分)
+- [Q031 上下文太长时如何压缩而不丢任务？](../questions/Q031.md#q031-上下文太长时如何压缩而不丢任务)
 - [Q049 设计一个企业知识库客服 Agent，你会怎样开始？](../questions/Q049.md#q049-设计一个企业知识库客服-agent你会怎样开始)
 - [Q052 面试官问“为什么选这个框架”，怎样回答？](../questions/Q052.md#q052-面试官问为什么选这个框架怎样回答)
 - [Q053 怎样向面试官讲清一个真实个人项目？](../questions/Q053.md#q053-怎样向面试官讲清一个真实个人项目)

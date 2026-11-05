@@ -230,6 +230,7 @@ python3 examples/agent_lab/lab.py --scenario loop
 
 - [Q009 最小 Agent Loop 应包含哪些环节？](../questions/Q009.md#q009-最小-agent-loop-应包含哪些环节)
 - [Q012 如何防止循环、反复重规划与无效重试？](../questions/Q012.md#q012-如何防止循环反复重规划与无效重试)
+- [Q037 一条有用的 Agent trace 应记录什么？](../questions/Q037.md#q037-一条有用的-agent-trace-应记录什么)
 - [Q051 设计一个能创建、分派工单的 Agent，状态如何流转？](../questions/Q051.md#q051-设计一个能创建分派工单的-agent状态如何流转)
 
 </details>

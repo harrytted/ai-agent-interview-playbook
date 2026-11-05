@@ -40,6 +40,10 @@ python3 -m unittest discover -s tests -p 'test_training_objectives.py' -v
 
 新的[训练目标实验](training-objectives.md)把两轮模型动作与工具观察分开，计算带掩码的SFT损失，再检查正/负优势、概率比裁剪与明确方向的KL正则。独立二值状态上的解析梯度与有限差分对照，随后做一次小步参数更新。它验证教学目标的计算，不是完整GRPO或语言模型训练；输入概率、标签与优势均为教学设定。
 
+## 检索评分、候选与冲突
+
+检索专题的[独立机制实验](retrieval-mechanisms.md)可用 `python3 examples/advanced/retrieval_lab.py --section all` 运行，复算BM25、给定向量、RRF、候选损失与冲突偏序；输入由作者编写，不报告真实语义检索或ANN性能。
+
 ## 预算与调度算例
 
 台账中的单位是预留额度，不是自动读取的模型 token 或账单；同一个预留 ID 重放不重复扣额，更换预留量会拒绝。台账顺序执行；多 Worker 服务应使用具备并发一致性的共享存储。

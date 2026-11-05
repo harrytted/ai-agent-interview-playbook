@@ -33,6 +33,9 @@
 | K25 | SFT 的输入内容与监督目标可以用 mask 分开 | [TRL SFT Trainer](https://huggingface.co/docs/trl/sft_trainer)、[训练目标实验](../examples/advanced/training-objectives.md) | 本例只监督模型动作，工具观察保留作后续条件；目标 mask 不等于注意力 mask。assistant-only loss 需聊天模板支持，不是所有 SFT 的默认目标。 |
 | K26 | 裁剪代理项需同时看优势正负、概率比、KL 与归一化 | [DeepSeekMath v3 §4.1、式(3)(4)](https://arxiv.org/html/2402.03300v3#S4.SS1)、[TRL Loss Types](https://huggingface.co/docs/trl/grpo_trainer#loss-types) | 旧策略与参考策略职责不同；本例用固定优势、独立二元状态均值、精确 `KL(当前\|\|参考)`，不把它当作完整 GRPO 或所有实现的唯一公式。 |
 | K27 | 版本比较应保留同题配对与统计假设 | [statsmodels McNemar](https://www.statsmodels.org/stable/generated/statsmodels.stats.contingency_tables.mcnemar.html)、[SciPy bootstrap](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html) | exact McNemar 使用不一致对的条件二项检验；paired bootstrap 用相同索引重采样。教学 percentile 区间不宣称优于 BCa，小样本或同源相关任务限制泛化。 |
+| K28 | 词项匹配的统计评分与向量近邻是不同检索机制 | [Lucene BM25](https://lucene.apache.org/core/10_5_2/core/org/apache/lucene/search/similarities/BM25Similarity.html)、[DPR原论文](https://arxiv.org/abs/2004.04906)、[Faiss度量](https://github.com/facebookresearch/faiss/wiki/MetricType-and-distances) | 基础06；分词、兼容表示空间、距离与归一化分别影响排序。教学BM25只实现声明的单字段公式，不复现完整搜索引擎。 |
+| K29 | 融合与纯重排的结果受原候选池约束 | [Elastic RRF](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion)、[检索机制实验](../examples/advanced/retrieval-mechanisms.md) | 固定粒度、没有新增检索或parent展开时，最终证据为候选子集；oracle标签只用于离线上限诊断。 |
+| K30 | 相同条件的矛盾资料需要可信裁决规则 | [进阶RAG冲突合同](../advanced/06-agentic-rag.md#知识冲突先确定身份与适用域再检查权威关系)、[实验实现](../examples/advanced/retrieval_lab.py) | 本手册采用显式业务偏序；不声称存在按相似度、上传时间或多数票决定真假的通用规则，也不自动抽取自然语言矛盾。 |
 
 ## 新案例的证据边界
 
@@ -50,12 +53,14 @@ K25、K27 的官方文档于 2026-11-05 核对，为可变实现入口；K26 的
 - [基础数学实验](../examples/foundations/README.md)：Attention、余弦、RRF 与检索指标。
 - [工具循环实验](../examples/agent_lab/README.md)：工具校验、重试、审批、幂等和循环终止。
 - [训练目标小实验](../examples/advanced/training-objectives.md)：两轮动作的 SFT 目标掩码、正负优势裁剪、精确二元 KL 与解析梯度；仅标准库教学小策略。
+- [检索机制实验](../examples/advanced/retrieval-mechanisms.md)：手工词项和给定向量上的评分、候选覆盖、过滤损失与结构化冲突处理；不运行真实编码器或ANN。
 
 ```bash
 python3 -m examples.policy_agent eval --suite pilot --mode offline --output .local/policy_agent/pilot-report.json
 python3 examples/foundations/math_lab.py --section all
 python3 examples/agent_lab/lab.py --scenario all
 python3 examples/advanced/training_objectives.py --section all
+python3 examples/advanced/retrieval_lab.py --section all
 ```
 
 [阅读目录](README.md) · [资源深度调研](../research/learning-resources.md) · [来源数据](../research/learning-sources.json) · [面试知识参考资料](../docs/claim-ledger.md)
