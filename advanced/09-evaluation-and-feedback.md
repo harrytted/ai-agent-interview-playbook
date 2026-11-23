@@ -220,4 +220,6 @@ python3 examples/advanced/runtime_lab.py --scenario evaluation
 
 [任务服务的发布与回退实验](16-service-deployment-and-operations.md)
 
+[19 · 故障排查与发布验证](19-incident-review-and-release.md)
+
 [上一章：08 · 编码与计算机操作](08-coding-and-computer-use.md) · [工程进阶目录](README.md) · [下一章：10 · 性能与推理](10-performance-and-serving.md)

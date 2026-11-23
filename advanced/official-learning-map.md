@@ -19,7 +19,9 @@
 | [11 安全与治理](11-security-and-governance.md)：能连上工具是否就代表有权执行？ | 先读 [MCP Authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)的 HTTP transport 授权范围；再读 Claude SDK [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions)的执行规则与运行时审批。 | 将服务身份、资源访问、用户同意、工具策略与执行隔离画成独立边界；覆盖拒绝、撤销和越权测试。 |
 | [12 Agent 训练](12-agent-training.md)：示范、偏好与回报怎样形成更新？ | 先读 [TRL SFT](https://huggingface.co/docs/trl/sft_trainer) 的目标掩码与 [DPO §4](https://arxiv.org/html/2305.18290v2#S4)的参考策略，再对照 [DeepSeekMath v3 §4.1](https://arxiv.org/html/2402.03300v3#S4.SS1) 的策略比、裁剪与 KL；[本手册目标实验](../examples/advanced/training-objectives.md)复算其中的 SFT/裁剪小策略，真实多轮训练另读 [TRL Agent Training](https://huggingface.co/docs/trl/grpo_trainer#agent-training)。 | 从动作概率解释NLL、DPO偏好差距与轨迹回报；区分参考策略、采样旧策略、环境观察和模型动作，说明分布偏移及奖励漏洞。数值算例与现有实验支持范围分别核对。 |
 
-## 应用专题六章阅读路径
+<div id="应用专题六章阅读路径"></div>
+
+## 应用专题阅读路径
 
 | 章节 | 一手资料 | 阅读后检查什么 |
 | --- | --- | --- |
@@ -29,8 +31,9 @@
 | [16 任务服务](16-service-deployment-and-operations.md) | [LangSmith Agent Server](https://docs.langchain.com/langsmith/agent-server) · [长任务Harness](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents) | 任务归属、持久接收、取消、流事件与跨重启恢复 |
 | [17 事件任务](17-event-driven-and-proactive-agents.md) | [Kafka 4.0设计](https://kafka.apache.org/40/design/design/) · [Flink 1.20事件时间](https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/datastream/event-time/generating_watermarks/) | 分区顺序、连续完成位置、事件时间窗口与迟到修订；本地订阅实验未实现Kafka/Flink流处理 |
 | [18 媒体与语音](18-multimodal-and-realtime-agents.md) | [LLaVA v2 §4.1](https://arxiv.org/html/2304.08485v2#S4.SS1) · [Transformer Transducer](https://arxiv.org/abs/2010.03192) · [LiveKit Turns](https://docs.livekit.io/agents/logic/turns/) | 视觉投影、流式右上下文与修订、轮次和已播确认；表示对齐不等于事实核验，离线夹具不证明识别效果 |
+| [19 故障排查与发布验证](19-incident-review-and-release.md) | [Anthropic Agent 评测实践](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) · [Google SRE 灰度发布指南](https://sre.google/workbook/canarying-releases/) | 从任务记录定位问题，验证修复，决定何时扩大上线范围 |
 
-先走13→16A→14→16B，SQL作为方向分支，事件与媒体作为后续扩展。具体机制、采用理由与限定见 [应用扩充说明](../research/application-expansion.md)。
+先走13→16A→14→16B，SQL作为方向分支，事件与媒体作为后续扩展。准备发布与维护时，再读第 19 章。具体机制、采用理由与限定见 [应用扩充说明](../research/application-expansion.md)。
 
 ## 从自己的项目出发
 

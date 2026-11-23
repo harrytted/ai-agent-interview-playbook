@@ -171,4 +171,4 @@ python3 -m unittest discover -s tests -p 'test_multimodal_lab.py' -v
 
 [对应面试题：Q108、Q109、Q110](../docs/advanced/18-multimodal-and-realtime-agents.md)
 
-[上一章：17 · 事件驱动与主动任务](17-event-driven-and-proactive-agents.md) · [工程进阶目录](README.md)
+[上一章：17 · 事件驱动与主动任务](17-event-driven-and-proactive-agents.md) · [工程进阶目录](README.md) · [下一章：19 · 故障排查与发布验证](19-incident-review-and-release.md)

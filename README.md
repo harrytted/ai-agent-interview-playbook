@@ -4,7 +4,7 @@
 
 从概念、组成和运行机制开始，理解模型、工具、上下文、检索、记忆与规划怎样协作。图解和同一个政策助手案例把知识串起来，Python 实验与面试追问帮助你检查理解。阅读正文可以直接开始，动手部分需要 Python 基础。
 
-当前包含 **10 章基础、18 章进阶、110 道详解题**，覆盖运行机制、模型接入、数据处理、服务交付与质量优化。
+当前包含 **10 章基础、19 章进阶、110 道详解题**，覆盖运行机制、模型接入、数据处理、服务交付与质量优化。
 
 **[先用三道题检查自己的薄弱点 →](practice/three-question-preview.md)**：引用存在，回答为什么仍会错？创建工单超时，能不能再发一次？设计企业知识库 Agent，应该从哪里开始？先口述，再展开短答与追问，最后按需要进入完整解析和学习章节。试读无需安装或配置密钥。
 
@@ -60,17 +60,18 @@
 | 能&#8288;力&#8288;组&#8288;织 | [05 工具路由/MCP](advanced/05-tool-routing-and-mcp.md) · [06 Agentic RAG](advanced/06-agentic-rag.md) · [07 多 Agent](advanced/07-multi-agent-systems.md) · [08 编码与计算机操作](advanced/08-coding-and-computer-use.md) | 工具选择、证据策略、协作图和操作环境 |
 | 质&#8288;量&#8288;优&#8288;化 | [09 评测反馈](advanced/09-evaluation-and-feedback.md) · [10 性能与推理](advanced/10-performance-and-serving.md) · [11 安全治理](advanced/11-security-and-governance.md) · [12 Agent 训练](advanced/12-agent-training.md) | 回归集合、共享预算、授权边界与训练决策 |
 | 应用主线 | [13 模型API](advanced/13-model-api-and-output-contracts.md) · [14 知识摄取](advanced/14-ingestion-and-index-lifecycle.md) · [16 任务服务](advanced/16-service-deployment-and-operations.md) | 模型往返、可更新索引与可恢复的HTTP任务 |
+| 上线维护 | [19 故障排查与发布验证](advanced/19-incident-review-and-release.md) | 找到出错环节，验证修复并决定是否扩大上线范围 |
 | 方向选读 | [15 SQL分析](advanced/15-text-to-sql-and-data-analysis.md) · [17 事件订阅](advanced/17-event-driven-and-proactive-agents.md) · [18 媒体与语音](advanced/18-multimodal-and-realtime-agents.md) | 统计核验、主动任务、证据关联与播放打断 |
 
 建议动手顺序为13→16最小服务→14→16发布运维；SQL按数据分析方向选读，之后再推进事件和媒体专题。
 
 [完整进阶路线](advanced/README.md) · [贯穿项目工作坊](advanced/project-workshop.md) · [官方知识体系](advanced/official-learning-map.md) · [机制实验](examples/advanced/README.md)
 
-每章都有对应的 [3 篇进阶题文章](questions/README.md#进阶系统)。先读场景和机制，再闭卷说短答，最后展开详细答案与案例。遇到不会的追问，可以直接回到学习章节补上那一步。
+第 01–18 章各有 [3 篇进阶题文章](questions/README.md#进阶系统)。先读场景和机制，再闭卷说短答，最后展开详细答案与案例。遇到不会的追问，可以直接回到学习章节补上那一步。
 
 ## 知识地图
 
-Q001–Q056 覆盖基础与通用工程，Q057–Q110 对应18章工程进阶，采用相同的详解与案例标准。正文按知识关系完整讲解，面试题按问题组织回答与追问；学习和复习可以沿两种入口往返。
+Q001–Q056 覆盖基础与通用工程，Q057–Q110 对应工程进阶第 01–18 章。正文按知识关系完整讲解，面试题按问题组织回答与追问；学习和复习可以沿两种入口往返。
 
 | 模块 | 题号 | 你应当能够解释 |
 | --- | --- | --- |

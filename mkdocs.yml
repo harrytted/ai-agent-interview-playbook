@@ -1,5 +1,5 @@
 site_name: Agent 学习手册
-site_description: AI Agent 中文学习与面试手册：10 章基础、18 章进阶、110 道详解题，配合图解、Python 实验与三题试读。
+site_description: AI Agent 中文学习与面试手册：10 章基础、19 章进阶、110 道详解题，配合图解、Python 实验与三题试读。
 site_url: https://harrytted.github.io/ai-agent-interview-playbook/
 repo_url: https://github.com/harrytted/ai-agent-interview-playbook
 repo_name: GitHub 仓库
@@ -105,6 +105,7 @@ nav:
       - 16 · 服务交付与运维: advanced/16-service-deployment-and-operations.md
       - 17 · 事件驱动与主动任务: advanced/17-event-driven-and-proactive-agents.md
       - 18 · 多模态与实时语音: advanced/18-multimodal-and-realtime-agents.md
+      - 19 · 故障排查与发布验证: advanced/19-incident-review-and-release.md
       - 贯穿项目工作坊: advanced/project-workshop.md
       - 官方知识体系: advanced/official-learning-map.md
   - 面试题库:
