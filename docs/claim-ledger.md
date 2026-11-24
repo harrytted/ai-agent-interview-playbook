@@ -28,7 +28,7 @@
 | 配对版本比较需检查不一致对、区间与独立样本单位 | [statsmodels McNemar](https://www.statsmodels.org/stable/generated/statsmodels.stats.contingency_tables.mcnemar.html)、[SciPy bootstrap](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html) | 评测进阶；exact 条件二项检验与相同索引配对重采样。教学手写夹具不是模型实测，percentile 不是优于 BCa 的结论。 |
 | BM25、双编码检索与ANN分别有不同的误差来源 | [Lucene BM25](https://lucene.apache.org/core/10_5_2/core/org/apache/lucene/search/similarities/BM25Similarity.html)、[DPR](https://arxiv.org/abs/2004.04906)、[Faiss索引](https://github.com/facebookresearch/faiss/wiki/Faiss-indexes) | Q019–Q021、Q072–Q074；表示、近似搜索、资格过滤和排序误差分开评价。 |
 | 重排上限由固定候选中的相关证据数量约束 | [检索—重排](https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html)、[本手册实验](../examples/advanced/retrieval-mechanisms.md) | 没有新增读取或展开时，排序不能产生缺失候选；RR改善不代表必要证据齐全。 |
-| 冲突裁决不能由相关性分数或转载数量推导 | [本手册冲突合同](../advanced/06-agentic-rag.md#知识冲突先确定身份与适用域再检查权威关系)、[可复算实现](../examples/advanced/retrieval_lab.py) | 先统一事实键、适用域和有效时间，再应用可信偏序；无裁决依据时保留分歧，属于明确的业务设计。 |
+| 冲突裁决不能由相关性分数或转载数量推导 | [本手册冲突合同](../advanced/06-agentic-rag.md#证据冲突与权威关系)、[可复算实现](../examples/advanced/retrieval_lab.py) | 先统一事实键、适用域和有效时间，再应用可信偏序；无裁决依据时保留分歧，属于明确的业务设计。 |
 | Outbox原子保存发送意图，不保证外部消费者只见一次 | [Transactional outbox模式原作者说明](https://microservices.io/patterns/data/transactional-outbox.html) | 02、17；转发器在发送后、记确认前退出可能重发，消费端仍需幂等。不能把本地事务扩张成远端恰好一次执行。 |
 | SQL的逻辑处理顺序和多重集语义决定统计含义 | [PostgreSQL 18 SELECT](https://www.postgresql.org/docs/18/sql-select.html) | 15；FROM/JOIN、WHERE、分组/聚合、HAVING与投影等有语义区别；默认保留重复，物理优化可改执行计划但不能任意改结果。 |
 | 吞吐保护需要观察资源需求，重试也会增加负载 | [Google SRE过载处理](https://sre.google/sre-book/handling-overload/) | 10、16；请求成本不同，固定QPS不等于固定资源占用；容量模型要声明假设，排队和接收策略另按实际负载验证。 |

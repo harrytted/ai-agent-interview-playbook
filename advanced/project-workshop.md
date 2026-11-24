@@ -54,7 +54,7 @@
 
 ## 第四轮：从机制走到应用入口
 
-先学 [13模型协议](13-model-api-and-output-contracts.md)，用原始响应和工具回填对应表定位模型与执行器的边界。接着做 [16A只读服务](16-service-deployment-and-operations.md#16a先交付最小只读任务服务)，提交、补日期并跨重启继续。再读02持久执行与11安全治理，进入 [16B批准与恢复](16-service-deployment-and-operations.md#16b加入批准写入与恢复)，验证具体批准、取消和版本回退。默认服务使用确定性规则，真实模型决策能力沿政策实验live入口单独测量。
+先学 [13模型协议](13-model-api-and-output-contracts.md)，用原始响应和工具回填对应表定位模型与执行器的边界。接着做 [16A只读服务](16-service-deployment-and-operations.md#16a--持久接收与只读任务)，提交、补日期并跨重启继续。再读02持久执行与11安全治理，进入 [16B批准与恢复](16-service-deployment-and-operations.md#16b--批准写入与恢复)，验证具体批准、取消和版本回退。默认服务使用确定性规则，真实模型决策能力沿政策实验live入口单独测量。
 
 [14摄取](14-ingestion-and-index-lifecycle.md)为原文建立真实词项索引，在更新、删除、撤权后重新查询。[15 SQL](15-text-to-sql-and-data-analysis.md)用另一组明确定义的虚构统计数据比较JOIN粒度；它是方向分支，不必阻塞服务学习。
 

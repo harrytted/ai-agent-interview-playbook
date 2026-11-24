@@ -90,7 +90,7 @@ Microsoft的标准索引流程先形成TextUnits，抽取实体/关系并汇总�
 
 对“某设备适用哪项限制”和“整个资料集反复出现哪些维护主题”分别设计局部/全局路径，写出入口、候选、装配及来源回溯。再合并两个同名实体、撤回一份原文，列出失效的派生产物；验收指出每层怎样发现错误，以及普通文本基线可否更直接完成问题。
 
-**学习与参考：** [主章GraphRAG机制](../../advanced/06-agentic-rag.md#graphrag-什么时候有帮助) · [Microsoft GraphRAG查询概览](https://microsoft.github.io/graphrag/query/overview/)
+**学习与参考：** [主章GraphRAG机制](../../advanced/06-agentic-rag.md#证据状态与停止条件) · [Microsoft GraphRAG查询概览](https://microsoft.github.io/graphrag/query/overview/)
 
 ### Q074 研究助手怎样反向核验证据并决定停止？
 
@@ -114,7 +114,7 @@ Microsoft的标准索引流程先形成TextUnits，抽取实体/关系并汇总�
 
 **Oracle检索**是诊断时换入人工确认的正确证据，保持问题、资料资格、生成器和可行预算不变，再看后续是否仍错。进一步在原候选上限内替换正确块、使用人工正确排序、提供完整证据包，可以定位候选、排序和装配。它不保证系统只有一个故障，也不能用更大oracle输入隐藏原预算根本装不下证据的问题。
 
-离线评测至少分开相关证据Recall@k、排序质量、上下文必要条件覆盖、冲突识别及最终引用支持；[ANN Recall@k](../../advanced/06-agentic-rag.md#同距近邻怎样计分)另以同向量精确搜索为参照，不以人工相关性为分母，并说明同距ID替换与距离容差。将BM25、精确向量、混合、重排、改写与ANN逐项消融，保持总候选/输入预算可比并另报成本。按同义词、否定、历史问题、冲突和受限域分层，避免总体平均掩盖退步。[BEIR检索评测](https://arxiv.org/abs/2104.08663) · [Faiss度量](https://github.com/facebookresearch/faiss/wiki/MetricType-and-distances)
+离线评测至少分开相关证据Recall@k、排序质量、上下文必要条件覆盖、冲突识别及最终引用支持；[ANN Recall@k](../../advanced/06-agentic-rag.md#分层测量与对照实验)另以同向量精确搜索为参照，不以人工相关性为分母，并说明同距ID替换与距离容差。将BM25、精确向量、混合、重排、改写与ANN逐项消融，保持总候选/输入预算可比并另报成本。按同义词、否定、历史问题、冲突和受限域分层，避免总体平均掩盖退步。[BEIR检索评测](https://arxiv.org/abs/2104.08663) · [Faiss度量](https://github.com/facebookresearch/faiss/wiki/MetricType-and-distances)
 
 **常见追问：**
 

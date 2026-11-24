@@ -53,7 +53,7 @@
 | MRR@k | 在声明查询集合上对首个命中的倒数排名取平均 | 单题是 RR，不是均值 MRR | [09](09-evaluation.md) |
 | nDCG@k | 折扣累积收益相对于理想排名的归一化值 | 必须声明 gain 与无相关项口径 | [09](09-evaluation.md) |
 | p95 | 一批观测的第95百分位耗时 | 不是平均数，也不是单次期限保证 | [09](09-evaluation.md) |
-| 墙钟 / 单调时钟 | 日期时间 / 同一时钟域内计量经过时间的时钟 | 墙钟可能校正；单调读数不能直接当成跨机器、跨系统重启的时间戳 | [基础10](10-reliability-and-security.md)、[进阶10](../advanced/10-performance-and-serving.md#耗时预算使用哪一种时钟) |
+| 墙钟 / 单调时钟 | 日期时间 / 同一时钟域内计量经过时间的时钟 | 墙钟可能校正；单调读数不能直接当成跨机器、跨系统重启的时间戳 | [基础10](10-reliability-and-security.md)、[进阶10](../advanced/10-performance-and-serving.md#模型路由与共享额度) |
 | SLO（服务水平目标） | 服务希望达到的质量或性能水平 | 需说明指标与统计窗口并实际验证 | [09](09-evaluation.md) |
 | 身份认证 / 授权 / 批准 | 确认是谁 / 能做什么 / 是否同意本次具体动作 | 三者不能相互替代 | [10](10-reliability-and-security.md) |
 | Idempotency（幂等） | 同一操作重复执行的约定效果与执行一次相同 | 不要求响应相同；创建接口仍需规定作用域、期限与一致性 | [10](10-reliability-and-security.md) |

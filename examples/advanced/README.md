@@ -29,7 +29,7 @@ python3 -m unittest discover -s tests -p 'test_evaluation_lab.py' -v
 
 默认12对标签由作者手工编写，基线成功6题、候选8题，其中修复3题、退步1题。脚本实际复算约16.7个百分点的配对差、McNemar双侧精确p值0.625，以及按整对任务重采样的百分位区间。默认2000次、种子7时区间约为[-16.7,50.0]个百分点；这是教学结果，不是模型实测提升。
 
-结果包含修复/退步ID及采样配置。可用`--input .local/paired-outcomes.json`读取自己已判定的任务对，每项须有唯一`task_id`与布尔字段`baseline`、`candidate`。缺失或未判定不能隐式变成False；任务独立性、近重复分组及多次尝试协议需要由评测者先明确。小样本百分位区间不保证稳定覆盖；全同分的退化区间也不证明总体等价。完整手算与解释见[评测章](../../advanced/09-evaluation-and-feedback.md#成功率提高后还要看配对差异与不确定性)。
+结果包含修复/退步ID及采样配置。可用`--input .local/paired-outcomes.json`读取自己已判定的任务对，每项须有唯一`task_id`与布尔字段`baseline`、`candidate`。缺失或未判定不能隐式变成False；任务独立性、近重复分组及多次尝试协议需要由评测者先明确。小样本百分位区间不保证稳定覆盖；全同分的退化区间也不证明总体等价。完整手算与解释见[评测章](../../advanced/09-evaluation-and-feedback.md#配对差异与不确定性)。
 
 ## 训练目标与一次参数更新
 

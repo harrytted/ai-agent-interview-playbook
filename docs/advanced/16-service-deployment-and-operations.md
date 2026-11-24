@@ -22,7 +22,7 @@ Worker负责推进任务而不占着HTTP连接等用户。缺日期进入clarifi
 
 单Worker也不消除并发更新。API取消与Worker完成可能同时到来，因此要在一致的边界里读取当前revision、验证允许转换并提交状态及事件。本地事务只保护本地；工单服务已提交而本地未确认的窗口仍需原operation ID查询、幂等重试或对账，不能用重新创建任务解决。
 
-扩到多Worker后，领取、续租、完成都要带条件：领取以事务/条件写保存claim_owner并递增claim_epoch，续租与完成检查领取者、代次、未过期租约和取消状态，完成还核对条件revision。任务owner表示所属用户，claim_owner表示执行Worker，调度不能改掉用户归属。数据库事务在取得资格后释放，不能跨模型或网络等待一直占锁。此为扩展设计，本地只有单Worker；外部fencing原理接02，服务状态转换见[16章](../../advanced/16-service-deployment-and-operations.md#扩展到多worker时领取必须是条件状态转移)。
+扩到多Worker后，领取、续租、完成都要带条件：领取以事务/条件写保存claim_owner并递增claim_epoch，续租与完成检查领取者、代次、未过期租约和取消状态，完成还核对条件revision。任务owner表示所属用户，claim_owner表示执行Worker，调度不能改掉用户归属。数据库事务在取得资格后释放，不能跨模型或网络等待一直占锁。此为扩展设计，本地只有单Worker；外部fencing原理接02，服务状态转换见[16章](../../advanced/16-service-deployment-and-operations.md#任务领取续租与取消)。
 
 **常见追问：**
 
@@ -92,7 +92,7 @@ Worker负责推进任务而不占着HTTP连接等用户。缺日期进入clarifi
 
 再运行`authorization-revocation`，对照release与access_revision，核对旧草稿不可见、旧批准被拒绝、补参不恢复资格和对象数0；对已经提交的对象则保留真实身份。解释为什么只在检索函数过滤权限仍不足以保护GET旧结果。
 
-**学习与参考：** [学习章16](../../advanced/16-service-deployment-and-operations.md) · [服务实验](../../examples/service_lab/README.md) · [持久执行的升级合同](../../advanced/02-durable-execution.md#代码升级要维护重放合同) · [SQLite事务](https://www.sqlite.org/lang_transaction.html)。
+**学习与参考：** [学习章16](../../advanced/16-service-deployment-and-operations.md) · [服务实验](../../examples/service_lab/README.md) · [持久执行的升级合同](../../advanced/02-durable-execution.md#升级与历史兼容) · [SQLite事务](https://www.sqlite.org/lang_transaction.html)。
 
 ### Q104 HTTP请求正常但任务失败时，怎样设计服务指标与告警？
 
@@ -114,7 +114,7 @@ Worker负责推进任务而不占着HTTP连接等用户。缺日期进入clarifi
 
 再沿任务因果链定位。队列堆积先看Worker就绪与下游容量；工具错误看对应调用与重试；索引错误看release与证据；业务结果未知则先查真实对象。失败也可能产生成本，累计用量、预算预留与提供方计量应可对账，不能只统计成功请求。
 
-还要区分可靠接收预算、队列上限和活跃执行槽。等待人工可释放槽位，但持久任务仍占空间；队列年龄持续增长时，HTTP接单再快也不代表任务更快。按owner限制占用并在过载时拒绝/延后新工作，比无限重试更符合有界服务合同。容量模型和范围见[接收与执行预算](../../advanced/16-service-deployment-and-operations.md#接收排队与执行槽需要不同预算)，实验只有最小状态计数。
+还要区分可靠接收预算、队列上限和活跃执行槽。等待人工可释放槽位，但持久任务仍占空间；队列年龄持续增长时，HTTP接单再快也不代表任务更快。按owner限制占用并在过载时拒绝/延后新工作，比无限重试更符合有界服务合同。容量模型和范围见[接收与执行预算](../../advanced/16-service-deployment-and-operations.md#状态排队与容量)，实验只有最小状态计数。
 
 告警应附带状态、范围与可执行处置。Worker停止且queued增长，先停止新接收或限制流量，恢复原队列；write_outcome_unknown增加，沿原操作ID查对象而不是重新提交。阈值由产品服务目标与测量条件制定，本实验只提供每owner的最小状态计数和就绪状态，没有声称实现生产告警平台。
 

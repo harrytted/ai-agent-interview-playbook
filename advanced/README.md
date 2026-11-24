@@ -12,8 +12,8 @@
 
 | 你的目标 | 建议阅读路线 | 先取得什么结果 |
 | --- | --- | --- |
-| 快速搭建 | [13 模型接入](13-model-api-and-output-contracts.md) → [16A 最小服务](16-service-deployment-and-operations.md#16a先交付最小只读任务服务) → [14 知识摄取](14-ingestion-and-index-lifecycle.md) → [16B 批准与运维](16-service-deployment-and-operations.md#16b加入批准写入与恢复) | 先提交、补参和跨重启继续，再验证知识变更与受控写入 |
-| 知识助手 | [06 证据驱动检索](06-agentic-rag.md) → [14 摄取生命周期](14-ingestion-and-index-lifecycle.md) → [16B 服务交付](16-service-deployment-and-operations.md#16b加入批准写入与恢复) → [17 事件订阅](17-event-driven-and-proactive-agents.md) | 把来源、版本和权限接到查询及后续任务 |
+| 快速搭建 | [13 模型接入](13-model-api-and-output-contracts.md) → [16A 最小服务](16-service-deployment-and-operations.md#16a--持久接收与只读任务) → [14 知识摄取](14-ingestion-and-index-lifecycle.md) → [16B 批准与运维](16-service-deployment-and-operations.md#16b--批准写入与恢复) | 先提交、补参和跨重启继续，再验证知识变更与受控写入 |
+| 知识助手 | [06 证据驱动检索](06-agentic-rag.md) → [14 摄取生命周期](14-ingestion-and-index-lifecycle.md) → [16B 服务交付](16-service-deployment-and-operations.md#16b--批准写入与恢复) → [17 事件订阅](17-event-driven-and-proactive-agents.md) | 把来源、版本和权限接到查询及后续任务 |
 | 数据分析 | [15 Text-to-SQL](15-text-to-sql-and-data-analysis.md) → [16 任务服务](16-service-deployment-and-operations.md) | 先核验统计粒度与结果，再学习任务交付合同 |
 | 系统优化 | [09 评测](09-evaluation-and-feedback.md) → [10 性能与预算](10-performance-and-serving.md) → [11 安全治理](11-security-and-governance.md) → [12 优化与训练](12-agent-training.md) | 先定位失败与成本，确认瓶颈后再决定是否训练 |
 | 上线维护 | [09 评测](09-evaluation-and-feedback.md) → [16 任务服务](16-service-deployment-and-operations.md) → [19 故障排查与发布验证](19-incident-review-and-release.md) | 定位失败、验证修复，决定是否扩大上线范围 |
@@ -28,37 +28,37 @@
 
 <div id="应用专题-1318把机制接成可运行的任务"></div>
 
-| 章 | 要解决的问题 | 学完交付什么 |
+| 章 | 核心内容 | 可用于 |
 | --- | --- | --- |
-| [01 Harness 与 Deep Agents](01-harness-and-deep-agents.md) | 控制器怎样从计划决定继续、等待和停止？ | 版本化状态转换、就绪调度与交接恢复推演 |
-| [02 持久执行](02-durable-execution.md) | 恢复怎样复用历史，又不重复外部动作？ | 确定性重放、历史匹配、事务去重与过期执行者隔离 |
-| [03 上下文工程](03-context-engineering.md) | 有限输入怎样保住决定下一步的条件？ | 依赖闭包装配、压缩损失检查与净成本复算 |
-| [04 记忆与技能](04-memory-and-skills.md) | 观察何时成为事实，事实与做法怎样更新？ | 记忆准入/巩固、双时间修订、遗忘传播与技能状态 |
-| [05 工具路由与 MCP](05-tool-routing-and-mcp.md) | 候选工具怎样成为有身份的可核对调用？ | 逐级路由、协议协商/目录变化、并发关联与取消竞态 |
-| [06 Agentic RAG](06-agentic-rag.md) | 词项与向量怎样召回，如何优化并处理冲突？ | BM25推导、ANN/过滤诊断、排序上限、冲突与停止合同 |
-| [07 多 Agent 系统](07-multi-agent-systems.md) | 分工何时有收益，怎样接受分支并判定结束？ | 依赖验收、归并不变量、共享预留与工作量/跨度下界 |
-| [08 编码与计算机操作](08-coding-and-computer-use.md) | 怎样知道补丁或界面动作确实改变了目标？ | 干净初态、版本化测试证据与观察—动作—核验闭环 |
-| [09 评测与反馈](09-evaluation-and-feedback.md) | 改善来自策略、评分误差还是样本组成？ | Judge误差传播、分层/聚类、配对统计与因果验证边界 |
-| [10 性能与推理服务](10-performance-and-serving.md) | 算量、访存、批处理和排队怎样改变完整延迟？ | Prefill/Decode、KV容量、迭代调度、平均在途量与扇出尾部推导 |
-| [11 安全与治理](11-security-and-governance.md) | 不可信内容怎样影响模型，又在哪里失去执行资格？ | 威胁路径、最小能力、授权关口及攻击/正常任务双重验证 |
-| [12 优化与训练](12-agent-training.md) | 示范、偏好和交互回报怎样形成参数更新？ | SFT/DPO目标、策略梯度与信用分配、采样偏差和奖励验证 |
-| [13 模型 API 与输出合同](13-model-api-and-output-contracts.md) | 任意切分字节何时成为可接受的完整调用？ | 增量缓冲、消息/块状态机、调用ID与异常终态 |
-| [14 知识摄取与索引生命周期](14-ingestion-and-index-lifecycle.md) | 内容怎样派生、发布、失效并安全回收？ | 结构化解析、血缘更新、完整代次与读者快照生命周期 |
-| [15 Text-to-SQL 与数据分析](15-text-to-sql-and-data-analysis.md) | 每次行变换为什么会改变统计含义？ | SQL逻辑顺序、多重集、外连接/NULL推导与独立语义检查 |
-| [16 服务交付与运维](16-service-deployment-and-operations.md) | 多个执行者怎样有界领取并处理取消竞争？ | 原子领取、续租/迟到提交、资源接收与发布兼容边界 |
-| [17 事件驱动与主动任务](17-event-driven-and-proactive-agents.md) | 输入重投、乱序和迟到时，何时形成可靠任务？ | 分区顺序、消费确认、窗口/水位线、因果循环与通知意图 |
-| [18 多模态与实时语音](18-multimodal-and-realtime-agents.md) | 像素和采样怎样变成表示，再接到真实交互？ | 视觉投影、流式识别、坐标/时钟、转写修订与缓冲反压 |
-| [19 故障排查与发布验证](19-incident-review-and-release.md) | Agent 出错后，怎样查清原因并重新上线？ | 故障记录、修复验证与发布决定 |
+| [01 Harness 与 Deep Agents](01-harness-and-deep-agents.md) | 运行框架、就绪调度与跨会话交接 | 版本化状态转换、就绪调度与交接恢复推演 |
+| [02 持久执行](02-durable-execution.md) | 重放、外部写入恢复与租约隔离 | 确定性重放、历史匹配、事务去重与过期执行者隔离 |
+| [03 上下文工程](03-context-engineering.md) | 输入预算、证据依赖与压缩 | 依赖闭包装配、压缩损失检查与净成本复算 |
+| [04 记忆与技能](04-memory-and-skills.md) | 事实修订、技能装载与效果验证 | 记忆准入/巩固、双时间修订、遗忘传播与技能状态 |
+| [05 工具路由与 MCP](05-tool-routing-and-mcp.md) | 候选工具、协议版本与执行授权 | 逐级路由、协议协商/目录变化、并发关联与取消竞态 |
+| [06 Agentic RAG](06-agentic-rag.md) | 词项、向量、冲突裁决与补查 | BM25推导、ANN/过滤诊断、排序上限、冲突与停止合同 |
+| [07 多 Agent 系统](07-multi-agent-systems.md) | 控制权、依赖验收、归并与预算 | 依赖验收、归并不变量、共享预留与工作量/跨度下界 |
+| [08 编码与计算机操作](08-coding-and-computer-use.md) | 编码改动、执行隔离与界面核验 | 干净初态、版本化测试证据与观察—动作—核验闭环 |
+| [09 评测与反馈](09-evaluation-and-feedback.md) | 失败归因、评分器与配对验证 | Judge误差传播、分层/聚类、配对统计与因果验证边界 |
+| [10 性能与推理服务](10-performance-and-serving.md) | 关键路径、生成阶段、显存与排队 | Prefill/Decode、KV容量、迭代调度、平均在途量与扇出尾部推导 |
+| [11 安全与治理](11-security-and-governance.md) | 信任边界、对象授权与审计 | 威胁路径、最小能力、授权关口及攻击/正常任务双重验证 |
+| [12 优化与训练](12-agent-training.md) | 动作目标、偏好比较与轨迹回报 | SFT/DPO目标、策略梯度与信用分配、采样偏差和奖励验证 |
+| [13 模型 API 与输出合同](13-model-api-and-output-contracts.md) | 流式消息、工具参数与异常终态 | 增量缓冲、消息/块状态机、调用ID与异常终态 |
+| [14 知识摄取与索引生命周期](14-ingestion-and-index-lifecycle.md) | 资料版本、原子发布与撤权 | 结构化解析、血缘更新、完整代次与读者快照生命周期 |
+| [15 Text-to-SQL 与数据分析](15-text-to-sql-and-data-analysis.md) | 统计口径、连接粒度与结果核验 | SQL逻辑顺序、多重集、外连接/NULL推导与独立语义检查 |
+| [16 服务交付与运维](16-service-deployment-and-operations.md) | 持久接收、取消边界与在途恢复 | 原子领取、续租/迟到提交、资源接收与发布兼容边界 |
+| [17 事件驱动与主动任务](17-event-driven-and-proactive-agents.md) | 事件投递、迟到处理与去重 | 分区顺序、消费确认、窗口/水位线、因果循环与通知意图 |
+| [18 多模态与实时语音](18-multimodal-and-realtime-agents.md) | 媒体定位、条件修订和播放控制 | 视觉投影、流式识别、坐标/时钟、转写修订与缓冲反压 |
+| [19 故障排查与发布验证](19-incident-review-and-release.md) | 故障定位、回归、灰度与回退 | 故障记录、修复验证与发布决定 |
 
-目录中的交付物要能由原理推出，而不只是填完模板。阅读时先说明对象、内部计算或状态变化，再检查改变一个条件会怎样；能复述一次正常过程，还不足以解释这个机制。配套实验的 README 说明实际支持范围、运行命令和失败证据。
+正文按机制、工程边界和验收组织。适用条件发生变化时，回到对应小节核对。实验的运行条件、命令和预期结果收录在各自的说明里。
 
-## 同一个案例，各章留下什么成品
+<div id="同一个案例各章留下什么成品"></div>
 
-政策研究资料作为应用实验的共同输入，完整案例产物集中在[贯穿项目工作坊](project-workshop.md)。原理附近的算例用于推导算法、状态变化与失败边界；涉及多个机制的完整业务流程与操作命令，集中在各章明确标出的应用部分。
+## 工作坊与实验
 
-各章中的三地、四地设计仍用于扩展讨论，原政策执行包只有海岚/云洲与文档/工单工具。摄取索引、SQLite统计和HTTP任务各有独立实验，不改变原任务预期。原执行包的可执行范围见 [政策实验](../examples/policy_agent/README.md)；图检索、真实多模型协作、浏览器操作、GPU服务和真实语言模型训练为设计或选读。12章另有四个独立二值状态/位置的小参数更新实验，用来观察训练目标，不代表已训练语言模型。各章会明确哪些是运行结果、哪些是手算或模拟成品，不因章节涵盖主题就声称完整服务已实现。
+需要把机制接成完整任务时，使用 [贯穿项目工作坊](project-workshop.md) 和 [政策实验](../examples/policy_agent/README.md)。检索、训练目标和配对统计可以独立复算。各实验提供可验证的输入、输出和运行边界。
 
-快速搭建路线的实际交付范围是：13解析作者编写的模型协议夹具；16A用规则与真实本地HTTP完成接收、补参和持久任务；14建立本地词项索引；16B用独立SQLite业务对象验证批准、恢复与发布。14与16共用“内容固定、当前授权单独检查”的机制：16现在有独立访问目录，旧任务和内容回退都不能恢复撤权，但它没有直接查询14的索引。17尚未调用16的HTTP任务入口，18也未接真实识别或语音模型。按路线学习会连接合同，不能把它写成已经自动集成的端到端模型服务。
+快速搭建路线从协议解析和只读 HTTP 任务开始，再学习索引发布、批准写入与恢复。相关组件分别由各实验验证。真实流量或模型质量按目标环境单独评测。
 
 ## 按目标选择主线
 
@@ -72,7 +72,7 @@
 
 [54 篇进阶题文章](../questions/README.md#进阶系统)覆盖 Q057–Q110，对应第 01–18 章，每章三题。每题有口述短答、分节详细解析、带答案的追问、实战案例和验收练习。正文与对应面试题可以直接互相跳转。
 
-读完相关章节后，先看题目并自己解释一次，再读分节答案。若只能原句复述，就把案例里的一个条件换掉：审批过期、远端结果未知、共享预算不足。回答会随条件变化，理解才算离开了背诵区。
+章末可以展开面试题、实验和资料。复习时先按实际状态解释下一步，再对照解析查缺口。
 
 ## 从问题找到对应知识
 
@@ -100,7 +100,7 @@
 | 第 5 周 | 09–10 | 逐题评测表；延迟与预算实验 |
 | 第 6 周 | 11–12 | 越权与奖励漏洞用例；改进和发布决策 |
 
-每章先读机制并解释输入输出，再预测条件变化后的结果，完成设计练习，最后闭卷回答自检。将推导、运行结果和失败原因记进项目笔记。[贯穿项目工作坊](project-workshop.md)把这些产物接成同一个项目。
+先读机制，记录输入、状态和结果。再用对应实验核对变化或故障，保留影响判断的证据。[贯穿项目工作坊](project-workshop.md)把这些产物接成同一个项目。
 
 <div id="三组能运行的进阶机制实验"></div>
 
@@ -132,6 +132,6 @@ python3 examples/advanced/runtime_lab.py --scenario replay
 
 [GitHub 与技术博客调研](../research/advanced-landscape.md)解释所选项目带来了哪些能力、怎样与基础原理衔接；[官方知识体系与选读地图](official-learning-map.md)把文档、协议和论文放到对应学习阶段。外部项目的版本、接口和维护方式不同，运行示例时使用相应项目的环境与版本说明。
 
-延伸阅读可以访问作者的 [Agent 技术博客](https://agent.harrylab.cn/articles/)，选读工程实践和原理图解；遇到 Harness、Context、MCP 等术语时，可打开 [AI 编程字典](https://agent.harrylab.cn/dictionary/)查看解释与概念关系，再回到本章案例和面试题检验理解。
+延伸阅读可以访问作者的 [Agent 技术博客](https://agent.harrylab.cn/articles/)，选读工程实践和原理图解；遇到 Harness、Context、MCP 等术语时，可打开 [AI 编程字典](https://agent.harrylab.cn/dictionary/)查看解释与概念关系，再回到正文和配套题巩固理解。
 
 [返回首页](../README.md) · [基础原理](../learning/README.md) · [110 题总索引](../docs/question-index.md) · [进阶面试题](../docs/advanced/README.md)
