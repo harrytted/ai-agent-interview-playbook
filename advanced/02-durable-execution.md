@@ -89,7 +89,7 @@ COMMIT
 
 ## 从临时模拟走到跨命令恢复
 
-远端提交与本地确认的基础故障窗口见[基础章的 checkpoint 与外部事务](../learning/07-memory-and-state.md#checkpoint-记录进度不替外部系统提交事务)；这里继续核对跨命令恢复留下的可靠记录。
+远端提交与本地确认的基础故障窗口见[基础章的 checkpoint 与外部事务](../learning/07-memory-and-state.md#检查点与任务恢复)；这里继续核对跨命令恢复留下的可靠记录。
 
 旧`runtime_lab.py --scenario replay`用两个独立SQLite数据库说明事务窗口，场景结束会清理临时目录。[工单崩溃恢复实验](../examples/policy_agent/README.md)保留`.local/policy_agent/<run-id>/`，用两个Python进程演示恢复，便于亲自检查持久对象。
 

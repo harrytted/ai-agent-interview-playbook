@@ -14,7 +14,7 @@
 | K06 | SFT、偏好优化与 LoRA 分属不同描述维度 | [TRL SFT](https://huggingface.co/docs/trl/sft_trainer)、[DPO](https://huggingface.co/docs/trl/dpo_trainer)、[LoRA 原论文](https://arxiv.org/abs/2106.09685) | 区分训练目标、训练信号与参数适配方式。 |
 | K07 | 上下文需选择；压缩可能丢失重要信息 | [Anthropic context engineering](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents) | 选择证据、管理上下文预算，并在摘要中保留关键条件。 |
 | K08 | 工具参数合同、真正执行和业务权限是不同边界 | [MCP Tools 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)、[当前客户端/服务端工具](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) | 分别检查输入结构、业务权限与执行结果；执行器可在应用侧或平台侧。 |
-| K09 | MCP 的 Host/Client/Server 是逻辑职责 | [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture)、[传输规范 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports) | 理解逻辑角色、会话连接与能力协商；stdio指标准输入/输出传输。 |
+| K09 | MCP 的应用、客户端和服务端各有职责 | [2025-11-25 生命周期](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle)、[2026-07-28 架构](https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture) | 对照旧版初始化握手和新版按请求携带版本、发现服务端能力的方式。 |
 | K10 | MCP HTTP 授权机制不能替代资源级业务授权 | [MCP authorization 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) | 区分 HTTP 与 stdio 的授权流程，以及连接权限与业务对象权限。 |
 | K11 | MCP 与 A2A 可在同一应用里组合 | [A2A 官方对照](https://a2a-protocol.org/latest/topics/a2a-and-mcp/) | 根据工具连接与 Agent 任务协作的需求组合协议。 |
 | K12 | RAG 使用外部检索材料，工程实践可比原论文更广 | [RAG](https://arxiv.org/abs/2005.11401)、[检索与生成的关系](https://docs.langchain.com/oss/python/deepagents/retrieval)、[DPR](https://arxiv.org/abs/2004.04906) | 先理解检索增强生成的用途与过程，再分别设计资料入库、检索与生成链路。 |
@@ -22,7 +22,7 @@
 | K14 | 重排只处理已召回的候选 | [Sentence Transformers retrieve/rerank](https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html) | 检查候选集合覆盖范围和最终 top-k 的证据完整性。 |
 | K15 | 存储记忆、检索和读入当前上下文是不同步骤 | [LangGraph Persistence](https://docs.langchain.com/oss/python/langgraph/persistence)、[上下文与窗口外笔记](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents) | 区分应用状态、窗口外存储与模型参数。 |
 | K16 | ReAct 是推理与行动的交替；文本反思未必更新权重 | [ReAct](https://arxiv.org/abs/2210.03629)、[Reflexion](https://arxiv.org/abs/2303.11366) | 理解反馈、情景记忆与参数更新的机制区别。 |
-| K17 | Agent 评测要区分任务、尝试、轨迹与环境终态 | [Anthropic agent evals](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | 用后端终态和执行轨迹共同判断任务结果。 |
+| K17 | Agent 评测要区分任务、尝试、轨迹与环境终态 | [Anthropic agent evals](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | 用后端终态和执行轨迹判断结果。用 pass@k 衡量多次尝试中能否成功，用 pass^k 衡量多次执行是否稳定。 |
 | K18 | 二值 gain 的 nDCG 用相应理想排序归一化 | [scikit-learn nDCG](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html) | 声明 gain、截断位置、空相关集合与汇总口径；算例约为 0.530721。 |
 | K19 | Judge 存在任务相关偏差，需人工校准 | [MT-Bench 原研究](https://arxiv.org/abs/2306.05685) | 检查位置、冗长与自我偏好，并用人工样本校准。 |
 | K20 | 超时不等于没有副作用；幂等约束操作效果而非响应字节 | [RFC 9110 §9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2)、[AWS idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) | 先区分幂等定义与创建接口的实现，再围绕稳定意图 ID、参数、作用域、期限和一致性设计恢复。 |
