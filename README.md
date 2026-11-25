@@ -1,161 +1,84 @@
 # AI Agent 系统学习与面试手册
 
-**AI Agent（智能体）** 是围绕目标、根据当前信息选择行动，并利用行动结果继续推进任务的系统。本手册讨论以大语言模型为决策核心的 Agent。
+一份中文 Agent 工程手册。沿着一次任务，理解模型读到了什么、程序执行了什么、结果怎么核对。可以从头学，也可以在做项目时按问题回查。
 
-基础章节讲清模型、工具、上下文、检索、记忆与规划的运行机制。复杂流程配有图解，章节也可以单独回查。需要动手验证时，可以选做 Python 实验。
+**[10 章基础目录](learning/README.md) · [19 章进阶目录](advanced/README.md) · [110 道题索引](docs/question-index.md)**
 
-当前包含 **10 章基础、19 章进阶、110 道详解题**，覆盖运行机制、模型接入、数据处理、服务交付与质量优化。
-
-**[先用三道题检查自己的薄弱点 →](practice/three-question-preview.md)**：引用存在，回答为什么仍会错？创建工单超时，能不能再发一次？设计企业知识库 Agent，应该从哪里开始？先口述，再展开短答与追问，最后按需要进入完整解析和学习章节。试读无需安装或配置密钥。
+[在线阅读](https://harrytted.github.io/ai-agent-interview-playbook/learning/) · [知识主线](learning/knowledge-map.md)
 
 <div class="learning-paths" markdown="1">
 
-- **[从基础概念开始](learning/01-system-map.md)**<br>
-  先认识 Agent 的组成与协作，再按十章主线理解各部分怎样工作。
+- **[系统入门](learning/01-system-map.md)**<br>
+  从 Agent 的组成开始，顺着工具、检索和任务状态读完基础十章。
 
-- **[深入工程进阶](advanced/README.md)**<br>
-  已有基础，可以按目标学习长任务、数据处理、服务交付和质量优化。
+- **[工程回查](#工程进阶)**<br>
+  按任务找资料。长任务恢复、检索、评测、性能和上线维护都可以单独阅读。
 
-- **[按面试题查漏补缺](questions/README.md)**<br>
-  进入 110 篇独立题解，先口述短答，再看完整解释、追问与案例。
+- **[面试复习](#面试复习)**<br>
+  先做 [三道试读题](practice/three-question-preview.md)，也可以按主题查题，从解析回到对应章节。
 
 </div>
 
-需要先看全貌，可以查看 [知识主线与阅读顺序](learning/knowledge-map.md)。
+## 正文试读
 
-## 从组成看懂协作
+- **[基础 · RAG 与检索](learning/06-rag-and-retrieval.md)**  顺着入库、召回、重排和模型输入定位证据丢失。
+- **[进阶 · Agent 故障排查与发布验证](advanced/19-incident-review-and-release.md)**  从执行轨迹找偏差，把修复变成回归检查，再决定能否扩大上线范围。
 
-从 [模型、工具、记忆与规划的关系图](learning/01-system-map.md#模型工具记忆与规划) 开始。
-
-模型根据本轮输入给出建议。工具读取资料或执行动作。运行时保存实际结果，更新任务进度，再决定下一步要补充什么。
-
-基础原理与工程进阶两部分保留完整讲解，能够按章节连续学习；独立面试题提供短答、深入解析与追问，供复习和查漏。代码和实验作为理解后的进一步练习。图解帮助你看清信息如何流动，追问用来检查能否用自己的话说清。
-
-按目录阅读可打开 [在线学习手册](https://harrytted.github.io/ai-agent-interview-playbook/)。遇到术语，可查作者的 [AI编程字典](https://agent.harrylab.cn/dictionary/)；需要更多图解与工程文章，可选读 [Agent技术博客](https://agent.harrylab.cn/articles/)。
-
+<div id="从组成看懂协作"></div>
 <div id="基础课程"></div>
 
 ## 基础原理
 
-先读模型和输入，再理解工具、检索、状态与规划。最后看任务如何验收，以及执行中断后如何恢复。章节关系见 [知识主线](learning/knowledge-map.md)。
+从模型与上下文读起，再看工具怎样执行、证据怎样进入回答、任务状态怎样保存。最后用评测与可靠性章节串起整条链路。
 
-| 学习阶段 | 章节 | 核心产出 |
-| --- | --- | --- |
-| 模型和输入 | [01 组成与协作](learning/01-system-map.md) · [02 LLM 原理](learning/02-llm-primer.md) · [03 上下文](learning/03-context-and-prompts.md) | 画清职责，组织有效证据；数学选做：复算注意力 |
-| 行动与知识 | [04 工具循环](learning/04-agent-loop.md) · [05 工具/MCP](learning/05-tools-and-mcp.md) · [06 RAG](learning/06-rag-and-retrieval.md) | 读执行轨迹，定义工具合同，检查检索链路 |
-| 状态与协作 | [07 记忆](learning/07-memory-and-state.md) · [08 规划与多 Agent](learning/08-planning-and-multi-agent.md) | 管理状态与版本，解释协作和恢复的边界 |
-| 质量与交付 | [09 评测](learning/09-evaluation.md) · [10 可靠性与安全](learning/10-reliability-and-security.md) | 定义指标与终态，处理失败和越权 |
-
-[完整目录与阅读顺序](learning/README.md) · [术语回查](learning/glossary.md) · [基础原理参考资料](learning/verification.md) · [GitHub 学习资源深度调研](research/learning-resources.md)
+[基础十章目录](learning/README.md) · [模型、工具、记忆与规划的关系图](learning/01-system-map.md#模型工具记忆与规划) · [术语表](learning/glossary.md)
 
 <div id="进阶课程"></div>
 
 ## 工程进阶
 
-进阶章节直接讲长任务、系统设计、故障恢复与质量优化。每章说明运行机制、实现边界和验收依据。按主题回查时，可以从下表进入对应章节。
+进阶章节讲运行机制、设计取舍和失效条件。做项目遇到具体问题时，可以直接从对应小节读起。
 
-| 学&#8288;习&#8288;主&#8288;题 | 章节 | 核心产出 |
-| --- | --- | --- |
-| 运&#8288;行&#8288;基&#8288;础 | [01 Harness](advanced/01-harness-and-deep-agents.md) · [02 持久执行](advanced/02-durable-execution.md) · [03 上下文工程](advanced/03-context-engineering.md) · [04 记忆与技能](advanced/04-memory-and-skills.md) | 长任务交接、恢复状态图、上下文与记忆合同 |
-| 能&#8288;力&#8288;组&#8288;织 | [05 工具路由/MCP](advanced/05-tool-routing-and-mcp.md) · [06 Agentic RAG](advanced/06-agentic-rag.md) · [07 多 Agent](advanced/07-multi-agent-systems.md) · [08 编码与计算机操作](advanced/08-coding-and-computer-use.md) | 工具选择、证据策略、协作图和操作环境 |
-| 质&#8288;量&#8288;优&#8288;化 | [09 评测反馈](advanced/09-evaluation-and-feedback.md) · [10 性能与推理](advanced/10-performance-and-serving.md) · [11 安全治理](advanced/11-security-and-governance.md) · [12 Agent 训练](advanced/12-agent-training.md) | 回归集合、共享预算、授权边界与训练决策 |
-| 应用主线 | [13 模型API](advanced/13-model-api-and-output-contracts.md) · [14 知识摄取](advanced/14-ingestion-and-index-lifecycle.md) · [16 任务服务](advanced/16-service-deployment-and-operations.md) | 模型往返、可更新索引与可恢复的HTTP任务 |
-| 上线维护 | [19 故障排查与发布验证](advanced/19-incident-review-and-release.md) | 找到出错环节，验证修复并决定是否扩大上线范围 |
-| 方向选读 | [15 SQL分析](advanced/15-text-to-sql-and-data-analysis.md) · [17 事件订阅](advanced/17-event-driven-and-proactive-agents.md) · [18 媒体与语音](advanced/18-multimodal-and-realtime-agents.md) | 统计核验、主动任务、证据关联与播放打断 |
+| 查阅主题 | 用于 |
+| --- | --- |
+| [RAG 证据排查](advanced/06-agentic-rag.md#分层测量与对照实验) | 区分召回遗漏、排序变化和模型输入里的证据丢失。 |
+| [写入超时与恢复](advanced/02-durable-execution.md#外部写入与故障窗口) | 沿原操作编号核对外部结果，判断何时能重试。 |
+| [Agent 技能验证](advanced/04-memory-and-skills.md#技能选择与效果验证) | 分别判断技能是否选对、启用后结果是否变好。 |
+| [评测改动](advanced/09-evaluation-and-feedback.md#配对差异与不确定性) | 用同一批任务比较版本，分清修复与退步。 |
+| [上线与回退](advanced/19-incident-review-and-release.md#回退与在途任务) | 回退版本时核对任务状态，处理已经派发的动作。 |
 
-建议动手顺序为13→16最小服务→14→16发布运维；SQL按数据分析方向选读，之后再推进事件和媒体专题。
+项目主线：[模型 API](advanced/13-model-api-and-output-contracts.md) → [最小任务服务](advanced/16-service-deployment-and-operations.md#16a--持久接收与只读任务) → [知识摄取](advanced/14-ingestion-and-index-lifecycle.md) → [批准写入与恢复](advanced/16-service-deployment-and-operations.md#16b--批准写入与恢复)。
 
-[完整进阶路线](advanced/README.md) · [贯穿项目工作坊](advanced/project-workshop.md) · [官方知识体系](advanced/official-learning-map.md) · [机制实验](examples/advanced/README.md)
+[进阶十九章目录](advanced/README.md) · [项目工作坊](advanced/project-workshop.md) · [进阶参考资料](advanced/official-learning-map.md)
 
-第 01–18 章各有 [3 篇进阶题文章](questions/README.md#进阶系统)。先读正文中的机制和边界，再用配套题检查理解。题目可以跳回对应章节。
+<div id="知识地图"></div>
+<div id="每天怎么学"></div>
 
-## 知识地图
+## 面试复习
 
-Q001–Q056 覆盖基础与通用工程，Q057–Q110 对应工程进阶第 01–18 章。正文按知识关系完整讲解，面试题按问题组织回答与追问；学习和复习可以沿两种入口往返。
+可以先做 [三道试读题](practice/three-question-preview.md)，也可以直接看 [110 题索引](docs/question-index.md)。基础和通用工程题为 Q001–Q056。Q057–Q110 对应进阶第 01–18 章。
 
-| 模块 | 题号 | 你应当能够解释 |
-| --- | --- | --- |
-| [Agent 与 LLM 基础](questions/README.md#agent-与大模型基础) | Q001–Q008 | Agent 边界、Transformer、训练与推理、模型适配 |
-| [规划与编排](questions/README.md#规划状态与多-agent-编排) | Q009–Q016 | 循环、ReAct、状态、恢复、并发与多 Agent 取舍 |
-| [RAG 与检索](questions/README.md#rag-与检索诊断) | Q017–Q024 | 分块、检索、重排、权限、归因与评测 |
-| [工具、记忆与协议](questions/README.md#工具调用记忆与-mcp) | Q025–Q032 | Schema、执行边界、MCP、上下文和持久记忆 |
-| [评测与可观测性](questions/README.md#05--评测与可观测性) | Q033–Q040 | 数据集、失败归因、Judge 偏差、成本与延迟 |
-| [可靠性与安全](questions/README.md#06--可靠性与安全) | Q041–Q048 | 重试、幂等、人审、注入、隔离与故障恢复 |
-| [系统设计与项目表达](questions/README.md#07--系统设计与项目表达) | Q049–Q056 | 需求、架构、验收、真实贡献与可复现证据 |
-| [18 章进阶面试](docs/advanced/README.md) | Q057–Q110 | 系统机制、模型接入、摄取、SQL、任务服务、事件与媒体 |
+[分主题题解](questions/README.md) · [模拟面试](practice/mock-interviews.md) · [复习工具](practice/README.md)
 
-## 每天怎么学
+<div id="理解以后再用实验和项目加深"></div>
 
-每天可以只解决一个能说清的问题：读案例，预测下一步，运行或手算一次，再口述关联题。面试复习时，每天闭卷回答 3–5 题，读解析、答追问，最后留一个微练习结果。
+## 离线实验与项目
 
-别急着把每页都涂成已读。对同一个例子加一句“这时网络断了呢”，往往比多背三个框架名更能发现缺口。
-
-只阅读文档无需安装。默认离线工具需要 **Python 3.10+**，仅使用标准库，无需联网、安装依赖或配置密钥；可选live路径需要单独提供供应商凭据。在仓库根目录运行：
+文档可直接阅读。下面两条命令需要 Python 3.10+，在仓库根目录执行。第一条抽三道题，第二条验证外部提交后中断怎么恢复。
 
 ```bash
-# 抽 5 题，只显示问题，先口述再看答案
-python3 scripts/study.py draw --count 5
-
-# 只练54道进阶题
-python3 scripts/study.py draw --topic docs/advanced/ --count 3
-
-# 查看单题回答、追问和练习
-python3 scripts/study.py show Q001
-python3 scripts/study.py show Q060
-
-# 自评分：0 不会；1 提示后会；2 独立说清；3 能追问并举证
-python3 scripts/study.py review Q001 --score 2
-
-# 查看到期题目、尚未学习的题目和进度
-python3 scripts/study.py due
-python3 scripts/study.py stats
-
-# 观察驱动的政策任务与独立评分
-python3 -m examples.policy_agent eval --suite all --mode offline --output .local/policy_agent/all-report.json
-
-# 隔离的执行器边界实验
-python3 examples/agent_lab/lab.py --scenario all
-
-# 复算 Attention、余弦、RRF 与检索指标
-python3 examples/foundations/math_lab.py --section all
-
-# 验证多次尝试指标、共享预算、关键路径与崩溃恢复
-python3 examples/advanced/runtime_lab.py --scenario all
-
-# 同题配对：修复与退步、精确检验及重采样区间
-python3 examples/advanced/evaluation_lab.py
-
-# 动作掩码、裁剪策略目标与教学小策略的一次参数更新
-python3 examples/advanced/training_objectives.py --section all
+python3 scripts/study.py draw --count 3
+python3 examples/advanced/runtime_lab.py --scenario replay
 ```
 
-新增的[配对评测](examples/advanced/README.md#配对改进与不确定性)使用手写结果标签解释统计边界；[训练目标实验](examples/advanced/training-objectives.md)复算损失与梯度并更新小型二值策略。它们不调用模型，也不提供真实LLM的质量或训练收益证明。
-
-六组新实验的命令与验证边界见 [模型协议](examples/model_protocol_lab/README.md)、[知识摄取](examples/knowledge_pipeline_lab/README.md)、[SQL分析](examples/sql_agent_lab/README.md)、[任务服务](examples/service_lab/README.md)、[事件订阅](examples/event_agent_lab/README.md)及 [媒体播放](examples/multimodal_lab/README.md)。默认离线检查可重复运行，真实模型入口需要自行配置凭据。
-
-复习记录保存在 `.local/study-progress.json`，默认不进入 Git。日期间隔规则详见 [复习说明](practice/README.md)。
-
-## 理解以后，再用实验和项目加深
-
-想亲手观察工具往返，可以选做 [00 · 走完一次任务](learning/00-first-agent.md)。[政策实验](examples/policy_agent/README.md)提供查询、澄清、旧资料与恢复的可运行过程；阅读概念章节不必先安装或运行它。
-
-
-[7 天项目实验](docs/engineering/08-project-lab.md)提供从工具循环到真实模型接入的验收步骤。旧执行器实验使用固定脚本；新增政策实验提供观察驱动规则、持久状态和本地授权/恢复替身。模型接入状态、模拟权限与生产系统之间的边界见各实验README；项目经历和线上效果须用自己的实测填写。
-
-准备面试时使用 [模拟面试](practice/mock-interviews.md)、[项目表达模板](practice/project-story-template.md) 和 [错题复盘模板](practice/review-template.md)。所有业务数据、项目职责和指标请用自己的真实材料填写。
+[走完一次任务](learning/00-first-agent.md) · [基础数学实验](examples/foundations/README.md) · [进阶机制实验](examples/advanced/README.md) · [七天项目路线](docs/engineering/08-project-lab.md)
 
 ## 参与完善
 
-读到不准确的解释、遇到跑不通的示例，欢迎反馈；有值得分享的面试经验或实战做法，也欢迎一起补充。
-
-- **纠错与补充**：通过 [Issue](https://github.com/harrytted/ai-agent-interview-playbook/issues/new) 注明题号或章节位置，写下修改建议，尽量附上参考来源。
-- **分享经验与案例**：欢迎通过 [Pull Request](https://github.com/harrytted/ai-agent-interview-playbook/compare) 补充面试追问、答题思路或实战案例，让下一位读者少绕一点弯。
-- **反馈代码问题**：提交 [Issue](https://github.com/harrytted/ai-agent-interview-playbook/issues/new) 时，请说明运行环境、复现步骤，以及预期结果和实际表现，方便定位与修复。
-
-内容格式、引用要求和提交前检查见 [贡献指南](CONTRIBUTING.md)。
+发现内容或运行问题，可以通过 [Issue](https://github.com/harrytted/ai-agent-interview-playbook/issues/new) 提交章节位置、预期结果和实际结果。补充内容可按 [贡献指南](CONTRIBUTING.md) 提交 Pull Request。
 
 ## 参考资料与延伸阅读
 
-想查原论文、官方文档，或继续挑选外部项目与教程，可以打开 [资料索引](research/README.md)，按当前问题选读。
+[基础参考资料](learning/verification.md) · [学习资源索引](research/README.md) · [AI 编程字典](https://agent.harrylab.cn/dictionary/) · [Agent 技术博客](https://agent.harrylab.cn/articles/)
 
-本文档与代码为本仓库原创整理，采用 [MIT License](LICENSE)。引用的资料、外部项目和商标归各自权利人所有；其内容适用原项目许可。这里只链接外部资料，不搬运其题库、插图或模板。
+仓库内容采用 [MIT 许可](LICENSE)。引用资料和外部项目适用各自的许可。
